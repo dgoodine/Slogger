@@ -8,32 +8,33 @@
 
 import Foundation
 
-typealias LogClosure = () -> String
+public typealias LogClosure = () -> String
 
-// Marker protocol for client-provided logging category enums
-public protocol Category : Hashable {}
+public protocol SloggerCategory : Hashable {}
 
 public enum Level : Int, Comparable {
-  case None = 0, Error, Warning, Info, Verbose
+  case None, Severe, Error, Warning, Info, Debug, Verbose
 }
+
+// Marker protocol for client-provided logging category enums
 
 public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool {
   return a.rawValue < b.rawValue
 }
 
 public enum Detail : Int {
-  case Date = 0, Time, File, Function
+  case Time = 0, File, Function, Level, Category
 }
 
-public class Slogger <T: Category> : NSObject {
+public class Slogger <T: SloggerCategory> : NSObject {
 
   public var currentLevel : Level
   public var dateFormatter : NSDateFormatter
-  public var details : [Detail]?
+  public var details : [Detail]
   public var categories : [T : Level] = Dictionary<T, Level>()
 
   // MARK: Initialization
-  public init (defaultLevel : Level, dateFormatter : NSDateFormatter?, details : [Detail]?) {
+  public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
     var df = dateFormatter
     if df == nil {
       let template = "yyyy.MM.dd HH:mm:ss zzz"
@@ -45,43 +46,39 @@ public class Slogger <T: Category> : NSObject {
     }
 
     self.currentLevel = defaultLevel
-    self.dateFormatter = dateFormatter!
-    self.details = details
+    self.dateFormatter = df!
+    self.details = (details != nil) ? details! : [.Time, .File, .Function, .Level, .Category]
   }
 
   // MARK: Public
-  public func error (category: T?, string : String) {
-    logInternal(category, level: .Error, string: string)
+  public func error (function: String = __FUNCTION__, _ file: String = __FILE__, _ line: Int = __LINE__, @autoclosure closure: LogClosure) {
+      logInternal(closure, category: nil, level: .Error, function: function, file: file, line: line)
   }
 
-  public func error (category: T?, @autoclosure closure: () -> String?) {
-    logInternal(category, level: .Error, closure: closure)
+  public func error (category: T? = nil, @autoclosure _ closure: LogClosure,
+     _ function: String = __FUNCTION__, _ file: String = __FILE__, _ line: Int = __LINE__) {
+    logInternal(closure, category: category, level: .Error, function: function, file: file, line: line)
   }
 
-  public func warning (category: T?, string : String) {
-    logInternal(category, level: .Warning, string: string)
+  public func warning (@autoclosure closure: LogClosure,
+    category: T? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)  {
+    logInternal(closure, category: category, level: .Warning, function: function, file: file, line: line)
   }
 
-  public func warning (category: T?, @autoclosure closure: () -> String?) {
-    logInternal(category, level: .Warning, closure: closure)
+  public func info (@autoclosure closure: LogClosure,
+    category: T? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)  {
+    logInternal(closure, category: category, level: .Info, function: function, file: file, line: line)
   }
 
-  public func info (category: T?, string : String) {
-    logInternal(category, level: .Info, string: string)
+  public func debug (@autoclosure closure: LogClosure,
+    category: T? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)  {
+    logInternal(closure, category: category, level: .Debug, function: function, file: file, line: line)
   }
 
-  public func info (category: T?, @autoclosure closure: () -> String?) {
-    logInternal(category, level: .Info, closure: closure)
+  public func verbose (@autoclosure closure: LogClosure,
+    category: T? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)  {
+    logInternal(closure, category: category, level: .Verbose, function: function, file: file, line: line)
   }
-
-  public func verbose (category: T?, string : String) {
-    logInternal(category, level: .Verbose, string: string)
-  }
-
-  public func verbose (category: T?, @autoclosure closure: () -> String?) {
-    logInternal(category, level: .Verbose, closure: closure)
-  }
-
 
   // MARK: Private
   private func canLog (category: T?, level: Level) -> Bool {
@@ -90,20 +87,47 @@ public class Slogger <T: Category> : NSObject {
       operatingLevel = categoryLevel
     }
 
-    return level >= operatingLevel
+    return level <= operatingLevel
   }
 
-  private func logInternal (category: T?, level: Level, string : String) {
-    print("[\(category)] (\(level)): \(string)")
-  }
+  private func logInternal (@autoclosure closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
 
-  private func logInternal (category: T?, level: Level, @autoclosure closure: () -> String?) {
-    guard canLog(category, level: level) else {
-      return;
-    }
+      guard canLog(category, level: level) else {
+        return;
+      }
 
-    if let string = closure() {
-      logInternal(category, level: level, string: string)
-    }
+      let string = closure()
+      let str : NSMutableString = NSMutableString()
+      for detail in details {
+        switch detail {
+        case .Category:
+          if category != nil {
+            str.appendString("\(category!)")
+          }
+
+        case .File:
+          let f = __FILE__
+          str.appendString(f)
+          break
+
+        case .Function:
+          str.appendString(function)
+          break
+
+        case .Level:
+          break
+
+        case .Time:
+          break
+        }
+      }
+      
+      str.appendString(": ")
+      str.appendString(string)
+      print(str)
   }
 }
+
+
+
+
