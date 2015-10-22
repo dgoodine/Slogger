@@ -11,27 +11,26 @@ import Foundation
 typealias LogClosure = () -> String
 
 // Marker protocol for client-provided logging category enums
-public protocol Category : StringLiteralConvertible {}
+public protocol Category : Hashable {}
 
-public enum Categories : Category {
-  case General
+public enum Level : Int, Comparable {
+  case None = 0, Error, Warning, Info, Verbose
 }
 
-public enum Level : Int {
-  case None = 0, Error, Warning, Info, Verbose
+public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool {
+  return a.rawValue < b.rawValue
 }
 
 public enum Detail : Int {
   case Date = 0, Time, File, Function
 }
 
-public class Slogger : NSObject {
+public class Slogger <T: Category> : NSObject {
 
-  public var defaultLevel : Level
-  public var defaultCategory : Category = Categories.General
+  public var currentLevel : Level
   public var dateFormatter : NSDateFormatter
   public var details : [Detail]?
-  public var categories : [Category : Level]
+  public var categories : [T : Level] = Dictionary<T, Level>()
 
   // MARK: Initialization
   public init (defaultLevel : Level, dateFormatter : NSDateFormatter?, details : [Detail]?) {
@@ -45,27 +44,66 @@ public class Slogger : NSObject {
       df = idf
     }
 
-    self.defaultLevel = defaultLevel
+    self.currentLevel = defaultLevel
     self.dateFormatter = dateFormatter!
     self.details = details
   }
 
+  // MARK: Public
+  public func error (category: T?, string : String) {
+    logInternal(category, level: .Error, string: string)
+  }
+
+  public func error (category: T?, @autoclosure closure: () -> String?) {
+    logInternal(category, level: .Error, closure: closure)
+  }
+
+  public func warning (category: T?, string : String) {
+    logInternal(category, level: .Warning, string: string)
+  }
+
+  public func warning (category: T?, @autoclosure closure: () -> String?) {
+    logInternal(category, level: .Warning, closure: closure)
+  }
+
+  public func info (category: T?, string : String) {
+    logInternal(category, level: .Info, string: string)
+  }
+
+  public func info (category: T?, @autoclosure closure: () -> String?) {
+    logInternal(category, level: .Info, closure: closure)
+  }
+
+  public func verbose (category: T?, string : String) {
+    logInternal(category, level: .Verbose, string: string)
+  }
+
+  public func verbose (category: T?, @autoclosure closure: () -> String?) {
+    logInternal(category, level: .Verbose, closure: closure)
+  }
+
+
   // MARK: Private
-  private func canLog (category: Category?, level: Level) -> Bool {
-    if let category = category {
-
+  private func canLog (category: T?, level: Level) -> Bool {
+    var operatingLevel = currentLevel
+    if category != nil, let categoryLevel = categories[category!] {
+      operatingLevel = categoryLevel
     }
+
+    return level >= operatingLevel
   }
 
-  private func logInternal (string : String) {
-
+  private func logInternal (category: T?, level: Level, string : String) {
+    print("[\(category)] (\(level)): \(string)")
   }
 
-  private func logInternal (category: Category?, level: Level, string : String) {
+  private func logInternal (category: T?, level: Level, @autoclosure closure: () -> String?) {
+    guard canLog(category, level: level) else {
+      return;
+    }
 
-  }
-
-  private func logInternal (category: Category?, level: Level, @autoclosure closure: () -> String?) {
-
+    if let string = closure() {
+      logInternal(category, level: level, string: string)
+    }
   }
 }
