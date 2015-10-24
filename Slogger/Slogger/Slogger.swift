@@ -3,26 +3,26 @@
 //  Slogger
 //
 //  Created by David Goodine on 10/20/15.
-//  Copyright © 2015 David Goodine. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
 public typealias LogClosure = () -> String
 
+// Marker protocol for client-provided logging category enums
 public protocol SloggerCategory : Hashable {}
 
 public enum Level : Int, Comparable {
   case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
 
-  // Wow.  This is pretty dumb.
+  // Swift really should support this implicitly.
   static func allValues () -> [Level] {
     return [None, Severe, Error, Warning, Info, Debug, Verbose, Trace]
   }
 }
 
-// Marker protocol for client-provided logging category enums
-
+// Swift really should support this implicitly.
 public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool {
   return a.rawValue < b.rawValue
 }
@@ -31,52 +31,28 @@ public enum Detail : Int {
   case Date, File, Function, Level, Category
 }
 
+public protocol Destination {
+  var colorMap : ColorMap? { get set }
+  var decorator : Decorator? { get set }
+  init (colorMap : ColorMap?)
+  func logString(string : String, level: Level)
+}
+
 public class Slogger <T: SloggerCategory> : NSObject {
+  public typealias Generator = (condition: Bool, message: String, category: T?, level: Level, function: String,
+    file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
 
   public var currentLevel : Level
+
   public var dateFormatter : NSDateFormatter
+
   public var details : [Detail]
+
   public var categories : [T : Level] = Dictionary<T, Level>()
-  public var hits : Int64 = 0
-  public var misses : Int64 = 0
 
-  // MARK: Initialization
-  public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
-    var df = dateFormatter
-    if df == nil {
-      let template = "yyyy.MM.dd HH:mm:ss zzz"
-      let locale = NSLocale.currentLocale()
-      let dateFormat = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: locale)
-      let idf = NSDateFormatter()
-      idf.dateFormat = dateFormat
-      df = idf
-    }
+  public var destinations : [Destination] = Array<Destination>()
 
-    self.currentLevel = defaultLevel
-    self.dateFormatter = df!
-    self.details = (details != nil) ? details! : [.Date, .File, .Function, .Category, .Level]
-  }
-
-  // MARK: Private
-  private func canLog (category: T?, level: Level) -> Bool {
-    var operatingLevel = currentLevel
-    if category != nil, let categoryLevel = categories[category!] {
-      operatingLevel = categoryLevel
-    }
-
-    return level <= operatingLevel
-  }
-
-  func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
-
-    guard canLog(category, level: level) else {
-      hits++
-      return;
-    }
-
-    misses++
-
-    let string = closure()
+  public var generator : Generator = { (condition, message, category, level, function, file, line, details, dateFormatter) -> String in
     let str : NSMutableString = NSMutableString()
     str.appendString("-")
 
@@ -118,8 +94,68 @@ public class Slogger <T: SloggerCategory> : NSObject {
     }
 
     str.appendString(": ")
-    str.appendString(string)
-    print(str)
+    str.appendString(message)
+    return str as String
+  }
+
+  public var colorMap : ColorMap = [
+    Level.Severe : (colorFromHexString("FFFF00"), nil),
+    Level.Error : (colorFromHexString("FAAB00"), nil),
+    Level.Warning : (colorFromHexString("E100FA"), nil),
+    Level.Info : (colorFromHexString("E100FA"), nil),
+    Level.Debug : (colorFromHexString("E100FA"), nil),
+    Level.Verbose : (colorFromHexString("E100FA"), nil),
+    Level.Trace : (colorFromHexString("11AB00"), nil)
+  ]
+
+  // Mark: Stats
+  public var hits : Int64 = 0
+  public var misses : Int64 = 0
+
+
+  // MARK: Initialization
+  public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
+    var df = dateFormatter
+    if df == nil {
+      let template = "yyyy.MM.dd HH:mm:ss zzz"
+      let locale = NSLocale.currentLocale()
+      let dateFormat = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: locale)
+      let idf = NSDateFormatter()
+      idf.dateFormat = dateFormat
+      df = idf
+    }
+
+    self.currentLevel = defaultLevel
+    self.dateFormatter = df!
+    self.details = (details != nil) ? details! : [.Date, .File, .Function, .Category, .Level]
+    self.destinations = [ConsoleDestination(colorMap: colorMap)]
+  }
+
+  // MARK: Private
+  private func canLog (category: T?, level: Level) -> Bool {
+    var operatingLevel = currentLevel
+    if category != nil, let categoryLevel = categories[category!] {
+      operatingLevel = categoryLevel
+    }
+
+    return level <= operatingLevel
+  }
+
+  func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
+
+    guard canLog(category, level: level) else {
+      hits++
+      return;
+    }
+
+    misses++
+
+    let message = closure()
+    let string = generator(condition: condition, message: message, category: category, level: level, function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
+
+    for dest in destinations {
+      dest.logString(string, level: level)
+    }
   }
 }
 
@@ -243,9 +279,11 @@ extension Slogger {
   public func trace (category: T?, _ condition: Bool, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
     logInternal(condition, closure, category: category, level: .Trace, function: function, file: file, line: line)
   }
-
-
+  
+  
 }
+
+
 
 
 
