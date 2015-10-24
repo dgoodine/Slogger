@@ -65,7 +65,6 @@ class SloggerTests: XCTestCase {
 
     let levels = Level.allValues()
     let categories = TestCategory.allValues()
-    var callCount = 0
 
     func checkString (condition: Bool, _ category: TestCategory?, _ level: Level) {
       // XCTAssert here
@@ -132,8 +131,6 @@ class SloggerTests: XCTestCase {
         }
         break
       }
-
-      callCount++
     }
 
     func sloggit (category: TestCategory?) {
@@ -152,7 +149,7 @@ class SloggerTests: XCTestCase {
       }
     }
 
-    print("Call count: \(callCount)")
+    print("Call counts: \(log.hits) / \(log.hits + log.misses)")
   }
 
   //  func testPerformanceExample() {

@@ -37,6 +37,8 @@ public class Slogger <T: SloggerCategory> : NSObject {
   public var dateFormatter : NSDateFormatter
   public var details : [Detail]
   public var categories : [T : Level] = Dictionary<T, Level>()
+  public var hits : Int64 = 0
+  public var misses : Int64 = 0
 
   // MARK: Initialization
   public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
@@ -68,8 +70,11 @@ public class Slogger <T: SloggerCategory> : NSObject {
   func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
 
     guard canLog(category, level: level) else {
+      hits++
       return;
     }
+
+    misses++
 
     let string = closure()
     let str : NSMutableString = NSMutableString()
