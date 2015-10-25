@@ -26,6 +26,12 @@ class TestLogger : Slogger<TestCategory> {
 
 let testDestination = TestDestination()
 
+#if DEBUG
+let log = Slogger<NoCategories>(defaultLevel: .Info)
+#else
+let log = Slogger<NoCategories>(defaultLevel: .Warning)
+#endif
+
 class SloggerTests: XCTestCase {
   let log = TestLogger(destination: testDestination)
   var defaultDestinations : [Destination] = []

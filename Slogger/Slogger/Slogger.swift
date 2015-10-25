@@ -11,6 +11,9 @@ public typealias LogClosure = () -> String
 
 // Marker protocol for client-provided logging category enums
 public protocol SloggerCategory : Hashable {}
+public enum NoCategories : SloggerCategory {
+  case None
+}
 
 public enum Level : Int, Comparable {
   case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
@@ -51,7 +54,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   public var destinations : [Destination] = Array<Destination>()
 
-  public var generator : Generator = { (message, category, level, function, file, line, details, dateFormatter) -> String in
+  public var defaultGenerator : Generator = { (message, category, level, function, file, line, details, dateFormatter) -> String in
     /* TODO: I would have just made this a closure call to an internal function, but for some reason was getting
     a compiler error.  Swift's type checking is still a little wonky. */
     let str : NSMutableString = NSMutableString()
@@ -283,8 +286,6 @@ extension Slogger {
   public func trace (category: T?, _ condition: Bool, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
     logInternal(condition, closure, category: category, level: .Trace, function: function, file: file, line: line)
   }
-  
-  
 }
 
 
