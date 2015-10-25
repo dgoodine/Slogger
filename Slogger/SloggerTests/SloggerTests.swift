@@ -82,7 +82,7 @@ class SloggerTests: XCTestCase {
     log.destinations = destinations
 
     func checkForType (type: String, _ condition: Bool, _ category: TestCategory?, _ level: Level) {
-      guard checkResults && log.canLogWithCondition(condition, category: category, level: level) else {
+      guard checkResults && log.canLogWithOverride(condition, category: category, level: level) else {
         return
       }
 
@@ -149,14 +149,6 @@ class SloggerTests: XCTestCase {
         checkString(true, category, level)
         log.verbose(category) { return "Closure" }
         checkClosure(true, category, level)
-
-      case .Trace:
-        for condition in [true, false] {
-          log.trace(category, condition, "String")
-          checkString(condition, category, level)
-          log.trace(category, condition) { return "Closure" }
-          checkClosure(condition, category, level)
-        }
       }
     }
 

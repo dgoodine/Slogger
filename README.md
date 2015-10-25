@@ -10,7 +10,7 @@ Version | Status | Comments
 
 ## Why another Swift logger?
 
-When I started doing serious Swift development, I naturally looked around for a logging framework.  I found Dave Wood excellent *XCGLogger* (https://github.com/DaveWoodCom/XCGLogger) implementation.  While it's fast and well constructed, I needed some extra features and decided to build my own.
+When I started doing serious Swift development, I naturally looked around for a logging framework.  I found Dave Wood's excellent *XCGLogger* (https://github.com/DaveWoodCom/XCGLogger) implementation.  While it's fast and well constructed, I needed some extra features and decided to build my own.
 
 *Slogger* uses much the same approach and function signatures as *XCGLogger*, and as such, in its basic use can be easily switched with *XCGLogger* without modifying the logging sites.
 
@@ -67,13 +67,12 @@ File | Coming Soon™
 ### Generators
 You can supply your own closure for outputting a log entry in any format.  The default uses the ubiquitous log4j pattern
 
-	- [10/25/2015, 15:33:57 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
+	- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
 	
 But you could easily output custom JSON, XML, or whatever you want.  These generators are configurable per logging destination.
 
 ### Details
-You can configure what details you want to see in the logs by providing an array of enum values for each detail supported.  Generators will 
-
+You can configure what details you want to see in the logs by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
 
 ### Configurable Decorators
 You can supply a decorator that will further adjust the format of the generator output.  These are configured on a per-destination.
@@ -86,7 +85,15 @@ ANSI | Coming Soon™
 ### Configurable Colormaps
 Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.
 
-## Categories
+### Traces
+Tracing allows logging sites to evaluate a condition and log based on that condition, not the logging level.  If the condition is true, the event is logged, regardless of the log level.  This allows you inspect values at the logging site and override the logging based on state.
+
+For example, if you were to define a *Request* object base class, you could add a boolean *trace* property, defaulting to false.  In your code that processes the request, you would use provide the *condition* argument to the 
+
+### Categories
+In addition to the two convenience functions for each level mentioned above, 
+
+## Implementing Categories
 
 
 

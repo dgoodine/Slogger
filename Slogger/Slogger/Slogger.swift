@@ -47,14 +47,11 @@ public enum Level : Int, Comparable {
   /// "WTF is going on in my app?"
   case Verbose
 
-  /// (special-case) See 'log.trace' documentation
-  case Trace
-
   /**
    - Returns: all values in the enumeration
   */
   static func allValues () -> [Level] {
-    return [None, Severe, Error, Warning, Info, Debug, Verbose, Trace]
+    return [None, Severe, Error, Warning, Info, Debug, Verbose]
   }
 }
 
@@ -139,7 +136,7 @@ public protocol Destination {
  All public properties are designed to allow any changes at runtime, so you can dynamically change
  while debugging. You could even change them programatically in your code if you need to track down a bug in the
  middle of heaps of calls by setting a higher, more verbose debug level in a function.
- 
+
 */
 public class Slogger <T: SloggerCategory> : NSObject {
 
@@ -242,7 +239,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
     Level.Info : (colorFromHexString("444444"), nil),
     Level.Debug : (colorFromHexString("035FFF"), nil),
     Level.Verbose : (colorFromHexString("666666"), nil),
-    Level.Trace : (colorFromHexString("009C03"), nil)
   ]
 
   // Mark: Stats
@@ -287,16 +283,15 @@ public class Slogger <T: SloggerCategory> : NSObject {
    The internal function used to determine if an event can be logged.  It's provided to allow for special use-cases,
    but shouldn't be needed in code.
    
-   - Parameter condition: The condition (see the 'trace' documentation).  If it is false, the test MUST fail.
-   - Parameter category: The category of the logging site or nil.  Used to evaluate category
-   specific debugging level configuration.
+   - Parameter override: If it is true, this function will return true, regardless of log level.
+   - Parameter category: The category of the logging site or nil.  Used to evaluate category specific debugging level configuration.
    - Parameter level: The value of the 'currentLevel' property.
    
    - Returns: true of the logging of the event should proceed, false if it shouldn't
    */
-  public func canLogWithCondition (condition: Bool, category: T?, level: Level) -> Bool {
-    guard condition else {
-      return false
+  public func canLogWithOverride (override: Bool, category: T?, level: Level) -> Bool {
+    guard override == false else {
+      return true
     }
 
     var operatingLevel = currentLevel
@@ -308,10 +303,10 @@ public class Slogger <T: SloggerCategory> : NSObject {
   }
 
   // MARK: Internal
-  func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level,
+  func logInternal (override: Bool, @noescape _ closure: LogClosure, category: T?, level: Level,
     function: String, file: String, line: Int) {
 
-      guard canLogWithCondition(condition, category: category, level: level) else {
+      guard canLogWithOverride(override, category: category, level: level) else {
         misses++
         return;
       }
@@ -345,123 +340,107 @@ This extension holds the public convenience methods for logging.  They should be
 */
 extension Slogger {
   // MARK: Severe
-  public func severe (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: nil, level: .Severe, function: function, file: file, line: line)
+  public func severe (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: nil, level: .Severe, function: function, file: file, line: line)
   }
 
-  public func severe (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: category, level: .Severe, function: function, file: file, line: line)
+  public func severe (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: category, level: .Severe, function: function, file: file, line: line)
   }
 
-  public func severe (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: nil, level: .Severe, function: function, file: file, line: line)
+  public func severe (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: nil, level: .Severe, function: function, file: file, line: line)
   }
 
-  public func severe (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: category, level: .Severe, function: function, file: file, line: line)
+  public func severe (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: category, level: .Severe, function: function, file: file, line: line)
   }
 
   // MARK: Error
-  public func error (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: nil, level: .Error, function: function, file: file, line: line)
+  public func error (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: nil, level: .Error, function: function, file: file, line: line)
   }
 
-  public func error (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: category, level: .Error, function: function, file: file, line: line)
+  public func error (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: category, level: .Error, function: function, file: file, line: line)
   }
 
-  public func error (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: nil, level: .Error, function: function, file: file, line: line)
+  public func error (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: nil, level: .Error, function: function, file: file, line: line)
   }
 
-  public func error (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: category, level: .Error, function: function, file: file, line: line)
+  public func error (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: category, level: .Error, function: function, file: file, line: line)
   }
 
   // MARK: Warning
-  public func warning (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: nil, level: .Warning, function: function, file: file, line: line)
+  public func warning (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: nil, level: .Warning, function: function, file: file, line: line)
   }
 
-  public func warning (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: category, level: .Warning, function: function, file: file, line: line)
+  public func warning (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: category, level: .Warning, function: function, file: file, line: line)
   }
 
-  public func warning (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: nil, level: .Warning, function: function, file: file, line: line)
+  public func warning (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: nil, level: .Warning, function: function, file: file, line: line)
   }
 
-  public func warning (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: category, level: .Warning, function: function, file: file, line: line)
+  public func warning (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: category, level: .Warning, function: function, file: file, line: line)
   }
 
   // MARK: Info
-  public func info (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: nil, level: .Info, function: function, file: file, line: line)
+  public func info (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: nil, level: .Info, function: function, file: file, line: line)
   }
 
-  public func info (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: category, level: .Info, function: function, file: file, line: line)
+  public func info (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: category, level: .Info, function: function, file: file, line: line)
   }
 
-  public func info (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: nil, level: .Info, function: function, file: file, line: line)
+  public func info (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: nil, level: .Info, function: function, file: file, line: line)
   }
 
-  public func info (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: category, level: .Info, function: function, file: file, line: line)
+  public func info (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: category, level: .Info, function: function, file: file, line: line)
   }
 
   // MARK: Debug
-  public func debug (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: nil, level: .Debug, function: function, file: file, line: line)
+  public func debug (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: nil, level: .Debug, function: function, file: file, line: line)
   }
 
-  public func debug (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: category, level: .Debug, function: function, file: file, line: line)
+  public func debug (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: category, level: .Debug, function: function, file: file, line: line)
   }
 
-  public func debug (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: nil, level: .Debug, function: function, file: file, line: line)
+  public func debug (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: nil, level: .Debug, function: function, file: file, line: line)
   }
 
-  public func debug (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(true, closure, category: category, level: .Debug, function: function, file: file, line: line)
+  public func debug (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
+    logInternal(override, closure, category: category, level: .Debug, function: function, file: file, line: line)
   }
 
   // MARK: Verbose
-  public func verbose (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: nil, level: .Verbose, function: function, file: file, line: line)
+  public func verbose (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: nil, level: .Verbose, function: function, file: file, line: line)
   }
 
-  public func verbose (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(true, closure, category: category, level: .Verbose, function: function, file: file, line: line)
+  public func verbose (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    logInternal(override, closure, category: category, level: .Verbose, function: function, file: file, line: line)
   }
 
-  public func verbose (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure) {
-    logInternal(true, closure, category: nil, level: .Verbose, function: function, file: file, line: line)
+  public func verbose (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure) {
+    logInternal(override, closure, category: nil, level: .Verbose, function: function, file: file, line: line)
   }
 
-  public func verbose (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure) {
-    logInternal(true, closure, category: category, level: .Verbose, function: function, file: file, line: line)
+  public func verbose (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure) {
+    logInternal(override, closure, category: category, level: .Verbose, function: function, file: file, line: line)
   }
 
-  // MARK: Trace
-  public func trace (condition: Bool, @autoclosure  _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(condition, closure, category: nil, level: .Trace, function: function, file: file, line: line)
-  }
-
-  public func trace (category: T?, _ condition: Bool, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    logInternal(condition, closure, category: category, level: .Trace, function: function, file: file, line: line)
-  }
-
-  public func trace (condition: Bool, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(condition, closure, category: nil, level: .Trace, function: function, file: file, line: line)
-  }
-
-  public func trace (category: T?, _ condition: Bool, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
-    logInternal(condition, closure, category: category, level: .Trace, function: function, file: file, line: line)
-  }
 }
 
 
