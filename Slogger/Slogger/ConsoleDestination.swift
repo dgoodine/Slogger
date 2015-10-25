@@ -1,5 +1,5 @@
 //
-//  ConsoleSlogger.swift
+//  ConsoleDestination.swift
 //  Slogger
 //
 //  Created by David Goodine on 10/24/15.
@@ -9,13 +9,14 @@ import Foundation
 
 public class ConsoleDestination : Destination {
 
-  public var colorMap : ColorMap?
-  public var decorator : Decorator? = XCodeColorsDecorator()
+  public var decorator : Decorator?
   public var generator : Generator?
+  public var colorMap : ColorMap?
 
-  public required init (generator: Generator? = nil, colorMap : ColorMap? = nil) {
+  public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
     self.generator = generator
     self.colorMap = colorMap
+    self.decorator = decorator
   }
 
   public func logString(string : String, level: Level) {
@@ -29,4 +30,3 @@ public class ConsoleDestination : Destination {
     print(string)
   }
 }
-

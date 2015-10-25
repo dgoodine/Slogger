@@ -10,35 +10,9 @@ Version | Status | Comments
 
 ## Why another Swift logger?
 
-When I started doing serious Swift development, I naturally looked around for a logging framework.  I found Dave Wood excellent *XCGLogger* (https://github.com/DaveWoodCom/XCGLogger) implementation.  While its fast and well constructed, I needed some extra features and decided to build my own.
+When I started doing serious Swift development, I naturally looked around for a logging framework.  I found Dave Wood excellent *XCGLogger* (https://github.com/DaveWoodCom/XCGLogger) implementation.  While it's fast and well constructed, I needed some extra features and decided to build my own.
 
 *Slogger* uses much the same approach and function signatures as *XCGLogger*, and as such, in its basic use can be easily switched with *XCGLogger* without modifying the logging sites.
-
-Here's a rundown of some of the features:
-
-### Configurable Destinations
-The *Destination* protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network if you wanted to.
-
-Slogger natively supports the following:
-
-Destination | Status
---- | ---
-Console | Current
-File | Coming Soon™
-
-### Configurable Generators
-You can supply your own closure for outputting a log entry in any format.  The default uses the ubiquitous log4j pattern
-
-	- [10/25/2015, 15:33:57 EDT] SloggerTests.swift:117 callIt [] Severe: String
-	
-But you could easily output custom JSON, XML, or whatever you want.  These generators are configurable *per logging destination.
-
-### Configurable Decorators
-You can supply a decorator that will further format 
-
-
-### Selectable Detail sets: You can configure what detail you want to see in the logs
-
 
 ## General Info
 
@@ -76,6 +50,41 @@ And you'll likely want to tailor your build for debug/release:
 	#endif
 
 The *Slogger* class is generic, to support categories as explained below.
+
+## Advanced Features
+
+### Destinations
+The *Destination* protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network if you wanted to.
+
+*Slogger* natively supports the following logging destinations:
+
+Destination | Status
+--- | ---
+Console | Implemented
+File | Coming Soon™
+
+
+### Generators
+You can supply your own closure for outputting a log entry in any format.  The default uses the ubiquitous log4j pattern
+
+	- [10/25/2015, 15:33:57 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
+	
+But you could easily output custom JSON, XML, or whatever you want.  These generators are configurable per logging destination.
+
+### Details
+You can configure what details you want to see in the logs by providing an array of enum values for each detail supported.  Generators will 
+
+
+### Configurable Decorators
+You can supply a decorator that will further adjust the format of the generator output.  These are configured on a per-destination.
+
+Decorators | Status
+--- | ---
+XCodeColors | Implemented
+ANSI | Coming Soon™
+
+### Configurable Colormaps
+Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.
 
 ## Categories
 

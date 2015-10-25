@@ -1,0 +1,67 @@
+Slogger.swift
+	case None
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool
+	case Date, File, Function, Level, Category
+	case Date, File, Function, Level, Category
+	case Date, File, Function, Level, Category
+	case Date, File, Function, Level, Category
+	case Date, File, Function, Level, Category
+	public func severe (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func severe (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func severe (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func severe (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func error (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func error (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func error (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func error (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func warning (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func warning (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func warning (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func warning (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func info (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func info (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func info (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func info (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func debug (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func debug (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func debug (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func debug (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func verbose (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func verbose (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func verbose (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure)
+	public func verbose (category: T?, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure)
+	public func trace (condition: Bool, @autoclosure  _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func trace (category: T?, _ condition: Bool, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+	public func trace (condition: Bool, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+	public func trace (category: T?, _ condition: Bool, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
+XCodeColorsDecorator.swift
+	public struct XCodeColorsDecorator : Decorator
+	public func decorateString(string : String, spec: ColorSpec) -> String
+ConsoleDestination.swift
+	public class ConsoleDestination : Destination
+	public var decorator : Decorator?
+	public var generator : Generator?
+	public var colorMap : ColorMap?
+	public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil)
+	public func logString(string : String, level: Level)
+TestDestination.swift
+	public class TestDestination : Destination
+	public var colorMap : ColorMap?
+	public var decorator : Decorator?
+	public var generator : Generator?
+	public var lastIndex : Int
+	public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil)
+	public func logString(string : String, level: Level)
+	public func clear ()
+Color.swift
+	public func colorFromHexString (string : String) -> Color
+	public protocol Decorator
+	func decorateString(string : String, spec: ColorSpec) -> String

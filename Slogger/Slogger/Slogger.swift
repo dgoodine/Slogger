@@ -9,16 +9,38 @@ import Foundation
 
 public typealias LogClosure = () -> String
 
-// Marker protocol for client-provided logging category enums
+/** 
+ Marker protocol for client-provided logging category enums
+*/
 public protocol SloggerCategory : Hashable {}
+
+/**
+ Default enum for instantiating a generic Slogger class
+ 
+ - None: Don't use it.
+*/
 public enum NoCategories : SloggerCategory {
   case None
 }
 
+/**
+ Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
+ 
+ - None: Turn off all logging
+ - Severe: Use this for cataclysmic events
+ - Error: Use this for things that shouldn't really happen
+ - [Warning]: Use this if something seems awry (ignore the brackets)
+ - Debug: Use this to look at runtime details of things
+ - Verbose: WTF is going on in my app?
+ - Trace: (special) See 'log.trace' documentation
+
+ */
 public enum Level : Int, Comparable {
   case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
 
-  // Swift really should support this implicitly.
+  /**
+   - Returns: all values in the enumeration
+  */
   static func allValues () -> [Level] {
     return [None, Severe, Error, Warning, Info, Debug, Verbose, Trace]
   }
@@ -29,38 +51,131 @@ public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> B
   return a.rawValue < b.rawValue
 }
 
+/**
+ An enumeration of the types of information passed to a generator for a log event
+
+ - [Date]: Date and time of the event (ignore the brackets)
+ - File: File and line number of the logging site
+ - Function: The function the logging site is in
+ - Level: The logging level of the site
+ - Category: The category specified in the logging site
+*/
 public enum Detail : Int {
   case Date, File, Function, Level, Category
 }
 
+/**
+ A type alias for Generator closures.
+
+ - Parameter message: The message string at the logging site
+ - Parameter category: The category specified in the logging site
+ - Parameter level: The logging level of the site
+ - Parameter function: The function the logging site is in
+ - Parameter file: File and line number of the logging site
+ - Parameter line: The line number of the logging site
+ - Parameter details: The ordered array of detail enum values for information that should be emitted
+ - Parameter dateFormatter: The dateFormatter to use.
+ 
+ - Returns: A string representation of the generator output
+*/
 public typealias Generator = (message: String, category: Any?, level: Level,
   function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
 
+/**
+ The protocol that all logging destination types must conform to
+*/
 public protocol Destination {
-  var colorMap : ColorMap? { get set }
-  var decorator : Decorator? { get set }
+  /** A custom generator for this destination.  If not provided, use the default provided by the logger. */
   var generator : Generator? { get set }
 
-  init (generator: Generator?, colorMap : ColorMap?)
+  /** A custom color map for this destination.  If not provided, use the default provided by the logger. */
+  var colorMap : ColorMap? { get set }
 
+  /** A custom decorator for this destination */
+  var decorator : Decorator? { get set }
+
+  /**
+   Required initializer.
+
+   - Parameter generator: A custom generator to use for this destination.
+   - Parameter colorMap: A custom colormap to use for this destination.
+   */
+  init (generator: Generator?, colorMap : ColorMap?, decorator: Decorator?)
+
+  /**
+   The basic logging function.
+   - Parameter string: The fully generated and decorated log string for the event
+   - Parameter level: The level of the logging site.  Provided for some special cases such as testing.
+   */
   func logString(string : String, level: Level)
 }
 
+// MARK: - Main Class
+/**
+ The main logger class.  It's operation should be fairly intuitive and the properties and functions should
+ be adequately documented herein.
+ 
+ The 'SloggerTests.swift' file is a very good place to look for examples of advanced usage, including
+ how to subclass this class to use your own categories.
+ 
+ All public properties are designed to allow any changes at runtime, so you can dynamically change
+ while debugging. You could even change them programatically in your code if you need to track down a bug in the
+ middle of heaps of calls by setting a higher, more verbose debug level in a function.
+ 
+ A typical strategy in a function might be:
+ 1. Capture the current log level
+ 1. Evaluate a test to see if the conditions require deeper logging
+ 1. If so, set the logging level higher
+ 1. Execute the body of the function
+ 1. If the condition in step 2 was true, reset 'log.loglevel' back to the saved value
+
+*/
 public class Slogger <T: SloggerCategory> : NSObject {
 
+  /**
+   The current operating level of the logger. 
+   */
   public var currentLevel : Level
 
+  /**
+   The current operating level of the logger. 
+   */
   public var dateFormatter : NSDateFormatter
 
+  /**
+   The current detail array representing the fields for the generator to output. A generator implemenetation
+   is free to choose to ignore details that are irrelevant for that generator.
+   */
   public var details : [Detail]
 
+  /** 
+   A dictionary of category  to level associations.  If a value exists for a given category, that level will be used
+   for all logging sites that specify that category, instead of the currentLevel.
+   */
   public var categories : [T : Level] = Dictionary<T, Level>()
 
+  /**
+   The default consoleDestination.  Can be accessed if you want to operate on it directly.
+   */
+  public var consoleDestination : Destination
+
+  /**
+   The curent destinations this logger will write to.  If this array is empty, logging will be evaluated normally.
+   (This can be useful for performance testing.)
+   
+   You can modify this array as you wish at any time while your app is running.
+   */
   public var destinations : [Destination] = Array<Destination>()
 
+  /**
+   The default (log4j-style) generator function.
+   
+   Ouput looks like this:
+
+       - [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 callIt [] Severe: String
+
+   */
   public var defaultGenerator : Generator = { (message, category, level, function, file, line, details, dateFormatter) -> String in
-    /* TODO: I would have just made this a closure call to an internal function, but for some reason was getting
-    a compiler error.  Swift's type checking is still a little wonky. */
     let str : NSMutableString = NSMutableString()
     str.appendString("-")
 
@@ -106,6 +221,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
     return str as String
   }
 
+  /**
+   The current colorMap.  See 'Color.swift' for more information on creating your own.
+   */
   public var colorMap : ColorMap = [
     Level.Severe : (colorFromHexString("FF0000"), nil),
     Level.Error : (colorFromHexString("FF8503"), nil),
@@ -117,14 +235,28 @@ public class Slogger <T: SloggerCategory> : NSObject {
   ]
 
   // Mark: Stats
+  /**
+  The number of logging hits (actual logged events) so far.
+  */
   public var hits : Int64 = 0
+
+  /**
+   The number of logging misses (events not logged due to level) so far.
+   */
   public var misses : Int64 = 0
 
   // MARK: Initialization
+  /**
+  The default initializer.
+  
+  - Parameter defaultLevel: Sets the 'currentLevel' property to this value.
+  - Parameter dateFormatter: The date formatter to use for dates.  It has a typical default.
+  - Parameter details: The order detail for the generator to output.
+  */
   public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
     var df = dateFormatter
     if df == nil {
-      let template = "yyyy.MM.dd HH:mm:ss zzz"
+      let template = "yyyy.MM.dd HH:mm:ss.SSS zzz"
       let locale = NSLocale.currentLocale()
       let dateFormat = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: locale)
       let idf = NSDateFormatter()
@@ -135,9 +267,22 @@ public class Slogger <T: SloggerCategory> : NSObject {
     self.currentLevel = defaultLevel
     self.dateFormatter = df!
     self.details = (details != nil) ? details! : [.Date, .File, .Function, .Category, .Level]
-    self.destinations = [ConsoleDestination(colorMap: colorMap)]
+    self.consoleDestination = ConsoleDestination(colorMap: colorMap, decorator: XCodeColorsDecorator())
+    self.destinations = [consoleDestination]
   }
 
+  // MARK: Public
+  /**
+   The internal function used to determine if an event can be logged.  It's provided to allow for special use-cases,
+   but shouldn't be needed in code.
+   
+   - Parameter condition: The condition (see the 'trace' documentation).  If it is false, the test MUST fail.
+   - Parameter category: The category of the logging site or nil.  Used to evaluate category
+   specific debugging level configuration.
+   - Parameter level: The value of the 'currentLevel' property.
+   
+   - Returns: true of the logging of the event should proceed, false if it shouldn't
+   */
   public func canLogWithCondition (condition: Bool, category: T?, level: Level) -> Bool {
     guard condition else {
       return false
@@ -184,6 +329,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
 }
 
 // MARK: - Log site functions
+/**
+This extension holds the public convenience methods for logging.  They should be the only ones used at logging sites.
+*/
 extension Slogger {
   // MARK: Severe
   public func severe (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
