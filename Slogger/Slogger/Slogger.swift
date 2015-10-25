@@ -16,27 +16,39 @@ public protocol SloggerCategory : Hashable {}
 
 /**
  Default enum for instantiating a generic Slogger class
- 
- - None: Don't use it.
 */
 public enum NoCategories : SloggerCategory {
+  /// Don't use this
   case None
 }
 
 /**
  Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
- 
- - None: Turn off all logging
- - Severe: Use this for cataclysmic events
- - Error: Use this for things that shouldn't really happen
- - [Warning]: Use this if something seems awry (ignore the brackets)
- - Debug: Use this to look at runtime details of things
- - Verbose: WTF is going on in my app?
- - Trace: (special) See 'log.trace' documentation
-
- */
+  */
 public enum Level : Int, Comparable {
-  case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+  /// Turn off all logging (except traces)
+  case None
+
+  /// Use this for cataclysmic events
+  case Severe
+
+  /// Use this for things that shouldn't really happen
+  case Error
+
+  /// Use this if something seems awry (ignore the brackets)
+  case Warning
+
+  /// Use this for general operational information
+  case Info
+
+  /// Use this for deeper debugging
+  case Debug
+
+  /// "WTF is going on in my app?"
+  case Verbose
+
+  /// (special-case) See 'log.trace' documentation
+  case Trace
 
   /**
    - Returns: all values in the enumeration
@@ -53,15 +65,22 @@ public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> B
 
 /**
  An enumeration of the types of information passed to a generator for a log event
-
- - [Date]: Date and time of the event (ignore the brackets)
- - File: File and line number of the logging site
- - Function: The function the logging site is in
- - Level: The logging level of the site
- - Category: The category specified in the logging site
 */
 public enum Detail : Int {
-  case Date, File, Function, Level, Category
+  ///  Date and time of the event (ignore the brackets)
+  case Date
+
+  /// File and line number of the logging site
+  case File
+
+  /// The function the logging site is in
+  case Function
+
+  /// The logging level of the site
+  case Level
+
+  /// The category specified in the logging site
+  case Category
 }
 
 /**
@@ -78,20 +97,19 @@ public enum Detail : Int {
  
  - Returns: A string representation of the generator output
 */
-public typealias Generator = (message: String, category: Any?, level: Level,
-  function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
+public typealias Generator = (message: String, category: Any?, level: Level, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
 
 /**
  The protocol that all logging destination types must conform to
 */
 public protocol Destination {
-  /** A custom generator for this destination.  If not provided, use the default provided by the logger. */
+  /** A custom generator for this destination.  If not provided, the logger value will be used. */
   var generator : Generator? { get set }
 
-  /** A custom color map for this destination.  If not provided, use the default provided by the logger. */
+  /** A custom color map for this destination.  If not provided, the logger value will be used. */
   var colorMap : ColorMap? { get set }
 
-  /** A custom decorator for this destination */
+  /** A custom decorator for this destination.  If not provided, the logger value will be used. */
   var decorator : Decorator? { get set }
 
   /**
@@ -122,13 +140,6 @@ public protocol Destination {
  while debugging. You could even change them programatically in your code if you need to track down a bug in the
  middle of heaps of calls by setting a higher, more verbose debug level in a function.
  
- A typical strategy in a function might be:
- 1. Capture the current log level
- 1. Evaluate a test to see if the conditions require deeper logging
- 1. If so, set the logging level higher
- 1. Execute the body of the function
- 1. If the condition in step 2 was true, reset 'log.loglevel' back to the saved value
-
 */
 public class Slogger <T: SloggerCategory> : NSObject {
 

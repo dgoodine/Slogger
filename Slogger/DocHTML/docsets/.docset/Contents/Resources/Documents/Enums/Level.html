@@ -13,7 +13,7 @@
     <a title="Level Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (28% documented)</p>
+        <p><a href="../index.html"> Docs</a> (44% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -117,16 +117,6 @@
               </div>
             <p>Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).</p>
 
-<ul>
-<li>None: Turn off all logging</li>
-<li>Severe: Use this for cataclysmic events</li>
-<li>Error: Use this for things that shouldn&rsquo;t really happen</li>
-<li>[Warning]: Use this if something seems awry (ignore the brackets)</li>
-<li>Debug: Use this to look at runtime details of things</li>
-<li>Verbose: WTF is going on in my app?</li>
-<li>Trace: (special) See &lsquo;log.trace&rsquo; documentation</li>
-</ul>
-
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -144,20 +134,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Turn off all logging (except traces)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">None</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -171,20 +165,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Use this for cataclysmic events</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Severe</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -198,20 +196,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Use this for things that shouldn&rsquo;t really happen</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Error</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -225,20 +227,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Use this if something seems awry (ignore the brackets)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Warning</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -252,20 +258,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Use this for general operational information</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Info</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -279,20 +289,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Use this for deeper debugging</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Debug</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -306,20 +320,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><q>WTF is going on in my app?</q></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Verbose</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -333,14 +351,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>(special-case) See &lsquo;log.trace&rsquo; documentation</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Trace</span></code></pre>
 
                         </div>
                       </div>

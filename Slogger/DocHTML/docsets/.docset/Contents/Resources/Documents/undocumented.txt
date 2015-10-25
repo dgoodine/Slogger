@@ -1,19 +1,5 @@
 Slogger.swift
-	case None
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
-	case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
 	public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool
-	case Date, File, Function, Level, Category
-	case Date, File, Function, Level, Category
-	case Date, File, Function, Level, Category
-	case Date, File, Function, Level, Category
-	case Date, File, Function, Level, Category
 	public func severe (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
 	public func severe (category: T?, @autoclosure _ closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
 	public func severe (function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
