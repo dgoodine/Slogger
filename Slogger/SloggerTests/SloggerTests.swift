@@ -9,24 +9,25 @@
 import XCTest
 @testable import Slogger
 
+enum TestCategory : String, SloggerCategory {
+  case First, Second, Third
+
+  static func allValues () -> [TestCategory] {
+    return [First, Second, Third]
+  }
+}
+
+class TestLogger : Slogger<TestCategory> {
+  init (destination : Destination) {
+    super.init(defaultLevel: Level.Info)
+    destinations.append(destination)
+  }
+}
+
+let testDestination = TestDestination()
+
 class SloggerTests: XCTestCase {
-
-  enum TestCategory : String, SloggerCategory {
-    case First, Second, Third
-
-    static func allValues () -> [TestCategory] {
-      return [First, Second, Third]
-    }
-  }
-
-  class TestLogger : Slogger<TestCategory> {
-    init () {
-      super.init(defaultLevel: Level.Info)
-    }
-  }
-
-  let log = TestLogger()
-
+  let log = TestLogger(destination: testDestination)
   override func setUp() {
     super.setUp()
   }
@@ -65,13 +66,25 @@ class SloggerTests: XCTestCase {
 
     let levels = Level.allValues()
     let categories = TestCategory.allValues()
+    var lastIndex : Int = 0
+
+    func checkForType (type: String, _ condition: Bool, _ category: TestCategory?, _ level: Level) {
+      guard log.canLogWithCondition(condition, category: category, level: level) else {
+        return
+      }
+
+      let last = testDestination[lastIndex]
+      XCTAssert(last.containsString(type) == condition, "Incorrect message")
+
+      lastIndex++
+    }
 
     func checkString (condition: Bool, _ category: TestCategory?, _ level: Level) {
-      // XCTAssert here
+      checkForType(": String", condition, category, level)
     }
 
     func checkClosure (condition: Bool, _ category: TestCategory?, _ level: Level) {
-      // XCTAssert here
+      checkForType(": Closure", condition, category, level)
     }
 
     func callIt (category: TestCategory?, _ level: Level) {
@@ -79,7 +92,6 @@ class SloggerTests: XCTestCase {
       case .None:
         checkString(false, category, level)
         checkClosure(false, category, level)
-        break
 
       case .Severe:
         log.severe(category, "String")
@@ -92,44 +104,38 @@ class SloggerTests: XCTestCase {
         checkString(true, category, level)
         log.error(category) { return "Closure" }
         checkClosure(true, category, level)
-        break
 
       case .Warning:
         log.warning(category, "String")
         checkString(true, category, level)
         log.warning(category) { return "Closure" }
         checkClosure(true, category, level)
-        break
 
       case .Info:
         log.info(category, "String")
         checkString(true, category, level)
         log.info(category) { return "Closure" }
         checkClosure(true, category, level)
-        break
 
       case .Debug:
         log.debug(category, "String")
         checkString(true, category, level)
         log.debug(category) { return "Closure" }
         checkClosure(true, category, level)
-        break
 
       case .Verbose:
         log.verbose(category, "String")
         checkString(true, category, level)
         log.verbose(category) { return "Closure" }
         checkClosure(true, category, level)
-        break
 
       case .Trace:
         for condition in [true, false] {
           log.trace(category, condition, "String")
-          checkString(true, category, level)
+          checkString(condition, category, level)
           log.trace(category, condition) { return "Closure" }
-          checkClosure(true, category, level)
+          checkClosure(condition, category, level)
         }
-        break
       }
     }
 

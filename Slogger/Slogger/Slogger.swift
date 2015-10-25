@@ -114,7 +114,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
   public var hits : Int64 = 0
   public var misses : Int64 = 0
 
-
   // MARK: Initialization
   public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
     var df = dateFormatter
@@ -133,8 +132,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
     self.destinations = [ConsoleDestination(colorMap: colorMap)]
   }
 
-  // MARK: Private
-  private func canLogWithCondition (condition: Bool, category: T?, level: Level) -> Bool {
+  public func canLogWithCondition (condition: Bool, category: T?, level: Level) -> Bool {
     guard condition else {
       return false
     }
@@ -147,14 +145,15 @@ public class Slogger <T: SloggerCategory> : NSObject {
     return level <= operatingLevel
   }
 
+  // MARK: Private
   func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level,
     function: String, file: String, line: Int) {
       guard canLogWithCondition(condition, category: category, level: level) else {
-        hits++
+        misses++
         return;
       }
 
-      misses++
+      hits++
 
       let message = closure()
       let string = generator(message: message, category: category, level: level,
