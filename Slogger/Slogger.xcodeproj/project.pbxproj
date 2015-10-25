@@ -7,19 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; settings = {ASSET_TAGS = (); }; };
-		A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; settings = {ASSET_TAGS = (); }; };
-		A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; settings = {ASSET_TAGS = (); }; };
+		A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
+		A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
+		A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
 		A83C79DA1BD6636800DA9F07 /* Slogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A83C79D91BD6636800DA9F07 /* Slogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A83C79E11BD6636800DA9F07 /* Slogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83C79D61BD6636800DA9F07 /* Slogger.framework */; settings = {ASSET_TAGS = (); }; };
+		A83C79E11BD6636800DA9F07 /* Slogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83C79D61BD6636800DA9F07 /* Slogger.framework */; };
 		A83C79E61BD6636800DA9F07 /* SloggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79E51BD6636800DA9F07 /* SloggerTests.swift */; };
-		A83C79F11BD6639A00DA9F07 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; settings = {ASSET_TAGS = (); }; };
-		A845537A1BDC084D00678385 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; settings = {ASSET_TAGS = (); }; };
-		A845537B1BDC085100678385 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; settings = {ASSET_TAGS = (); }; };
-		A86ED5B71BDD0C4F0065AF70 /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */; settings = {ASSET_TAGS = (); }; };
-		A86ED5B81BDD0C4F0065AF70 /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */; settings = {ASSET_TAGS = (); }; };
-		A8A53D9F1BDC2903009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; settings = {ASSET_TAGS = (); }; };
-		A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; settings = {ASSET_TAGS = (); }; };
+		A83C79F11BD6639A00DA9F07 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
+		A845537A1BDC084D00678385 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A845537B1BDC085100678385 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A85BFC471BDD4622008D1F1E /* SloggerOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = A85BFC461BDD4622008D1F1E /* SloggerOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A85BFC4E1BDD4622008D1F1E /* SloggerOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */; };
+		A85BFC531BDD4622008D1F1E /* SloggerOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85BFC521BDD4622008D1F1E /* SloggerOSXTests.swift */; };
+		A85BFC5B1BDD46A6008D1F1E /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
+		A85BFC5C1BDD46A6008D1F1E /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
+		A85BFC5D1BDD46A6008D1F1E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
+		A85BFC5F1BDD46A6008D1F1E /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */; };
+		A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
+		A85BFC611BDD472A008D1F1E /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
+		A85BFC621BDD472A008D1F1E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
+		A85BFC641BDD472A008D1F1E /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */; };
+		A85BFC651BDD4739008D1F1E /* SloggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79E51BD6636800DA9F07 /* SloggerTests.swift */; };
+		A86ED5B71BDD0C4F0065AF70 /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */; };
+		A86ED5B81BDD0C4F0065AF70 /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */; };
+		A8A53D9F1BDC2903009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
+		A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +43,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A83C79D51BD6636800DA9F07;
 			remoteInfo = Slogger;
+		};
+		A85BFC4F1BDD4622008D1F1E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A83C79CD1BD6636800DA9F07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A85BFC431BDD4622008D1F1E;
+			remoteInfo = SloggerOSX;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -42,6 +63,12 @@
 		A83C79E71BD6636800DA9F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A83C79F01BD6639A00DA9F07 /* Slogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slogger.swift; sourceTree = "<group>"; };
 		A84553791BDC084D00678385 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SloggerOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A85BFC461BDD4622008D1F1E /* SloggerOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SloggerOSX.h; sourceTree = "<group>"; };
+		A85BFC481BDD4622008D1F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A85BFC4D1BDD4622008D1F1E /* SloggerOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SloggerOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A85BFC521BDD4622008D1F1E /* SloggerOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SloggerOSXTests.swift; sourceTree = "<group>"; };
+		A85BFC541BDD4622008D1F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A86ED5B61BDD0C4F0065AF70 /* TestDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDestination.swift; sourceTree = "<group>"; };
 		A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCodeColorsDecorator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +89,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A85BFC401BDD4622008D1F1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A85BFC4A1BDD4622008D1F1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A85BFC4E1BDD4622008D1F1E /* SloggerOSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -70,6 +112,8 @@
 			children = (
 				A83C79D81BD6636800DA9F07 /* Slogger */,
 				A83C79E41BD6636800DA9F07 /* SloggerTests */,
+				A85BFC451BDD4622008D1F1E /* SloggerOSX */,
+				A85BFC511BDD4622008D1F1E /* SloggerOSXTests */,
 				A83C79D71BD6636800DA9F07 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,6 +123,8 @@
 			children = (
 				A83C79D61BD6636800DA9F07 /* Slogger.framework */,
 				A83C79E01BD6636800DA9F07 /* SloggerTests.xctest */,
+				A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */,
+				A85BFC4D1BDD4622008D1F1E /* SloggerOSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +152,24 @@
 			path = SloggerTests;
 			sourceTree = "<group>";
 		};
+		A85BFC451BDD4622008D1F1E /* SloggerOSX */ = {
+			isa = PBXGroup;
+			children = (
+				A85BFC461BDD4622008D1F1E /* SloggerOSX.h */,
+				A85BFC481BDD4622008D1F1E /* Info.plist */,
+			);
+			path = SloggerOSX;
+			sourceTree = "<group>";
+		};
+		A85BFC511BDD4622008D1F1E /* SloggerOSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				A85BFC521BDD4622008D1F1E /* SloggerOSXTests.swift */,
+				A85BFC541BDD4622008D1F1E /* Info.plist */,
+			);
+			path = SloggerOSXTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -114,6 +178,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A83C79DA1BD6636800DA9F07 /* Slogger.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A85BFC411BDD4622008D1F1E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A85BFC471BDD4622008D1F1E /* SloggerOSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,21 +228,64 @@
 			productReference = A83C79E01BD6636800DA9F07 /* SloggerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A85BFC431BDD4622008D1F1E /* SloggerOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A85BFC591BDD4622008D1F1E /* Build configuration list for PBXNativeTarget "SloggerOSX" */;
+			buildPhases = (
+				A85BFC3F1BDD4622008D1F1E /* Sources */,
+				A85BFC401BDD4622008D1F1E /* Frameworks */,
+				A85BFC411BDD4622008D1F1E /* Headers */,
+				A85BFC421BDD4622008D1F1E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SloggerOSX;
+			productName = SloggerOSX;
+			productReference = A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A85BFC4C1BDD4622008D1F1E /* SloggerOSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A85BFC5A1BDD4622008D1F1E /* Build configuration list for PBXNativeTarget "SloggerOSXTests" */;
+			buildPhases = (
+				A85BFC491BDD4622008D1F1E /* Sources */,
+				A85BFC4A1BDD4622008D1F1E /* Frameworks */,
+				A85BFC4B1BDD4622008D1F1E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A85BFC501BDD4622008D1F1E /* PBXTargetDependency */,
+			);
+			name = SloggerOSXTests;
+			productName = SloggerOSXTests;
+			productReference = A85BFC4D1BDD4622008D1F1E /* SloggerOSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A83C79CD1BD6636800DA9F07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "David Goodine";
 				TargetAttributes = {
 					A83C79D51BD6636800DA9F07 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 4G72T9YLHA;
 					};
 					A83C79DF1BD6636800DA9F07 = {
 						CreatedOnToolsVersion = 7.0.1;
+					};
+					A85BFC431BDD4622008D1F1E = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					A85BFC4C1BDD4622008D1F1E = {
+						CreatedOnToolsVersion = 7.1;
 					};
 				};
 			};
@@ -188,6 +303,8 @@
 			targets = (
 				A83C79D51BD6636800DA9F07 /* Slogger */,
 				A83C79DF1BD6636800DA9F07 /* SloggerTests */,
+				A85BFC431BDD4622008D1F1E /* SloggerOSX */,
+				A85BFC4C1BDD4622008D1F1E /* SloggerOSXTests */,
 			);
 		};
 /* End PBXProject section */
@@ -201,6 +318,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A83C79DE1BD6636800DA9F07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A85BFC421BDD4622008D1F1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A85BFC4B1BDD4622008D1F1E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,6 +366,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A85BFC3F1BDD4622008D1F1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A85BFC5B1BDD46A6008D1F1E /* Slogger.swift in Sources */,
+				A85BFC5C1BDD46A6008D1F1E /* ConsoleDestination.swift in Sources */,
+				A85BFC5D1BDD46A6008D1F1E /* Color.swift in Sources */,
+				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
+				A85BFC5F1BDD46A6008D1F1E /* TestDestination.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A85BFC491BDD4622008D1F1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A85BFC611BDD472A008D1F1E /* ConsoleDestination.swift in Sources */,
+				A85BFC651BDD4739008D1F1E /* SloggerTests.swift in Sources */,
+				A85BFC621BDD472A008D1F1E /* Color.swift in Sources */,
+				A85BFC641BDD472A008D1F1E /* TestDestination.swift in Sources */,
+				A85BFC531BDD4622008D1F1E /* SloggerOSXTests.swift in Sources */,
+				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
+				A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -242,6 +399,11 @@
 			isa = PBXTargetDependency;
 			target = A83C79D51BD6636800DA9F07 /* Slogger */;
 			targetProxy = A83C79E21BD6636800DA9F07 /* PBXContainerItemProxy */;
+		};
+		A85BFC501BDD4622008D1F1E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A85BFC431BDD4622008D1F1E /* SloggerOSX */;
+			targetProxy = A85BFC4F1BDD4622008D1F1E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -283,9 +445,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,8 +488,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -339,6 +503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -350,6 +515,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -357,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -367,6 +534,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.Slogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -387,6 +555,78 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A85BFC551BDD4622008D1F1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SloggerOSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerOSX;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A85BFC561BDD4622008D1F1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SloggerOSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerOSX;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A85BFC571BDD4622008D1F1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SloggerOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A85BFC581BDD4622008D1F1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SloggerOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -419,6 +659,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A85BFC591BDD4622008D1F1E /* Build configuration list for PBXNativeTarget "SloggerOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A85BFC551BDD4622008D1F1E /* Debug */,
+				A85BFC561BDD4622008D1F1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A85BFC5A1BDD4622008D1F1E /* Build configuration list for PBXNativeTarget "SloggerOSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A85BFC571BDD4622008D1F1E /* Debug */,
+				A85BFC581BDD4622008D1F1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

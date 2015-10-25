@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 public struct XCodeColorsDecorator : Decorator {
   private let escape = "\u{001b}["

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 public typealias Color = (r: CGFloat, g: CGFloat, b:CGFloat )
 public typealias ColorSpec = (fg: Color?, bg: Color?)
