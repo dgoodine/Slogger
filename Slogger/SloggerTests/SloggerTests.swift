@@ -35,7 +35,7 @@ class SloggerTests: XCTestCase {
     super.tearDown()
   }
 
-  func testBasic () {
+  func otestBasic () {
     log.error("Message")
 
     log.error(.First, "Message")

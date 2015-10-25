@@ -39,8 +39,8 @@ public protocol Destination {
 }
 
 public class Slogger <T: SloggerCategory> : NSObject {
-  public typealias Generator = (condition: Bool, message: String, category: T?, level: Level, function: String,
-    file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
+  public typealias Generator = (message: String, category: T?, level: Level,
+    function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
 
   public var currentLevel : Level
 
@@ -52,7 +52,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   public var destinations : [Destination] = Array<Destination>()
 
-  public var generator : Generator = { (condition, message, category, level, function, file, line, details, dateFormatter) -> String in
+  public var generator : Generator = { (message, category, level, function, file, line, details, dateFormatter) -> String in
+    /* TODO: I would have just made this a closure call to an internal function, but for some reason was getting
+    a compiler error.  Swift's type checking is still a little wonky. */
     let str : NSMutableString = NSMutableString()
     str.appendString("-")
 
@@ -99,13 +101,13 @@ public class Slogger <T: SloggerCategory> : NSObject {
   }
 
   public var colorMap : ColorMap = [
-    Level.Severe : (colorFromHexString("FFFF00"), nil),
-    Level.Error : (colorFromHexString("FAAB00"), nil),
-    Level.Warning : (colorFromHexString("E100FA"), nil),
-    Level.Info : (colorFromHexString("E100FA"), nil),
-    Level.Debug : (colorFromHexString("E100FA"), nil),
-    Level.Verbose : (colorFromHexString("E100FA"), nil),
-    Level.Trace : (colorFromHexString("11AB00"), nil)
+    Level.Severe : (colorFromHexString("FF0000"), nil),
+    Level.Error : (colorFromHexString("FF8503"), nil),
+    Level.Warning : (colorFromHexString("FF03FB"), nil),
+    Level.Info : (colorFromHexString("444444"), nil),
+    Level.Debug : (colorFromHexString("035FFF"), nil),
+    Level.Verbose : (colorFromHexString("666666"), nil),
+    Level.Trace : (colorFromHexString("009C03"), nil)
   ]
 
   // Mark: Stats
@@ -132,7 +134,11 @@ public class Slogger <T: SloggerCategory> : NSObject {
   }
 
   // MARK: Private
-  private func canLog (category: T?, level: Level) -> Bool {
+  private func canLogWithCondition (condition: Bool, category: T?, level: Level) -> Bool {
+    guard condition else {
+      return false
+    }
+
     var operatingLevel = currentLevel
     if category != nil, let categoryLevel = categories[category!] {
       operatingLevel = categoryLevel
@@ -141,21 +147,21 @@ public class Slogger <T: SloggerCategory> : NSObject {
     return level <= operatingLevel
   }
 
-  func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
+  func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level,
+    function: String, file: String, line: Int) {
+      guard canLogWithCondition(condition, category: category, level: level) else {
+        hits++
+        return;
+      }
 
-    guard canLog(category, level: level) else {
-      hits++
-      return;
-    }
+      misses++
 
-    misses++
-
-    let message = closure()
-    let string = generator(condition: condition, message: message, category: category, level: level, function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
-
-    for dest in destinations {
-      dest.logString(string, level: level)
-    }
+      let message = closure()
+      let string = generator(message: message, category: category, level: level,
+        function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
+      for dest in destinations {
+        dest.logString(string, level: level)
+      }
   }
 }
 

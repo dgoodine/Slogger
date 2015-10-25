@@ -27,16 +27,18 @@ public struct XCodeColorsDecorator : Decorator {
       return "\(escape)\(typeCode)\(r),\(g),\(b);"
     }
 
-    var fgString : String = resetFg
+    var fgStart = ""
+    let fgEnd = (fg == nil) ? "" : resetFg
     if fg != nil {
-      fgString = prefix(fg!, "fg")
+      fgStart = prefix(fg!, "fg")
     }
 
-    var bgString : String = resetBg
+    var bgStart = ""
+    let bgEnd = (bg == nil) ? "" : resetBg
     if bg != nil {
-      bgString = prefix(bg!, "bg")
+      bgStart = prefix(bg!, "bg")
     }
-    let value = "\(fgString)\(bgString)\(string)"
+    let value = "\(fgStart)\(bgStart)\(string)\(fgEnd)\(bgEnd)"
 
     return value
   }
