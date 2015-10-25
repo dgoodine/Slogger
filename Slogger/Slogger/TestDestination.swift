@@ -26,6 +26,10 @@ public class TestDestination : Destination {
     lines.append(string)
   }
 
+  public func clear () {
+    lines = []
+  }
+
   public subscript (index : Int) -> String {
     get {
       guard index >= 0 && index < lines.count else {

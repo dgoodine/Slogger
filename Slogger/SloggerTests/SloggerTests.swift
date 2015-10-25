@@ -28,8 +28,11 @@ let testDestination = TestDestination()
 
 class SloggerTests: XCTestCase {
   let log = TestLogger(destination: testDestination)
+  var defaultDestinations : [Destination] = []
+
   override func setUp() {
     super.setUp()
+    defaultDestinations = log.destinations
   }
 
   override func tearDown() {
@@ -62,19 +65,30 @@ class SloggerTests: XCTestCase {
     }
   }
 
-  func testExhaustive () {
-
+  func exhaustiveTestWithDestinations (destinations : [Destination], checkResults: Bool = true) {
     let levels = Level.allValues()
     let categories = TestCategory.allValues()
     var lastIndex : Int = 0
 
+    log.hits = 0
+    log.misses = 0
+    log.destinations = destinations
+
     func checkForType (type: String, _ condition: Bool, _ category: TestCategory?, _ level: Level) {
-      guard log.canLogWithCondition(condition, category: category, level: level) else {
+      guard checkResults && log.canLogWithCondition(condition, category: category, level: level) else {
         return
       }
 
       let last = testDestination[lastIndex]
-      XCTAssert(last.containsString(type) == condition, "Incorrect message")
+      XCTAssertEqual(last.containsString(" \(level): "), condition, "Incorrect level")
+      XCTAssertEqual(last.containsString(type), condition, "Incorrect message")
+      XCTAssertEqual(last.containsString(" SloggerTests.swift:"), condition, "Incorrect file")
+      XCTAssertEqual(last.containsString(" callIt"), condition, "Incorrect function")
+      if category == nil {
+        XCTAssertEqual(last.containsString(" [] "), condition, "Incorrect function")
+      } else {
+        XCTAssertEqual(last.containsString(" [\(category!)] "), condition, "Incorrect function")
+      }
 
       lastIndex++
     }
@@ -155,7 +169,26 @@ class SloggerTests: XCTestCase {
       }
     }
 
-    print("Call counts: \(log.hits) / \(log.hits + log.misses)")
+    print("Log Calls: \(log.hits), Log Calls \(log.hits + log.misses)")
+  }
+
+  func testConsole () {
+    self.measureBlock() {
+      self.exhaustiveTestWithDestinations(self.defaultDestinations, checkResults: false)
+    }
+  }
+
+  func testNoConsole () {
+    self.measureBlock() {
+      self.exhaustiveTestWithDestinations([testDestination], checkResults: true)
+    }
+  }
+
+  func testNoLoggers () {
+    self.measureBlock() {
+      testDestination.clear()
+      self.exhaustiveTestWithDestinations([], checkResults: false)
+    }
   }
 
   //  func testPerformanceExample() {
