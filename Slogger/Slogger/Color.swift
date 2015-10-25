@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias Color = (r: CGFloat, g: CGFloat, b:CGFloat )
+public typealias Color = (r: Double, g: Double, b: Double)
 public typealias ColorSpec = (fg: Color?, bg: Color?)
 public typealias ColorMap = [Level : ColorSpec]
 
@@ -26,7 +26,7 @@ public func colorFromHexString (string : String) -> Color {
   let g = Int(color >> 8) & mask
   let b = Int(color) & mask
 
-  return (r: CGFloat(r) / 255.0, g: CGFloat(g) / 255.0, b: CGFloat(b) / 255.0)
+  return (r: Double(r) / 255.0, g: Double(g) / 255.0, b: Double(b) / 255.0)
 }
 
 public protocol Decorator {

@@ -12,7 +12,7 @@ public struct XCodeColorsDecorator : Decorator {
   private let resetFg = "\u{001b}[fg;"
   private let resetBg = "\u{001b}[bg;"
   private let reset = "\u{001b}[;"
-  private let maxColor = CGFloat(255)
+  private let maxColor = 255.0
 
   public func decorateString(string : String, spec: ColorSpec) -> String {
     let fg = spec.fg
