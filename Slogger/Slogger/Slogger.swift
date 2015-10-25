@@ -33,16 +33,20 @@ public enum Detail : Int {
   case Date, File, Function, Level, Category
 }
 
+public typealias Generator = (message: String, category: Any?, level: Level,
+  function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
+
 public protocol Destination {
   var colorMap : ColorMap? { get set }
   var decorator : Decorator? { get set }
-  init (colorMap : ColorMap?)
+  var generator : Generator? { get set }
+
+  init (generator: Generator?, colorMap : ColorMap?)
+
   func logString(string : String, level: Level)
 }
 
 public class Slogger <T: SloggerCategory> : NSObject {
-  public typealias Generator = (message: String, category: T?, level: Level,
-    function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
 
   public var currentLevel : Level
 
@@ -147,9 +151,10 @@ public class Slogger <T: SloggerCategory> : NSObject {
     return level <= operatingLevel
   }
 
-  // MARK: Private
+  // MARK: Internal
   func logInternal (condition: Bool, @noescape _ closure: LogClosure, category: T?, level: Level,
     function: String, file: String, line: Int) {
+
       guard canLogWithCondition(condition, category: category, level: level) else {
         misses++
         return;
@@ -158,10 +163,22 @@ public class Slogger <T: SloggerCategory> : NSObject {
       hits++
 
       let message = closure()
-      let string = generator(message: message, category: category, level: level,
-        function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
+      var defaultString : String? = nil
+
       for dest in destinations {
-        dest.logString(string, level: level)
+        let generator = dest.generator
+        let string : String?
+        if generator != nil {
+          string = generator!(message: message, category: category, level: level,
+            function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
+        } else {
+          if defaultString == nil {
+            defaultString = defaultGenerator(message: message, category: category, level: level,
+              function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
+          }
+          string = defaultString
+        }
+        dest.logString(string!, level: level)
       }
   }
 }

@@ -11,6 +11,8 @@ import Foundation
 public class TestDestination : Destination {
   public var colorMap : ColorMap?
   public var decorator : Decorator? = XCodeColorsDecorator()
+  public var generator : Generator? = nil
+
   private var lines : [String] = []
   public var lastIndex : Int {
     get {
@@ -18,7 +20,7 @@ public class TestDestination : Destination {
     }
   }
 
-  public required init (colorMap : ColorMap? = nil) {
+  public required init (generator: Generator? = nil, colorMap : ColorMap? = nil) {
     self.colorMap = colorMap
   }
 

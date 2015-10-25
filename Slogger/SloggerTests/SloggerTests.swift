@@ -39,6 +39,7 @@ class SloggerTests: XCTestCase {
   override func setUp() {
     super.setUp()
     defaultDestinations = log.destinations
+    testDestination.generator = log.defaultGenerator
   }
 
   override func tearDown() {

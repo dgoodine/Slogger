@@ -11,8 +11,10 @@ public class ConsoleDestination : Destination {
 
   public var colorMap : ColorMap?
   public var decorator : Decorator? = XCodeColorsDecorator()
+  public var generator : Generator?
 
-  public required init (colorMap : ColorMap? = nil) {
+  public required init (generator: Generator? = nil, colorMap : ColorMap? = nil) {
+    self.generator = generator
     self.colorMap = colorMap
   }
 
