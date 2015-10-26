@@ -28,14 +28,12 @@ Cocoapods | Considering it | Not a fan of invasive development tools, but it's p
 The logger levels supported are as follows:
 
 	public enum Level : Int, Comparable {
-	  case None, Severe, Error, Warning, Info, Debug, Verbose, Trace
+	  case None, Severe, Error, Warning, Info, Debug, Verbose
 
 	  static func allValues () -> [Level] {
-	    return [None, Severe, Error, Warning, Info, Debug, Verbose, Trace]
+	    return [None, Severe, Error, Warning, Info, Debug, Verbose]
 	  }
 	}
-
-*Trace* is a special logging level with different semantics explained below.
 
 Each log level has both an @autoclosure and @noescape trailing closure implementation, so the following are both valid forms:
 
@@ -46,7 +44,7 @@ Each log level has both an @autoclosure and @noescape trailing closure implement
 
 By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site.
 
-Setting up a simple, default logger can be as simple as one line of code:
+Setting up a logger can be as simple as one line of code:
 
 	let log = Slogger<NoCategories>(defaultLevel: .Debug)
 	
@@ -58,7 +56,7 @@ And you'll likely want to tailor your build for debug/release:
 	let log = Slogger<NoCategories>(defaultLevel: .Warning)
 	#endif
 
-The *Slogger* class is generic, to support categories as explained below.
+The *Slogger* class is generic, to support categories.  This is explained below.
 
 ## Advanced Features
 
