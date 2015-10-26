@@ -125,6 +125,22 @@ public protocol Destination {
   func logString(string : String, level: Level)
 }
 
+/**
+ Protocol for type used to decorate generator output.
+*/
+public protocol Decorator {
+
+  /**
+   The decorator function.
+   
+   - Parameter string: The string to decorate
+   - Parameter colorSpec: The color spec to use for decoration
+   - Returns: The decorated string
+   */
+  func decorateString(string : String, spec: ColorSpec) -> String
+}
+
+
 // MARK: - Main Class
 /**
  The main logger class.  It's operation should be fairly intuitive and the properties and functions should
@@ -303,8 +319,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
   }
 
   // MARK: Internal
-  func logInternal (override: Bool, @noescape _ closure: LogClosure, category: T?, level: Level,
-    function: String, file: String, line: Int) {
+  func logInternal (override: Bool, @noescape _ closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
 
       guard canLogWithOverride(override, category: category, level: level) else {
         misses++

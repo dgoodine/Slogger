@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ A logging destination used by the test suite.  It records each line logged in order so that testing code
+ can retrieve them after a logging call.
+*/
 public class TestDestination : Destination {
   public var colorMap : ColorMap?
   public var decorator : Decorator?
@@ -28,10 +32,17 @@ public class TestDestination : Destination {
     lines.append(string)
   }
 
+  /// Clear the logging history.
   public func clear () {
     lines = []
   }
 
+  /**
+   Subscript-based access to logging lines.
+   
+   - Parameter index: The index of the line to return
+   - Returns: The logging output for the index or the empty string if the index was out of bounds.
+   */
   public subscript (index : Int) -> String {
     get {
       guard index >= 0 && index < lines.count else {
