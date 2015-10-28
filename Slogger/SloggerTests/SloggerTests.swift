@@ -7,7 +7,12 @@
 //
 
 import XCTest
+
+#if os(iOS)
 @testable import Slogger
+#elseif os(OSX)
+@testable import SloggerOSX
+#endif
 
 enum TestCategory : String, SloggerCategory {
   case First, Second
@@ -69,7 +74,7 @@ class SloggerTests: XCTestCase {
     log.verbose(.First, override: true) { "Closure Message" }
   }
 
-  func exhaustiveTestWithDestinations (destinations : [Destination], checkResults: Bool = true) {
+  func exhaustiveTestWithDestinations (destinations : [Destination], checkResults: Bool = true, verbose: Bool = false) {
     let levels = Level.allValues()
     let categories = TestCategory.allValues()
 
@@ -155,7 +160,9 @@ class SloggerTests: XCTestCase {
 
     // Execute the tests
     for setLevel in levels {
-      print("Setting log level: \(setLevel)")
+      if verbose {
+        print("Setting log level: \(setLevel)")
+      }
       log.currentLevel = setLevel
 
       if setLevel == .None {
@@ -173,12 +180,14 @@ class SloggerTests: XCTestCase {
       }
     }
 
-    print("Log Calls: \(log.hits), Log Calls \(log.hits + log.misses)")
+    if verbose {
+      print("Log Calls: \(log.hits), Log Calls \(log.hits + log.misses)")
+    }
   }
 
   func testConsole () {
     self.measureBlock() {
-      self.exhaustiveTestWithDestinations([self.log.consoleDestination], checkResults: false)
+      self.exhaustiveTestWithDestinations([self.log.consoleDestination], checkResults: false, verbose: true)
     }
   }
 

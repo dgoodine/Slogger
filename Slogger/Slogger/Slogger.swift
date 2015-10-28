@@ -257,9 +257,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
   public var colorMap : ColorMap
   = [
     Level.Severe : (colorFromHexString("FF0000"), nil),
-    Level.Error : (colorFromHexString("FF8503"), nil),
+    Level.Error : (colorFromHexString("FF5500"), nil),
     Level.Warning : (colorFromHexString("FF03FB"), nil),
-    Level.Info : (colorFromHexString("444444"), nil),
+    Level.Info : (colorFromHexString("008C31"), nil),
     Level.Debug : (colorFromHexString("035FFF"), nil),
     Level.Verbose : (colorFromHexString("666666"), nil),
   ]
