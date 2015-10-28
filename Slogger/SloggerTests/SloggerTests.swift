@@ -181,7 +181,7 @@ class SloggerTests: XCTestCase {
     }
 
     if verbose {
-      print("Log Calls: \(log.hits), Log Calls \(log.hits + log.misses)")
+      print("Logged entries: \(log.hits), Log calls \(log.hits + log.misses)")
     }
   }
 
