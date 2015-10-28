@@ -38,9 +38,7 @@ The logger levels supported are as follows:
 Each log level has both an @autoclosure and @noescape trailing closure implementation, so the following are both valid forms:
 
 	log.debug("Enter")
-	log.debug() {
-		return "Enter"
-	}
+	log.debug() { "Enter" }
 
 By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site.
 
@@ -56,7 +54,9 @@ And you'll likely want to tailor your build for debug/release:
 	let log = Slogger<NoCategories>(defaultLevel: .Warning)
 	#endif
 
-The *Slogger* class is generic, to support categories.  This is explained below.
+The *Slogger* class is generic to support categories, as explained below.
+
+The public interface is well documented.  See the Docs directory for HTML-based and Apple docset versions of the header documentation.
 
 ## Advanced Features
 
@@ -67,42 +67,43 @@ The *Destination* protocol allows you to write your own log destinations and add
 
 Destination | Status
 --- | ---
-Console | Implemented
+Console | Supported
+Memory | Supported
 File | Coming Soon™
 
 
 ### Generators
-You can supply your own closure for outputting a log entry in any format.  The default uses the ubiquitous log4j pattern
+You can supply your own closure for outputting a log entry in any format.  The default uses the following pattern:
 
 	- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
 	
 But you could easily output custom JSON, XML, or whatever you want.  These generators are configurable per logging destination.
 
 ### Details
-You can configure what details you want to see in the logs by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
+You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
 
 ### Configurable Decorators
 You can supply a decorator that will further adjust the format of the generator output.  These are configured on a per-destination.
 
 Decorators | Status
 --- | ---
-XCodeColors | Implemented
+XCodeColors | Supported
 ANSI | Coming Soon™
 
 ### Configurable Colormaps
 Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.
 
 ### Radioactive Tracing
-Radioactive tracing allows logging sites to log based on a boolean override value, not the logging level.  If the *override* argument in a logging site is true, the event is logged, regardless of the log level.
+Radioactive tracing allows logging sites to log based on a boolean override value, in addition to the logging level.  If the *override* argument in a logging site is *true*, the event is logged, regardless of the log level.  If the argument is *false*, log-level checking continues as usual.
 
-For example, if you were to define a *Request* object base class in a services implementation, you could define a boolean *trace* property, defaulting to false.  In your code that processes the request, you would provide the *condition* argument to the logging site.  If a particular request is causing a problem (but you have tons of them to process), you can set the *trace* flag for only that request and logging sites for all levels would be logged.
+For example, if you were to define a *Request* object base class in a services implementation, you could define a boolean *trace* property, defaulting to *false*.  In your code that processes the request, you would provide the value of *trace* as the *override* argument at the logging site.  If a particular request is causing a problem (but you have tons of them to process), you can set the *trace* flag for only that request.  Consequently, logging sites for all levels would be logged for that particular request.
 
 ### Categories
 In addition to the two convenience functions for each level mentioned above, logging sites allow a *Category* to be defined which is passed to the logging function.  While a category could be any type conforming to the *Hashable* protocol, you would typically define an *enum* for type safety.
 
-Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc.
+Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc).
 
-The design of categories is such that third-party frameworks can expose their *Slogger* object and document their category values for developers using the framework.  Then, if the developers need to diagnose a problem inside the framework, they can simple fine-tune the logging levels to get more information.  This is especially useful the framework developer doesn't release the source code.
+The design of categories is such that third-party frameworks can expose their *Slogger* instance and document their category values for developers using the framework.  Then, if the developers need to diagnose a problem inside the framework, they can simply adjust the logging levels for particular categories to get more information.  This can be especially useful in cases where the framework developer doesn't release the source code.
 
 ## Implementing Categories
 
@@ -118,7 +119,7 @@ First, define your category enum:
 	  }
 	}
 
-Then, you need to subclass *Slogger*, which is generic, to bind the type to your category type:
+Second, subclass the generic *Slogger* class to bind it to your category type:
 
 	class TestLogger : Slogger<TestCategory> {}
 	
@@ -126,11 +127,14 @@ Then create your logger in the obvious way:
 
 	public let log = TestLogger()
 	
-Naturally, if you want your logger to have customize values (generators, decorators, etc.), you can override the *init* method and provide that information there.
+Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the *init* method and provide that information there.
 
 Remember, *Slogger* is designed so that all public public properties for a *Slogger* instance can be modified at runtime, without having to worry about state.
 
+## Feedback
+Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about *Sloggers* implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.
 
+Happy logging!
 
 
 

@@ -1,8 +1,0 @@
-#! /bin/bash
-
-cd Slogger
-jazzy -o ../Docs --swift-version 2.1 -a -c -a "David Goodine" -m "Slogger" -g "https://github.com/dgoodine/Slogger" \
-    --module-version 1.0  --docset-path com.davidgoodine.Slogger.docset --readme ../README.md
-cd ../
-open Docs/index.html
-

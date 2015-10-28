@@ -9,14 +9,14 @@ import Foundation
 
 public typealias LogClosure = () -> String
 
-/** 
+/**
  Marker protocol for client-provided logging category enums
-*/
+ */
 public protocol SloggerCategory : Hashable {}
 
 /**
  Default enum for instantiating a generic Slogger class
-*/
+ */
 public enum NoCategories : SloggerCategory {
   /// Don't use this
   case None
@@ -24,7 +24,7 @@ public enum NoCategories : SloggerCategory {
 
 /**
  Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
-  */
+ */
 public enum Level : Int, Comparable {
   /// Turn off all logging (except traces)
   case None
@@ -49,7 +49,7 @@ public enum Level : Int, Comparable {
 
   /**
    - Returns: all values in the enumeration
-  */
+   */
   static func allValues () -> [Level] {
     return [None, Severe, Error, Warning, Info, Debug, Verbose]
   }
@@ -62,7 +62,7 @@ public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> B
 
 /**
  An enumeration of the types of information passed to a generator for a log event
-*/
+ */
 public enum Detail : Int {
   ///  Date and time of the event (ignore the brackets)
   case Date
@@ -84,6 +84,7 @@ public enum Detail : Int {
  A type alias for Generator closures.
 
  - Parameter message: The message string at the logging site
+ - Parameter override: The override value
  - Parameter category: The category specified in the logging site
  - Parameter level: The logging level of the site
  - Parameter function: The function the logging site is in
@@ -91,14 +92,14 @@ public enum Detail : Int {
  - Parameter line: The line number of the logging site
  - Parameter details: The ordered array of detail enum values for information that should be emitted
  - Parameter dateFormatter: The dateFormatter to use.
- 
+
  - Returns: A string representation of the generator output
-*/
-public typealias Generator = (message: String, category: Any?, level: Level, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
+ */
+public typealias Generator = (message: String, override: Bool, category: Any?, level: Level, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String
 
 /**
  The protocol that all logging destination types must conform to
-*/
+ */
 public protocol Destination {
   /** A custom generator for this destination.  If not provided, the logger value will be used. */
   var generator : Generator? { get set }
@@ -119,6 +120,7 @@ public protocol Destination {
 
   /**
    The basic logging function.
+
    - Parameter string: The fully generated and decorated log string for the event
    - Parameter level: The level of the logging site.  Provided for some special cases such as testing.
    */
@@ -127,12 +129,12 @@ public protocol Destination {
 
 /**
  Protocol for type used to decorate generator output.
-*/
+ */
 public protocol Decorator {
 
   /**
    The decorator function.
-   
+
    - Parameter string: The string to decorate
    - Parameter colorSpec: The color spec to use for decoration
    - Returns: The decorated string
@@ -142,27 +144,30 @@ public protocol Decorator {
 
 
 // MARK: - Main Class
+
 /**
- The main logger class.  It's operation should be fairly intuitive and the properties and functions should
- be adequately documented herein.
- 
- The 'SloggerTests.swift' file is a very good place to look for examples of advanced usage, including
- how to subclass this class to use your own categories.
- 
- All public properties are designed to allow any changes at runtime, so you can dynamically change
- while debugging. You could even change them programatically in your code if you need to track down a bug in the
- middle of heaps of calls by setting a higher, more verbose debug level in a function.
+The main logger class.  It's operation should be fairly intuitive and the properties and functions should
+be adequately documented herein.
+
+The 'SloggerTests.swift' file is a very good place to look for examples of advanced usage, including
+how to subclass this class to use your own categories.  Check out the Slogger extension below for logging site
+functions documentation.  Only the *severe* level functions are documented.  All other functions related to logging
+site levels are identical.
+
+All public properties are designed to allow any changes at runtime, so you can dynamically change
+while debugging. You could even change them programatically in your code if you need to track down a bug in the
+middle of heaps of calls by setting a higher, more verbose debug level in a function.
 
 */
 public class Slogger <T: SloggerCategory> : NSObject {
 
   /**
-   The current operating level of the logger. 
+   The current operating level of the logger.
    */
   public var currentLevel : Level
 
   /**
-   The current operating level of the logger. 
+   The current operating level of the logger.
    */
   public var dateFormatter : NSDateFormatter
 
@@ -172,7 +177,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
    */
   public var details : [Detail]
 
-  /** 
+  /**
    A dictionary of category  to level associations.  If a value exists for a given category, that level will be used
    for all logging sites that specify that category, instead of the currentLevel.
    */
@@ -186,22 +191,23 @@ public class Slogger <T: SloggerCategory> : NSObject {
   /**
    The curent destinations this logger will write to.  If this array is empty, logging will be evaluated normally.
    (This can be useful for performance testing.)
-   
+
    You can modify this array as you wish at any time while your app is running.
    */
   public var destinations : [Destination] = Array<Destination>()
 
   /**
-   The default (log4j-style) generator function.
-   
+   The default generator function.
+
    Ouput looks like this:
 
-       - [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 callIt [] Severe: String
+   - [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 callIt [] Severe: String
 
    */
-  public var defaultGenerator : Generator = { (message, category, level, function, file, line, details, dateFormatter) -> String in
-    let str : NSMutableString = NSMutableString()
-    str.appendString("-")
+  public var defaultGenerator : Generator = { (message, override, category, level, function, file, line, details, dateFormatter) -> String in
+    let prefix = (override) ? "*" : "-"
+    let str : NSMutableString = NSMutableString(capacity: 100)
+    str.appendString(prefix)
 
     func maybeSpace () {
       if str.length > 0 {
@@ -248,7 +254,8 @@ public class Slogger <T: SloggerCategory> : NSObject {
   /**
    The current colorMap.  See 'Color.swift' for more information on creating your own.
    */
-  public var colorMap : ColorMap = [
+  public var colorMap : ColorMap
+  = [
     Level.Severe : (colorFromHexString("FF0000"), nil),
     Level.Error : (colorFromHexString("FF8503"), nil),
     Level.Warning : (colorFromHexString("FF03FB"), nil),
@@ -271,7 +278,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
   // MARK: Initialization
   /**
   The default initializer.
-  
+
   - Parameter defaultLevel: Sets the 'currentLevel' property to this value.
   - Parameter dateFormatter: The date formatter to use for dates.  It has a typical default.
   - Parameter details: The order detail for the generator to output.
@@ -296,15 +303,15 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   // MARK: Public
   /**
-   The internal function used to determine if an event can be logged.  It's provided to allow for special use-cases,
-   but shouldn't be needed in code.
-   
-   - Parameter override: If it is true, this function will return true, regardless of log level.
-   - Parameter category: The category of the logging site or nil.  Used to evaluate category specific debugging level configuration.
-   - Parameter level: The value of the 'currentLevel' property.
-   
-   - Returns: true of the logging of the event should proceed, false if it shouldn't
-   */
+  The internal function used to determine if an event can be logged.  It's provided to allow for special use-cases,
+  but shouldn't be needed at logging sites since the message closure is only evaluated if this returns to true.
+
+  - Parameter override: If it is true, this function will return true, regardless of log level.
+  - Parameter category: The category of the logging site or nil.  Used to evaluate category specific debugging level configuration.
+  - Parameter level: The value of the 'currentLevel' property.
+
+  - Returns: true of the logging of the event should proceed, false if it shouldn't
+  */
   public func canLogWithOverride (override: Bool, category: T?, level: Level) -> Bool {
     guard override == false else {
       return true
@@ -321,31 +328,31 @@ public class Slogger <T: SloggerCategory> : NSObject {
   // MARK: Internal
   func logInternal (override: Bool, @noescape _ closure: LogClosure, category: T?, level: Level, function: String, file: String, line: Int) {
 
-      guard canLogWithOverride(override, category: category, level: level) else {
-        misses++
-        return;
-      }
+    guard canLogWithOverride(override, category: category, level: level) else {
+      misses++
+      return;
+    }
 
-      hits++
+    hits++
 
-      let message = closure()
-      var defaultString : String? = nil
+    let message = closure()
+    var defaultString : String? = nil
 
-      for dest in destinations {
-        let generator = dest.generator
-        let string : String?
-        if generator != nil {
-          string = generator!(message: message, category: category, level: level,
+    for dest in destinations {
+      let generator = dest.generator
+      let string : String?
+      if generator != nil {
+        string = generator!(message: message, override: override, category: category, level: level,
+          function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
+      } else {
+        if defaultString == nil {
+          defaultString = defaultGenerator(message: message, override: override, category: category, level: level,
             function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
-        } else {
-          if defaultString == nil {
-            defaultString = defaultGenerator(message: message, category: category, level: level,
-              function: function, file: file, line: line, details: details, dateFormatter: dateFormatter)
-          }
-          string = defaultString
         }
-        dest.logString(string!, level: level)
+        string = defaultString
       }
+      dest.logString(string!, level: level)
+    }
   }
 }
 
@@ -355,18 +362,53 @@ This extension holds the public convenience methods for logging.  They should be
 */
 extension Slogger {
   // MARK: Severe
+  /**
+  Log a *severe* level event.  The first arugment is an @autoclosure returning the message string.
+  This logging site has no category.
+  - Parameter override: If *true* it will cause the event to be logged regardless of level evaluation.  Detaults to *false*.
+  - Parameter function: The function within which the logging site is contained.  It should remain as the default.
+  - Parameter file: The file within which the logging site is contained.  It should remain as the default.
+  - Parameter line: The line in the file of the logging site.  It should remain as the default.
+  */
   public func severe (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
     logInternal(override, closure, category: nil, level: .Severe, function: function, file: file, line: line)
   }
 
+  /**
+   Log a *severe* level event.
+   The first argument is the category of the logging site.
+   The second arugment is an @autoclosure returning the message string.
+   - Parameter override: If *true* it will cause the event to be logged regardless of level evaluation.  Detaults to *false*
+   - Parameter function: The function within which the logging site is contained.  It should remain as the default.
+   - Parameter file: The file within which the logging site is contained.  It should remain as the default.
+   - Parameter line: The line in the file of the logging site.  It should remain as the default.
+   */
   public func severe (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
     logInternal(override, closure, category: category, level: .Severe, function: function, file: file, line: line)
   }
 
+  /**
+   Log a *severe* level event.
+   The last argument is a trailing @noescape closure that produces the message string.
+   This logging site has no category.
+   - Parameter override: If *true* it will cause the event to be logged regardless of level evaluation.  Detaults to *false*
+   - Parameter function: The function within which the logging site is contained.  It should remain as the default.
+   - Parameter file: The file within which the logging site is contained.  It should remain as the default.
+   - Parameter line: The line in the file of the logging site.  It should remain as the default.
+   */
   public func severe (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
     logInternal(override, closure, category: nil, level: .Severe, function: function, file: file, line: line)
   }
 
+  /**
+   Log a *severe* level event.
+   The first argument is the category of the logging site.
+   The last argument is a trailing @noescape closure that produces the message string.
+   - Parameter override: If *true* it will cause the event to be logged regardless of level evaluation.  Detaults to *false*
+   - Parameter function: The function within which the logging site is contained.  It should remain as the default.
+   - Parameter file: The file within which the logging site is contained.  It should remain as the default.
+   - Parameter line: The line in the file of the logging site.  It should remain as the default.
+   */
   public func severe (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure) {
     logInternal(override, closure, category: category, level: .Severe, function: function, file: file, line: line)
   }
@@ -455,7 +497,7 @@ extension Slogger {
   public func verbose (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure) {
     logInternal(override, closure, category: category, level: .Verbose, function: function, file: file, line: line)
   }
-
+  
 }
 
 

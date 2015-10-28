@@ -10,10 +10,10 @@ import XCTest
 @testable import Slogger
 
 enum TestCategory : String, SloggerCategory {
-  case First, Second, Third
+  case First, Second
 
   static func allValues () -> [TestCategory] {
-    return [First, Second, Third]
+    return [First, Second]
   }
 }
 
@@ -72,20 +72,19 @@ class SloggerTests: XCTestCase {
   func exhaustiveTestWithDestinations (destinations : [Destination], checkResults: Bool = true) {
     let levels = Level.allValues()
     let categories = TestCategory.allValues()
-    var lastIndex : Int = 0
 
     log.hits = 0
     log.misses = 0
     log.destinations = destinations
 
-    func checkForType (type: String, _ condition: Bool, _ category: TestCategory?, _ level: Level, function: String) {
+    func checkForMessage (message: String, _ condition: Bool, _ category: TestCategory?, _ level: Level, _ function: String) {
       guard checkResults && log.canLogWithOverride(condition, category: category, level: level) else {
         return
       }
 
       let last = testDestination[lastIndex]
       XCTAssertEqual(last.containsString(" \(level): "), condition, "Incorrect level")
-      XCTAssertEqual(last.containsString(type), condition, "Incorrect message")
+      XCTAssertEqual(last.containsString(": \(message)"), condition, "Incorrect message")
       XCTAssertEqual(last.containsString(" SloggerTests.swift:"), condition, "Incorrect file")
       XCTAssertEqual(last.containsString(" \(function)"), condition, "Incorrect function")
       if category == nil {
@@ -97,55 +96,49 @@ class SloggerTests: XCTestCase {
       lastIndex++
     }
 
-    func checkString (condition: Bool, _ category: TestCategory?, _ level: Level, function: String = __FUNCTION__) {
-      checkForType(": String", condition, category, level, function: function)
-    }
 
-    func checkClosure (condition: Bool, _ category: TestCategory?, _ level: Level, function: String = __FUNCTION__) {
-      checkForType(": Closure", condition, category, level, function: function)
-    }
 
     func callIt (category: TestCategory?, _ level: Level) {
       switch (level) {
       case .None:
-        checkString(false, category, level)
-        checkClosure(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
 
       case .Severe:
         log.severe(category, "String")
-        checkString(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
         log.severe(category) { "Closure" }
-        checkClosure(false, category, level)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
 
       case .Error:
         log.error(category, "String")
-        checkString(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
         log.error(category) { "Closure" }
-        checkClosure(false, category, level)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
 
       case .Warning:
         log.warning(category, "String")
-        checkString(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
         log.warning(category) { "Closure" }
-        checkClosure(false, category, level)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
 
       case .Info:
         log.info(category, "String")
-        checkString(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
         log.info(category) { "Closure" }
-        checkClosure(false, category, level)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
 
       case .Debug:
         log.debug(category, "String")
-        checkString(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
         log.debug(category) { "Closure" }
-        checkClosure(false, category, level)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
 
       case .Verbose:
         log.verbose(category, "String")
-        checkString(false, category, level)
+        checkForMessage("String", false, category, level, __FUNCTION__)
         log.verbose(category) { "Closure" }
-        checkClosure(false, category, level)
+        checkForMessage("Closure", false, category, level, __FUNCTION__)
       }
     }
 
@@ -155,15 +148,16 @@ class SloggerTests: XCTestCase {
       }
     }
 
-    // Test tracing
-    log.verbose("String", override: true)
-    checkString(true, nil, .Verbose)
-    log.verbose(nil, override: true) { "Closure" }
-    checkClosure(true, nil, .Verbose)
-
+    // Execute the tests
     for setLevel in levels {
       print("Setting log level: \(setLevel)")
       log.currentLevel = setLevel
+
+      // Radioactive trace
+      log.verbose("String", override: true)
+      checkForMessage("String", true, nil, .Verbose, __FUNCTION__)
+      log.verbose(nil, override: true) { "Closure" }
+      checkForMessage("Closure", true, nil, .Verbose, __FUNCTION__)
 
       sloggit(nil)
       for category in categories {

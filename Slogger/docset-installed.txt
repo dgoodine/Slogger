@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: ../Docs/com.davidgoodine.slogger.Slogger.docset
+Time: 2015-10-28 10:51:35 +0000

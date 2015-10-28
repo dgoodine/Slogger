@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Level Enum Reference</title>
+    <title>BaseDestination Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,11 +9,11 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/Level" class="dashAnchor"></a>
-    <a title="Level Enum Reference"></a>
+    <a name="//apple_ref/swift/Class/BaseDestination" class="dashAnchor"></a>
+    <a title="BaseDestination Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (54% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (64% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Slogger Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Level Enum Reference
+        BaseDestination Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -31,13 +31,16 @@
           <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Classes/BaseDestination.html">BaseDestination</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/ConsoleDestination.html">ConsoleDestination</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/Slogger.html">Slogger</a>
+                <a href="../Classes/MemoryDestination.html">MemoryDestination</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/TestDestination.html">TestDestination</a>
+                <a href="../Classes/Slogger.html">Slogger</a>
               </li>
             </ul>
           </li>
@@ -118,14 +121,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Level</h1>
+            <h1>BaseDestination</h1>
               <div class="declaration">
                 <div class="Swift">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Level</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                 </div>
               </div>
-            <p>Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).</p>
+            <p>Base class implementing the destination protocol.  Can be subclassed to provide custom <em>logString</em> functionality.</p>
 
           </section>
           <section class="section task-group-section">
@@ -134,9 +137,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO7Slogger5Level4NoneFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/None" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level4NoneFMS0_S0_">None</a>
+                    <a name="/s:vC7Slogger15BaseDestination9decoratorGSqPS_9Decorator__"></a>
+                    <a name="//apple_ref/swift/Property/decorator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger15BaseDestination9decoratorGSqPS_9Decorator__">decorator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -144,30 +147,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Turn off all logging (except traces)</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">None</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO7Slogger5Level6SevereFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/Severe" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level6SevereFMS0_S0_">Severe</a>
+                    <a name="/s:vC7Slogger15BaseDestination9generatorGSqFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS_"></a>
+                    <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger15BaseDestination9generatorGSqFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS_">generator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -175,30 +174,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Use this for cataclysmic events</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Severe</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO7Slogger5Level5ErrorFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/Error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level5ErrorFMS0_S0_">Error</a>
+                    <a name="/s:vC7Slogger15BaseDestination8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____"></a>
+                    <a name="//apple_ref/swift/Property/colorMap" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger15BaseDestination8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____">colorMap</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -206,30 +201,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Use this for things that shouldn&rsquo;t really happen</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Error</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO7Slogger5Level7WarningFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/Warning" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level7WarningFMS0_S0_">Warning</a>
+                    <a name="/s:FC7Slogger15BaseDestinationcFMS0_FT9generatorGSqFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS_8colorMapGSqGVSs10DictionaryS1_T2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____9decoratorGSqPS_9Decorator___S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(generator:colorMap:decorator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger15BaseDestinationcFMS0_FT9generatorGSqFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS_8colorMapGSqGVSs10DictionaryS1_T2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____9decoratorGSqPS_9Decorator___S0_">init(generator:colorMap:decorator:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -237,30 +228,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Use this if something seems awry (ignore the brackets)</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Warning</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO7Slogger5Level4InfoFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/Info" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level4InfoFMS0_S0_">Info</a>
+                    <a name="/s:FC7Slogger15BaseDestination9logStringFS0_FTSS5levelOS_5Level_T_"></a>
+                    <a name="//apple_ref/swift/Method/logString(_:level:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger15BaseDestination9logStringFS0_FTSS5levelOS_5Level_T_">logString(_:level:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -268,76 +255,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Use this for general operational information</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Info</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FO7Slogger5Level5DebugFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/Debug" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level5DebugFMS0_S0_">Debug</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Use this for deeper debugging</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Debug</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FO7Slogger5Level7VerboseFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/Verbose" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO7Slogger5Level7VerboseFMS0_S0_">Verbose</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p><q>WTF is going on in my app?</q></p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">Verbose</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
@@ -349,7 +274,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-26)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-28)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

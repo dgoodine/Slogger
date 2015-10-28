@@ -1,9 +1,5 @@
 Slogger.swift
 	public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool
-	public func severe (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
-	public func severe (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
-	public func severe (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
-	public func severe (category: T?, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
 	public func error (@autoclosure  closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
 	public func error (category: T?, @autoclosure _ closure: LogClosure, override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
 	public func error (override: Bool = false, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape closure: LogClosure)
@@ -28,16 +24,11 @@ XCodeColorsDecorator.swift
 	public struct XCodeColorsDecorator : Decorator
 	public func decorateString(string : String, spec: ColorSpec) -> String
 ConsoleDestination.swift
-	public class ConsoleDestination : Destination
+	public class ConsoleDestination : BaseDestination
+	public override func logString(string : String, level: Level)
+BaseDestination.swift
 	public var decorator : Decorator?
 	public var generator : Generator?
 	public var colorMap : ColorMap?
-	public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil)
-	public func logString(string : String, level: Level)
-TestDestination.swift
-	public var colorMap : ColorMap?
-	public var decorator : Decorator?
-	public var generator : Generator?
-	public var lastIndex : Int
 	public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil)
 	public func logString(string : String, level: Level)
