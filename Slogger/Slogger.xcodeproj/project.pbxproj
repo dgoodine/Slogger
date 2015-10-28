@@ -11,6 +11,11 @@
 		A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
 		A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
 		A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
+		A826330E1BE1271600293716 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* FileDestination.swift */; };
+		A826330F1BE1271600293716 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* FileDestination.swift */; };
+		A82633101BE1271600293716 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* FileDestination.swift */; };
+		A82633111BE1271600293716 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* FileDestination.swift */; };
+		A82633121BE1271600293716 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* FileDestination.swift */; };
 		A83C79DA1BD6636800DA9F07 /* Slogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A83C79D91BD6636800DA9F07 /* Slogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A83C79E11BD6636800DA9F07 /* Slogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83C79D61BD6636800DA9F07 /* Slogger.framework */; };
 		A83C79E61BD6636800DA9F07 /* SloggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79E51BD6636800DA9F07 /* SloggerTests.swift */; };
@@ -66,6 +71,7 @@
 /* Begin PBXFileReference section */
 		A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDestination.swift; sourceTree = "<group>"; };
 		A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleDestination.swift; sourceTree = "<group>"; };
+		A826330D1BE1271600293716 /* FileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDestination.swift; sourceTree = "<group>"; };
 		A83C79D61BD6636800DA9F07 /* Slogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Slogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83C79D91BD6636800DA9F07 /* Slogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Slogger.h; sourceTree = "<group>"; };
 		A83C79DB1BD6636800DA9F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,8 +136,20 @@
 		A80A898A1BE0F6B200FE8F81 /* Destinations */ = {
 			isa = PBXGroup;
 			children = (
+				A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */,
+				A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */,
+				A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */,
+				A826330D1BE1271600293716 /* FileDestination.swift */,
 			);
 			name = Destinations;
+			sourceTree = "<group>";
+		};
+		A826330C1BE126D500293716 /* Decorators */ = {
+			isa = PBXGroup;
+			children = (
+				A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */,
+			);
+			name = Decorators;
 			sourceTree = "<group>";
 		};
 		A83C79CC1BD6636800DA9F07 = {
@@ -161,15 +179,12 @@
 		A83C79D81BD6636800DA9F07 /* Slogger */ = {
 			isa = PBXGroup;
 			children = (
+				A826330C1BE126D500293716 /* Decorators */,
 				A80A898A1BE0F6B200FE8F81 /* Destinations */,
 				A83C79D91BD6636800DA9F07 /* Slogger.h */,
 				A83C79DB1BD6636800DA9F07 /* Info.plist */,
 				A83C79F01BD6639A00DA9F07 /* Slogger.swift */,
-				A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */,
 				A84553791BDC084D00678385 /* Color.swift */,
-				A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */,
-				A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */,
-				A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */,
 			);
 			path = Slogger;
 			sourceTree = "<group>";
@@ -426,6 +441,7 @@
 				A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
 				A845537A1BDC084D00678385 /* Color.swift in Sources */,
+				A826330E1BE1271600293716 /* FileDestination.swift in Sources */,
 				A80A89891BE0F59B00FE8F81 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +452,7 @@
 			files = (
 				A83C79E61BD6636800DA9F07 /* SloggerTests.swift in Sources */,
 				A86ED5B81BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
+				A826330F1BE1271600293716 /* FileDestination.swift in Sources */,
 				A845537B1BDC085100678385 /* Color.swift in Sources */,
 				A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */,
 				A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
@@ -453,6 +470,7 @@
 				A85BFC5D1BDD46A6008D1F1E /* Color.swift in Sources */,
 				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC5F1BDD46A6008D1F1E /* MemoryDestination.swift in Sources */,
+				A82633101BE1271600293716 /* FileDestination.swift in Sources */,
 				A8A9DAF01BE0FB25000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +481,7 @@
 			files = (
 				A85BFC611BDD472A008D1F1E /* ConsoleDestination.swift in Sources */,
 				A85BFC651BDD4739008D1F1E /* SloggerTests.swift in Sources */,
+				A82633111BE1271600293716 /* FileDestination.swift in Sources */,
 				A85BFC621BDD472A008D1F1E /* Color.swift in Sources */,
 				A85BFC641BDD472A008D1F1E /* MemoryDestination.swift in Sources */,
 				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
@@ -480,6 +499,7 @@
 				A85BFC761BDD4B8B008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC731BDD4B8B008D1F1E /* Slogger.swift in Sources */,
 				A85BFC751BDD4B8B008D1F1E /* Color.swift in Sources */,
+				A82633121BE1271600293716 /* FileDestination.swift in Sources */,
 				A8A9DAF21BE0FB27000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

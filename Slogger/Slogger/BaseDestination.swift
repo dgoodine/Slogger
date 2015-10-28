@@ -9,19 +9,30 @@
 import Foundation
 
 /**
- Base class implementing the destination protocol.  Can be subclassed to provide custom *logString* functionality.
+ Base class implementing the destination protocol.  Subclasses must override *logString* function.
 */
 public class BaseDestination : Destination {
   public var decorator : Decorator?
   public var generator : Generator?
   public var colorMap : ColorMap?
 
-  public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+  /**
+   Base initializer.
+   
+   - Parameter generator: Generator to use for this destination.  If nil, uses the logger's generator.
+   - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
+   - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.
+   */
+  public init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
     self.generator = generator
     self.colorMap = colorMap
     self.decorator = decorator
   }
 
+  /**
+   Protocol implementation.  Will terminate with a false assertion.
+   Important: Subclasses *MUST* override this function.
+   */
   public func logString(string : String, level: Level) {
     assert(true, "This function must be overridden by subclasses")
   }

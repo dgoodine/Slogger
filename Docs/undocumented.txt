@@ -25,10 +25,9 @@ XCodeColorsDecorator.swift
 	public func decorateString(string : String, spec: ColorSpec) -> String
 ConsoleDestination.swift
 	public class ConsoleDestination : BaseDestination
-	public override func logString(string : String, level: Level)
+FileDestination.swift
+	public class FileDestination : BaseDestination
 BaseDestination.swift
 	public var decorator : Decorator?
 	public var generator : Generator?
 	public var colorMap : ColorMap?
-	public required init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil)
-	public func logString(string : String, level: Level)

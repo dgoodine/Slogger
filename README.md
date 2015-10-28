@@ -7,6 +7,9 @@ Version | Status | Comments
 --- | --- | ---
 1.0 | In Progress | Finishing up for initial release
 
+## TODO
+- Finish FileDestination (*currently not supported*)
+- Add *Carthage* support.
 
 ## Why Another Swift logger?
 
@@ -132,7 +135,7 @@ Naturally, if you want your logger to have customized values (generators, decora
 Remember, *Slogger* is designed so that all public public properties for a *Slogger* instance can be modified at runtime, without having to worry about state.
 
 ## Feedback
-Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about *Sloggers* implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.
+Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.
 
 Happy logging!
 

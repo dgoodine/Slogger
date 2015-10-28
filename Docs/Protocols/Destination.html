@@ -13,7 +13,7 @@
     <a title="Destination Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (64% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -35,6 +35,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/ConsoleDestination.html">ConsoleDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileDestination.html">FileDestination</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/MemoryDestination.html">MemoryDestination</a>
@@ -218,66 +221,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP7Slogger11DestinationcuRq_S0__FMq_FT9generatorGSqFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS_8colorMapGSqGVSs10DictionaryS1_T2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____9decoratorGSqPS_9Decorator___q_"></a>
-                    <a name="//apple_ref/swift/Method/init(generator:colorMap:decorator:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7Slogger11DestinationcuRq_S0__FMq_FT9generatorGSqFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS_8colorMapGSqGVSs10DictionaryS1_T2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____9decoratorGSqPS_9Decorator___q_">init(generator:colorMap:decorator:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Required initializer.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="nf">init</span> <span class="p">(</span><span class="nv">generator</span><span class="p">:</span> <span class="kt">Generator</span><span class="p">?,</span> <span class="nv">colorMap</span> <span class="p">:</span> <span class="kt">ColorMap</span><span class="p">?,</span> <span class="nv">decorator</span><span class="p">:</span> <span class="kt">Decorator</span><span class="p">?)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>generator</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A custom generator to use for this destination.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>colorMap</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A custom colormap to use for this destination.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:FP7Slogger11Destination9logStringuRq_S0__Fq_FTSS5levelOS_5Level_T_"></a>
                     <a name="//apple_ref/swift/Method/logString(_:level:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FP7Slogger11Destination9logStringuRq_S0__Fq_FTSS5levelOS_5Level_T_">logString(_:level:)</a>
@@ -288,9 +231,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The basic logging function.
-- Parameter string: The fully generated and decorated log string for the event
-- Parameter level: The level of the logging site.  Provided for some special cases such as testing.</p>
+                        <p>The basic logging function.</p>
 
                       </div>
                       <div class="declaration">

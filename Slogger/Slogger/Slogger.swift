@@ -111,14 +111,6 @@ public protocol Destination {
   var decorator : Decorator? { get set }
 
   /**
-   Required initializer.
-
-   - Parameter generator: A custom generator to use for this destination.
-   - Parameter colorMap: A custom colormap to use for this destination.
-   */
-  init (generator: Generator?, colorMap : ColorMap?, decorator: Decorator?)
-
-  /**
    The basic logging function.
 
    - Parameter string: The fully generated and decorated log string for the event
