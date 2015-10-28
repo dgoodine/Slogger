@@ -10,6 +10,8 @@ import Foundation
 
 public class FileDestination : BaseDestination {
 
+  // MARK: - Public
+
   /// Time interval in seconds for log file rotation
   private var fileRotationInterval : Float = 60 * 60 * 24
 
@@ -18,23 +20,6 @@ public class FileDestination : BaseDestination {
 
   /// Directory path for the log files.
   public let directory : String
-
-  /// Date format for log files
-  private lazy var fileDateFormatter : NSDateFormatter = {
-    let value = NSDateFormatter()
-    value.dateFormat = "HH-mm-ss-SSS"
-    return value
-  }()
-
-  /// Date format for log files
-  private lazy var directoryDateFormatter : NSDateFormatter = {
-    let value = NSDateFormatter()
-    value.dateFormat = "yyyy-MM-dd"
-    return value
-  }()
-
-  /// A buffer used to log entries while directory archiving is taking place.
-  private var buffer : [String] = []
 
   /**
    Designated initializer.
@@ -57,12 +42,64 @@ public class FileDestination : BaseDestination {
    - Parameter level: The level provided at the logging site.
    */
   public override func logString(string: String, level: Level) {
-
+    guard outputStream != nil else {
+      return
+    }
   }
 
-  /// Utility function to open the logging file with the current date format
-  private func openFile () {
+  // MARK: - Private
+  /// Date format for log files
+  private lazy var fileDateFormatter : NSDateFormatter = {
+    let value = NSDateFormatter()
+    value.dateFormat = "HH-mm-ss-SSS"
+    return value
+  }()
 
+  /// Date format for log files
+  private lazy var directoryDateFormatter : NSDateFormatter = {
+    let value = NSDateFormatter()
+    value.dateFormat = "yyyy-MM-dd"
+    return value
+  }()
+
+  private lazy var outputStream : NSOutputStream? = nil // self.openFile()
+
+  /// A buffer used to log entries while directory archiving is taking place.
+  private var buffer : [String] = []
+
+
+  /// Utility function to open the logging file with the current date format
+  private var errorPrinted = false
+  private func openFile () -> NSOutputStream? {
+    let fileManager = NSFileManager.defaultManager()
+    let now = NSDate()
+    let dateString = directoryDateFormatter.stringFromDate(now)
+    let directoryPath = "\(directory)/\(dateString)"
+    let attributes : [String : AnyObject] = Dictionary<String, AnyObject>()
+
+    do {
+      try fileManager.createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes:attributes)
+    } catch {
+      if (!errorPrinted) {
+        print("Fatal error in Slogger: \(error)")
+        errorPrinted = true
+      }
+
+      return nil
+    }
+
+    // let value = NSOutputStream(toFileAtPath: path, append: true)
+
+    return nil
+  }
+
+  private func closeFile (reopen : Bool = true) {
+    guard outputStream != nil else {
+      return
+    }
+
+    outputStream!.close()
+    outputStream = (reopen) ? openFile() : nil
   }
 }
 
