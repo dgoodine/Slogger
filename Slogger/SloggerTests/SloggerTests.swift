@@ -24,7 +24,7 @@ class TestLogger : Slogger<TestCategory> {
   }
 }
 
-let testDestination = TestDestination()
+let testDestination = MemoryDestination()
 
 #if DEBUG
 let log = Slogger<NoCategories>(defaultLevel: .Info)
@@ -77,26 +77,30 @@ class SloggerTests: XCTestCase {
     log.misses = 0
     log.destinations = destinations
 
-    func checkForMessage (message: String, _ condition: Bool, _ category: TestCategory?, _ level: Level, _ function: String) {
-      guard checkResults && log.canLogWithOverride(condition, category: category, level: level) else {
+    func checkForMessage (message: String, _ override: Bool, _ category: TestCategory?, _ level: Level, _ function: String) {
+      guard checkResults && log.canLogWithOverride(override, category: category, level: level) else {
         return
       }
 
-      let last = testDestination[lastIndex]
-      XCTAssertEqual(last.containsString(" \(level): "), condition, "Incorrect level")
-      XCTAssertEqual(last.containsString(": \(message)"), condition, "Incorrect message")
-      XCTAssertEqual(last.containsString(" SloggerTests.swift:"), condition, "Incorrect file")
-      XCTAssertEqual(last.containsString(" \(function)"), condition, "Incorrect function")
-      if category == nil {
-        XCTAssertEqual(last.containsString(" [] "), condition, "Incorrect function")
-      } else {
-        XCTAssertEqual(last.containsString(" [\(category!)] "), condition, "Incorrect function")
+      let last = testDestination.lastLine
+      guard last != nil || override else {
+        return
       }
 
-      lastIndex++
+      if let last = last {
+        let prefix = (override) ? "* " : "- "
+        XCTAssert(last.containsString(prefix), "Incorrect Radioactive Trace Prefix")
+        XCTAssert(last.containsString(" \(level): "), "Incorrect level")
+        XCTAssert(last.containsString(": \(message)"), "Incorrect message")
+        XCTAssert(last.containsString(" SloggerTests.swift:"), "Incorrect file")
+        XCTAssert(last.containsString(" \(function)"), "Incorrect function")
+        if category == nil {
+          XCTAssert(last.containsString(" [] "), "Incorrect function")
+        } else {
+          XCTAssert(last.containsString(" [\(category!)] "), "Incorrect function")
+        }
+      }
     }
-
-
 
     func callIt (category: TestCategory?, _ level: Level) {
       switch (level) {
@@ -144,6 +148,7 @@ class SloggerTests: XCTestCase {
 
     func sloggit (category: TestCategory?) {
       for level in levels {
+        testDestination.clear()
         callIt(category, level)
       }
     }
@@ -153,11 +158,14 @@ class SloggerTests: XCTestCase {
       print("Setting log level: \(setLevel)")
       log.currentLevel = setLevel
 
-      // Radioactive trace
-      log.verbose("String", override: true)
-      checkForMessage("String", true, nil, .Verbose, __FUNCTION__)
-      log.verbose(nil, override: true) { "Closure" }
-      checkForMessage("Closure", true, nil, .Verbose, __FUNCTION__)
+      if setLevel == .None {
+        // Radioactive trace
+        log.verbose("String", override: true)
+        checkForMessage("String", true, nil, .Verbose, __FUNCTION__)
+        log.verbose(nil, override: true) { "Closure" }
+        checkForMessage("Closure", true, nil, .Verbose, __FUNCTION__)
+
+      }
 
       sloggit(nil)
       for category in categories {

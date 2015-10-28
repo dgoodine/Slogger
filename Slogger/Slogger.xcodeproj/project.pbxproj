@@ -40,6 +40,10 @@
 		A86ED5B81BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A8A53D9F1BDC2903009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
 		A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
+		A8A9DAEF1BE0FB25000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
+		A8A9DAF01BE0FB25000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
+		A8A9DAF11BE0FB26000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
+		A8A9DAF21BE0FB27000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -436,6 +440,7 @@
 				A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */,
 				A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */,
+				A8A9DAEF1BE0FB25000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +453,7 @@
 				A85BFC5D1BDD46A6008D1F1E /* Color.swift in Sources */,
 				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC5F1BDD46A6008D1F1E /* MemoryDestination.swift in Sources */,
+				A8A9DAF01BE0FB25000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +467,7 @@
 				A85BFC641BDD472A008D1F1E /* MemoryDestination.swift in Sources */,
 				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
 				A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */,
+				A8A9DAF11BE0FB26000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +480,7 @@
 				A85BFC761BDD4B8B008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC731BDD4B8B008D1F1E /* Slogger.swift in Sources */,
 				A85BFC751BDD4B8B008D1F1E /* Color.swift in Sources */,
+				A8A9DAF21BE0FB27000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
