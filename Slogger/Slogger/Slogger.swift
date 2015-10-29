@@ -187,7 +187,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
    You can modify this array as you wish at any time while your app is running.
    */
-  public var destinations : [Destination] = Array<Destination>()
+  public var destinations : [Destination] = []
 
   /**
    The default generator function.

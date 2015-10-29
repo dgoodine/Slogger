@@ -186,30 +186,52 @@ class SloggerTests: XCTestCase {
   }
 
   func testConsole () {
-    self.measureBlock() {
-      self.exhaustiveTestWithDestinations([self.log.consoleDestination], checkResults: false, verbose: true)
-    }
+    testDestination.clear()
+    self.exhaustiveTestWithDestinations([self.log.consoleDestination], checkResults: false, verbose: true)
   }
 
   func testNoConsole () {
-    self.measureBlock() {
-      testDestination.clear()
-      self.exhaustiveTestWithDestinations([testDestination], checkResults: true)
-    }
+    testDestination.clear()
+    self.exhaustiveTestWithDestinations([testDestination], checkResults: true)
   }
 
   func testNoLoggers () {
-    self.measureBlock() {
-      testDestination.clear()
-      self.exhaustiveTestWithDestinations([], checkResults: false)
-    }
+    testDestination.clear()
+    self.exhaustiveTestWithDestinations([], checkResults: false)
   }
-
-  //  func testPerformanceExample() {
-  //    // This is an example of a performance test case.
-  //    self.measureBlock {
-  //      // Put the code you want to measure the time of here.
-  //    }
-  //  }
-  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

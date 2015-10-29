@@ -134,6 +134,20 @@ Naturally, if you want your logger to have customized values (generators, decora
 
 Remember, *Slogger* is designed so that all public public properties for a *Slogger* instance can be modified at runtime, without having to worry about state.
 
+## Performance
+Here's some performance timing for logging calls with the release build:
+
+Device | Destinations | Level | Iterations | log.Debug(.Only, "Message")
+--- | --- | --- | --- | ---
+Simulator | [MemoryDestination] | .None | 100, 000 | 363ns
+Simulator | [] | .Verbose | 1,000,000 | 363ns
+Simulator | [MemoryDestination] | .Verbose | 100,000 | 28µs
+Simulator | [ConsoleDestination] | .Verbose | 1000 | 240µs
+iPhone 6 | [MemoryDestination] | .None | 100, 000 | 921ns
+iPhone 6 | [] | .Verbose | 1,000,000 | 943ns
+iPhone 6 | [MemoryDestination] | .Verbose | 100,000 | 65µs
+iPhone 6 | [ConsoleDestination] | .Verbose | 1000 | 718µs
+
 ## Feedback
 Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.
 
