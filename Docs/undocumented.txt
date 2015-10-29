@@ -23,6 +23,9 @@ Slogger.swift
 XCodeColorsDecorator.swift
 	public struct XCodeColorsDecorator : Decorator
 	public func decorateString(string : String, spec: ColorSpec) -> String
+PerformanceTest.swift
+	public init () {}
+	public func test ()
 ConsoleDestination.swift
 	public class ConsoleDestination : BaseDestination
 FileDestination.swift
