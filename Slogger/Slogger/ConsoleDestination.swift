@@ -3,6 +3,7 @@
 //  Slogger
 //
 //  Created by David Goodine on 10/24/15.
+//  Copyright © 2015 David Goodine. All rights reserved.
 //
 
 import Foundation
