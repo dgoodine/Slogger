@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Simple performance test for logging.
 public class PerformanceTest {
 
   private enum PerformanceCategory : String, SloggerCategory {
