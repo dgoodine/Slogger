@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Slogger : A simple, fast and customizable logging framework for Swift">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Slogger</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dgoodine/Slogger">View on GitHub</a>
+
+          <h1 id="project_title">Slogger</h1>
+          <h2 id="project_tagline">A simple, fast and customizable logging framework for Swift</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dgoodine/Slogger/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dgoodine/Slogger/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a id="why-another-swift-logger" class="anchor" href="#why-another-swift-logger" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why Another Swift logger?</h2>
+
+<p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found <em>XCGLogger</em> by Dave Wood <a href="https://github.com/DaveWoodCom" class="user-mention">@DaveWoodCom</a> (<a href="https://github.com/DaveWoodCom/XCGLogger">https://github.com/DaveWoodCom/XCGLogger</a>).  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. <g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji></p>
+
+<p><em>Slogger</em> uses much the same approach and identical function signatures as <em>XCGLogger</em>, so it can be easily switched with <em>XCGLogger</em> without modifying existing logging sites.  If you want to try it as an alternative, it's should be relatively easy.  Be sure to check the <strong>Advanced Features</strong> section below to see why I decided to go this route.</p>
+
+<h2>
+<a id="general-info" class="anchor" href="#general-info" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Info</h2>
+
+<p>The typical logger levels are supported:</p>
+
+<pre><code>public enum Level : Int, Comparable {
+  case None, Severe, Error, Warning, Info, Debug, Verbose
+
+  static func allValues () -&gt; [Level] {
+    return [None, Severe, Error, Warning, Info, Debug, Verbose]
+  }
+}
+</code></pre>
+
+<p>Each log level has autoclosure and noescape trailing closure implementations, so the following are both valid forms:</p>
+
+<pre><code>log.debug("Enter")
+log.debug() { "Enter" }
+</code></pre>
+
+<p>By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site.</p>
+
+<p>Setting up a logger can be as simple as one line of code:</p>
+
+<pre><code>let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Debug)
+</code></pre>
+
+<p>And you'll likely want to tailor your build for debug/release:</p>
+
+<pre><code>#if DEBUG
+let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Info)
+#else
+let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
+#endif
+</code></pre>
+
+<p>The <em>Slogger</em> class is generic to support categories, as explained below.</p>
+
+<p>The public interface documented in the headers.  See the Docs directory for an HTML-based version.  At some point there will be a docset available.</p>
+
+<h2>
+<a id="advanced-features" class="anchor" href="#advanced-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced Features</h2>
+
+<h3>
+<a id="destinations" class="anchor" href="#destinations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Destinations</h3>
+
+<p>The <em>Destination</em> protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network, for example.</p>
+
+<p><em>Slogger</em> natively supports the following logging destinations:</p>
+
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Console</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Coming Soon™</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Considering it</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="generators" class="anchor" href="#generators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generators</h3>
+
+<p>You can supply your own closure for outputting a log entry in any format.  The default uses the following pattern:</p>
+
+<pre><code>- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
+</code></pre>
+
+<p>But you could easily output custom JSON, XML, or whatever you want by supplying your own.  These generators are configurable per logging destination.</p>
+
+<h3>
+<a id="details" class="anchor" href="#details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Details</h3>
+
+<p>You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.</p>
+
+<h3>
+<a id="configurable-decorators" class="anchor" href="#configurable-decorators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configurable Decorators</h3>
+
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.</p>
+
+<table>
+<thead>
+<tr>
+<th>Decorators</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XCodeColors</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>ANSI</td>
+<td>Coming Soon™</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="configurable-colormaps" class="anchor" href="#configurable-colormaps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configurable Colormaps</h3>
+
+<p>Make your own color map for mapping <em>Level</em> to color in a platform- and decorator-independent way.</p>
+
+<h3>
+<a id="radioactive-tracing" class="anchor" href="#radioactive-tracing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Radioactive Tracing</h3>
+
+<p>Radioactive tracing allows logging sites to execute based on a boolean <em>override</em> value, in addition to the logging level.  If the <em>override</em> argument at a logging site is <em>true</em>, the event is logged, regardless of the log level.  If the argument is <em>false</em>, log-level checking continues as usual.</p>
+
+<p>One use-case would be where you have a <em>Request</em> object base class in a services implementation.  You could define a boolean <em>trace</em> property, defaulting to <em>false</em>, and in your code that processes the request, you would provide the value of <em>trace</em> as the <em>override</em> argument at the logging site.  If a particular request is causing a problem (but tons of them are being processed), you can set the <em>trace</em> flag for only that request, causing logging sites for all levels to be logged.</p>
+
+<h3>
+<a id="categories" class="anchor" href="#categories" aria-hidden="true"><span class="octicon octicon-link"></span></a>Categories</h3>
+
+<p>In addition to the two convenience functions for each level mentioned above, logging sites allow a <em>Category</em> to also be passed to the logging function.  While a category could be any type conforming to the <em>Hashable</em> protocol, you would typically define an <em>enum</em> for type safety.</p>
+
+<p>Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc).</p>
+
+<p>The design of <em>Slogger</em> is such that third-party frameworks can expose their log instance and document their category values for developers using the framework.  Then, if the developers need to diagnose a problem inside the framework, they can simply adjust the logging levels for particular categories to get more information.  This is particularly useful in cases where the framework developer doesn't release the source code.</p>
+
+<h2>
+<a id="implementing-categories" class="anchor" href="#implementing-categories" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementing Categories</h2>
+
+<p>Here's an example of how you should implement your custom categories, taken from the unit test code in <em>Slogger</em>.</p>
+
+<p>First, define your category enum:</p>
+
+<pre><code>enum TestCategory : String, SloggerCategory {
+  case First, Second
+
+  static func allValues () -&gt; [TestCategory] {
+    return [First, Second]
+  }
+}
+</code></pre>
+
+<p>Second, subclass the generic <em>Slogger</em> class to bind it to your category type:</p>
+
+<pre><code>class TestLogger : Slogger&lt;TestCategory&gt; {}
+</code></pre>
+
+<p>Then create your logger in the obvious way:</p>
+
+<pre><code>public let log = TestLogger()
+</code></pre>
+
+<p>Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the <em>init</em> method and provide that information there.</p>
+
+<p><em>Slogger</em> is designed so that all public public properties for a <em>Slogger</em> instance can be modified at runtime, without having to worry about its internal state.</p>
+
+<h2>
+<a id="performance" class="anchor" href="#performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Performance</h2>
+
+<p>Here's some initial performance timing for logging calls with a release build (as of version 1.0):</p>
+
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Destinations</th>
+<th>Level</th>
+<th>Iterations</th>
+<th>log.Debug(.Only, "Message")</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulator</td>
+<td>[MemoryDestination]</td>
+<td>.None</td>
+<td>100, 000</td>
+<td>363ns</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>[]</td>
+<td>.Verbose</td>
+<td>1,000,000</td>
+<td>363ns</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>[MemoryDestination]</td>
+<td>.Verbose</td>
+<td>100,000</td>
+<td>28µs</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>[ConsoleDestination]</td>
+<td>.Verbose</td>
+<td>1000</td>
+<td>240µs</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[MemoryDestination]</td>
+<td>.None</td>
+<td>100, 000</td>
+<td>921ns</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[]</td>
+<td>.Verbose</td>
+<td>1,000,000</td>
+<td>943ns</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[MemoryDestination]</td>
+<td>.Verbose</td>
+<td>100,000</td>
+<td>65µs</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[ConsoleDestination]</td>
+<td>.Verbose</td>
+<td>1000</td>
+<td>718µs</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="how-to-get-it" class="anchor" href="#how-to-get-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How To Get it</h2>
+
+<p>Here's how you can check it out:</p>
+
+<table>
+<thead>
+<tr>
+<th>Means</th>
+<th>Status</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Github</td>
+<td>Supported</td>
+<td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
+</tr>
+<tr>
+<td>Carthage</td>
+<td>In process</td>
+<td></td>
+</tr>
+<tr>
+<td>Cocoapods</td>
+<td>In process</td>
+<td>Not a fan of invasive development tools, but it's popular</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h2>
+
+<p>Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.</p>
+
+<p>Happy logging!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Slogger maintained by <a href="https://github.com/dgoodine">dgoodine</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
