@@ -26,9 +26,7 @@ The typical logger levels are supported:
 	public enum Level : Int, Comparable {
 	  case None, Severe, Error, Warning, Info, Debug, Verbose
 
-	  static func allValues () -> [Level] {
-	    return [None, Severe, Error, Warning, Info, Debug, Verbose]
-	  }
+	  static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
 	}
 	
 The order of the levels is higher-priority first. Thus the threshold is evaluated using the *<=* operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information n the *override* and *category* parameters.)
@@ -44,6 +42,8 @@ The order of the levels is higher-priority first. Thus the threshold is evaluate
 
 		return level <= activeLevel
 	  }
+	  
+Specifying a value *.None* effectively turns off logging.
 
 ### Creating a *Slogger* Instance
 Setting up a logger can be as simple as one line of code:

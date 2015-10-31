@@ -48,12 +48,8 @@ public enum Level : Int, Comparable {
   /// "WTF is going on in my app?"
   case Verbose
 
-  /**
-   - Returns: all values in the enumeration
-   */
-  static func allValues () -> [Level] {
-    return [None, Severe, Error, Warning, Info, Debug, Verbose]
-  }
+  /// All levels
+  static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
 }
 
 // Swift really should support this implicitly.
@@ -490,7 +486,19 @@ extension Slogger {
   public func verbose (category: T?, override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure) {
     logInternal(closure: closure, category: category, override: override, level: .Verbose, function: function, file: file, line: line)
   }
-  
+
+  // MARK: None (provided for completeness)
+  public func none (@autoclosure  closure: LogClosure, override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+  {}
+
+  public func none (category: T?, @autoclosure _ closure: LogClosure, override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__)
+  {}
+
+  public func none (override override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure)
+  {}
+
+  public func none (category: T?, override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, @noescape _ closure: LogClosure)
+  {}
 }
 
 

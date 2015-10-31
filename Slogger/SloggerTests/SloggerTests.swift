@@ -75,7 +75,7 @@ class SloggerTests: XCTestCase {
   }
 
   func exhaustiveTestWithDestinations (destinations : [Destination], checkResults: Bool = true, verbose: Bool = false) {
-    let levels = Level.allValues()
+    let levels = Level.allValues
     let categories = TestCategory.allValues()
 
     log.hits = 0
@@ -163,11 +163,11 @@ class SloggerTests: XCTestCase {
       if verbose {
         print("Setting log level: \(setLevel)")
       }
-      log.currentLevel = setLevel
+      log.activeLevel = setLevel
 
       if setLevel == .None {
         // Radioactive trace
-        for override in Level.allValues() {
+        for override in Level.allValues {
           log.verbose("\(override)", override: .Verbose)
           checkForMessage("\(override)", nil, override, .Verbose, __FUNCTION__)
           log.verbose(nil, override: override) { "\(override)" }
