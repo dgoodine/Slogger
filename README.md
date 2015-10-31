@@ -33,7 +33,7 @@ The order of the levels is higher-priority first. Thus the threshold is evaluate
 
 	  public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
 	    if override != nil {
-	      return level <= override
+	      return (level == .None) ? false : level <= override
 	    }
 
 	    if category != nil, let categoryLevel = categories[category!] {
@@ -43,12 +43,12 @@ The order of the levels is higher-priority first. Thus the threshold is evaluate
 		return level <= activeLevel
 	  }
 	  
-Specifying a value *.None* effectively turns off logging.
+Note that the exception that specifying an *override* value of *.None* disables logging for the logging site.
 
 ### Creating a *Slogger* Instance
 Setting up a logger can be as simple as one line of code:
 
-	let log = Slogger<NoCategories>(defaultLevel: .Debug)
+	let log = Slogger<NoCategories>(defaultLevel: .Info)
 	
 And you'll likely want to tailor your build for debug/release:
 
@@ -56,56 +56,48 @@ And you'll likely want to tailor your build for debug/release:
 	let log = Slogger<NoCategories>(defaultLevel: .Info)
 	#else
 	let log = Slogger<NoCategories>(defaultLevel: .Warning)
-	#endif
+	#endif 
+
+The public interface is fully documented in the headers for reference in *Xcode* (use Alt-Click).  See the Docs directory for an HTML-based version.  (At some point there will be a docset available, but at the moment there are issues with both Jazzy and AppleDoc that I haven't had time to resolve.)
 
 The *Slogger* class is generic to support categories, as explained below.
-
-The public interface documented in the headers.  See the Docs directory for an HTML-based version.  (At some point there will be a docset available, but at the moment there are issues with both Jazzy and AppleDoc. and I haven't had time to resolve them.)
 
 ### Logging Site Functions
 Each log level has *autoclosure* and *noescape* trailing closure implementations, so the following are both valid forms:
 
 	log.debug("Enter")
 	log.debug() { "Enter" }
+	
+**Important Note**: The resulting closures **are not evaluated if the logging site doesn't pass the level threshold**.  So don't worry about expensive computations inside them.  And don't rely on them for side-effects.
 
-For completeness, functions are provided for the .None level have no-op implementations.
+For completeness, functions are provided for the .None level that have no-op implementations.  Thus the only overhead would be allocating the closure on the stack and the function call.
 
 	log.none("Enter")
 	log.none() { "Enter" }
 	
 ### Log Instance Properties
-The following properties of each log instance are exposed.  They can be modified at runtime, either programmatically or using the debugger at a breakpoint.
+The following properties of each log instance are exposed and have read/write access.  They can be modified at runtime, either programmatically or by using the debugger at a breakpoint.
 
 Property | Type | Comments
 --- | --- | ---
-level | Level | The active level of the logger.
+level | Level | The active, global level of the logger instance.
 dateFormatter | NSDateFormatter | Formatter to use for dates.
 details | [Detail] | Determines what to output and in what order.
 categories | [T : Level] | A mapping between categories and levels (see below)
+generator | Generator | Current generator.  Defaults to *defaultGenerator*.
+destinations | [Destination] | Destinations this logger will write to.  Defaults to [*consoleDestination*].
+colorMap | ColorMap | The current colorMap.
 defaultGenerator | Generator | Default generator implementation.
-generator : Generator
-	
-	/// The default ConsoleDestination implementation.
-	public var consoleDestination : Destination
+consoleDestination | Destination | The default console implementation with an XCodeColors/ANSI decorator.
+hits | UInt64 | Number of events logged.
+misses | UInt64 | Number of events logged.Number of events that weren't logged due to logging threshold.
 
-	/// Destinations this logger will write to. Defaults to [consoleDestination].
-	public var destinations : [Destination]
+**Important Note**: *Slogger* instances are inherently thread-safe, as are all supported implementations of *Slogger* types and protocols.  If you provide an implementation for a protocol, it **MUST** be thread-safe as well.
 
-	/// The current colorMap.
-	public var colorMap : ColorMap.
-
-	/// Number of events logged.
-	public var hits : UInt64
-
-	/// Number of events that weren't logged due to logging threshold.
-	public var misses : UInt64
-	  
 ## Advanced Features
 
 ### Destinations
-The *Destination* protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network, for example.
-
-*Slogger* natively supports the following logging destinations:
+The *Destination* protocol allows you to write your own log destinations and add them to the logger. The following destinations are provided:
 
 Destination | Status
 --- | ---
@@ -115,7 +107,7 @@ File | Coming Soon™
 Network | Planned but no ETA
 
 ### Generators
-Closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.
+These are closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.
 
 The default uses the typical pattern:
 
@@ -134,12 +126,18 @@ csvGenerator | Coming Soon™
 ### Details
 You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
 
+The default value includes all available *Detail* values, in a typical order:
+
+	[.Date, .File, .Function, .Category, .Level]
+	
+The inclusion of the logging message is implicit.
+
 ### Configurable Decorators
-You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use the decorator to decorate your file logs too.  Any command line shell 
+You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use that decorator to decorate your file logs too.  Any command line shell will display them correctly.
 
 Decorators | Status | Info
---- | ---
-XCodeColors | Supported | (https://github.com/robbiehanson/XcodeColors)
+--- | --- | ---
+XCodeColors (ANSI) | Supported | (https://github.com/robbiehanson/XcodeColors)
 
 ### Configurable Colormaps
 Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.  See the *ColorMap* type for more information.
@@ -193,21 +191,21 @@ Naturally, if you want your logger to have customized values (generators, decora
 *Slogger* is designed so that all public public properties for a *Slogger* instance can be modified at runtime, without having to worry about its internal state.
 
 ## Performance
-Here's some initial performance timing for logging calls with a release build (as of version 1.0):
+Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the *SloggerPerformanceIOS* project for details.  (Use of *Slogger* for Mac OS applications should be identical to that of the simulator.)
 
-Device | Destinations | Level | Iterations | log.Debug(.Only, "Message")
---- | --- | --- | --- | ---
-Simulator | [MemoryDestination] | .None | 100, 000 | 363ns
-Simulator | [] | .Verbose | 1,000,000 | 363ns
-Simulator | [MemoryDestination] | .Verbose | 100,000 | 28µs
-Simulator | [ConsoleDestination] | .Verbose | 1000 | 240µs
-iPhone 6 | [MemoryDestination] | .None | 100, 000 | 921ns
-iPhone 6 | [] | .Verbose | 1,000,000 | 943ns
-iPhone 6 | [MemoryDestination] | .Verbose | 100,000 | 65µs
-iPhone 6 | [ConsoleDestination] | .Verbose | 1000 | 718µs
+Device | Destinations | Level | log.Debug(.Only, "Message")
+--- | --- | --- | ---
+Simulator | [MemoryDestination] | .None | 363ns
+Simulator | [] | .Severe | 363ns
+Simulator | [MemoryDestination] | .Severe | 28µs
+Simulator | [ConsoleDestination] | .Severe | 240µs
+iPhone 6 | [MemoryDestination] | .None | 921ns
+iPhone 6 | [] | .Severe | 943ns
+iPhone 6 | [MemoryDestination] | .Severe | 65µs
+iPhone 6 | [ConsoleDestination] | .Severe | 718µs
 
 ## How To Get it
-Here's how you can check it out:
+Here's how you can get *Slogger* if you want to give it a try:
 
 Means | Status | Comment
 --- | --- | ---
@@ -217,9 +215,9 @@ Cocoapods | In process | Not a fan of invasive development tools, but it's popul
 
 
 ## Feedback
-Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.
+Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.
 
-Happy logging!
+***Happy logging!***
 
 
 

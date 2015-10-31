@@ -11,12 +11,15 @@ import Foundation
 /// Simple performance test for logging.
 public class PerformanceTest {
 
+  /// Category enum
   private enum PerformanceCategory : String, SloggerCategory {
     case Only
   }
 
+  /// Initializer
   public init () {}
 
+  /// Test Function
   public func test () {
     testWithDestinations(MemoryDestination(), 100000, .None)
     testWithDestinations(nil, 1000000, .Verbose)
@@ -24,6 +27,7 @@ public class PerformanceTest {
     testWithDestinations(ConsoleDestination(), 1000, .Verbose)
   }
 
+  /// Private test implementation.
   private func testWithDestinations (destination : Destination?, _ count : Int, _ level : Level) {
     let log = Slogger<PerformanceCategory>(defaultLevel: level)
     log.destinations = (destination == nil) ? [] : [destination!]
@@ -42,6 +46,7 @@ public class PerformanceTest {
     print("Elapsed: \(intervalToString(interval)), Per Call time: \(intervalToString(interval / Double(count)))")
   }
 
+  /// Helper function for human-readable output.
   private func intervalToString (interval : Double) -> String {
     if interval > 1.0 {
       return "\(formatInterval(interval))s"
@@ -55,6 +60,7 @@ public class PerformanceTest {
     return "\(interval)"
   }
 
+  /// Cuz meh.
   private func formatInterval (interval : Double) -> String {
     return NSString(format: "%.0f", interval) as String
   }

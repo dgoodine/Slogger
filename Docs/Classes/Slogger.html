@@ -13,7 +13,7 @@
     <a title="Slogger Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (88% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (90% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -134,13 +134,18 @@
 
                 </div>
               </div>
-            <p>The main logger class.  Its operation should be fairly intuitive and the properties and functions should
-be adequately documented herein.</p>
+            <p>This is the main logger class.  Its operation should be fairly intuitive and the properties and functions are
+fully documented herein.</p>
 
 <p>The &lsquo;SloggerTests.swift&rsquo; file is a very good place to look for examples of advanced usage, including
-how to subclass this class to use your own categories.  Check out the Slogger extension below for logging site
+how to define a subclass to use your own categories.  Check out the Slogger extension below for logging site
 functions documentation.  Only the <em>severe</em> level functions are documented.  All other functions related to logging
 site levels are identical.</p>
+
+<p><strong>Important Note</strong>: The implementation of logging site functions is stateless.  As a result, any exposed property
+can be changed at runtime, either programatically or using the debugger at a breakpoint.  Furthemore, <em>Slogger</em>
+instances are inherently thread-safe, as are all supported implementations of <em>Slogger</em> types and protocols.
+If you provide an implementation for a protocol, it <strong>MUST</strong> be thread-safe as well.</p>
 
           </section>
           <section class="section task-group-section">
@@ -247,7 +252,7 @@ site levels are identical.</p>
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">categories</span> <span class="p">:</span> <span class="p">[</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">Level</span><span class="p">]</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">,</span> <span class="kt">Level</span><span class="o">&gt;</span><span class="p">()</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">categories</span> <span class="p">:</span> <span class="p">[</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">Level</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -257,9 +262,9 @@ site levels are identical.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger9generatorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
+                    <a name="/s:vC7Slogger7Slogger9generatorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS_"></a>
                     <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger9generatorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">generator</a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger9generatorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS_">generator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -301,7 +306,7 @@ site levels are identical.</p>
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">destinations</span> <span class="p">:</span> <span class="p">[</span><span class="kt">Destination</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">destinations</span> <span class="p">:</span> <span class="p">[</span><span class="kt">Destination</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -321,7 +326,7 @@ site levels are identical.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current colorMap.</p>
+                        <p>The current mapping of <code>Level</code> to <code>ColorSpec</code></p>
 
                       </div>
                       <div class="declaration">
@@ -449,7 +454,7 @@ site levels are identical.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The date formatter to use for dates.  It has a typical default.</p>
+                                  <p>The date formatter to use for dates.  It has locale independent default.</p>
 
                                 </div>
                               </td>
@@ -462,7 +467,7 @@ site levels are identical.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The order detail for the generator to output.</p>
+                                  <p>The detail for the generator to output at logging sites.</p>
 
                                 </div>
                               </td>
@@ -497,7 +502,7 @@ site levels are identical.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The internal function used to determine if an event can be logged.  It&rsquo;s provided to allow for special use-cases,
+                        <p>The internal function used to determine if an event can be logged.  It&rsquo;s public to allow for special use-cases,
 but shouldn&rsquo;t be needed at logging sites since the message closure is only evaluated if this returns <code>true</code>.
 The order of the parameters designates their precedence in evaluating the logging conidition.</p>
 
@@ -522,7 +527,7 @@ The order of the parameters designates their precedence in evaluating the loggin
                               </td>
                               <td>
                                 <div>
-                                  <p>If it is not nil, it will be used exclusively to determine if logging should proceeed.</p>
+                                  <p>If it is not nil, it will be used exclusively to determine if logging should proceeed. If the value is .None, the generator will not be called for this logging site and there will be no output.</p>
 
                                 </div>
                               </td>
@@ -605,9 +610,9 @@ The order of the parameters designates their precedence in evaluating the loggin
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
+                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS_"></a>
                     <a name="//apple_ref/swift/Property/defaultGenerator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">defaultGenerator</a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS_">defaultGenerator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -615,12 +620,10 @@ The order of the parameters designates their precedence in evaluating the loggin
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The default generator function.</p>
-
-<p>Ouput looks like this:</p>
+                        <p>The default generator function. The ouput looks like this:</p>
 
 <ul>
-<li>[10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 callIt [] Severe: String</li>
+<li>[10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 myFunction(_:) [] Severe: String</li>
 </ul>
 
                       </div>
@@ -628,7 +631,7 @@ The order of the parameters designates their precedence in evaluating the loggin
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="k">override</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">details</span><span class="p">,</span> <span class="n">dateFormatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="k">override</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">details</span><span class="p">,</span> <span class="n">dateFormatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span></code></pre>
 
                         </div>
                       </div>

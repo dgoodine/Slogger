@@ -13,7 +13,7 @@
     <a title="Slogger Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (88% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (90% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -134,13 +134,18 @@
 
                 </div>
               </div>
-            <p>The main logger class.  Its operation should be fairly intuitive and the properties and functions should
-be adequately documented herein.</p>
+            <p>This is the main logger class.  Its operation should be fairly intuitive and the properties and functions are
+fully documented herein.</p>
 
 <p>The &lsquo;SloggerTests.swift&rsquo; file is a very good place to look for examples of advanced usage, including
-how to subclass this class to use your own categories.  Check out the Slogger extension below for logging site
+how to define a subclass to use your own categories.  Check out the Slogger extension below for logging site
 functions documentation.  Only the <em>severe</em> level functions are documented.  All other functions related to logging
 site levels are identical.</p>
+
+<p><strong>Important Note</strong>: The implementation of logging site functions is stateless.  As a result, any exposed property
+can be changed at runtime, either programatically or using the debugger at a breakpoint.  Furthemore, <em>Slogger</em>
+instances are inherently thread-safe, as are all supported implementations of <em>Slogger</em> types and protocols.
+If you provide an implementation for a protocol, it <strong>MUST</strong> be thread-safe as well.</p>
 
           </section>
           <section class="section task-group-section">

@@ -12,7 +12,7 @@
     <a title="Slogger  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (88% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (90% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -171,7 +171,7 @@
 <p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
 <pre class="highlight plaintext"><code>  public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
     if override != nil {
-      return level &lt;= override
+      return (level == .None) ? false : level &lt;= override
     }
 
     if category != nil, let categoryLevel = categories[category!] {
@@ -182,11 +182,11 @@
   }
 </code></pre>
 
-<p>Specifying a value <em>.None</em> effectively turns off logging.</p>
+<p>Note that the exception that specifying an <em>override</em> value of <em>.None</em> disables logging for the logging site.</p>
 <a href='#creating_a_em_slogger_em_instance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='creating_a_em_slogger_em_instance'>Creating a <em>Slogger</em> Instance</h3>
 
 <p>Setting up a logger can be as simple as one line of code:</p>
-<pre class="highlight plaintext"><code>let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Debug)
+<pre class="highlight plaintext"><code>let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Info)
 </code></pre>
 
 <p>And you&rsquo;ll likely want to tailor your build for debug/release:</p>
@@ -194,12 +194,12 @@
 let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Info)
 #else
 let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
-#endif
+#endif 
 </code></pre>
 
-<p>The <em>Slogger</em> class is generic to support categories, as explained below.</p>
+<p>The public interface is fully documented in the headers for reference in <em>Xcode</em> (use Alt-Click).  See the Docs directory for an HTML-based version.  (At some point there will be a docset available, but at the moment there are issues with both Jazzy and AppleDoc that I haven&rsquo;t had time to resolve.)</p>
 
-<p>The public interface documented in the headers.  See the Docs directory for an HTML-based version.  (At some point there will be a docset available, but at the moment there are issues with both Jazzy and AppleDoc. and I haven&rsquo;t had time to resolve them.)</p>
+<p>The <em>Slogger</em> class is generic to support categories, as explained below.</p>
 <a href='#logging_site_functions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='logging_site_functions'>Logging Site Functions</h3>
 
 <p>Each log level has <em>autoclosure</em> and <em>noescape</em> trailing closure implementations, so the following are both valid forms:</p>
@@ -207,13 +207,15 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 log.debug() { "Enter" }
 </code></pre>
 
-<p>For completeness, functions are provided for the .None level have no-op implementations.</p>
+<p><strong>Important Note</strong>: The resulting closures <strong>are not evaluated if the logging site doesn&rsquo;t pass the level threshold</strong>.  So don&rsquo;t worry about expensive computations inside them.  And don&rsquo;t rely on them for side-effects.</p>
+
+<p>For completeness, functions are provided for the .None level that have no-op implementations.  Thus the only overhead would be allocating the closure on the stack and the function call.</p>
 <pre class="highlight plaintext"><code>log.none("Enter")
 log.none() { "Enter" }
 </code></pre>
 <a href='#log_instance_properties' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='log_instance_properties'>Log Instance Properties</h3>
 
-<p>The following properties of each log instance are exposed.  They can be modified at runtime, either programmatically or using the debugger at a breakpoint.</p>
+<p>The following properties of each log instance are exposed and have read/write access.  They can be modified at runtime, either programmatically or by using the debugger at a breakpoint.</p>
 
 <table><thead>
 <tr>
@@ -225,7 +227,7 @@ log.none() { "Enter" }
 <tr>
 <td>level</td>
 <td>Level</td>
-<td>The active level of the logger.</td>
+<td>The active, global level of the logger instance.</td>
 </tr>
 <tr>
 <td>dateFormatter</td>
@@ -243,34 +245,47 @@ log.none() { "Enter" }
 <td>A mapping between categories and levels (see below)</td>
 </tr>
 <tr>
+<td>generator</td>
+<td>Generator</td>
+<td>Current generator.  Defaults to <em>defaultGenerator</em>.</td>
+</tr>
+<tr>
+<td>destinations</td>
+<td>[Destination]</td>
+<td>Destinations this logger will write to.  Defaults to [<em>consoleDestination</em>].</td>
+</tr>
+<tr>
+<td>colorMap</td>
+<td>ColorMap</td>
+<td>The current colorMap.</td>
+</tr>
+<tr>
 <td>defaultGenerator</td>
 <td>Generator</td>
 <td>Default generator implementation.</td>
 </tr>
+<tr>
+<td>consoleDestination</td>
+<td>Destination</td>
+<td>The default console implementation with an XCodeColors/ANSI decorator.</td>
+</tr>
+<tr>
+<td>hits</td>
+<td>UInt64</td>
+<td>Number of events logged.</td>
+</tr>
+<tr>
+<td>misses</td>
+<td>UInt64</td>
+<td>Number of events logged.Number of events that weren&rsquo;t logged due to logging threshold.</td>
+</tr>
 </tbody></table>
 
-<p>generator : Generator</p>
-<pre class="highlight plaintext"><code>/// The default ConsoleDestination implementation.
-public var consoleDestination : Destination
-
-/// Destinations this logger will write to. Defaults to [consoleDestination].
-public var destinations : [Destination]
-
-/// The current colorMap.
-public var colorMap : ColorMap.
-
-/// Number of events logged.
-public var hits : UInt64
-
-/// Number of events that weren't logged due to logging threshold.
-public var misses : UInt64
-</code></pre>
+<p><strong>Important Note</strong>: <em>Slogger</em> instances are inherently thread-safe, as are all supported implementations of <em>Slogger</em> types and protocols.  If you provide an implementation for a protocol, it <strong>MUST</strong> be thread-safe as well.</p>
 <a href='#advanced_features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='advanced_features'>Advanced Features</h2>
 <a href='#destinations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='destinations'>Destinations</h3>
 
-<p>The <em>Destination</em> protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network, for example.</p>
-
-<p><em>Slogger</em> natively supports the following logging destinations:</p>
+<p>The <em>Destination</em> protocol allows you to write your own log destinations and add them to the logger. The following destinations are provided:</p>
 
 <table><thead>
 <tr>
@@ -297,7 +312,7 @@ public var misses : UInt64
 </tbody></table>
 <a href='#generators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='generators'>Generators</h3>
 
-<p>Closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.</p>
+<p>These are closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.</p>
 
 <p>The default uses the typical pattern:</p>
 <pre class="highlight plaintext"><code>- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
@@ -335,13 +350,29 @@ public var misses : UInt64
 <a href='#details' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='details'>Details</h3>
 
 <p>You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.</p>
+
+<p>The default value includes all available <em>Detail</em> values, in a typical order:</p>
+<pre class="highlight plaintext"><code>[.Date, .File, .Function, .Category, .Level]
+</code></pre>
+
+<p>The inclusion of the logging message is implicit.</p>
 <a href='#configurable_decorators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_decorators'>Configurable Decorators</h3>
 
-<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use the decorator to decorate your file logs too.  Any command line shell </p>
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use that decorator to decorate your file logs too.  Any command line shell will display them correctly.</p>
 
-<p>Decorators | Status | Info
-&mdash; | &mdash;
-XCodeColors | Supported | (<a href="https://github.com/robbiehanson/XcodeColors">https://github.com/robbiehanson/XcodeColors</a>)</p>
+<table><thead>
+<tr>
+<th>Decorators</th>
+<th>Status</th>
+<th>Info</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>XCodeColors (ANSI)</td>
+<td>Supported</td>
+<td>(<a href="https://github.com/robbiehanson/XcodeColors">https://github.com/robbiehanson/XcodeColors</a>)</td>
+</tr>
+</tbody></table>
 <a href='#configurable_colormaps' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_colormaps'>Configurable Colormaps</h3>
 
 <p>Make your own color map for mapping <em>Level</em> to color in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.</p>
@@ -396,14 +427,13 @@ XCodeColors | Supported | (<a href="https://github.com/robbiehanson/XcodeColors"
 <p><em>Slogger</em> is designed so that all public public properties for a <em>Slogger</em> instance can be modified at runtime, without having to worry about its internal state.</p>
 <a href='#performance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='performance'>Performance</h2>
 
-<p>Here&rsquo;s some initial performance timing for logging calls with a release build (as of version 1.0):</p>
+<p>Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the <em>SloggerPerformanceIOS</em> project for details.  (Use of <em>Slogger</em> for Mac OS applications should be identical to that of the simulator.)</p>
 
 <table><thead>
 <tr>
 <th>Device</th>
 <th>Destinations</th>
 <th>Level</th>
-<th>Iterations</th>
 <th>log.Debug(.Only, <q>Message</q>)</th>
 </tr>
 </thead><tbody>
@@ -411,62 +441,54 @@ XCodeColors | Supported | (<a href="https://github.com/robbiehanson/XcodeColors"
 <td>Simulator</td>
 <td>[MemoryDestination]</td>
 <td>.None</td>
-<td>100, 000</td>
 <td>363ns</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[]</td>
-<td>.Verbose</td>
-<td>1,000,000</td>
+<td>.Severe</td>
 <td>363ns</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[MemoryDestination]</td>
-<td>.Verbose</td>
-<td>100,000</td>
+<td>.Severe</td>
 <td>28µs</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[ConsoleDestination]</td>
-<td>.Verbose</td>
-<td>1000</td>
+<td>.Severe</td>
 <td>240µs</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[MemoryDestination]</td>
 <td>.None</td>
-<td>100, 000</td>
 <td>921ns</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[]</td>
-<td>.Verbose</td>
-<td>1,000,000</td>
+<td>.Severe</td>
 <td>943ns</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[MemoryDestination]</td>
-<td>.Verbose</td>
-<td>100,000</td>
+<td>.Severe</td>
 <td>65µs</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[ConsoleDestination]</td>
-<td>.Verbose</td>
-<td>1000</td>
+<td>.Severe</td>
 <td>718µs</td>
 </tr>
 </tbody></table>
 <a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
 
-<p>Here&rsquo;s how you can check it out:</p>
+<p>Here&rsquo;s how you can get <em>Slogger</em> if you want to give it a try:</p>
 
 <table><thead>
 <tr>
@@ -493,9 +515,9 @@ XCodeColors | Supported | (<a href="https://github.com/robbiehanson/XcodeColors"
 </tbody></table>
 <a href='#feedback' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='feedback'>Feedback</h2>
 
-<p>Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.</p>
+<p>Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.</p>
 
-<p>Happy logging!</p>
+<p><strong><em>Happy logging!</em></strong></p>
 
           </section>
         </section>
