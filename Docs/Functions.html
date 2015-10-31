@@ -12,7 +12,7 @@
     <a title="Functions  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (67% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (88% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -75,7 +75,7 @@
           <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF7Sloggeroi1luRq_Ss16RawRepresentableqq_S0_8RawValueSs10Comparable_FTq_q__Sb">&lt;(_:_:)</a>
+                <a href="Functions/&lt;(_:_:).html">&lt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F7Slogger18colorFromHexStringFSST1rSd1gSd1bSd_">colorFromHexString(_:)</a>
@@ -146,8 +146,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Used to implement the Comparable protocol.  The other comparison operators default to using this with modified logic.</p>
 
+                        <a href="Functions/<(_:_:).html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">&lt;&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">RawRepresentable</span> <span class="k">where</span> <span class="kt">T</span><span class="o">.</span><span class="kt">RawValue</span><span class="p">:</span> <span class="kt">Comparable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

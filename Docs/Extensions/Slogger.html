@@ -13,7 +13,7 @@
     <a title="Slogger Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (67% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (88% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -76,7 +76,7 @@
           <a href="../Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:ZF7Sloggeroi1luRq_Ss16RawRepresentableqq_S0_8RawValueSs10Comparable_FTq_q__Sb">&lt;(_:_:)</a>
+                <a href="../Functions/&lt;(_:_:).html">&lt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F7Slogger18colorFromHexStringFSST1rSd1gSd1bSd_">colorFromHexString(_:)</a>
@@ -134,17 +134,13 @@
 
                 </div>
               </div>
-            <p>The main logger class.  It&rsquo;s operation should be fairly intuitive and the properties and functions should
+            <p>The main logger class.  Its operation should be fairly intuitive and the properties and functions should
 be adequately documented herein.</p>
 
 <p>The &lsquo;SloggerTests.swift&rsquo; file is a very good place to look for examples of advanced usage, including
 how to subclass this class to use your own categories.  Check out the Slogger extension below for logging site
 functions documentation.  Only the <em>severe</em> level functions are documented.  All other functions related to logging
 site levels are identical.</p>
-
-<p>All public properties are designed to allow any changes at runtime, so you can dynamically change
-while debugging. You could even change them programatically in your code if you need to track down a bug in the
-middle of heaps of calls by setting a higher, more verbose debug level in a function.</p>
 
           </section>
           <section class="section task-group-section">
@@ -170,12 +166,7 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Log a <em>severe</em> level event.  The first arugment is an @autoclosure returning the message string.
-This logging site has no category.
-- Parameter override: If not nil, will be used first to determine whether logging should proceed.  Defaults to <em>nil</em>.
-- Parameter function: The function within which the logging site is contained.  It should remain as the default.
-- Parameter file: The file within which the logging site is contained.  It should remain as the default.
-- Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
+                        <p>Log a <em>severe</em> event.</p>
 
                       </div>
                       <div class="declaration">
@@ -193,12 +184,25 @@ This logging site has no category.
                             <tr>
                               <td>
                                 <code>
+                                <em>closure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that returns the message string.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>override</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If not nil, will be used first to determine whether logging should proceed.  Defaults to .</p>
+                                  <p>If not nil, will be used to determine whether logging should output to the destinations.  Defaults to <code>nil</code>.</p>
 
                                 </div>
                               </td>
@@ -261,13 +265,7 @@ This logging site has no category.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Log a <em>severe</em> level event.
-The first argument is the category of the logging site.
-The second arugment is an @autoclosure returning the message string.
-- Parameter override: If not nil, will be used first to determine whether logging should proceed.  Defaults to <em>nil</em>.
-- Parameter function: The function within which the logging site is contained.  It should remain as the default.
-- Parameter file: The file within which the logging site is contained.  It should remain as the default.
-- Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
+                        <p>Log a <em>severe</em> event.</p>
 
                       </div>
                       <div class="declaration">
@@ -285,12 +283,38 @@ The second arugment is an @autoclosure returning the message string.
                             <tr>
                               <td>
                                 <code>
+                                <em>category</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Category</code> of the logging site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>closure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that returns the message string.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>override</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If not nil, will be used first to determine whether logging should proceed.  Defaults to .</p>
+                                  <p>If not nil, will be used to determine whether logging should output to the destinations.  Defaults to <code>nil</code>.</p>
 
                                 </div>
                               </td>
@@ -353,13 +377,7 @@ The second arugment is an @autoclosure returning the message string.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Log a <em>severe</em> level event.
-The last argument is a trailing @noescape closure that produces the message string.
-This logging site has no category.
-- Parameter override: If not nil, will be used first to determine whether logging should proceed.  Defaults to <em>nil</em>.
-- Parameter function: The function within which the logging site is contained.  It should remain as the default.
-- Parameter file: The file within which the logging site is contained.  It should remain as the default.
-- Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
+                        <p>Log a <em>severe</em> event.</p>
 
                       </div>
                       <div class="declaration">
@@ -382,7 +400,7 @@ This logging site has no category.
                               </td>
                               <td>
                                 <div>
-                                  <p>If not nil, will be used first to determine whether logging should proceed.  Defaults to .</p>
+                                  <p>If not nil, will be used to determine whether logging should output to the destinations.  Defaults to <code>nil</code>.</p>
 
                                 </div>
                               </td>
@@ -422,6 +440,19 @@ This logging site has no category.
                               <td>
                                 <div>
                                   <p>The line in the file of the logging site.  It should remain as the default.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>closure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that returns the message string.</p>
 
                                 </div>
                               </td>
@@ -445,13 +476,7 @@ This logging site has no category.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Log a <em>severe</em> level event.
-The first argument is the category of the logging site.
-The last argument is a trailing @noescape closure that produces the message string.
-- Parameter override: If <em>true</em> it will cause the event to be logged regardless of level evaluation.  Detaults to <em>false</em>
-- Parameter function: The function within which the logging site is contained.  It should remain as the default.
-- Parameter file: The file within which the logging site is contained.  It should remain as the default.
-- Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
+                        <p>Log a <em>severe</em> event.</p>
 
                       </div>
                       <div class="declaration">
@@ -469,12 +494,25 @@ The last argument is a trailing @noescape closure that produces the message stri
                             <tr>
                               <td>
                                 <code>
+                                <em>category</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Category</code> of the logging site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>override</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If  it will cause the event to be logged regardless of level evaluation.  Detaults to </p>
+                                  <p>If not nil, will be used to determine whether logging should output to the destinations.  Defaults to <code>nil</code>.</p>
 
                                 </div>
                               </td>
@@ -514,6 +552,19 @@ The last argument is a trailing @noescape closure that produces the message stri
                               <td>
                                 <div>
                                   <p>The line in the file of the logging site.  It should remain as the default.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>closure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that returns the message string.</p>
 
                                 </div>
                               </td>
@@ -548,14 +599,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">error</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -575,14 +626,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">error</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -602,14 +653,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">error</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -629,14 +680,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">error</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -667,14 +718,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">warning</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -694,14 +745,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">warning</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -721,14 +772,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">warning</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -748,14 +799,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">warning</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -786,14 +837,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">info</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -813,14 +864,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">info</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -840,14 +891,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">info</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -867,14 +918,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">info</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -905,14 +956,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">debug</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -932,14 +983,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">debug</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -959,14 +1010,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">debug</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -986,14 +1037,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">debug</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1024,14 +1075,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verbose</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1051,14 +1102,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verbose</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1078,14 +1129,14 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verbose</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1105,14 +1156,137 @@ The last argument is a trailing @noescape closure that produces the message stri
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>See the <code>severe</code> functions for documentation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verbose</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/None"></a>
+                  <a name="//apple_ref/swift/Section/None" class="dashAnchor"></a>
+                  <a href="#/None">
+                    <h3 class="section-name">None</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/none(_:override:function:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">none(_:override:function:file:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>See the corresponding <code>severe</code> function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">none</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span>
+  <span class="p">{}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/none(_:_:override:function:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">none(_:_:override:function:file:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>See the corresponding <code>severe</code> function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">none</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span>
+  <span class="p">{}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/none(override:function:file:line:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_">none(override:function:file:line:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>See the corresponding <code>severe</code> function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">none</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span>
+  <span class="p">{}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/none(_:override:function:file:line:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4noneuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_">none(_:override:function:file:line:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>See the corresponding <code>severe</code> function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">none</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span>
+  <span class="p">{}</span></code></pre>
 
                         </div>
                       </div>

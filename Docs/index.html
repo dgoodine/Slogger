@@ -12,7 +12,7 @@
     <a title="Slogger  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (67% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (88% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -75,7 +75,7 @@
           <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF7Sloggeroi1luRq_Ss16RawRepresentableqq_S0_8RawValueSs10Comparable_FTq_q__Sb">&lt;(_:_:)</a>
+                <a href="Functions/&lt;(_:_:).html">&lt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F7Slogger18colorFromHexStringFSST1rSd1gSd1bSd_">colorFromHexString(_:)</a>
@@ -164,13 +164,11 @@
 <pre class="highlight plaintext"><code>public enum Level : Int, Comparable {
   case None, Severe, Error, Warning, Info, Debug, Verbose
 
-  static func allValues () -&gt; [Level] {
-    return [None, Severe, Error, Warning, Info, Debug, Verbose]
-  }
+  static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
 }
 </code></pre>
 
-<p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information n the <em>override</em> and <em>category</em> parameters.)</p>
+<p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
 <pre class="highlight plaintext"><code>  public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
     if override != nil {
       return level &lt;= override
@@ -183,6 +181,8 @@
     return level &lt;= activeLevel
   }
 </code></pre>
+
+<p>Specifying a value <em>.None</em> effectively turns off logging.</p>
 <a href='#creating_a_em_slogger_em_instance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='creating_a_em_slogger_em_instance'>Creating a <em>Slogger</em> Instance</h3>
 
 <p>Setting up a logger can be as simple as one line of code:</p>
@@ -199,15 +199,72 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 
 <p>The <em>Slogger</em> class is generic to support categories, as explained below.</p>
 
-<p>The public interface documented in the headers.  See the Docs directory for an HTML-based version.  At some point there will be a docset available.</p>
+<p>The public interface documented in the headers.  See the Docs directory for an HTML-based version.  (At some point there will be a docset available, but at the moment there are issues with both Jazzy and AppleDoc. and I haven&rsquo;t had time to resolve them.)</p>
 <a href='#logging_site_functions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='logging_site_functions'>Logging Site Functions</h3>
 
-<p>Each log level has autoclosure and noescape trailing closure implementations, so the following are both valid forms:</p>
+<p>Each log level has <em>autoclosure</em> and <em>noescape</em> trailing closure implementations, so the following are both valid forms:</p>
 <pre class="highlight plaintext"><code>log.debug("Enter")
 log.debug() { "Enter" }
 </code></pre>
 
-<p>By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site..</p>
+<p>For completeness, functions are provided for the .None level have no-op implementations.</p>
+<pre class="highlight plaintext"><code>log.none("Enter")
+log.none() { "Enter" }
+</code></pre>
+<a href='#log_instance_properties' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='log_instance_properties'>Log Instance Properties</h3>
+
+<p>The following properties of each log instance are exposed.  They can be modified at runtime, either programmatically or using the debugger at a breakpoint.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>level</td>
+<td>Level</td>
+<td>The active level of the logger.</td>
+</tr>
+<tr>
+<td>dateFormatter</td>
+<td>NSDateFormatter</td>
+<td>Formatter to use for dates.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>[Detail]</td>
+<td>Determines what to output and in what order.</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>[T : Level]</td>
+<td>A mapping between categories and levels (see below)</td>
+</tr>
+<tr>
+<td>defaultGenerator</td>
+<td>Generator</td>
+<td>Default generator implementation.</td>
+</tr>
+</tbody></table>
+
+<p>generator : Generator</p>
+<pre class="highlight plaintext"><code>/// The default ConsoleDestination implementation.
+public var consoleDestination : Destination
+
+/// Destinations this logger will write to. Defaults to [consoleDestination].
+public var destinations : [Destination]
+
+/// The current colorMap.
+public var colorMap : ColorMap.
+
+/// Number of events logged.
+public var hits : UInt64
+
+/// Number of events that weren't logged due to logging threshold.
+public var misses : UInt64
+</code></pre>
 <a href='#advanced_features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='advanced_features'>Advanced Features</h2>
 <a href='#destinations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='destinations'>Destinations</h3>
 
@@ -235,41 +292,59 @@ log.debug() { "Enter" }
 </tr>
 <tr>
 <td>Network</td>
-<td>Considering it</td>
+<td>Planned but no ETA</td>
 </tr>
 </tbody></table>
 <a href='#generators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='generators'>Generators</h3>
 
-<p>You can supply your own closure for outputting a log entry in any format.  The default uses the following pattern:</p>
+<p>Closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.</p>
+
+<p>The default uses the typical pattern:</p>
 <pre class="highlight plaintext"><code>- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
 </code></pre>
 
-<p>But you could easily output custom JSON, XML, or whatever you want by supplying your own.  These generators are configurable per logging destination.</p>
+<p>List of supported generators (see the source for details):</p>
+
+<table><thead>
+<tr>
+<th>Generator</th>
+<th>Status</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>defaultGenerator</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>jsonGenerator</td>
+<td>Coming Soon™</td>
+</tr>
+<tr>
+<td>xmlGenerator</td>
+<td>Coming Soon™</td>
+</tr>
+<tr>
+<td>tabGenerator</td>
+<td>Coming Soon™</td>
+</tr>
+<tr>
+<td>csvGenerator</td>
+<td>Coming Soon™</td>
+</tr>
+</tbody></table>
 <a href='#details' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='details'>Details</h3>
 
 <p>You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.</p>
 <a href='#configurable_decorators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_decorators'>Configurable Decorators</h3>
 
-<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.</p>
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use the decorator to decorate your file logs too.  Any command line shell </p>
 
-<table><thead>
-<tr>
-<th>Decorators</th>
-<th>Status</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>XCodeColors</td>
-<td>Supported</td>
-</tr>
-<tr>
-<td>ANSI</td>
-<td>Coming Soon™</td>
-</tr>
-</tbody></table>
+<p>Decorators | Status | Info
+&mdash; | &mdash;
+XCodeColors | Supported | (<a href="https://github.com/robbiehanson/XcodeColors">https://github.com/robbiehanson/XcodeColors</a>)</p>
 <a href='#configurable_colormaps' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_colormaps'>Configurable Colormaps</h3>
 
-<p>Make your own color map for mapping <em>Level</em> to color in a platform- and decorator-independent way.</p>
+<p>Make your own color map for mapping <em>Level</em> to color in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.</p>
 <a href='#radioactive_logging' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='radioactive_logging'>Radioactive Logging</h3>
 
 <p>Radioactive logging allows logging to execute based on evaluation of an optional <em>override</em> value at logging sites.  If the <em>override</em> value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.</p>

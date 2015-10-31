@@ -13,7 +13,7 @@
     <a title="Slogger Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (67% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (88% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -76,7 +76,7 @@
           <a href="../Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:ZF7Sloggeroi1luRq_Ss16RawRepresentableqq_S0_8RawValueSs10Comparable_FTq_q__Sb">&lt;(_:_:)</a>
+                <a href="../Functions/&lt;(_:_:).html">&lt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F7Slogger18colorFromHexStringFSST1rSd1gSd1bSd_">colorFromHexString(_:)</a>
@@ -134,17 +134,13 @@
 
                 </div>
               </div>
-            <p>The main logger class.  It&rsquo;s operation should be fairly intuitive and the properties and functions should
+            <p>The main logger class.  Its operation should be fairly intuitive and the properties and functions should
 be adequately documented herein.</p>
 
 <p>The &lsquo;SloggerTests.swift&rsquo; file is a very good place to look for examples of advanced usage, including
 how to subclass this class to use your own categories.  Check out the Slogger extension below for logging site
 functions documentation.  Only the <em>severe</em> level functions are documented.  All other functions related to logging
 site levels are identical.</p>
-
-<p>All public properties are designed to allow any changes at runtime, so you can dynamically change
-while debugging. You could even change them programatically in your code if you need to track down a bug in the
-middle of heaps of calls by setting a higher, more verbose debug level in a function.</p>
 
           </section>
           <section class="section task-group-section">
@@ -153,9 +149,9 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger11activeLevelOS_5Level"></a>
-                    <a name="//apple_ref/swift/Property/activeLevel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger11activeLevelOS_5Level">activeLevel</a>
+                    <a name="/s:vC7Slogger7Slogger5levelOS_5Level"></a>
+                    <a name="//apple_ref/swift/Property/level" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger5levelOS_5Level">level</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -163,14 +159,14 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current operating level of the logger.</p>
+                        <p>The active, global operating level of the logger.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">activeLevel</span> <span class="p">:</span> <span class="kt">Level</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">level</span> <span class="p">:</span> <span class="kt">Level</span></code></pre>
 
                         </div>
                       </div>
@@ -190,7 +186,7 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current operating level of the logger.</p>
+                        <p>Formatter to use for dates.</p>
 
                       </div>
                       <div class="declaration">
@@ -217,8 +213,7 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current detail array representing the fields for the generator to output. A generator implemenetation
-is free to choose to ignore details that are irrelevant for that generator.</p>
+                        <p>An array representing what to output (and in what order) by a <code>Generator</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -245,8 +240,7 @@ is free to choose to ignore details that are irrelevant for that generator.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A dictionary of category  to level associations.  If a value exists for a given category, that level will be used
-for all logging sites that specify that category, instead of the activeLevel.</p>
+                        <p>A dictionary for providing a custom <code>Level</code> for each <code>Category</code> defined.</p>
 
                       </div>
                       <div class="declaration">
@@ -263,9 +257,9 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger18consoleDestinationPS_11Destination_"></a>
-                    <a name="//apple_ref/swift/Property/consoleDestination" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger18consoleDestinationPS_11Destination_">consoleDestination</a>
+                    <a name="/s:vC7Slogger7Slogger9generatorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
+                    <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger9generatorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">generator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -273,14 +267,14 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The default consoleDestination.  Can be accessed if you want to operate on it directly.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">consoleDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span> <span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                         </div>
                       </div>
@@ -300,10 +294,7 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The curent destinations this logger will write to.  If this array is empty, logging will be evaluated normally.
-(This can be useful for performance testing.)</p>
-
-<p>You can modify this array as you wish at any time while your app is running.</p>
+                        <p>Destinations this logger will write to.</p>
 
                       </div>
                       <div class="declaration">
@@ -311,39 +302,6 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">destinations</span> <span class="p">:</span> <span class="p">[</span><span class="kt">Destination</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
-                    <a name="//apple_ref/swift/Property/defaultGenerator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">defaultGenerator</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The default generator function.</p>
-
-<p>Ouput looks like this:</p>
-
-<ul>
-<li>[10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 callIt [] Severe: String</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="k">override</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">details</span><span class="p">,</span> <span class="n">dateFormatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span></code></pre>
 
                         </div>
                       </div>
@@ -363,7 +321,7 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current colorMap.  See &lsquo;Color.swift&rsquo; for more information on creating your own.</p>
+                        <p>The current colorMap.</p>
 
                       </div>
                       <div class="declaration">
@@ -380,9 +338,9 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger4hitsVSs5Int64"></a>
+                    <a name="/s:vC7Slogger7Slogger4hitsVSs6UInt64"></a>
                     <a name="//apple_ref/swift/Property/hits" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger4hitsVSs5Int64">hits</a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger4hitsVSs6UInt64">hits</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -390,14 +348,14 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The number of logging hits (actual logged events) so far.</p>
+                        <p>Number of events logged.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hits</span> <span class="p">:</span> <span class="kt">Int64</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hits</span> <span class="p">:</span> <span class="kt">UInt64</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
 
                         </div>
                       </div>
@@ -407,9 +365,9 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger6missesVSs5Int64"></a>
+                    <a name="/s:vC7Slogger7Slogger6missesVSs6UInt64"></a>
                     <a name="//apple_ref/swift/Property/misses" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger6missesVSs5Int64">misses</a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger6missesVSs6UInt64">misses</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -417,14 +375,14 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The number of logging misses (events not logged due to level) so far.</p>
+                        <p>Number of events that weren&rsquo;t logged due to logging threshold.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">misses</span> <span class="p">:</span> <span class="kt">Int64</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">misses</span> <span class="p">:</span> <span class="kt">UInt64</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
 
                         </div>
                       </div>
@@ -478,7 +436,7 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                               </td>
                               <td>
                                 <div>
-                                  <p>Sets the &lsquo;activeLevel&rsquo; property to this value.</p>
+                                  <p>Sets the &lsquo;level&rsquo; property to this value.</p>
 
                                 </div>
                               </td>
@@ -519,10 +477,10 @@ for all logging sites that specify that category, instead of the activeLevel.</p
             </div>
             <div class="task-group">
                 <div class="task-name-container">
-                  <a name="/Public"></a>
-                  <a name="//apple_ref/swift/Section/Public" class="dashAnchor"></a>
-                  <a href="#/Public">
-                    <h3 class="section-name">Public</h3>
+                  <a name="/Functions"></a>
+                  <a name="//apple_ref/swift/Section/Functions" class="dashAnchor"></a>
+                  <a href="#/Functions">
+                    <h3 class="section-name">Functions</h3>
                   </a>
                 </div>
               <ul>
@@ -540,7 +498,7 @@ for all logging sites that specify that category, instead of the activeLevel.</p
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The internal function used to determine if an event can be logged.  It&rsquo;s provided to allow for special use-cases,
-but shouldn&rsquo;t be needed at logging sites since the message closure is only evaluated if this returns <em>true</em>.
+but shouldn&rsquo;t be needed at logging sites since the message closure is only evaluated if this returns <code>true</code>.
 The order of the parameters designates their precedence in evaluating the logging conidition.</p>
 
                       </div>
@@ -602,6 +560,115 @@ The order of the parameters designates their precedence in evaluating the loggin
                         <h4>Return Value</h4>
                         <p>true of the logging of the event should proceed, false if it shouldn&rsquo;t</p>
 
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger7Slogger10resetStatsuRq_S_15SloggerCategory_FGS0_q__FT_T_"></a>
+                    <a name="//apple_ref/swift/Method/resetStats()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger10resetStatsuRq_S_15SloggerCategory_FGS0_q__FT_T_">resetStats()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Resets <code>hits</code> and <code>misses</code> counters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetStats</span> <span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Generators"></a>
+                  <a name="//apple_ref/swift/Section/Generators" class="dashAnchor"></a>
+                  <a href="#/Generators">
+                    <h3 class="section-name">Generators</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
+                    <a name="//apple_ref/swift/Property/defaultGenerator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">defaultGenerator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default generator function.</p>
+
+<p>Ouput looks like this:</p>
+
+<ul>
+<li>[10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 callIt [] Severe: String</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="k">override</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">details</span><span class="p">,</span> <span class="n">dateFormatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Destinations"></a>
+                  <a name="//apple_ref/swift/Section/Destinations" class="dashAnchor"></a>
+                  <a href="#/Destinations">
+                    <h3 class="section-name">Destinations</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC7Slogger7Slogger18consoleDestinationPS_11Destination_"></a>
+                    <a name="//apple_ref/swift/Property/consoleDestination" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger18consoleDestinationPS_11Destination_">consoleDestination</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default consoleDestination.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">consoleDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

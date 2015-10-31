@@ -29,7 +29,7 @@ The typical logger levels are supported:
 	  static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
 	}
 	
-The order of the levels is higher-priority first. Thus the threshold is evaluated using the *<=* operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information n the *override* and *category* parameters.)
+The order of the levels is higher-priority first. Thus the threshold is evaluated using the *<=* operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information on the *override* and *category* parameters.)
 
 	  public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
 	    if override != nil {
@@ -60,16 +60,46 @@ And you'll likely want to tailor your build for debug/release:
 
 The *Slogger* class is generic to support categories, as explained below.
 
-The public interface documented in the headers.  See the Docs directory for an HTML-based version.  At some point there will be a docset available.
+The public interface documented in the headers.  See the Docs directory for an HTML-based version.  (At some point there will be a docset available, but at the moment there are issues with both Jazzy and AppleDoc. and I haven't had time to resolve them.)
 
 ### Logging Site Functions
-Each log level has autoclosure and noescape trailing closure implementations, so the following are both valid forms:
+Each log level has *autoclosure* and *noescape* trailing closure implementations, so the following are both valid forms:
 
 	log.debug("Enter")
 	log.debug() { "Enter" }
 
-By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site..
+For completeness, functions are provided for the .None level have no-op implementations.
 
+	log.none("Enter")
+	log.none() { "Enter" }
+	
+### Log Instance Properties
+The following properties of each log instance are exposed.  They can be modified at runtime, either programmatically or using the debugger at a breakpoint.
+
+Property | Type | Comments
+--- | --- | ---
+level | Level | The active level of the logger.
+dateFormatter | NSDateFormatter | Formatter to use for dates.
+details | [Detail] | Determines what to output and in what order.
+categories | [T : Level] | A mapping between categories and levels (see below)
+defaultGenerator | Generator | Default generator implementation.
+generator : Generator
+	
+	/// The default ConsoleDestination implementation.
+	public var consoleDestination : Destination
+
+	/// Destinations this logger will write to. Defaults to [consoleDestination].
+	public var destinations : [Destination]
+
+	/// The current colorMap.
+	public var colorMap : ColorMap.
+
+	/// Number of events logged.
+	public var hits : UInt64
+
+	/// Number of events that weren't logged due to logging threshold.
+	public var misses : UInt64
+	  
 ## Advanced Features
 
 ### Destinations
@@ -82,29 +112,37 @@ Destination | Status
 Console | Supported
 Memory | Supported
 File | Coming Soon™
-Network | Considering it
-
+Network | Planned but no ETA
 
 ### Generators
-You can supply your own closure for outputting a log entry in any format.  The default uses the following pattern:
+Closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.
+
+The default uses the typical pattern:
 
 	- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
 	
-But you could easily output custom JSON, XML, or whatever you want by supplying your own.  These generators are configurable per logging destination.
+List of supported generators (see the source for details):
+
+Generator | Status
+--- | ---
+defaultGenerator | Supported
+jsonGenerator | Coming Soon™
+xmlGenerator | Coming Soon™
+tabGenerator | Coming Soon™
+csvGenerator | Coming Soon™
 
 ### Details
 You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
 
 ### Configurable Decorators
-You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.
+You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use the decorator to decorate your file logs too.  Any command line shell 
 
-Decorators | Status
+Decorators | Status | Info
 --- | ---
-XCodeColors | Supported
-ANSI | Coming Soon™
+XCodeColors | Supported | (https://github.com/robbiehanson/XcodeColors)
 
 ### Configurable Colormaps
-Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.
+Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.  See the *ColorMap* type for more information.
 
 ### Radioactive Logging
 Radioactive logging allows logging to execute based on evaluation of an optional *override* value at logging sites.  If the *override* value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.
