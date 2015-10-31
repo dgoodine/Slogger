@@ -63,15 +63,15 @@ class SloggerTests: XCTestCase {
     }
 
     log.verbose("Message")
-    log.verbose("Message", override: true)
+    log.verbose("Message", override: .Verbose)
 
     log.verbose(.First, "Message")
 
     log.verbose() { "Closure Message" }
-    log.verbose(nil, override: true) { "Closure Message" }
+    log.verbose(override: Level.Verbose) { "Closure Message" }
 
     log.verbose(.First) { "Closure Message" }
-    log.verbose(.First, override: true) { "Closure Message" }
+    log.verbose(.First, override: .Verbose) { "Closure Message" }
   }
 
   func exhaustiveTestWithDestinations (destinations : [Destination], checkResults: Bool = true, verbose: Bool = false) {
@@ -82,18 +82,18 @@ class SloggerTests: XCTestCase {
     log.misses = 0
     log.destinations = destinations
 
-    func checkForMessage (message: String, _ override: Bool, _ category: TestCategory?, _ level: Level, _ function: String) {
-      guard checkResults && log.canLogWithOverride(override, category: category, level: level) else {
+    func checkForMessage (message: String, _ category: TestCategory?, _ override: Level?, _ level: Level, _ function: String) {
+      guard checkResults && log.canLog(override: override, category: category, level: level) else {
         return
       }
 
       let last = testDestination.lastLine
-      guard last != nil || override else {
+      guard last != nil || override != nil else {
         return
       }
 
       if let last = last {
-        let prefix = (override) ? "* " : "- "
+        let prefix = (override != nil) ? "* " : "- "
         XCTAssert(last.containsString(prefix), "Incorrect Radioactive Trace Prefix")
         XCTAssert(last.containsString(" \(level): "), "Incorrect level")
         XCTAssert(last.containsString(": \(message)"), "Incorrect message")
@@ -110,44 +110,44 @@ class SloggerTests: XCTestCase {
     func callIt (category: TestCategory?, _ level: Level) {
       switch (level) {
       case .None:
-        checkForMessage("String", false, category, level, __FUNCTION__)
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
 
       case .Severe:
         log.severe(category, "String")
-        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
         log.severe(category) { "Closure" }
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
 
       case .Error:
         log.error(category, "String")
-        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
         log.error(category) { "Closure" }
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
 
       case .Warning:
         log.warning(category, "String")
-        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
         log.warning(category) { "Closure" }
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
 
       case .Info:
         log.info(category, "String")
-        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
         log.info(category) { "Closure" }
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
 
       case .Debug:
         log.debug(category, "String")
-        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
         log.debug(category) { "Closure" }
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
 
       case .Verbose:
         log.verbose(category, "String")
-        checkForMessage("String", false, category, level, __FUNCTION__)
+        checkForMessage("String", category, nil, level, __FUNCTION__)
         log.verbose(category) { "Closure" }
-        checkForMessage("Closure", false, category, level, __FUNCTION__)
+        checkForMessage("Closure", category, nil, level, __FUNCTION__)
       }
     }
 
@@ -167,11 +167,12 @@ class SloggerTests: XCTestCase {
 
       if setLevel == .None {
         // Radioactive trace
-        log.verbose("String", override: true)
-        checkForMessage("String", true, nil, .Verbose, __FUNCTION__)
-        log.verbose(nil, override: true) { "Closure" }
-        checkForMessage("Closure", true, nil, .Verbose, __FUNCTION__)
-
+        for override in Level.allValues() {
+          log.verbose("\(override)", override: .Verbose)
+          checkForMessage("\(override)", nil, override, .Verbose, __FUNCTION__)
+          log.verbose(nil, override: override) { "\(override)" }
+          checkForMessage("\(override)", nil, override, .Verbose, __FUNCTION__)
+        }
       }
 
       sloggit(nil)

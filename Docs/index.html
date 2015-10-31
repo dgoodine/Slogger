@@ -150,42 +150,17 @@
 <ul>
 <li>Finish FileDestination (<em>currently not supported</em>)</li>
 <li>Add <em>Carthage</em> support.</li>
+<li>Make docset</li>
 </ul>
-<a href='#why_another_swift_logger' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='why_another_swift_logger'>Why Another Swift logger?</h2>
+<a href='#why_another_swift_logging_framework' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='why_another_swift_logging_framework'>Why Another Swift Logging Framework?</h2>
 
-<p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found Dave Wood&rsquo;s excellent <em>XCGLogger</em> (<a href="https://github.com/DaveWoodCom/XCGLogger">https://github.com/DaveWoodCom/XCGLogger</a>) implementation.  While it&rsquo;s fast and well constructed, I needed some extra features and decided to build my own.</p>
+<p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found <em>XCGLogger</em> by Dave Wood @DaveWoodCom (<a href="https://github.com/DaveWoodCom/XCGLogger">https://github.com/DaveWoodCom/XCGLogger</a>).  While it&rsquo;s fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺🍺🍺</p>
 
-<p><em>Slogger</em> uses much the same approach and function signatures as <em>XCGLogger</em>, and as such, in its basic use can be easily switched with <em>XCGLogger</em> without modifying the logging sites.</p>
-<a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
-
-<p>Here are the ways you can get and use slogger:</p>
-
-<table><thead>
-<tr>
-<th>Means</th>
-<th>Status</th>
-<th>Comment</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Github</td>
-<td>Supported</td>
-<td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
-</tr>
-<tr>
-<td>Carthage</td>
-<td>In process</td>
-<td></td>
-</tr>
-<tr>
-<td>Cocoapods</td>
-<td>Considering it</td>
-<td>Not a fan of invasive development tools, but it&rsquo;s popular</td>
-</tr>
-</tbody></table>
+<p><em>Slogger</em> uses much the same approach and identical function signatures as <em>XCGLogger</em>, so they are interchangeable without modifying existing logging sites. Be sure to check the <strong>Advanced Features</strong> section below – particularly <em>Radioactive Logging</em> and <em>Categories</em> – to see why I decided to go this route.</p>
 <a href='#general_info' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='general_info'>General Info</h2>
+<a href='#logging_levels' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='logging_levels'>Logging Levels</h3>
 
-<p>The logger levels supported are as follows:</p>
+<p>The typical logger levels are supported:</p>
 <pre class="highlight plaintext"><code>public enum Level : Int, Comparable {
   case None, Severe, Error, Warning, Info, Debug, Verbose
 
@@ -195,12 +170,20 @@
 }
 </code></pre>
 
-<p>Each log level has both an @autoclosure and @noescape trailing closure implementation, so the following are both valid forms:</p>
-<pre class="highlight plaintext"><code>log.debug("Enter")
-log.debug() { "Enter" }
-</code></pre>
+<p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information n the <em>override</em> and <em>category</em> parameters.)</p>
+<pre class="highlight plaintext"><code>  public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
+    if override != nil {
+      return level &lt;= override
+    }
 
-<p>By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site.</p>
+    if category != nil, let categoryLevel = categories[category!] {
+      return level &lt;= categoryLevel
+    }
+
+    return level &lt;= activeLevel
+  }
+</code></pre>
+<a href='#creating_a_em_slogger_em_instance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='creating_a_em_slogger_em_instance'>Creating a <em>Slogger</em> Instance</h3>
 
 <p>Setting up a logger can be as simple as one line of code:</p>
 <pre class="highlight plaintext"><code>let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Debug)
@@ -216,11 +199,19 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 
 <p>The <em>Slogger</em> class is generic to support categories, as explained below.</p>
 
-<p>The public interface is well documented.  See the Docs directory for HTML-based and Apple docset versions of the header documentation.</p>
+<p>The public interface documented in the headers.  See the Docs directory for an HTML-based version.  At some point there will be a docset available.</p>
+<a href='#logging_site_functions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='logging_site_functions'>Logging Site Functions</h3>
+
+<p>Each log level has autoclosure and noescape trailing closure implementations, so the following are both valid forms:</p>
+<pre class="highlight plaintext"><code>log.debug("Enter")
+log.debug() { "Enter" }
+</code></pre>
+
+<p>By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site..</p>
 <a href='#advanced_features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='advanced_features'>Advanced Features</h2>
 <a href='#destinations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='destinations'>Destinations</h3>
 
-<p>The <em>Destination</em> protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network if you wanted to.</p>
+<p>The <em>Destination</em> protocol allows you to write your own log destinations and add them to the logger.  This would enable you to add a destination to log over the network, for example.</p>
 
 <p><em>Slogger</em> natively supports the following logging destinations:</p>
 
@@ -242,6 +233,10 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 <td>File</td>
 <td>Coming Soon™</td>
 </tr>
+<tr>
+<td>Network</td>
+<td>Considering it</td>
+</tr>
 </tbody></table>
 <a href='#generators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='generators'>Generators</h3>
 
@@ -249,13 +244,13 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 <pre class="highlight plaintext"><code>- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
 </code></pre>
 
-<p>But you could easily output custom JSON, XML, or whatever you want.  These generators are configurable per logging destination.</p>
+<p>But you could easily output custom JSON, XML, or whatever you want by supplying your own.  These generators are configurable per logging destination.</p>
 <a href='#details' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='details'>Details</h3>
 
 <p>You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.</p>
 <a href='#configurable_decorators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_decorators'>Configurable Decorators</h3>
 
-<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured on a per-destination.</p>
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.</p>
 
 <table><thead>
 <tr>
@@ -275,28 +270,40 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 <a href='#configurable_colormaps' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_colormaps'>Configurable Colormaps</h3>
 
 <p>Make your own color map for mapping <em>Level</em> to color in a platform- and decorator-independent way.</p>
-<a href='#radioactive_tracing' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='radioactive_tracing'>Radioactive Tracing</h3>
+<a href='#radioactive_logging' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='radioactive_logging'>Radioactive Logging</h3>
 
-<p>Radioactive tracing allows logging sites to log based on a boolean override value, in addition to the logging level.  If the <em>override</em> argument in a logging site is <em>true</em>, the event is logged, regardless of the log level.  If the argument is <em>false</em>, log-level checking continues as usual.</p>
+<p>Radioactive logging allows logging to execute based on evaluation of an optional <em>override</em> value at logging sites.  If the <em>override</em> value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.</p>
 
-<p>For example, if you were to define a <em>Request</em> object base class in a services implementation, you could define a boolean <em>trace</em> property, defaulting to <em>false</em>.  In your code that processes the request, you would provide the value of <em>trace</em> as the <em>override</em> argument at the logging site.  If a particular request is causing a problem (but you have tons of them to process), you can set the <em>trace</em> flag for only that request.  Consequently, logging sites for all levels would be logged for that particular request.</p>
+<p>As an example, imagine you have a <em>Request</em> object base class in a services implementation.  You could define a <em>logOverride</em> property of type <em>Level</em>, defaulting to <em>nil</em>. In the service code that processes requests, you would then provide the value of the <em>logOverride</em> property of requests as the <em>override</em> parameter at all logging sites.  This would cause any non-nil value in requests being processed to be used to override logging for the service.</p>
+
+<p>As a use-case, if you had a service that was processing tons of request, but a specific one was failing in a subtle way, you could use the following procedure to get more information for just that request, as follows:</p>
+
+<ol>
+<li>Add code to set a <em>logOverride</em> value (typically .Verbose) where the request is created</li>
+<li>Set the <em>activeLevel</em> property in the log instance to <em>.None</em></li>
+<li>Run your code</li>
+</ol>
+
+<p>You would then see logging for <em>only</em> that specific request, at whatever level you specified as the override.  This allows you to focus diagnosis on a particular object as it flows through the system, rather than getting a firehose of logging information for requests that you don&rsquo;t care about if you were to simply set the <em>activeLevel</em> property to a higher value.</p>
+
+<p>This procedure can be done by simply modifying your code at the site of creation of the request, or it can be done by setting a breakpoint at runtime and using the debugger to modify the properties.</p>
 <a href='#categories' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='categories'>Categories</h3>
 
-<p>In addition to the two convenience functions for each level mentioned above, logging sites allow a <em>Category</em> to be defined which is passed to the logging function.  While a category could be any type conforming to the <em>Hashable</em> protocol, you would typically define an <em>enum</em> for type safety.</p>
+<p>In addition to the two convenience functions for each level mentioned above, logging sites allow a <em>Category</em> to also be passed to the logging function.  While a category could be any type conforming to the <em>Hashable</em> protocol, you would typically define an <em>enum</em> for type safety.</p>
 
 <p>Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc).</p>
 
-<p>The design of categories is such that third-party frameworks can expose their <em>Slogger</em> instance and document their category values for developers using the framework.  Then, if the developers need to diagnose a problem inside the framework, they can simply adjust the logging levels for particular categories to get more information.  This can be especially useful in cases where the framework developer doesn&rsquo;t release the source code.</p>
+<p>The design of <em>Slogger</em> is such that third-party frameworks can expose their log instance and document their category values for developers using the framework.  Then, if the developers need to diagnose a problem inside the framework, they can simply adjust the logging levels for particular categories to get more information.  This is particularly useful in cases where the framework developer doesn&rsquo;t release the source code.</p>
 <a href='#implementing_categories' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='implementing_categories'>Implementing Categories</h2>
 
 <p>Here&rsquo;s an example of how you should implement your custom categories, taken from the unit test code in <em>Slogger</em>.</p>
 
 <p>First, define your category enum:</p>
 <pre class="highlight plaintext"><code>enum TestCategory : String, SloggerCategory {
-  case First, Second, Third
+  case First, Second
 
   static func allValues () -&gt; [TestCategory] {
-    return [First, Second, Third]
+    return [First, Second]
   }
 }
 </code></pre>
@@ -311,10 +318,10 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 
 <p>Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the <em>init</em> method and provide that information there.</p>
 
-<p>Remember, <em>Slogger</em> is designed so that all public public properties for a <em>Slogger</em> instance can be modified at runtime, without having to worry about state.</p>
+<p><em>Slogger</em> is designed so that all public public properties for a <em>Slogger</em> instance can be modified at runtime, without having to worry about its internal state.</p>
 <a href='#performance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='performance'>Performance</h2>
 
-<p>Here&rsquo;s some performance timing for logging calls with the release build:</p>
+<p>Here&rsquo;s some initial performance timing for logging calls with a release build (as of version 1.0):</p>
 
 <table><thead>
 <tr>
@@ -382,6 +389,33 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
 <td>718µs</td>
 </tr>
 </tbody></table>
+<a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
+
+<p>Here&rsquo;s how you can check it out:</p>
+
+<table><thead>
+<tr>
+<th>Means</th>
+<th>Status</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Github</td>
+<td>Supported</td>
+<td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
+</tr>
+<tr>
+<td>Carthage</td>
+<td>In process</td>
+<td></td>
+</tr>
+<tr>
+<td>Cocoapods</td>
+<td>In process</td>
+<td>Not a fan of invasive development tools, but it&rsquo;s popular</td>
+</tr>
+</tbody></table>
 <a href='#feedback' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='feedback'>Feedback</h2>
 
 <p>Please do use the issues section on Github to raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute (generators, destinations, etc.), feel free to discuss it in the issues section and/or issue a pull request.</p>
@@ -391,7 +425,7 @@ let log = Slogger&lt;NoCategories&gt;(defaultLevel: .Warning)
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-29)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-31)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

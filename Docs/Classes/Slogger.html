@@ -153,9 +153,9 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger12currentLevelOS_5Level"></a>
-                    <a name="//apple_ref/swift/Property/currentLevel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger12currentLevelOS_5Level">currentLevel</a>
+                    <a name="/s:vC7Slogger7Slogger11activeLevelOS_5Level"></a>
+                    <a name="//apple_ref/swift/Property/activeLevel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger11activeLevelOS_5Level">activeLevel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -170,7 +170,7 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">currentLevel</span> <span class="p">:</span> <span class="kt">Level</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">activeLevel</span> <span class="p">:</span> <span class="kt">Level</span></code></pre>
 
                         </div>
                       </div>
@@ -246,7 +246,7 @@ is free to choose to ignore details that are irrelevant for that generator.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A dictionary of category  to level associations.  If a value exists for a given category, that level will be used
-for all logging sites that specify that category, instead of the currentLevel.</p>
+for all logging sites that specify that category, instead of the activeLevel.</p>
 
                       </div>
                       <div class="declaration">
@@ -320,9 +320,9 @@ for all logging sites that specify that category, instead of the currentLevel.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
+                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS"></a>
                     <a name="//apple_ref/swift/Property/defaultGenerator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8overrideSb8categoryGSqP__5levelOS_5Level8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">defaultGenerator</a>
+                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_SS">defaultGenerator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -343,7 +343,7 @@ for all logging sites that specify that category, instead of the currentLevel.</
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="k">override</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">details</span><span class="p">,</span> <span class="n">dateFormatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="k">override</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">details</span><span class="p">,</span> <span class="n">dateFormatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span></code></pre>
 
                         </div>
                       </div>
@@ -478,7 +478,7 @@ for all logging sites that specify that category, instead of the currentLevel.</
                               </td>
                               <td>
                                 <div>
-                                  <p>Sets the &lsquo;currentLevel&rsquo; property to this value.</p>
+                                  <p>Sets the &lsquo;activeLevel&rsquo; property to this value.</p>
 
                                 </div>
                               </td>
@@ -529,9 +529,9 @@ for all logging sites that specify that category, instead of the currentLevel.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger18canLogWithOverrideuRq_S_15SloggerCategory_FGS0_q__FTSb8categoryGSqq__5levelOS_5Level_Sb"></a>
-                    <a name="//apple_ref/swift/Method/canLogWithOverride(_:category:level:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger18canLogWithOverrideuRq_S_15SloggerCategory_FGS0_q__FTSb8categoryGSqq__5levelOS_5Level_Sb">canLogWithOverride(_:category:level:)</a>
+                    <a name="/s:FC7Slogger7Slogger6canLoguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8categoryGSqq__5levelS2__Sb"></a>
+                    <a name="//apple_ref/swift/Method/canLog(override:category:level:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger6canLoguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8categoryGSqq__5levelS2__Sb">canLog(override:category:level:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -540,14 +540,15 @@ for all logging sites that specify that category, instead of the currentLevel.</
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The internal function used to determine if an event can be logged.  It&rsquo;s provided to allow for special use-cases,
-but shouldn&rsquo;t be needed at logging sites since the message closure is only evaluated if this returns to true.</p>
+but shouldn&rsquo;t be needed at logging sites since the message closure is only evaluated if this returns <em>true</em>.
+The order of the parameters designates their precedence in evaluating the logging conidition.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">canLogWithOverride</span> <span class="p">(</span><span class="nv">override</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">canLog</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?,</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -563,7 +564,7 @@ but shouldn&rsquo;t be needed at logging sites since the message closure is only
                               </td>
                               <td>
                                 <div>
-                                  <p>If it is true, this function will return true, regardless of log level.</p>
+                                  <p>If it is not nil, it will be used exclusively to determine if logging should proceeed.</p>
 
                                 </div>
                               </td>
@@ -589,7 +590,7 @@ but shouldn&rsquo;t be needed at logging sites since the message closure is only
                               </td>
                               <td>
                                 <div>
-                                  <p>The value of the &lsquo;currentLevel&rsquo; property.</p>
+                                  <p>The default level of the logging site.</p>
 
                                 </div>
                               </td>
@@ -610,7 +611,7 @@ but shouldn&rsquo;t be needed at logging sites since the message closure is only
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-29)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-31)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

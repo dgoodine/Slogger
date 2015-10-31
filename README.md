@@ -12,14 +12,15 @@ Version | Status | Comments
 - Add *Carthage* support.
 - Make docset
 
-## Why Another Swift logger?
+## Why Another Swift Logging Framework?
 
-When I started doing serious Swift development, I naturally looked around for a logging framework.  I found *XCGLogger* by Dave Wood @DaveWoodCom (https://github.com/DaveWoodCom/XCGLogger).  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺
+When I started doing serious Swift development, I naturally looked around for a logging framework.  I found *XCGLogger* by Dave Wood @DaveWoodCom (https://github.com/DaveWoodCom/XCGLogger).  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺🍺🍺
 
-*Slogger* uses much the same approach and identical function signatures as *XCGLogger*, so it can be easily switched with *XCGLogger* without modifying existing logging sites.  If you want to try it as an alternative, it's should be relatively easy.  Be sure to check the **Advanced Features** section below to see why I decided to go this route.
+*Slogger* uses much the same approach and identical function signatures as *XCGLogger*, so they are interchangeable without modifying existing logging sites. Be sure to check the **Advanced Features** section below – particularly *Radioactive Logging* and *Categories* – to see why I decided to go this route.
 
 ## General Info
 
+### Logging Levels
 The typical logger levels are supported:
 
 	public enum Level : Int, Comparable {
@@ -29,14 +30,22 @@ The typical logger levels are supported:
 	    return [None, Severe, Error, Warning, Info, Debug, Verbose]
 	  }
 	}
+	
+The order of the levels is higher-priority first. Thus the threshold is evaluated using the *<=* operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information n the *override* and *category* parameters.)
 
-Each log level has autoclosure and noescape trailing closure implementations, so the following are both valid forms:
+	  public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
+	    if override != nil {
+	      return level <= override
+	    }
 
-	log.debug("Enter")
-	log.debug() { "Enter" }
+	    if category != nil, let categoryLevel = categories[category!] {
+	      return level <= categoryLevel
+	    }
 
-By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site.
+		return level <= activeLevel
+	  }
 
+### Creating a *Slogger* Instance
 Setting up a logger can be as simple as one line of code:
 
 	let log = Slogger<NoCategories>(defaultLevel: .Debug)
@@ -52,6 +61,14 @@ And you'll likely want to tailor your build for debug/release:
 The *Slogger* class is generic to support categories, as explained below.
 
 The public interface documented in the headers.  See the Docs directory for an HTML-based version.  At some point there will be a docset available.
+
+### Logging Site Functions
+Each log level has autoclosure and noescape trailing closure implementations, so the following are both valid forms:
+
+	log.debug("Enter")
+	log.debug() { "Enter" }
+
+By necessity, the function parameters include defaulted parameters to capture the source code information at the logging site..
 
 ## Advanced Features
 
@@ -89,10 +106,20 @@ ANSI | Coming Soon™
 ### Configurable Colormaps
 Make your own color map for mapping *Level* to color in a platform- and decorator-independent way.
 
-### Radioactive Tracing
-Radioactive tracing allows logging sites to execute based on a boolean *override* value, in addition to the logging level.  If the *override* argument at a logging site is *true*, the event is logged, regardless of the log level.  If the argument is *false*, log-level checking continues as usual.
+### Radioactive Logging
+Radioactive logging allows logging to execute based on evaluation of an optional *override* value at logging sites.  If the *override* value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.
 
-One use-case would be where you have a *Request* object base class in a services implementation.  You could define a boolean *trace* property, defaulting to *false*, and in your code that processes the request, you would provide the value of *trace* as the *override* argument at the logging site.  If a particular request is causing a problem (but tons of them are being processed), you can set the *trace* flag for only that request, causing logging sites for all levels to be logged.
+As an example, imagine you have a *Request* object base class in a services implementation.  You could define a *logOverride* property of type *Level*, defaulting to *nil*. In the service code that processes requests, you would then provide the value of the *logOverride* property of requests as the *override* parameter at all logging sites.  This would cause any non-nil value in requests being processed to be used to override logging for the service.
+
+As a use-case, if you had a service that was processing tons of request, but a specific one was failing in a subtle way, you could use the following procedure to get more information for just that request, as follows:
+
+1. Add code to set a *logOverride* value (typically .Verbose) where the request is created
+1. Set the *activeLevel* property in the log instance to *.None*
+1. Run your code
+
+You would then see logging for *only* that specific request, at whatever level you specified as the override.  This allows you to focus diagnosis on a particular object as it flows through the system, rather than getting a firehose of logging information for requests that you don't care about if you were to simply set the *activeLevel* property to a higher value.
+
+This procedure can be done by simply modifying your code at the site of creation of the request, or it can be done by setting a breakpoint at runtime and using the debugger to modify the properties.
 
 ### Categories
 In addition to the two convenience functions for each level mentioned above, logging sites allow a *Category* to also be passed to the logging function.  While a category could be any type conforming to the *Hashable* protocol, you would typically define an *enum* for type safety.

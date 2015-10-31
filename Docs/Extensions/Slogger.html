@@ -160,9 +160,9 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/severe(_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_">severe(_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">severe(_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,7 +172,7 @@ middle of heaps of calls by setting a higher, more verbose debug level in a func
                       <div class="abstract">
                         <p>Log a <em>severe</em> level event.  The first arugment is an @autoclosure returning the message string.
 This logging site has no category.
-- Parameter override: If <em>true</em> it will cause the event to be logged regardless of level evaluation.  Detaults to <em>false</em>.
+- Parameter override: If not nil, will be used first to determine whether logging should proceed.  Defaults to <em>nil</em>.
 - Parameter function: The function within which the logging site is contained.  It should remain as the default.
 - Parameter file: The file within which the logging site is contained.  It should remain as the default.
 - Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
@@ -182,7 +182,7 @@ This logging site has no category.
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="kd">@autoclosure</span>  <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -198,7 +198,7 @@ This logging site has no category.
                               </td>
                               <td>
                                 <div>
-                                  <p>If  it will cause the event to be logged regardless of level evaluation.  Detaults to .</p>
+                                  <p>If not nil, will be used first to determine whether logging should proceed.  Defaults to .</p>
 
                                 </div>
                               </td>
@@ -251,9 +251,9 @@ This logging site has no category.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/severe(_:_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_">severe(_:_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">severe(_:_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -264,7 +264,7 @@ This logging site has no category.
                         <p>Log a <em>severe</em> level event.
 The first argument is the category of the logging site.
 The second arugment is an @autoclosure returning the message string.
-- Parameter override: If <em>true</em> it will cause the event to be logged regardless of level evaluation.  Detaults to <em>false</em>
+- Parameter override: If not nil, will be used first to determine whether logging should proceed.  Defaults to <em>nil</em>.
 - Parameter function: The function within which the logging site is contained.  It should remain as the default.
 - Parameter file: The file within which the logging site is contained.  It should remain as the default.
 - Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
@@ -274,7 +274,7 @@ The second arugment is an @autoclosure returning the message string.
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="kd">@autoclosure</span> <span class="n">_</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -290,7 +290,7 @@ The second arugment is an @autoclosure returning the message string.
                               </td>
                               <td>
                                 <div>
-                                  <p>If  it will cause the event to be logged regardless of level evaluation.  Detaults to </p>
+                                  <p>If not nil, will be used first to determine whether logging should proceed.  Defaults to .</p>
 
                                 </div>
                               </td>
@@ -343,9 +343,9 @@ The second arugment is an @autoclosure returning the message string.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/severe(_:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_">severe(_:function:file:line:closure:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">severe(_:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -356,7 +356,7 @@ The second arugment is an @autoclosure returning the message string.
                         <p>Log a <em>severe</em> level event.
 The last argument is a trailing @noescape closure that produces the message string.
 This logging site has no category.
-- Parameter override: If <em>true</em> it will cause the event to be logged regardless of level evaluation.  Detaults to <em>false</em>
+- Parameter override: If not nil, will be used first to determine whether logging should proceed.  Defaults to <em>nil</em>.
 - Parameter function: The function within which the logging site is contained.  It should remain as the default.
 - Parameter file: The file within which the logging site is contained.  It should remain as the default.
 - Parameter line: The line in the file of the logging site.  It should remain as the default.</p>
@@ -366,7 +366,7 @@ This logging site has no category.
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="nv">override</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -382,7 +382,7 @@ This logging site has no category.
                               </td>
                               <td>
                                 <div>
-                                  <p>If  it will cause the event to be logged regardless of level evaluation.  Detaults to </p>
+                                  <p>If not nil, will be used first to determine whether logging should proceed.  Defaults to .</p>
 
                                 </div>
                               </td>
@@ -435,9 +435,9 @@ This logging site has no category.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/severe(_:override:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_">severe(_:override:function:file:line:closure:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger6severeuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">severe(_:override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -458,7 +458,7 @@ The last argument is a trailing @noescape closure that produces the message stri
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">severe</span> <span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FUNCTION__</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">,</span> <span class="kd">@noescape</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -538,9 +538,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/error(_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_">error(_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">error(_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -565,9 +565,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/error(_:_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_">error(_:_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">error(_:_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -592,9 +592,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
-                    <a name="//apple_ref/swift/Method/error(_:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_">error(_:function:file:line:closure:)</a>
+                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/error(override:function:file:line:closure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">error(override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -619,9 +619,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/error(_:override:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_">error(_:override:function:file:line:closure:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5erroruRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">error(_:override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -657,9 +657,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/warning(_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_">warning(_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">warning(_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -684,9 +684,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/warning(_:_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_">warning(_:_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">warning(_:_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -711,9 +711,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
-                    <a name="//apple_ref/swift/Method/warning(_:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_">warning(_:function:file:line:closure:)</a>
+                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/warning(override:function:file:line:closure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">warning(override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -738,9 +738,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/warning(_:override:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_">warning(_:override:function:file:line:closure:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7warninguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">warning(_:override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -776,9 +776,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/info(_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_">info(_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">info(_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -803,9 +803,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/info(_:_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_">info(_:_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">info(_:_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -830,9 +830,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
-                    <a name="//apple_ref/swift/Method/info(_:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_">info(_:function:file:line:closure:)</a>
+                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/info(override:function:file:line:closure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">info(override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -857,9 +857,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/info(_:override:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_">info(_:override:function:file:line:closure:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger4infouRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">info(_:override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -895,9 +895,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/debug(_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_">debug(_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">debug(_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -922,9 +922,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/debug(_:_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_">debug(_:_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">debug(_:_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -949,9 +949,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
-                    <a name="//apple_ref/swift/Method/debug(_:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSi7closureFT_SS_T_">debug(_:function:file:line:closure:)</a>
+                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/debug(override:function:file:line:closure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">debug(override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -976,9 +976,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/debug(_:override:function:file:line:closure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSi7closureFT_SS_T_">debug(_:override:function:file:line:closure:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger5debuguRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSi7closureFT_SS_T_">debug(_:override:function:file:line:closure:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1014,9 +1014,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/verbose(_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideSb8functionSS4fileSS4lineSi_T_">verbose(_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTKT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">verbose(_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1041,9 +1041,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_"></a>
                     <a name="//apple_ref/swift/Method/verbose(_:_:override:function:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideSb8functionSS4fileSS4lineSi_T_">verbose(_:_:override:function:file:line:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__KT_SS8overrideGSqOS_5Level_8functionSS4fileSS4lineSi_T_">verbose(_:_:override:function:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1068,9 +1068,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSiFT_SS_T_"></a>
-                    <a name="//apple_ref/swift/Method/verbose(_:function:file:line:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTSb8functionSS4fileSS4lineSiFT_SS_T_">verbose(_:function:file:line:_:)</a>
+                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_"></a>
+                    <a name="//apple_ref/swift/Method/verbose(override:function:file:line:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_">verbose(override:function:file:line:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1095,9 +1095,9 @@ The last argument is a trailing @noescape closure that produces the message stri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSiFT_SS_T_"></a>
+                    <a name="/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_"></a>
                     <a name="//apple_ref/swift/Method/verbose(_:override:function:file:line:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideSb8functionSS4fileSS4lineSiFT_SS_T_">verbose(_:override:function:file:line:_:)</a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger7verboseuRq_S_15SloggerCategory_FGS0_q__FTGSqq__8overrideGSqOS_5Level_8functionSS4fileSS4lineSiFT_SS_T_">verbose(_:override:function:file:line:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1124,7 +1124,7 @@ The last argument is a trailing @noescape closure that produces the message stri
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-29)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-10-31)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
