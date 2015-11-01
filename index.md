@@ -1,17 +1,6 @@
 # Slogger
 A simple, fast and flexible logging framework for Swift on all Apple platforms.
 
-## Version History
-
-Version | Status | Comments
---- | --- | ---
-1.0 | In Progress | Finishing up for initial release
-
-## TODO
-- Finish FileDestination (*currently not supported*)
-- Add *Carthage* support.
-- Make docset
-
 ## Why Another Swift Logging Framework?
 
 When I started doing serious Swift development, I naturally looked around for a logging framework.  I found *XCGLogger* by Dave Wood @DaveWoodCom (https://github.com/DaveWoodCom/XCGLogger).  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺🍺🍺
@@ -218,6 +207,3 @@ Cocoapods | In process | Not a fan of invasive development tools, but it's popul
 Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.
 
 ***Happy logging!***
-
-
-
