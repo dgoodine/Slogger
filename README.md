@@ -1,5 +1,5 @@
 # Slogger
-A simple, fast and highly-customizable logging framework for Swift on all Apple platforms.
+A simple, fast and flexible logging framework for Swift on all Apple platforms.
 
 ## Version History
 
