@@ -222,7 +222,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
     self.level = defaultLevel
     self.dateFormatter = df!
     if let details = details {
-      self.details = details
+      self._details = details
     }
 
     self.generator = defaultGenerator
@@ -315,9 +315,13 @@ public class Slogger <T: SloggerCategory> : NSObject {
   // MARK: Private
   func logInternal (@noescape closure closure: LogClosure, category: T?, override: Level?, level: Level, function: String, file: String, line: Int) {
 
+    guard destinations.count > 0 else {
+      return
+    }
+
     guard canLog(override: override, category: category, level: level) else {
       misses = misses &+ 1
-      return;
+      return
     }
 
     hits = hits &+ 1

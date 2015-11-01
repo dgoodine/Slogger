@@ -20,10 +20,10 @@ enum TestCategory : String, SloggerCategory {
   static let allValues = [First, Second]
 }
 
-class TestLogger : Slogger<TestCategory> {
-  init (destination : Destination) {
-    super.init(defaultLevel: Level.Info)
-    destinations.append(destination)
+class TestLogger : Slogger<TestCategory>
+{
+  init() {
+    super.init(defaultLevel: .Info)
   }
 }
 
@@ -36,7 +36,7 @@ let log = Slogger<NoCategories>(defaultLevel: .Warning)
 #endif
 
 class SloggerTests: XCTestCase {
-  let log = TestLogger(destination: testDestination)
+  let log = TestLogger()
 
   override func setUp() {
     super.setUp()
