@@ -31,17 +31,17 @@ The typical logger levels are supported:
 	
 The order of the levels is higher-priority first. Thus the threshold is evaluated using the *<=* operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information on the *override* and *category* parameters.)
 
-    public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
-      if override != nil {
-        return (override == .None) ? false : override <= level
-      }
+	public func canLog (override override: Level?, category: T?, siteLevel: Level) -> Bool {
+	  if override != nil {
+	    return (override == .None) ? false : siteLevel <= override
+	  }
 
-      if category != nil, let categoryLevel = categories[category!] {
-        return categoryLevel <= level
-      }
+	  if category != nil, let categoryLevel = categories[category!] {
+	    return siteLevel <= categoryLevel
+	  }
 
-      return self.level <= level
-    }
+	  return siteLevel <= self.level
+	}
 	  
 Note that the exception that specifying an *override* value of *.None* disables logging for the logging site.
 
