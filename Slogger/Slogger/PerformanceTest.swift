@@ -62,10 +62,10 @@ public class PerformanceTest {
   /// Test Function
   public func test () {
     testWithDestinations(nil, 100000, .Verbose)
-    testWithDestinations(MemoryDestination(), 100000, .Severe)
-    testWithDestinations(MemoryDestination(), 100000, .Verbose)
-    testWithDestinations(ConsoleDestination(), 1000, .Severe)
-    testWithDestinations(ConsoleDestination(), 1000, .Verbose)
+    testWithDestinations(MemoryDestination(), 10000, .Severe)
+    testWithDestinations(MemoryDestination(), 10000, .Verbose)
+    testWithDestinations(ConsoleDestination(), 10000, .Severe)
+    testWithDestinations(ConsoleDestination(), 10000, .Verbose)
 
     print("\nMarkdown table output:\n")
     print("Device | Destinations | Level | Can Log | log.Debug(.Only, \"Message\")")
@@ -73,6 +73,7 @@ public class PerformanceTest {
     for mdString in mdStrings {
       print(mdString)
     }
+    print("")
   }
 
   /// Private test implementation.

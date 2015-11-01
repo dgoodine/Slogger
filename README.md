@@ -189,22 +189,21 @@ Creating your logger as a top-level, global variable gives you convenient access
 ## Performance
 Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the *PerformanceTest* class and *SloggerPerformanceIOS* project for details.  (The performance of *Slogger* for Mac OS X applications should be identical to that of the simulator.)
 
-Device | Destinations | Level | Can Log | log.Debug(.Only, "Message")
+Destinations | Level | Can Log | Simulator | iPhone 6 
 --- | --- | --- | --- | ---
-Simulator | [] | Verbose | true | 52ns
-Simulator | [MemoryDestination] | Severe | false | 361ns
-Simulator | [MemoryDestination] | Verbose | true | 28µs
-Simulator | [ConsoleDestination] | Severe | false | 409ns
-Simulator | [ConsoleDestination] | Verbose | true | 304µs
-iPhone 6 | [] | Verbose | true | 96ns
-iPhone 6 | [MemoryDestination] | Severe | false | 988ns
-iPhone 6 | [MemoryDestination] | Verbose | true | 66µs
-iPhone 6 | [ConsoleDestination] | Severe | false | 1µs
-iPhone 6 | [ConsoleDestination] | Verbose | true | 566µs
+[]                   | Verbose | true  | 53ns  | 108ns
+[MemoryDestination]  | Severe  | false | 374ns | 1µs
+[MemoryDestination]  | Verbose | true  | 3µs   | 7µs
+[ConsoleDestination] | Severe  | false | 370ns | 1µs
+[ConsoleDestination] | Verbose | true  | 4µs   | 10µs
 
-From looking at the timing, if you want to completely turn off logging in the most efficient way, set the *destinations* property to an empty array.  This avoids even performing the level threshold test.
+It's clear from the timing that if you want to completely turn off logging in the most efficient way, set the *destinations* property to an empty array.  This avoids even performing the level threshold test.
 
-Also, if you want to perform these tests yourself, you'll need to make sure the "Debug exectuable" option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.
+It should be noted that the timing for *Can Log* cases does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's @noescape).  The rest of the work is done via dispatch_async to the main thread.
+
+***I am planning to update the implementation to use a separate thread with its own dispatch queue to remove even that overhead from the main thread.***
+
+If you want to perform these tests yourself, you'll need to make sure the "Debug exectuable" option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.
 
 ## How To Get it
 Here's how you can get *Slogger* if you want to give it a try:

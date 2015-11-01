@@ -24,6 +24,7 @@ class TestLogger : Slogger<TestCategory>
 {
   init() {
     super.init(defaultLevel: .Info)
+    self.asynchronous = false
   }
 }
 

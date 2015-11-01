@@ -202,6 +202,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
   /// Number of events that weren't logged due to logging threshold.
   public var misses : UInt64 = 0
 
+  /// Used to turn off asynchronous operation for unit testing.
+  var asynchronous = true
+
   // MARK: Initialization
   /**
   The default initializer.
@@ -325,32 +328,39 @@ public class Slogger <T: SloggerCategory> : NSObject {
       return
     }
 
-    hits = hits &+ 1
-
     let message = closure()
-    var defaultString : String? = nil
+    let codeBlock = {
+      self.hits = self.hits &+ 1
 
-    for dest in destinations {
-      let string : String?
-      if let gen = dest.generator {
-        string = gen(message: message, category: category, override: override, level: level, function: function,
-          file: file, line: line, details: details, dateFormatter: dateFormatter)
-      }
-      else if defaultString != nil {
-        string = defaultString!
-      }
-      else {
-        string = generator(message: message, category: category, override: override, level: level, function: function,
-          file: file, line: line, details: details, dateFormatter: dateFormatter)
-        defaultString = string
-      }
+      var defaultString : String? = nil
 
-      if let string = string {
-        dest.logString(string, level: level)
+      for dest in self.destinations {
+        let string : String?
+        if let gen = dest.generator {
+          string = gen(message: message, category: category, override: override, level: level, function: function,
+            file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
+        }
+        else if defaultString != nil {
+          string = defaultString!
+        }
+        else {
+          string = self.generator(message: message, category: category, override: override, level: level, function: function,
+            file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
+          defaultString = string
+        }
+
+        if let string = string {
+          dest.logString(string, level: level)
+        }
       }
     }
-  }
 
+    if (asynchronous) {
+      dispatch_async(dispatch_get_main_queue(), codeBlock)
+    } else {
+      codeBlock()
+    }
+  }
 }
 
 // MARK: - Log site functions

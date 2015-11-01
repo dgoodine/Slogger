@@ -427,88 +427,57 @@ log.none() { "Enter" }
 
 <table><thead>
 <tr>
-<th>Device</th>
 <th>Destinations</th>
 <th>Level</th>
 <th>Can Log</th>
-<th>log.Debug(.Only, <q>Message</q>)</th>
+<th>Simulator</th>
+<th>iPhone 6</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Simulator</td>
 <td>[]</td>
 <td>Verbose</td>
 <td>true</td>
-<td>52ns</td>
+<td>53ns</td>
+<td>108ns</td>
 </tr>
 <tr>
-<td>Simulator</td>
 <td>[MemoryDestination]</td>
 <td>Severe</td>
 <td>false</td>
-<td>361ns</td>
-</tr>
-<tr>
-<td>Simulator</td>
-<td>[MemoryDestination]</td>
-<td>Verbose</td>
-<td>true</td>
-<td>28µs</td>
-</tr>
-<tr>
-<td>Simulator</td>
-<td>[ConsoleDestination]</td>
-<td>Severe</td>
-<td>false</td>
-<td>409ns</td>
-</tr>
-<tr>
-<td>Simulator</td>
-<td>[ConsoleDestination]</td>
-<td>Verbose</td>
-<td>true</td>
-<td>304µs</td>
-</tr>
-<tr>
-<td>iPhone 6</td>
-<td>[]</td>
-<td>Verbose</td>
-<td>true</td>
-<td>96ns</td>
-</tr>
-<tr>
-<td>iPhone 6</td>
-<td>[MemoryDestination]</td>
-<td>Severe</td>
-<td>false</td>
-<td>988ns</td>
-</tr>
-<tr>
-<td>iPhone 6</td>
-<td>[MemoryDestination]</td>
-<td>Verbose</td>
-<td>true</td>
-<td>66µs</td>
-</tr>
-<tr>
-<td>iPhone 6</td>
-<td>[ConsoleDestination]</td>
-<td>Severe</td>
-<td>false</td>
+<td>374ns</td>
 <td>1µs</td>
 </tr>
 <tr>
-<td>iPhone 6</td>
+<td>[MemoryDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>3µs</td>
+<td>7µs</td>
+</tr>
+<tr>
+<td>[ConsoleDestination]</td>
+<td>Severe</td>
+<td>false</td>
+<td>370ns</td>
+<td>1µs</td>
+</tr>
+<tr>
 <td>[ConsoleDestination]</td>
 <td>Verbose</td>
 <td>true</td>
-<td>566µs</td>
+<td>4µs</td>
+<td>10µs</td>
 </tr>
 </tbody></table>
 
-<p>From looking at the timing, if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
+<p>It&rsquo;s clear from the timing that if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
 
-<p>Also, if you want to perform these tests yourself, you&rsquo;ll need to make sure the <q>Debug exectuable</q> option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.</p>
+<p>It should be noted that the timing for <em>Can Log</em> cases does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it&rsquo;s @noescape).  The rest of the work is done via dispatch_async to the main thread.</p>
+
+<p><strong><em>I am planning to update the implementation to use a separate thread with its own dispatch queue to remove even that overhead from the main thread.</em></strong></p>
+
+<p>If you want to perform these tests yourself, you&rsquo;ll need to make sure the <q>Debug exectuable</q> option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.</p>
 <a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
 
 <p>Here&rsquo;s how you can get <em>Slogger</em> if you want to give it a try:</p>
