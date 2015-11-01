@@ -56,19 +56,18 @@
 <p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
 
 <pre><code>public func canLog (override override: Level?, category: T?, siteLevel: Level) -&gt; Bool {
+  let effectiveLevel : Level
   if override != nil {
-    return (override == .None) ? false : siteLevel &lt;= override
+    effectiveLevel = override!
+  } else if category != nil, let categoryLevel = categories[category!] {
+    effectiveLevel = categoryLevel
+  } else {
+    effectiveLevel = level
   }
 
-  if category != nil, let categoryLevel = categories[category!] {
-    return siteLevel &lt;= categoryLevel
-  }
-
-  return siteLevel &lt;= self.level
+  return effectiveLevel == .None ? false : siteLevel &lt;= effectiveLevel
 }
 </code></pre>
-
-<p>Note that the exception that specifying an <em>override</em> value of <em>.None</em> disables logging for the logging site.</p>
 
 <h3>
 <a id="creating-a-slogger-instance" class="anchor" href="#creating-a-slogger-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a <em>Slogger</em> Instance</h3>
