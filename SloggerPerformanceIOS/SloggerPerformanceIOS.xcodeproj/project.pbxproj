@@ -7,14 +7,59 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A82064121BE658E000296CFF /* Slogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82064091BE658D500296CFF /* Slogger.framework */; };
+		A82064131BE658E000296CFF /* Slogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A82064091BE658D500296CFF /* Slogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A82633261BE2151700293716 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82633251BE2151700293716 /* AppDelegate.swift */; };
 		A82633281BE2151700293716 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82633271BE2151700293716 /* ViewController.swift */; };
 		A826332B1BE2151700293716 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82633291BE2151700293716 /* Main.storyboard */; };
 		A826332D1BE2151700293716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A826332C1BE2151700293716 /* Assets.xcassets */; };
 		A82633301BE2151700293716 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A826332E1BE2151700293716 /* LaunchScreen.storyboard */; };
-		A871B9921BE2300E00503D41 /* Slogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A871B9911BE2300E00503D41 /* Slogger.framework */; };
-		A871B9931BE2300E00503D41 /* Slogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A871B9911BE2300E00503D41 /* Slogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A82064081BE658D500296CFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A83C79D61BD6636800DA9F07;
+			remoteInfo = Slogger;
+		};
+		A820640A1BE658D500296CFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A83C79E01BD6636800DA9F07;
+			remoteInfo = SloggerTests;
+		};
+		A820640C1BE658D500296CFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A85BFC441BDD4622008D1F1E;
+			remoteInfo = SloggerOSX;
+		};
+		A820640E1BE658D500296CFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A85BFC4D1BDD4622008D1F1E;
+			remoteInfo = SloggerOSXTests;
+		};
+		A82064101BE658D500296CFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A85BFC6B1BDD4B63008D1F1E;
+			remoteInfo = SloggerWatch;
+		};
+		A82064141BE658E000296CFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A83C79D51BD6636800DA9F07;
+			remoteInfo = Slogger;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A8067F8B1BE21BDC0052165C /* Embed Frameworks */ = {
@@ -23,7 +68,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A871B9931BE2300E00503D41 /* Slogger.framework in Embed Frameworks */,
+				A82064131BE658E000296CFF /* Slogger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A82064001BE658D500296CFF /* Slogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Slogger.xcodeproj; path = ../Slogger/Slogger.xcodeproj; sourceTree = "<group>"; };
 		A82633221BE2151700293716 /* SloggerPerformanceIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SloggerPerformanceIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82633251BE2151700293716 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A82633271BE2151700293716 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,7 +84,6 @@
 		A826332C1BE2151700293716 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A826332F1BE2151700293716 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82633311BE2151700293716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A871B9911BE2300E00503D41 /* Slogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Slogger.framework; path = "/Users/davidgoodine/Projects/davidgoodine/Slogger/DerivedData/Build/Products/Release-iphoneos/Slogger.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,17 +91,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A871B9921BE2300E00503D41 /* Slogger.framework in Frameworks */,
+				A82064121BE658E000296CFF /* Slogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A82064011BE658D500296CFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A82064091BE658D500296CFF /* Slogger.framework */,
+				A820640B1BE658D500296CFF /* SloggerTests.xctest */,
+				A820640D1BE658D500296CFF /* SloggerOSX.framework */,
+				A820640F1BE658D500296CFF /* SloggerOSXTests.xctest */,
+				A82064111BE658D500296CFF /* SloggerWatch.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A82633191BE2151700293716 = {
 			isa = PBXGroup;
 			children = (
-				A871B9911BE2300E00503D41 /* Slogger.framework */,
+				A82064001BE658D500296CFF /* Slogger.xcodeproj */,
 				A82633241BE2151700293716 /* SloggerPerformanceIOS */,
 				A82633231BE2151700293716 /* Products */,
 			);
@@ -98,6 +155,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A82064151BE658E000296CFF /* PBXTargetDependency */,
 			);
 			name = SloggerPerformanceIOS;
 			productName = SloggerPerformanceIOS;
@@ -130,12 +188,56 @@
 			mainGroup = A82633191BE2151700293716;
 			productRefGroup = A82633231BE2151700293716 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A82064011BE658D500296CFF /* Products */;
+					ProjectRef = A82064001BE658D500296CFF /* Slogger.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A82633211BE2151700293716 /* SloggerPerformanceIOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A82064091BE658D500296CFF /* Slogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Slogger.framework;
+			remoteRef = A82064081BE658D500296CFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A820640B1BE658D500296CFF /* SloggerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SloggerTests.xctest;
+			remoteRef = A820640A1BE658D500296CFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A820640D1BE658D500296CFF /* SloggerOSX.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SloggerOSX.framework;
+			remoteRef = A820640C1BE658D500296CFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A820640F1BE658D500296CFF /* SloggerOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SloggerOSXTests.xctest;
+			remoteRef = A820640E1BE658D500296CFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A82064111BE658D500296CFF /* SloggerWatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SloggerWatch.framework;
+			remoteRef = A82064101BE658D500296CFF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A82633201BE2151700293716 /* Resources */ = {
@@ -161,6 +263,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A82064151BE658E000296CFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Slogger;
+			targetProxy = A82064141BE658E000296CFF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A82633291BE2151700293716 /* Main.storyboard */ = {
@@ -218,7 +328,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -257,7 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -269,6 +379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SloggerPerformanceIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -281,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SloggerPerformanceIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

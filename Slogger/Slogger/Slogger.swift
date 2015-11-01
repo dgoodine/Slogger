@@ -245,14 +245,14 @@ public class Slogger <T: SloggerCategory> : NSObject {
   */
   public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
     if override != nil {
-      return (override == .None) ? false : level <= override
+      return (override == .None) ? false : override <= level
     }
 
     if category != nil, let categoryLevel = categories[category!] {
-      return level <= categoryLevel
+      return categoryLevel <= level
     }
 
-    return level <= self.level
+    return self.level <= level
   }
 
   /// Resets `hits` and `misses` counters.

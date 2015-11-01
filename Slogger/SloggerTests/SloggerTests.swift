@@ -28,15 +28,9 @@ class TestLogger : Slogger<TestCategory>
 }
 
 let testDestination = MemoryDestination()
-
-#if DEBUG
-let log = Slogger<NoCategories>(defaultLevel: .Info)
-#else
-let log = Slogger<NoCategories>(defaultLevel: .Warning)
-#endif
+let log = TestLogger()
 
 class SloggerTests: XCTestCase {
-  let log = TestLogger()
 
   override func setUp() {
     super.setUp()
@@ -61,7 +55,7 @@ class SloggerTests: XCTestCase {
     XCTAssert(last.containsString(" \(level): "), "Incorrect level")
     XCTAssert(last.containsString(": \(message)"), "Incorrect message")
     XCTAssert(last.containsString(" SloggerTests.swift:"), "Incorrect file")
-    XCTAssert(last.containsString(" \(function)"), "Incorrect function")
+    XCTAssert(last.containsString(" \(function) "), "Incorrect function")
     if category == nil {
       XCTAssert(last.containsString(" [] "), "Incorrect function")
     } else {

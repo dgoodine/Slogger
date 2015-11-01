@@ -19,7 +19,7 @@ public typealias ColorSpec = (fg: Color?, bg: Color?)
 
 /**
  A dictionary mapping logging levels to color specs.  If a level is not included in the dictionary,
- it will not be used for decoration.
+ it log messages at that level will not be decorated.
 */
 public typealias ColorMap = [Level : ColorSpec]
 

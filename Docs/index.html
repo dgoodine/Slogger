@@ -169,17 +169,17 @@
 </code></pre>
 
 <p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
-<pre class="highlight plaintext"><code>  public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
-    if override != nil {
-      return (level == .None) ? false : level &lt;= override
-    }
-
-    if category != nil, let categoryLevel = categories[category!] {
-      return level &lt;= categoryLevel
-    }
-
-    return level &lt;= activeLevel
+<pre class="highlight plaintext"><code>public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
+  if override != nil {
+    return (override == .None) ? false : override &lt;= level
   }
+
+  if category != nil, let categoryLevel = categories[category!] {
+    return categoryLevel &lt;= level
+  }
+
+  return self.level &lt;= level
+}
 </code></pre>
 
 <p>Note that the exception that specifying an <em>override</em> value of <em>.None</em> disables logging for the logging site.</p>
@@ -444,7 +444,7 @@ log.none() { "Enter" }
 <td>Simulator</td>
 <td>[]</td>
 <td>.Severe</td>
-<td>363ns</td>
+<td>51ns</td>
 </tr>
 <tr>
 <td>Simulator</td>

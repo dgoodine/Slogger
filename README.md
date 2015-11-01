@@ -31,17 +31,17 @@ The typical logger levels are supported:
 	
 The order of the levels is higher-priority first. Thus the threshold is evaluated using the *<=* operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information on the *override* and *category* parameters.)
 
-	  public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
-	    if override != nil {
-	      return (level == .None) ? false : level <= override
-	    }
+    public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
+      if override != nil {
+        return (override == .None) ? false : override <= level
+      }
 
-	    if category != nil, let categoryLevel = categories[category!] {
-	      return level <= categoryLevel
-	    }
+      if category != nil, let categoryLevel = categories[category!] {
+        return categoryLevel <= level
+      }
 
-		return level <= activeLevel
-	  }
+      return self.level <= level
+    }
 	  
 Note that the exception that specifying an *override* value of *.None* disables logging for the logging site.
 
@@ -193,7 +193,7 @@ Here are initial performance figures for logging calls with a release build (as 
 Device | Destinations | Level | log.Debug(.Only, "Message")
 --- | --- | --- | ---
 Simulator | [MemoryDestination] | .None | 363ns
-Simulator | [] | .Severe | 363ns
+Simulator | [] | .Severe | 51ns
 Simulator | [MemoryDestination] | .Severe | 28µs
 Simulator | [ConsoleDestination] | .Severe | 240µs
 iPhone 6 | [MemoryDestination] | .None | 921ns

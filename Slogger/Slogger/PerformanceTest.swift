@@ -21,10 +21,10 @@ public class PerformanceTest {
 
   /// Test Function
   public func test () {
+    testWithDestinations(ConsoleDestination(), 1000, .Severe)
     testWithDestinations(MemoryDestination(), 100000, .None)
-    testWithDestinations(nil, 1000000, .Verbose)
-    testWithDestinations(MemoryDestination(), 100000, .Verbose)
-    testWithDestinations(ConsoleDestination(), 1000, .Verbose)
+    testWithDestinations(nil, 1000000, .Severe)
+    testWithDestinations(MemoryDestination(), 100000, .Severe)
   }
 
   /// Private test implementation.
