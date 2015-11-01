@@ -243,16 +243,16 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   - Returns: true of the logging of the event should proceed, false if it shouldn't
   */
-  public func canLog (override override: Level?, category: T?, level: Level) -> Bool {
+  public func canLog (override override: Level?, category: T?, siteLevel: Level) -> Bool {
     if override != nil {
-      return (override == .None) ? false : override <= level
+      return (override == .None) ? false : siteLevel <= override
     }
 
     if category != nil, let categoryLevel = categories[category!] {
-      return categoryLevel <= level
+      return siteLevel <= categoryLevel
     }
 
-    return self.level <= level
+    return siteLevel <= self.level
   }
 
   /// Resets `hits` and `misses` counters.
@@ -319,7 +319,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
       return
     }
 
-    guard canLog(override: override, category: category, level: level) else {
+    guard canLog(override: override, category: category, siteLevel: level) else {
       misses = misses &+ 1
       return
     }
