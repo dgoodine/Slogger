@@ -218,6 +218,3 @@ Cocoapods | In process | Not a fan of invasive development tools, but it's popul
 Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.
 
 ***Happy logging!***
-
-
-
