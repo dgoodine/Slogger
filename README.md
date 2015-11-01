@@ -88,7 +88,7 @@ generator | Generator | Current generator.  Defaults to *defaultGenerator*.
 destinations | [Destination] | Destinations this logger will write to.  Defaults to [*consoleDestination*].
 colorMap | ColorMap | The current colorMap.
 defaultGenerator | Generator | Default generator implementation.
-consoleDestination | Destination | The default console implementation with an XCodeColors/ANSI decorator.
+consoleDestination | Destination | The default console implementation with an XcodeColors/ANSI decorator.
 hits | UInt64 | Number of events logged.
 misses | UInt64 | Number of events not logged due to logging threshold evaluation.
 
@@ -133,14 +133,14 @@ The default value includes all available *Detail* values, in a typical order:
 The inclusion of the message at the logging site is implicit.
 
 ### Configurable Decorators
-You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use it to decorate your file logs too.
+You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XcodeColors uses ANSI standard format, so you can use it to decorate your file logs too.
 
 Decorators | Status | Info
 --- | --- | ---
-XCodeColors (ANSI) | Supported | Get [*XCodeColors*](https://github.com/robbiehanson/XcodeColors).
+XcodeColors (ANSI) | Supported | Get [*XcodeColors*](https://github.com/robbiehanson/XcodeColors).
 
 ### Configurable Colormaps
-Make your own color map to customize log line color by *Level* in a platform- and decorator-independent way.  See the *ColorMap* type for more information.  (Note: You can use the *XCodeColorsDecorator* class yourself for non-log use in your console without writing your own.)
+Make your own color map to customize log line color by *Level* in a platform- and decorator-independent way.  See the *ColorMap* type for more information.  (Note: You can use the *XcodeColorsDecorator* class yourself for non-log use in your console without writing your own.)
 
 ### Radioactive Logging
 Radioactive logging allows logging to execute based on evaluation of an optional *override* value at logging sites.  If the *override* value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.
