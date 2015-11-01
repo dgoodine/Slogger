@@ -170,19 +170,18 @@
 
 <p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
 <pre class="highlight plaintext"><code>public func canLog (override override: Level?, category: T?, siteLevel: Level) -&gt; Bool {
+  let effectiveLevel : Level
   if override != nil {
-    return (override == .None) ? false : siteLevel &lt;= override
+    effectiveLevel = override!
+  } else if category != nil, let categoryLevel = categories[category!] {
+    effectiveLevel = categoryLevel
+  } else {
+    effectiveLevel = level
   }
 
-  if category != nil, let categoryLevel = categories[category!] {
-    return siteLevel &lt;= categoryLevel
-  }
-
-  return siteLevel &lt;= self.level
+  return effectiveLevel == .None ? false : siteLevel &lt;= effectiveLevel
 }
 </code></pre>
-
-<p>Note that the exception that specifying an <em>override</em> value of <em>.None</em> disables logging for the logging site.</p>
 <a href='#creating_a_em_slogger_em_instance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='creating_a_em_slogger_em_instance'>Creating a <em>Slogger</em> Instance</h3>
 
 <p>Setting up a logger can be as simple as one line of code:</p>
@@ -267,7 +266,7 @@ log.none() { "Enter" }
 <tr>
 <td>consoleDestination</td>
 <td>Destination</td>
-<td>The default console implementation with an XCodeColors/ANSI decorator.</td>
+<td>The default console implementation with an XcodeColors/ANSI decorator.</td>
 </tr>
 <tr>
 <td>hits</td>
@@ -358,7 +357,7 @@ log.none() { "Enter" }
 <p>The inclusion of the message at the logging site is implicit.</p>
 <a href='#configurable_decorators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_decorators'>Configurable Decorators</h3>
 
-<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use it to decorate your file logs too.</p>
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XcodeColors uses ANSI standard format, so you can use it to decorate your file logs too.</p>
 
 <table><thead>
 <tr>
@@ -368,14 +367,14 @@ log.none() { "Enter" }
 </tr>
 </thead><tbody>
 <tr>
-<td>XCodeColors (ANSI)</td>
+<td>XcodeColors (ANSI)</td>
 <td>Supported</td>
-<td>Get <a href="https://github.com/robbiehanson/XcodeColors"><em>XCodeColors</em></a>.</td>
+<td>Get <a href="https://github.com/robbiehanson/XcodeColors"><em>XcodeColors</em></a>.</td>
 </tr>
 </tbody></table>
 <a href='#configurable_colormaps' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_colormaps'>Configurable Colormaps</h3>
 
-<p>Make your own color map to customize log line color by <em>Level</em> in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.  (Note: You can use the <em>XCodeColorsDecorator</em> class yourself for non-log use in your console without writing your own.)</p>
+<p>Make your own color map to customize log line color by <em>Level</em> in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.  (Note: You can use the <em>XcodeColorsDecorator</em> class yourself for non-log use in your console without writing your own.)</p>
 <a href='#radioactive_logging' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='radioactive_logging'>Radioactive Logging</h3>
 
 <p>Radioactive logging allows logging to execute based on evaluation of an optional <em>override</em> value at logging sites.  If the <em>override</em> value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.</p>
