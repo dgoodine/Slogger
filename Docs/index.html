@@ -12,7 +12,7 @@
     <a title="Slogger  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (90% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -169,16 +169,16 @@
 </code></pre>
 
 <p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here&rsquo;s the function that&rsquo;s used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
-<pre class="highlight plaintext"><code>public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
+<pre class="highlight plaintext"><code>public func canLog (override override: Level?, category: T?, siteLevel: Level) -&gt; Bool {
   if override != nil {
-    return (override == .None) ? false : override &lt;= level
+    return (override == .None) ? false : siteLevel &lt;= override
   }
 
   if category != nil, let categoryLevel = categories[category!] {
-    return categoryLevel &lt;= level
+    return siteLevel &lt;= categoryLevel
   }
 
-  return self.level &lt;= level
+  return siteLevel &lt;= self.level
 }
 </code></pre>
 
@@ -424,65 +424,92 @@ log.none() { "Enter" }
 <p>Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your <em>Swift</em> code defines a module, you a) don&rsquo;t have to worry about name collisions, and b) you can document your categories and allow other modules to modify its behavior, as described above.</p>
 <a href='#performance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='performance'>Performance</h2>
 
-<p>Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the <em>SloggerPerformanceIOS</em> project for details.  (The performance of <em>Slogger</em> for Mac OS X applications should be identical to that of the simulator.)</p>
+<p>Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the <em>PerformanceTest</em> class and <em>SloggerPerformanceIOS</em> project for details.  (The performance of <em>Slogger</em> for Mac OS X applications should be identical to that of the simulator.)</p>
 
 <table><thead>
 <tr>
 <th>Device</th>
 <th>Destinations</th>
 <th>Level</th>
+<th>Can Log</th>
 <th>log.Debug(.Only, <q>Message</q>)</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Simulator</td>
-<td>[MemoryDestination]</td>
-<td>.None</td>
-<td>363ns</td>
-</tr>
-<tr>
-<td>Simulator</td>
 <td>[]</td>
-<td>.Severe</td>
-<td>51ns</td>
+<td>Verbose</td>
+<td>true</td>
+<td>52ns</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[MemoryDestination]</td>
-<td>.Severe</td>
+<td>Severe</td>
+<td>false</td>
+<td>361ns</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>[MemoryDestination]</td>
+<td>Verbose</td>
+<td>true</td>
 <td>28µs</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[ConsoleDestination]</td>
-<td>.Severe</td>
-<td>240µs</td>
+<td>Severe</td>
+<td>false</td>
+<td>409ns</td>
 </tr>
 <tr>
-<td>iPhone 6</td>
-<td>[MemoryDestination]</td>
-<td>.None</td>
-<td>921ns</td>
+<td>Simulator</td>
+<td>[ConsoleDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>304µs</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[]</td>
-<td>.Severe</td>
-<td>943ns</td>
+<td>Verbose</td>
+<td>true</td>
+<td>96ns</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[MemoryDestination]</td>
-<td>.Severe</td>
-<td>65µs</td>
+<td>Severe</td>
+<td>false</td>
+<td>988ns</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[MemoryDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>66µs</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[ConsoleDestination]</td>
-<td>.Severe</td>
-<td>718µs</td>
+<td>Severe</td>
+<td>false</td>
+<td>1µs</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[ConsoleDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>566µs</td>
 </tr>
 </tbody></table>
+
+<p>From looking at the timing, if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
+
+<p>Also, if you want to perform these tests yourself, you&rsquo;ll need to make sure the <q>Debug exectuable</q> option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.</p>
 <a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
 
 <p>Here&rsquo;s how you can get <em>Slogger</em> if you want to give it a try:</p>

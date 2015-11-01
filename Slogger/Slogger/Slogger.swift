@@ -46,7 +46,7 @@ public enum Level : Int, Comparable {
   static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
 }
 
-/// Used to implement the Comparable protocol.  The other comparison operators default to using this with modified logic.
+/// This is necessary because Swift doesn't provide it by default for Int-based enume
 public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool {
   return a.rawValue < b.rawValue
 }
@@ -167,7 +167,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
     set {_categories = newValue }
   }
 
-  // The current generator closure.
+  /// The current generator closure.
   public var generator : Generator
 
   // Local Storage
@@ -249,10 +249,10 @@ public class Slogger <T: SloggerCategory> : NSObject {
     }
 
     if category != nil, let categoryLevel = categories[category!] {
-      return siteLevel <= categoryLevel
+      return (categoryLevel == .None) ? false : siteLevel <= categoryLevel
     }
 
-    return siteLevel <= self.level
+    return (self.level == .None) ? false : siteLevel <= self.level
   }
 
   /// Resets `hits` and `misses` counters.

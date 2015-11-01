@@ -5,5 +5,6 @@ jazzy -o ../Docs --swift-version 2.1 -a -c -a "David Goodine" -m "Slogger" -g "h
 rm -rf ../Docs/docsets
 #appledoc -d -n -u --docset-install-path ../Docs -p Slogger -v 1.0 -c "David Goodine" --output ../Docs --company-id "" Slogger
 cd ../
+cat Docs/undocumented.txt
 open Docs/index.html
 

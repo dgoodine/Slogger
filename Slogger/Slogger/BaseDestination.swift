@@ -12,8 +12,14 @@ import Foundation
  Base class implementing the destination protocol.  Subclasses must override *logString* function.
 */
 public class BaseDestination : Destination {
+
+  /// Protocol property
   public var decorator : Decorator?
+
+  /// Protocol property
   public var generator : Generator?
+
+  /// Protocol property
   public var colorMap : ColorMap?
 
   /**

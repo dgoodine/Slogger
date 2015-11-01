@@ -25,7 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let performanceTest = PerformanceTest()
     performanceTest.test()
 
-
+    dispatch_async(dispatch_get_main_queue()) {
+      exit(0)
+    }
 
     return true
   }

@@ -42,7 +42,7 @@ class SloggerTests: XCTestCase {
   }
 
   func checkForMessage (message: String, _ category: TestCategory?, _ override: Level?, _ level: Level, _ function: String,  _ checkResults: Bool) {
-    guard checkResults && log.canLog(override: override, category: category, level: level) else {
+    guard checkResults && log.canLog(override: override, category: category, siteLevel: level) else {
       return
     }
 

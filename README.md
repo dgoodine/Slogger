@@ -188,18 +188,24 @@ Naturally, if you want your logger to have customized values (generators, decora
 Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your *Swift* code defines a module, you a) don't have to worry about name collisions, and b) you can document your categories and allow other modules to modify its behavior, as described above.
 
 ## Performance
-Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the *SloggerPerformanceIOS* project for details.  (The performance of *Slogger* for Mac OS X applications should be identical to that of the simulator.)
+Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the *PerformanceTest* class and *SloggerPerformanceIOS* project for details.  (The performance of *Slogger* for Mac OS X applications should be identical to that of the simulator.)
 
-Device | Destinations | Level | log.Debug(.Only, "Message")
---- | --- | --- | ---
-Simulator | [MemoryDestination] | .None | 363ns
-Simulator | [] | .Severe | 51ns
-Simulator | [MemoryDestination] | .Severe | 28µs
-Simulator | [ConsoleDestination] | .Severe | 240µs
-iPhone 6 | [MemoryDestination] | .None | 921ns
-iPhone 6 | [] | .Severe | 943ns
-iPhone 6 | [MemoryDestination] | .Severe | 65µs
-iPhone 6 | [ConsoleDestination] | .Severe | 718µs
+Device | Destinations | Level | Can Log | log.Debug(.Only, "Message")
+--- | --- | --- | --- | ---
+Simulator | [] | Verbose | true | 52ns
+Simulator | [MemoryDestination] | Severe | false | 361ns
+Simulator | [MemoryDestination] | Verbose | true | 28µs
+Simulator | [ConsoleDestination] | Severe | false | 409ns
+Simulator | [ConsoleDestination] | Verbose | true | 304µs
+iPhone 6 | [] | Verbose | true | 96ns
+iPhone 6 | [MemoryDestination] | Severe | false | 988ns
+iPhone 6 | [MemoryDestination] | Verbose | true | 66µs
+iPhone 6 | [ConsoleDestination] | Severe | false | 1µs
+iPhone 6 | [ConsoleDestination] | Verbose | true | 566µs
+
+From looking at the timing, if you want to completely turn off logging in the most efficient way, set the *destinations* property to an empty array.  This avoids even performing the level threshold test.
+
+Also, if you want to perform these tests yourself, you'll need to make sure the "Debug exectuable" option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.
 
 ## How To Get it
 Here's how you can get *Slogger* if you want to give it a try:

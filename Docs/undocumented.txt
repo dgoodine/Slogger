@@ -1,14 +1,2 @@
 Slogger.swift
 	public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool
-	public var generator : Generator
-XCodeColorsDecorator.swift
-	public struct XCodeColorsDecorator : Decorator
-	public func decorateString(string : String, spec: ColorSpec) -> String
-ConsoleDestination.swift
-	public class ConsoleDestination : BaseDestination
-FileDestination.swift
-	public class FileDestination : BaseDestination
-BaseDestination.swift
-	public var decorator : Decorator?
-	public var generator : Generator?
-	public var colorMap : ColorMap?

@@ -13,7 +13,7 @@
     <a title="Slogger Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (90% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -272,14 +272,14 @@ If you provide an implementation for a protocol, it <strong>MUST</strong> be thr
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The current generator closure.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Slogger</span> <span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">SloggerCategory</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">generator</span> <span class="p">:</span> <span class="kt">Generator</span></code></pre>
 
                         </div>
                       </div>
@@ -492,9 +492,9 @@ If you provide an implementation for a protocol, it <strong>MUST</strong> be thr
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7Slogger6canLoguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8categoryGSqq__5levelS2__Sb"></a>
-                    <a name="//apple_ref/swift/Method/canLog(override:category:level:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7Slogger6canLoguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8categoryGSqq__5levelS2__Sb">canLog(override:category:level:)</a>
+                    <a name="/s:FC7Slogger7Slogger6canLoguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8categoryGSqq__9siteLevelS2__Sb"></a>
+                    <a name="//apple_ref/swift/Method/canLog(override:category:siteLevel:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger6canLoguRq_S_15SloggerCategory_FGS0_q__FT8overrideGSqOS_5Level_8categoryGSqq__9siteLevelS2__Sb">canLog(override:category:siteLevel:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -511,7 +511,7 @@ The order of the parameters designates their precedence in evaluating the loggin
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">canLog</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?,</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">canLog</span> <span class="p">(</span><span class="k">override</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?,</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">siteLevel</span><span class="p">:</span> <span class="kt">Level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A rotating and compressing local file-based destination.
 public class FileDestination : BaseDestination {
 
   // MARK: - Public
@@ -35,12 +36,7 @@ public class FileDestination : BaseDestination {
     super.init(generator: generator, colorMap: colorMap, decorator: decorator)
   }
 
-  /**
-   Protocol implementation – Writes the log entry to the current log file.
-
-   - Parameter string: The line to be logged.
-   - Parameter level: The level provided at the logging site.
-   */
+  /// Protocol implementation
   public override func logString(string: String, level: Level) {
     guard outputStream != nil else {
       return

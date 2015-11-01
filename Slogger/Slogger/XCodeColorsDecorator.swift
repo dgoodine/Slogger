@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Decorator that uses XcodeColors (ANSI) format
 public struct XCodeColorsDecorator : Decorator {
   private let escape = "\u{001b}["
   private let resetFg = "\u{001b}[fg;"
@@ -15,6 +16,7 @@ public struct XCodeColorsDecorator : Decorator {
   private let reset = "\u{001b}[;"
   private let maxColor = 255.0
 
+  /// Protocol implementation
   public func decorateString(string : String, spec: ColorSpec) -> String {
     let fg = spec.fg
     let bg = spec.bg
