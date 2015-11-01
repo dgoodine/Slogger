@@ -7,7 +7,6 @@
     <meta name="description" content="Slogger : A simple, fast and flexible logging framework for Swift">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <script src="scripts.js" type="text/javascript"></script>
 
     <title>Slogger</title>
   </head>
@@ -35,7 +34,7 @@
         <h2>
 <a id="why-another-swift-logging-framework" class="anchor" href="#why-another-swift-logging-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why Another Swift Logging Framework?</h2>
 
-<p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found <em>XCGLogger</em> by Dave Wood <a href="https://github.com/DaveWoodCom" class="user-mention">@DaveWoodCom</a> (<a href="https://github.com/DaveWoodCom/XCGLogger">https://github.com/DaveWoodCom/XCGLogger</a>).  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. <g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji><g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji><g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji></p>
+<p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found <a href="https://github.com/DaveWoodCom/XCGLogger"><em>XCGLogger</em></a> by Dave Wood <a href="https://github.com/DaveWoodCom" class="user-mention">@DaveWoodCom</a>.  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. <g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji><g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji><g-emoji alias="beer" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png">🍺</g-emoji></p>
 
 <p><em>Slogger</em> uses much the same approach and identical function signatures as <em>XCGLogger</em>, so they are interchangeable without modifying existing logging sites. Be sure to check the <strong>Advanced Features</strong> section below – particularly <em>Radioactive Logging</em> and <em>Categories</em> – to see why I decided to go this route.</p>
 
@@ -56,17 +55,17 @@
 
 <p>The order of the levels is higher-priority first. Thus the threshold is evaluated using the <em>&lt;=</em> operator. Here's the function that's used internally to determine if a message should be logged.  (See below for information on the <em>override</em> and <em>category</em> parameters.)</p>
 
-<pre><code>  public func canLog (override override: Level?, category: T?, level: Level) -&gt; Bool {
-    if override != nil {
-      return (level == .None) ? false : level &lt;= override
-    }
-
-    if category != nil, let categoryLevel = categories[category!] {
-      return level &lt;= categoryLevel
-    }
-
-    return level &lt;= activeLevel
+<pre><code>public func canLog (override override: Level?, category: T?, siteLevel: Level) -&gt; Bool {
+  if override != nil {
+    return (override == .None) ? false : siteLevel &lt;= override
   }
+
+  if category != nil, let categoryLevel = categories[category!] {
+    return siteLevel &lt;= categoryLevel
+  }
+
+  return siteLevel &lt;= self.level
+}
 </code></pre>
 
 <p>Note that the exception that specifying an <em>override</em> value of <em>.None</em> disables logging for the logging site.</p>
@@ -166,7 +165,7 @@ log.none() { "Enter" }
 <tr>
 <td>consoleDestination</td>
 <td>Destination</td>
-<td>The default console implementation with an XCodeColors/ANSI decorator.</td>
+<td>The default console implementation with an XcodeColors/ANSI decorator.</td>
 </tr>
 <tr>
 <td>hits</td>
@@ -181,7 +180,7 @@ log.none() { "Enter" }
 </tbody>
 </table>
 
-<p><strong>Important Note</strong>: <em>Slogger</em> instances are inherently thread-safe, as are all supported implementations of <em>Slogger</em> types and protocols.  If you provide an implementation for a protocol, it <strong>MUST</strong> be thread-safe as well.</p>
+<p><strong>Important Note</strong>: <em>Slogger</em> instances are implemented to be thread-safe, as are all supported implementations of <em>Slogger</em> types and protocols.  If you provide an implementation for a protocol, it <strong>MUST</strong> be thread-safe as well.</p>
 
 <h2>
 <a id="advanced-features" class="anchor" href="#advanced-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced Features</h2>
@@ -225,7 +224,7 @@ log.none() { "Enter" }
 
 <p>The default uses the typical pattern:</p>
 
-<pre><code>- [10/25/2015, 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
+<pre><code>- [2015-11-01 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
 </code></pre>
 
 <p>List of supported generators (see the source for details):</p>
@@ -271,12 +270,12 @@ log.none() { "Enter" }
 <pre><code>[.Date, .File, .Function, .Category, .Level]
 </code></pre>
 
-<p>The inclusion of the logging message is implicit.</p>
+<p>The inclusion of the message at the logging site is implicit.</p>
 
 <h3>
 <a id="configurable-decorators" class="anchor" href="#configurable-decorators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configurable Decorators</h3>
 
-<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XCodeColors uses ANSI standard format, so you can use that decorator to decorate your file logs too.  Any command line shell will display them correctly.</p>
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XcodeColors uses ANSI standard format, so you can use it to decorate your file logs too.</p>
 
 <table>
 <thead>
@@ -288,9 +287,9 @@ log.none() { "Enter" }
 </thead>
 <tbody>
 <tr>
-<td>XCodeColors (ANSI)</td>
+<td>XcodeColors (ANSI)</td>
 <td>Supported</td>
-<td>(<a href="https://github.com/robbiehanson/XcodeColors">https://github.com/robbiehanson/XcodeColors</a>)</td>
+<td>Get <a href="https://github.com/robbiehanson/XcodeColors"><em>XcodeColors</em></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -298,7 +297,7 @@ log.none() { "Enter" }
 <h3>
 <a id="configurable-colormaps" class="anchor" href="#configurable-colormaps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configurable Colormaps</h3>
 
-<p>Make your own color map for mapping <em>Level</em> to color in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.</p>
+<p>Make your own color map to customize log line color by <em>Level</em> in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.  (Note: You can use the <em>XcodeColorsDecorator</em> class yourself for non-log use in your console without writing your own.)</p>
 
 <h3>
 <a id="radioactive-logging" class="anchor" href="#radioactive-logging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Radioactive Logging</h3>
@@ -316,53 +315,50 @@ log.none() { "Enter" }
 <li>Run your code</li>
 </ol>
 
-<p>You would then see logging for <em>only</em> that specific request, at whatever level you specified as the override.  This allows you to focus diagnosis on a particular object as it flows through the system, rather than getting a firehose of logging information for requests that you don't care about if you were to simply set the <em>activeLevel</em> property to a higher value.</p>
+<p>You would then see logging for <em>only</em> that specific request, at whatever level you specified as the override.  This allows you to focus diagnosis on a particular object as it flows through the system, rather than getting a firehose of logging information for requests that you don't care about if you were to simply set the logger's <em>level</em> property to a higher value.</p>
 
 <p>This procedure can be done by simply modifying your code at the site of creation of the request, or it can be done by setting a breakpoint at runtime and using the debugger to modify the properties.</p>
 
 <h3>
 <a id="categories" class="anchor" href="#categories" aria-hidden="true"><span class="octicon octicon-link"></span></a>Categories</h3>
 
-<p>In addition to the two convenience functions for each level mentioned above, logging sites allow a <em>Category</em> to also be passed to the logging function.  While a category could be any type conforming to the <em>Hashable</em> protocol, you would typically define an <em>enum</em> for type safety.</p>
+<p>In addition to the two logging site functions for each level mentioned above, <em>Slogger</em> adds two more with an additional <em>Category</em> parameter.  While a category could be any type conforming to the protocol, it's best to define them an <em>enum</em> for type safety and convenience.</p>
 
 <p>Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc).</p>
 
-<p>The design of <em>Slogger</em> is such that third-party frameworks can expose their log instance and document their category values for developers using the framework.  Then, if the developers need to diagnose a problem inside the framework, they can simply adjust the logging levels for particular categories to get more information.  This is particularly useful in cases where the framework developer doesn't release the source code.</p>
+<p>The design of <em>Slogger</em> also allows third-party frameworks that use it to expose their log instance and document their category values for developers using them.  If you need to diagnose a problem inside the framework, you can simply adjust the logging levels for particular categories – or make objects radioactive if the framework supports it – to get more information.  This is particularly useful in cases where the framework developer doesn't release the source code.</p>
 
 <h2>
 <a id="implementing-categories" class="anchor" href="#implementing-categories" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementing Categories</h2>
 
-<p>Here's an example of how you should implement your custom categories, taken from the unit test code in <em>Slogger</em>.</p>
+<p>Here's an example of how you should implement your custom categories and your <em>Slogger</em> subclass.</p>
 
 <p>First, define your category enum:</p>
 
-<pre><code>enum TestCategory : String, SloggerCategory {
-  case First, Second
-
-  static func allValues () -&gt; [TestCategory] {
-    return [First, Second]
+<pre><code>public enum MyCategories : String, SloggerCategory {
+  case Foo, Bar, Baz
   }
 }
 </code></pre>
 
 <p>Second, subclass the generic <em>Slogger</em> class to bind it to your category type:</p>
 
-<pre><code>class TestLogger : Slogger&lt;TestCategory&gt; {}
+<pre><code>class MyLogger : Slogger&lt;MyCategories&gt; {}
 </code></pre>
 
 <p>Then create your logger in the obvious way:</p>
 
-<pre><code>public let log = TestLogger()
+<pre><code>public let log = MyLogger(defaultLevel: .Info)
 </code></pre>
 
 <p>Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the <em>init</em> method and provide that information there.</p>
 
-<p><em>Slogger</em> is designed so that all public public properties for a <em>Slogger</em> instance can be modified at runtime, without having to worry about its internal state.</p>
+<p>Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your <em>Swift</em> code defines a module, you a) don't have to worry about name collisions, and b) you can document your categories and allow other modules to modify its behavior, as described above.</p>
 
 <h2>
 <a id="performance" class="anchor" href="#performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Performance</h2>
 
-<p>Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the <em>SloggerPerformanceIOS</em> project for details.  (Use of <em>Slogger</em> for Mac OS applications should be identical to that of the simulator.)</p>
+<p>Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the <em>PerformanceTest</em> class and <em>SloggerPerformanceIOS</em> project for details.  (The performance of <em>Slogger</em> for Mac OS X applications should be identical to that of the simulator.)</p>
 
 <table>
 <thead>
@@ -370,60 +366,87 @@ log.none() { "Enter" }
 <th>Device</th>
 <th>Destinations</th>
 <th>Level</th>
+<th>Can Log</th>
 <th>log.Debug(.Only, "Message")</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Simulator</td>
-<td>[MemoryDestination]</td>
-<td>.None</td>
-<td>363ns</td>
-</tr>
-<tr>
-<td>Simulator</td>
 <td>[]</td>
-<td>.Severe</td>
-<td>363ns</td>
+<td>Verbose</td>
+<td>true</td>
+<td>52ns</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[MemoryDestination]</td>
-<td>.Severe</td>
+<td>Severe</td>
+<td>false</td>
+<td>361ns</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>[MemoryDestination]</td>
+<td>Verbose</td>
+<td>true</td>
 <td>28µs</td>
 </tr>
 <tr>
 <td>Simulator</td>
 <td>[ConsoleDestination]</td>
-<td>.Severe</td>
-<td>240µs</td>
+<td>Severe</td>
+<td>false</td>
+<td>409ns</td>
 </tr>
 <tr>
-<td>iPhone 6</td>
-<td>[MemoryDestination]</td>
-<td>.None</td>
-<td>921ns</td>
+<td>Simulator</td>
+<td>[ConsoleDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>304µs</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[]</td>
-<td>.Severe</td>
-<td>943ns</td>
+<td>Verbose</td>
+<td>true</td>
+<td>96ns</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[MemoryDestination]</td>
-<td>.Severe</td>
-<td>65µs</td>
+<td>Severe</td>
+<td>false</td>
+<td>988ns</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[MemoryDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>66µs</td>
 </tr>
 <tr>
 <td>iPhone 6</td>
 <td>[ConsoleDestination]</td>
-<td>.Severe</td>
-<td>718µs</td>
+<td>Severe</td>
+<td>false</td>
+<td>1µs</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>[ConsoleDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>566µs</td>
 </tr>
 </tbody>
 </table>
+
+<p>From looking at the timing, if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
+
+<p>Also, if you want to perform these tests yourself, you'll need to make sure the "Debug exectuable" option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.</p>
 
 <h2>
 <a id="how-to-get-it" class="anchor" href="#how-to-get-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How To Get it</h2>
@@ -452,7 +475,7 @@ log.none() { "Enter" }
 <tr>
 <td>Cocoapods</td>
 <td>In process</td>
-<td>Not a fan of invasive development tools, but it's popular</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -474,7 +497,17 @@ log.none() { "Enter" }
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-69486446-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
