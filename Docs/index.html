@@ -385,7 +385,7 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <p>Make your own color map to customize log line color by <em>Level</em> in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.  (Note: You can use the <em>XcodeColorsDecorator</em> class yourself for non-log use in your console without writing your own.)</p>
 <a href='#radioactive_logging' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='radioactive_logging'>Radioactive Logging</h3>
 
-<p>Radioactive logging allows logging to execute based on evaluation of an optional <em>override</em> value at logging sites.  If the <em>override</em> value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.</p>
+<p>Radioactive logging allows logging to execute based on evaluation of an optional <em>override</em> value at logging sites.  If the <em>override</em> value is non-nil, it is evaluated first. If the level of the logging function is less than or equal to the <em>override</em> value, the site will be logged.  If not, logging threshold evaluation will proceed by the normal process.</p>
 
 <p>As an example, imagine you have a <em>Request</em> object base class in a services implementation.  You could define a <em>logOverride</em> property of type <em>Level</em>, defaulting to <em>nil</em>. In the service code that processes requests, you would then provide the value of the <em>logOverride</em> property of requests as the <em>override</em> parameter at all logging sites.  This would cause any non-nil value in requests being processed to be used to override logging for the service.</p>
 
@@ -402,7 +402,7 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <p>This procedure can be done by simply modifying your code at the site of creation of the request, or it can be done by setting a breakpoint at runtime and using the debugger to modify the properties.</p>
 <a href='#categories' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='categories'>Categories</h3>
 
-<p>In addition to the two logging site functions for each level mentioned above, <em>Slogger</em> adds two more with an additional <em>Category</em> parameter.  While a category could be any type conforming to the protocol, it&rsquo;s best to define them an <em>enum</em> for type safety and convenience.</p>
+<p>In addition to the two logging site functions for each level mentioned above, <em>Slogger</em> adds two more with an additional <em>Category</em> parameter.  While a category could be any type conforming to the protocol, it&rsquo;s best to define them as an <em>enum</em> for type safety and convenience.</p>
 
 <p>Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc).</p>
 
@@ -482,8 +482,6 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <p>It&rsquo;s clear from the timing that if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
 
 <p>It should be noted that the timing for where <em>Can Log</em> is <em>true</em> does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it&rsquo;s noescape).  The rest of the work is done via dispatch_async to a private, serial queue.</p>
-
-<p>If you want to perform these tests yourself, you&rsquo;ll need to make sure the <q>Debug exectuable</q> option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.</p>
 <a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
 
 <p>Here&rsquo;s how you can get <em>Slogger</em> if you want to give it a try:</p>

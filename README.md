@@ -151,7 +151,7 @@ XcodeColors (ANSI) | Supported | Get [*XcodeColors*](https://github.com/robbieha
 Make your own color map to customize log line color by *Level* in a platform- and decorator-independent way.  See the *ColorMap* type for more information.  (Note: You can use the *XcodeColorsDecorator* class yourself for non-log use in your console without writing your own.)
 
 ### Radioactive Logging
-Radioactive logging allows logging to execute based on evaluation of an optional *override* value at logging sites.  If the *override* value is non-nil, it is evaluated first. If it is less than or equal to the level of the site, the site will be logged.  If not, logging evaluation will proceed by the normal process.
+Radioactive logging allows logging to execute based on evaluation of an optional *override* value at logging sites.  If the *override* value is non-nil, it is evaluated first. If the level of the logging function is less than or equal to the *override* value, the site will be logged.  If not, logging threshold evaluation will proceed by the normal process.
 
 As an example, imagine you have a *Request* object base class in a services implementation.  You could define a *logOverride* property of type *Level*, defaulting to *nil*. In the service code that processes requests, you would then provide the value of the *logOverride* property of requests as the *override* parameter at all logging sites.  This would cause any non-nil value in requests being processed to be used to override logging for the service.
 
@@ -166,7 +166,7 @@ You would then see logging for *only* that specific request, at whatever level y
 This procedure can be done by simply modifying your code at the site of creation of the request, or it can be done by setting a breakpoint at runtime and using the debugger to modify the properties.
 
 ### Categories
-In addition to the two logging site functions for each level mentioned above, *Slogger* adds two more with an additional *Category* parameter.  While a category could be any type conforming to the protocol, it's best to define them an *enum* for type safety and convenience.
+In addition to the two logging site functions for each level mentioned above, *Slogger* adds two more with an additional *Category* parameter.  While a category could be any type conforming to the protocol, it's best to define them as an *enum* for type safety and convenience.
 
 Once the categories are defined, you can configure your logger to customize the logging level for that category (.Debug or .Verbose, for example), even at runtime.  This allows more fine-tuning of logging if, for example, you want to see more logging of the events for a particular concern (database calls, networking transactions, etc).
 
@@ -210,7 +210,6 @@ It's clear from the timing that if you want to completely turn off logging in th
 
 It should be noted that the timing for where *Can Log* is *true* does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via dispatch_async to a private, serial queue.
 
-If you want to perform these tests yourself, you'll need to make sure the "Debug exectuable" option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.
 
 ## How To Get it
 Here's how you can get *Slogger* if you want to give it a try:
