@@ -224,13 +224,13 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
     self.level = defaultLevel
     self.dateFormatter = df!
-    if let details = details {
-      self._details = details
-    }
-
     self.generator = defaultGenerator
     self.consoleDestination = ConsoleDestination(colorMap: _colorMap, decorator: XCodeColorsDecorator())
   	self._destinations = [consoleDestination]
+
+    if let details = details {
+      self._details = details
+    }
   }
 
   // MARK: Functions
