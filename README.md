@@ -75,7 +75,7 @@ For completeness, functions are provided for the .None level that have no-op imp
 	log.none() { "Enter" }
 	
 ### Log Instance Properties
-The following properties of each log instance are exposed and have read/write access.  They can be modified at runtime, either programmatically or by using the debugger at a breakpoint.
+The following properties of each log instance are exposed and have read/write access (except for default implementations).  They can be modified at runtime, either programmatically or by using the debugger at a breakpoint.
 
 Property | Type | Comments
 --- | --- | ---
@@ -91,9 +91,18 @@ consoleDestination | Destination | The default console implementation with an Xc
 hits | UInt64 | Number of events logged.
 misses | UInt64 | Number of events not logged due to logging threshold evaluation.
 
-**Important Note**: *Slogger* instances are implemented to be thread-safe, as are all supported implementations of *Slogger* types and protocols.  If you provide an implementation for a protocol, it **MUST** be thread-safe as well.
-
 ## Advanced Features
+
+### *** Important Implementation Note ***
+
+*Slogger* uses a private, serial dispatch queue for most of its work, including calls to the 
+generator, decorator, and all logging destinations.  The only code executed synchronously by the logging functions is
+the threshold evaluation (and only if `destinations.count > 0`) and, if that passes, evaulation of the closure
+to produce the message from the logging site.  All other work is performed on a separate thread serially.
+
+Thus, all *Slogger* types are inherently thread-safe. If you decide to implement your own, you can do so
+without concern about concurrency issues. However, if you create a custom implementation of any type that requires
+code be executed on the main thread, you **MUST** wrap that code inside a `dispatch_async` call to the main queue.
 
 ### Destinations
 The *Destination* protocol allows you to write your own log destinations and add them to the logger. The following destinations are provided:
@@ -193,15 +202,13 @@ Destinations | Level | Can Log | Simulator | iPhone 6
 --- | --- | --- | --- | ---
 []                   | Verbose | true  | 53ns  | 108ns
 [MemoryDestination]  | Severe  | false | 374ns | 1µs
-[MemoryDestination]  | Verbose | true  | 3µs   | 7µs
+[MemoryDestination]  | Verbose | true  | 3µs   | 8µs
 [ConsoleDestination] | Severe  | false | 370ns | 1µs
-[ConsoleDestination] | Verbose | true  | 4µs   | 10µs
+[ConsoleDestination] | Verbose | true  | 4µs   | 15µs
 
 It's clear from the timing that if you want to completely turn off logging in the most efficient way, set the *destinations* property to an empty array.  This avoids even performing the level threshold test.
 
-It should be noted that the timing for *Can Log* cases does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's @noescape).  The rest of the work is done via dispatch_async to the main thread.
-
-***I am planning to update the implementation to use a separate thread with its own dispatch queue to remove even that overhead from the main thread.***
+It should be noted that the timing for where *Can Log* is *true* does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via dispatch_async to a private, serial queue.
 
 If you want to perform these tests yourself, you'll need to make sure the "Debug exectuable" option is checked (is should be by default).  It appears that the print() function does nothing unless that option is on.
 

@@ -135,10 +135,14 @@ how to define a subclass to use your own categories.  Check out the Slogger exte
 functions documentation.  Only the *severe* level functions are documented.  All other functions related to logging
 site levels are identical.
 
-**Important Note**: The implementation of logging site functions is stateless.  As a result, any exposed property
-can be changed at runtime, either programatically or using the debugger at a breakpoint.  Furthemore, *Slogger*
-instances are inherently thread-safe, as are all supported implementations of *Slogger* types and protocols.
-If you provide an implementation for a protocol, it **MUST** be thread-safe as well.
+**Important Implementation Note**: *Slogger* uses a private, serial dispatch queue for most of its work, including
+calls to the generator, decorator, and all logging destinations.  The only code executed synchronously by the logging
+functions is the threshold evaluation (and only if `destinations.count > 0`) and, if that passes, evaulation of the
+closure to produce the message from the logging site.  All other work is performed on a separate thread serially.
+
+Thus, all *Slogger* types are inherently thread-safe. If you decide to implement your own, you can do so
+without concern about concurrency issues. However, if you create a custom implementation of any type that requires
+code be executed on the main thread, you **MUST** wrap that code inside a `dispatch_async` call to the main queue.
 
 */
 public class Slogger <T: SloggerCategory> : NSObject {
@@ -204,6 +208,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   /// Used to turn off asynchronous operation for unit testing.
   var asynchronous = true
+
+  /// Worker queue for processing logging work that has passed the level threshold test
+  let workerQueue = dispatch_queue_create("Slogger queue", DISPATCH_QUEUE_SERIAL)
 
   // MARK: Initialization
   /**
@@ -314,7 +321,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   // MARK: Destinations
   /// The default consoleDestination.
-  public var consoleDestination : Destination
+  public let consoleDestination : Destination
 
   // MARK: Private
   func logInternal (@noescape closure closure: LogClosure, category: T?, override: Level?, level: Level, function: String, file: String, line: Int) {
@@ -356,7 +363,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
     }
 
     if (asynchronous) {
-      dispatch_async(dispatch_get_main_queue(), codeBlock)
+      dispatch_async(workerQueue, codeBlock)
     } else {
       codeBlock()
     }
