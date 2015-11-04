@@ -1,10 +1,15 @@
 # Slogger
-A simple, fast and flexible logging framework for Swift on all Apple platforms.
+A simple, fast and flexible logging framework for Swift.
+
+[![Pod Version](http://img.shields.io/cocoapods/v/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
+[![Pod License](http://img.shields.io/cocoapods/l/Slogger.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 ## Version History
 
 Version | Status | Comments
 --- | --- | ---
+0.1 | Available | **Pre-release** (for sorting out CocoaPods/Carthage support).
 1.0 | In Progress | Finishing up for initial release
 
 ## TODO
@@ -217,8 +222,8 @@ Here's how you can get *Slogger* if you want to give it a try:
 Means | Status | Comment
 --- | --- | ---
 Github | Supported | https://github.com/dgoodine/Slogger
-Carthage | In process |
-Cocoapods | In process | 
+Cocoapods | In process | v0.1 (Pre-release) **Mac OS X not yet available.**
+Carthage | In process | 
 
 
 ## Feedback
