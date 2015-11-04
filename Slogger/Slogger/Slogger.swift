@@ -71,6 +71,10 @@ public enum Detail : Int {
 
 /**
  A type alias for generator closures.
+ 
+ - Important: The `override` parameter can be used to signify in the output that this is an override event. However, the
+ `level` parameter should be used if the details call for it, since it corresponds to the level implicitly passed by the
+ logging function at the logging site.  This will preserve decorator style appropriate for the level.
 
  - Parameter message: The message string at the logging site.
  - Parameter category: The category specified in the logging site.
@@ -85,9 +89,6 @@ public enum Detail : Int {
 
  - Returns: A string representation of the generator output or `nil` to produce no output.
 
- - Note: The `override` parameter can be used to signify in the output that this is an override event. However, the
- `level` parameter should be used if the details call for it, since it corresponds to the level implicitly passed by the
- logging function at the logging site to preserve decorator style.
  */
 public typealias Generator = (message: String, category: Any?, override: Level?, level: Level, date: NSDate, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String?
 
@@ -281,7 +282,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
    */
   public let defaultGenerator : Generator = { (message, category, override, level, date, function, file, line, details, dateFormatter) -> String in
     let prefix = (override != nil) ? "*" : "-"
-    let str : NSMutableString = NSMutableString(capacity: 100)
+    let str : NSMutableString = NSMutableString(capacity: 512)
     str.appendString(prefix)
 
     for detail in details {
