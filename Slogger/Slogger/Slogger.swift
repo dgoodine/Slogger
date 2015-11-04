@@ -76,6 +76,7 @@ public enum Detail : Int {
  - Parameter category: The category specified in the logging site.
  - Parameter override: The override level.
  - Parameter level: The logging level of the site.
+ - Parameter date: The date of the logging event.
  - Parameter function: The function the logging site is in.
  - Parameter file: The file the logging site is in.
  - Parameter line: The line number in the file of the logging site.
@@ -88,7 +89,7 @@ public enum Detail : Int {
  `level` parameter should be used if the details call for it, since it corresponds to the level implicitly passed by the
  logging function at the logging site to preserve decorator style.
  */
-public typealias Generator = (message: String, category: Any?, override: Level?, level: Level, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String?
+public typealias Generator = (message: String, category: Any?, override: Level?, level: Level, date: NSDate, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String?
 
 /// The protocol for logging destinations.
 public protocol Destination {
@@ -278,7 +279,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   	- [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 myFunction(_:) [] Severe: String
    */
-  public let defaultGenerator : Generator = { (message, category, override, level, function, file, line, details, dateFormatter) -> String in
+  public let defaultGenerator : Generator = { (message, category, override, level, date, function, file, line, details, dateFormatter) -> String in
     let prefix = (override != nil) ? "*" : "-"
     let str : NSMutableString = NSMutableString(capacity: 100)
     str.appendString(prefix)
@@ -309,7 +310,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
         str.appendString("\(level)")
 
       case .Date:
-        let dateString = dateFormatter.stringFromDate(NSDate())
+        let dateString = dateFormatter.stringFromDate(date)
         str.appendString("[\(dateString)]")
       }
     }
@@ -336,6 +337,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
     }
 
     let message = closure()
+    let date = NSDate()
     let codeBlock = {
       self.hits = self.hits &+ 1
 
@@ -344,15 +346,15 @@ public class Slogger <T: SloggerCategory> : NSObject {
       for dest in self.destinations {
         let string : String?
         if let gen = dest.generator {
-          string = gen(message: message, category: category, override: override, level: level, function: function,
-            file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
+          string = gen(message: message, category: category, override: override, level: level, date: date,
+            function: function, file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
         }
         else if defaultString != nil {
           string = defaultString!
         }
         else {
-          string = self.generator(message: message, category: category, override: override, level: level, function: function,
-            file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
+          string = self.generator(message: message, category: category, override: override, level: level, date: NSDate(),
+            function: function, file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
           defaultString = string
         }
 
