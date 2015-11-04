@@ -299,9 +299,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
       case .File:
         var f = file as NSString
         f = f.lastPathComponent
-        str.appendString(f as String)
-        str.appendString(":")
-        str.appendString("\(line)")
+        str.appendString("\(f as String):\(line)")
 
       case .Function:
         str.appendString(function)
