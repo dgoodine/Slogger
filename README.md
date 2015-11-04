@@ -9,7 +9,7 @@ A simple, fast and flexible logging framework for Swift.
 
 Version | Status | Comments
 --- | --- | ---
-0.1 | Available | **Pre-release** (for sorting out CocoaPods/Carthage support).
+0.1.x | Available | **Pre-release** (for sorting out CocoaPods/Carthage support).
 1.0 | In Progress | Finishing up for initial release
 
 ## TODO
