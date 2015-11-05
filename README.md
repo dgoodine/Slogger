@@ -23,6 +23,10 @@ When I started doing serious Swift development, I naturally looked around for a 
 
 *Slogger* uses much the same approach and identical function signatures as *XCGLogger*, so they are interchangeable without modifying existing logging sites. Be sure to check the **Advanced Features** section below – particularly *Radioactive Logging* and *Categories* – to see why I decided to go this route.
 
+Also note: Slogger is completely API independent, except for the Swift standard library.  So it can be used in Mac OS X projects projects as well.
+
+**Slogger requires Xcode 7 and Swift 2.1.**
+
 ## General Info
 
 ### Logging Levels
