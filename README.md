@@ -96,7 +96,7 @@ generator | Generator | Current generator.  Defaults to *defaultGenerator*.
 destinations | [Destination] | Destinations this logger will write to.  Defaults to [*consoleDestination*].
 colorMap | ColorMap | The current colorMap.
 defaultGenerator | Generator | Default generator implementation.
-consoleDestination | Destination | The default console implementation with an XcodeColors/ANSI decorator.
+consoleDestination | Destination | The default console implementation with an XcodeColors decorator.
 hits | UInt64 | Number of events logged.
 misses | UInt64 | Number of events not logged due to logging threshold evaluation.
 
@@ -150,11 +150,12 @@ The default value includes all available *Detail* values, in a typical order:
 The inclusion of the message at the logging site is implicit.
 
 ### Configurable Decorators
-You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XcodeColors uses ANSI standard format, so you can use it to decorate your file logs too.
+You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.
 
 Decorators | Status | Info
 --- | --- | ---
-XcodeColors (ANSI) | Supported | Get [*XcodeColors*](https://github.com/robbiehanson/XcodeColors).
+XcodeColors | Supported | Get [*XcodeColors*](https://github.com/robbiehanson/XcodeColors).
+ANSI | On Hold | Not sure how useful this is for the trouble.
 
 ### Configurable Colormaps
 Make your own color map to customize log line color by *Level* in a platform- and decorator-independent way.  See the *ColorMap* type for more information.  (Note: You can use the *XcodeColorsDecorator* class yourself for non-log use in your console without writing your own.)

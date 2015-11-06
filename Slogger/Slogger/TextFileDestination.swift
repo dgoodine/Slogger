@@ -173,6 +173,7 @@ public class TextFileDestination : BaseDestination {
     guard fm.createFileAtPath(filePath, contents: NSData(), attributes: config.fileAttributes) else {
       if !errorPrinted {
         print("*** Slogger.TextFileDestination couldn't create log file.")
+        errorPrinted = true
       }
       return nil
     }

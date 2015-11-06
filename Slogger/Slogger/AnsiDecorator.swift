@@ -1,23 +1,27 @@
 //
-//  XCodeColorsDecorator.swift
+//  AnsiDecorator.swift
 //  Slogger
 //
-//  Created by David Goodine on 10/24/15.
+//  Created by David Goodine on 11/6/15.
 //  Copyright © 2015 David Goodine. All rights reserved.
 //
 
 import Foundation
 
-/// Decorator that uses XcodeColors format
-public struct XCodeColorsDecorator : Decorator {
+public struct AnsiDecorator : Decorator {
   private let escape = "\u{001b}["
-  private let resetFg = "\u{001b}[fg;"
-  private let resetBg = "\u{001b}[bg;"
-  private let reset = "\u{001b}[;"
+  private let reset = "\u{001b}[m"
+  private let fgCode = "38;2;"
+  private let bgCode = "48;2;"
   private let maxColor = 255.0
+
+  public init() {}
 
   /// Protocol implementation
   public func decorateString(string : String, spec: ColorSpec) -> String {
+    // This is disabled for now.
+    return string
+
     let fg = spec.fg
     let bg = spec.bg
 
@@ -26,22 +30,20 @@ public struct XCodeColorsDecorator : Decorator {
       let r = Int(color.r * maxColor)
       let g = Int(color.g * maxColor)
       let b = Int(color.b * maxColor)
-      return "\(escape)\(typeCode)\(r),\(g),\(b);"
+      return "\(escape)\(typeCode)\(r);\(g);\(b);m"
     }
 
     var fgStart = ""
-    let fgEnd = (fg == nil) ? "" : resetFg
     if fg != nil {
-      fgStart = prefix(fg!, "fg")
+      fgStart = prefix(fg!, fgCode)
     }
 
     var bgStart = ""
-    let bgEnd = (bg == nil) ? "" : resetBg
     if bg != nil {
-      bgStart = prefix(bg!, "bg")
+      bgStart = prefix(bg!, bgCode)
     }
-    let value = "\(fgStart)\(bgStart)\(string)\(fgEnd)\(bgEnd)"
 
+    let value = "\(fgStart)\(bgStart)\(string)\(reset)"
     return value
   }
 }

@@ -113,8 +113,8 @@
 		A82633191BE2151700293716 = {
 			isa = PBXGroup;
 			children = (
-				A82064001BE658D500296CFF /* Slogger.xcodeproj */,
 				A82633241BE2151700293716 /* SloggerPerformanceIOS */,
+				A82064001BE658D500296CFF /* Slogger.xcodeproj */,
 				A82633231BE2151700293716 /* Products */,
 			);
 			sourceTree = "<group>";

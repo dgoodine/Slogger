@@ -1,2 +1,5 @@
 Slogger.swift
 	public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool
+AnsiDecorator.swift
+	public struct AnsiDecorator : Decorator
+	public init() {}

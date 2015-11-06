@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Destination Protocol Reference</title>
+    <title>AnsiDecorator Struct Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,8 +9,8 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/Destination" class="dashAnchor"></a>
-    <a title="Destination Protocol Reference"></a>
+    <a name="//apple_ref/swift/Struct/AnsiDecorator" class="dashAnchor"></a>
+    <a title="AnsiDecorator Struct Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Slogger Docs</a> (97% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Slogger Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Destination Protocol Reference
+        AnsiDecorator Struct Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -130,14 +130,8 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Destination</h1>
-              <div class="declaration">
-                <div class="Swift">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Destination</span></code></pre>
-
-                </div>
-              </div>
-            <p>The protocol for logging destinations.</p>
+            <h1>AnsiDecorator</h1>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -146,9 +140,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vP7Slogger11Destination9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__"></a>
-                    <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vP7Slogger11Destination9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__">generator</a>
+                    <a name="/s:FV7Slogger13AnsiDecoratorcFMS0_FT_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV7Slogger13AnsiDecoratorcFMS0_FT_S0_">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -156,16 +150,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A custom generator for this destination.  If not provided, the logger value will be used.</p>
+                        <p>Undocumented</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">generator</span> <span class="p">:</span> <span class="kt">Generator</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -173,9 +159,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vP7Slogger11Destination8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____"></a>
-                    <a name="//apple_ref/swift/Property/colorMap" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vP7Slogger11Destination8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____">colorMap</a>
+                    <a name="/s:FV7Slogger13AnsiDecorator14decorateStringFS0_FTSS4specT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd____SS"></a>
+                    <a name="//apple_ref/swift/Method/decorateString(_:spec:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV7Slogger13AnsiDecorator14decorateStringFS0_FTSS4specT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd____SS">decorateString(_:spec:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -183,103 +169,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A custom color map for this destination.  If not provided, the logger value will be used.</p>
+                        <p>Protocol implementation</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">colorMap</span> <span class="p">:</span> <span class="kt">ColorMap</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">decorateString</span><span class="p">(</span><span class="nv">string</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">spec</span><span class="p">:</span> <span class="kt">ColorSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vP7Slogger11Destination9decoratorGSqPS_9Decorator__"></a>
-                    <a name="//apple_ref/swift/Property/decorator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vP7Slogger11Destination9decoratorGSqPS_9Decorator__">decorator</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A custom decorator for this destination.  If not provided, the logger value will be used.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">decorator</span> <span class="p">:</span> <span class="kt">Decorator</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FP7Slogger11Destination9logStringuRq_S0__Fq_FTSS5levelOS_5Level_T_"></a>
-                    <a name="//apple_ref/swift/Method/logString(_:level:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP7Slogger11Destination9logStringuRq_S0__Fq_FTSS5levelOS_5Level_T_">logString(_:level:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The logging function.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">logString</span><span class="p">(</span><span class="nv">string</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>string</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The fully generated and decorated log string for the event.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>level</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The level of the logging site.  Provided for some special cases such as unit testing.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
