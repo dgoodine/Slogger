@@ -180,6 +180,25 @@ class SloggerTests: XCTestCase {
     testDestination.clear()
     self.exhaustiveTest(destinations: [testDestination], checkResults: true)
   }
+
+  func testPlainFileLogging () {
+    let dir = "~/Desktop/SloggerTestLogs" as NSString
+    let path = dir.stringByExpandingTildeInPath
+    let dest = TextFileDestination(directory: path)
+
+    print("Testing plain file logging to path: \(path)")
+    self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
+  }
+
+  func testJSONFileLogging () {
+    let dir = "~/Desktop/SloggerTestLogs" as NSString
+    let path = dir.stringByExpandingTildeInPath
+    let dest = JSONFileDestination(directory: path)
+
+    print("Testing JSON file logging to path: \(path)")
+    self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
+  }
+
 }
 
 

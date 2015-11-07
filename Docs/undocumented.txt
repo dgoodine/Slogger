@@ -3,3 +3,7 @@ Slogger.swift
 AnsiDecorator.swift
 	public struct AnsiDecorator : Decorator
 	public init() {}
+JSONFileDestination.swift
+	public class JSONFileDestination : TextFileDestination
+	public class JSONConfiguration : Configuration
+	public init ()

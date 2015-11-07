@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Configuration Struct Reference</title>
+    <title>Configuration Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,11 +9,11 @@
     <script src="../../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Configuration" class="dashAnchor"></a>
-    <a title="Configuration Struct Reference"></a>
+    <a name="//apple_ref/swift/Class/Configuration" class="dashAnchor"></a>
+    <a title="Configuration Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Slogger Docs</a> (97% documented)</p>
+        <p><a href="../../index.html">Slogger Docs</a> (95% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Slogger Reference</a>
         <img id="carat" src="../../img/carat.png" />
-        Configuration Struct Reference
+        Configuration Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -35,6 +35,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Classes/ConsoleDestination.html">ConsoleDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/JSONFileDestination.html">JSONFileDestination</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Classes/MemoryDestination.html">MemoryDestination</a>
@@ -133,7 +136,7 @@
             <h1>Configuration</h1>
               <div class="declaration">
                 <div class="Swift">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Configuration</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Configuration</span></code></pre>
 
                 </div>
               </div>
@@ -146,9 +149,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration20fileRotationIntervalSd"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration20fileRotationIntervalSd"></a>
                     <a name="//apple_ref/swift/Property/fileRotationInterval" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration20fileRotationIntervalSd">fileRotationInterval</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration20fileRotationIntervalSd">fileRotationInterval</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -173,56 +176,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:VC7Slogger19TextFileDestination13Configuration18PostArchiveHandler"></a>
-                    <a name="//apple_ref/swift/Alias/PostArchiveHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:VC7Slogger19TextFileDestination13Configuration18PostArchiveHandler">PostArchiveHandler</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A closure that is called after an archiving operation has completed.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">PostArchiveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nv">directory</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>archive</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The recently compressed archive.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:VC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler"></a>
+                    <a name="/s:CC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler"></a>
                     <a name="//apple_ref/swift/Alias/PostFileCloseHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:VC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler">PostFileCloseHandler</a>
+                    <a class="token" href="#/s:CC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler">PostFileCloseHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,9 +223,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:VC7Slogger19TextFileDestination13Configuration20FileWrapperGenerator"></a>
+                    <a name="/s:CC7Slogger19TextFileDestination13Configuration20FileWrapperGenerator"></a>
                     <a name="//apple_ref/swift/Alias/FileWrapperGenerator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:VC7Slogger19TextFileDestination13Configuration20FileWrapperGenerator">FileWrapperGenerator</a>
+                    <a class="token" href="#/s:CC7Slogger19TextFileDestination13Configuration20FileWrapperGenerator">FileWrapperGenerator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -314,9 +270,56 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration26directoryArchivingIntervalSd"></a>
+                    <a name="/s:CC7Slogger19TextFileDestination13Configuration18PostArchiveHandler"></a>
+                    <a name="//apple_ref/swift/Alias/PostArchiveHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:CC7Slogger19TextFileDestination13Configuration18PostArchiveHandler">PostArchiveHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A closure that is called after an archiving operation has completed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">PostArchiveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nv">directory</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>archive</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The recently compressed archive.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration26directoryArchivingIntervalSd"></a>
                     <a name="//apple_ref/swift/Property/directoryArchivingInterval" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration26directoryArchivingIntervalSd">directoryArchivingInterval</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration26directoryArchivingIntervalSd">directoryArchivingInterval</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -341,9 +344,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration20fileWrapperGeneratorGSqFT10isPreambleSb_SS_"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration20fileWrapperGeneratorGSqFT10isPreambleSb_SS_"></a>
                     <a name="//apple_ref/swift/Property/fileWrapperGenerator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration20fileWrapperGeneratorGSqFT10isPreambleSb_SS_">fileWrapperGenerator</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration20fileWrapperGeneratorGSqFT10isPreambleSb_SS_">fileWrapperGenerator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -368,9 +371,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration20postFileCloseHandlerGSqFT4pathSS_T__"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration20postFileCloseHandlerGSqFT4pathSS_T__"></a>
                     <a name="//apple_ref/swift/Property/postFileCloseHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration20postFileCloseHandlerGSqFT4pathSS_T__">postFileCloseHandler</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration20postFileCloseHandlerGSqFT4pathSS_T__">postFileCloseHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -395,9 +398,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration18postArchiveHandlerGSqFT9directorySS_T__"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration18postArchiveHandlerGSqFT9directorySS_T__"></a>
                     <a name="//apple_ref/swift/Property/postArchiveHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration18postArchiveHandlerGSqFT9directorySS_T__">postArchiveHandler</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration18postArchiveHandlerGSqFT9directorySS_T__">postArchiveHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -422,9 +425,63 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration14fileAttributesGVSs10DictionarySSPSs9AnyObject__"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration14entryDelimiterSS"></a>
+                    <a name="//apple_ref/swift/Property/entryDelimiter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration14entryDelimiterSS">entryDelimiter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A string to emit between log entries.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">entryDelimiter</span> <span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration13fileExtensionSS"></a>
+                    <a name="//apple_ref/swift/Property/fileExtension" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration13fileExtensionSS">fileExtension</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>File extension for log files.  Defaults to <q>txt</q></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">fileExtension</span> <span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"txt"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration14fileAttributesGVSs10DictionarySSPSs9AnyObject__"></a>
                     <a name="//apple_ref/swift/Property/fileAttributes" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration14fileAttributesGVSs10DictionarySSPSs9AnyObject__">fileAttributes</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration14fileAttributesGVSs10DictionarySSPSs9AnyObject__">fileAttributes</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -449,9 +506,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration9decoratorGSqPS_9Decorator__"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration9decoratorGSqPS_9Decorator__"></a>
                     <a name="//apple_ref/swift/Property/decorator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration9decoratorGSqPS_9Decorator__">decorator</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration9decoratorGSqPS_9Decorator__">decorator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -476,9 +533,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS2_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS2_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__"></a>
                     <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS2_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__">generator</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS2_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__">generator</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -503,9 +560,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vVC7Slogger19TextFileDestination13Configuration8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____"></a>
                     <a name="//apple_ref/swift/Property/colorMap" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vVC7Slogger19TextFileDestination13Configuration8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____">colorMap</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration8colorMapGSqGVSs10DictionaryOS_5LevelT2fgGSqT1rSd1gSd1bSd__2bgGSqT1rSd1gSd1bSd_____">colorMap</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -532,7 +589,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-11-06)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-11-07)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

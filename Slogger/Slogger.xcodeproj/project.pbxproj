@@ -59,6 +59,11 @@
 		A8A9DAF01BE0FB25000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
 		A8A9DAF11BE0FB26000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
 		A8A9DAF21BE0FB27000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
+		A8CF46BB1BEE4E270013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
+		A8CF46BC1BEE4E2A0013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
+		A8CF46BD1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
+		A8CF46BE1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
+		A8CF46BF1BEE4E2C0013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +107,7 @@
 		A85BFC6F1BDD4B63008D1F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryDestination.swift; sourceTree = "<group>"; };
 		A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCodeColorsDecorator.swift; sourceTree = "<group>"; };
+		A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFileDestination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +158,7 @@
 				A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */,
 				A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */,
 				A826330D1BE1271600293716 /* TextFileDestination.swift */,
+				A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */,
 			);
 			name = Destinations;
 			sourceTree = "<group>";
@@ -466,6 +473,7 @@
 				A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
 				A845537A1BDC084D00678385 /* Color.swift in Sources */,
 				A826330E1BE1271600293716 /* TextFileDestination.swift in Sources */,
+				A8CF46BB1BEE4E270013D2C7 /* JSONFileDestination.swift in Sources */,
 				A80A89891BE0F59B00FE8F81 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +488,7 @@
 				A845537B1BDC085100678385 /* Color.swift in Sources */,
 				A83C59E71BED365F0037B847 /* AnsiDecorator.swift in Sources */,
 				A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */,
+				A8CF46BC1BEE4E2A0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A82633151BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */,
@@ -499,6 +508,7 @@
 				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC5F1BDD46A6008D1F1E /* MemoryDestination.swift in Sources */,
 				A82633101BE1271600293716 /* TextFileDestination.swift in Sources */,
+				A8CF46BD1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A8A9DAF01BE0FB25000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,6 +523,7 @@
 				A85BFC621BDD472A008D1F1E /* Color.swift in Sources */,
 				A83C59E91BED36600037B847 /* AnsiDecorator.swift in Sources */,
 				A85BFC641BDD472A008D1F1E /* MemoryDestination.swift in Sources */,
+				A8CF46BE1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
 				A82633171BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */,
@@ -532,6 +543,7 @@
 				A85BFC731BDD4B8B008D1F1E /* Slogger.swift in Sources */,
 				A85BFC751BDD4B8B008D1F1E /* Color.swift in Sources */,
 				A82633121BE1271600293716 /* TextFileDestination.swift in Sources */,
+				A8CF46BF1BEE4E2C0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A8A9DAF21BE0FB27000A9351 /* BaseDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
