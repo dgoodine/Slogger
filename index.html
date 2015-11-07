@@ -38,6 +38,10 @@
 
 <p><em>Slogger</em> uses much the same approach and identical function signatures as <em>XCGLogger</em>, so they are interchangeable without modifying existing logging sites. Be sure to check the <strong>Advanced Features</strong> section below – particularly <em>Radioactive Logging</em> and <em>Categories</em> – to see why I decided to go this route.</p>
 
+<p>Also note: Slogger is completely API independent, except for the Swift standard library.  So it can be used in Mac OS X projects projects as well.</p>
+
+<p><strong>Slogger requires Xcode 7 and Swift 2.1.</strong></p>
+
 <h2>
 <a id="general-info" class="anchor" href="#general-info" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Info</h2>
 
@@ -164,7 +168,7 @@ log.none() { "Enter" }
 <tr>
 <td>consoleDestination</td>
 <td>Destination</td>
-<td>The default console implementation with an XcodeColors/ANSI decorator.</td>
+<td>The default console implementation with an XcodeColors decorator.</td>
 </tr>
 <tr>
 <td>hits</td>
@@ -284,7 +288,7 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <h3>
 <a id="configurable-decorators" class="anchor" href="#configurable-decorators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configurable Decorators</h3>
 
-<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.  Note: XcodeColors uses ANSI standard format, so you can use it to decorate your file logs too.</p>
+<p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.</p>
 
 <table>
 <thead>
@@ -296,9 +300,14 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 </thead>
 <tbody>
 <tr>
-<td>XcodeColors (ANSI)</td>
+<td>XcodeColors</td>
 <td>Supported</td>
 <td>Get <a href="https://github.com/robbiehanson/XcodeColors"><em>XcodeColors</em></a>.</td>
+</tr>
+<tr>
+<td>ANSI</td>
+<td>On Hold</td>
+<td>Not sure how useful this is for the trouble.</td>
 </tr>
 </tbody>
 </table>
@@ -442,12 +451,13 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
 </tr>
 <tr>
-<td>Carthage</td>
+<td>Cocoapods</td>
 <td>In process</td>
-<td></td>
+<td>v0.1 (Pre-release) <strong>Mac OS X not yet available.</strong>
+</td>
 </tr>
 <tr>
-<td>Cocoapods</td>
+<td>Carthage</td>
 <td>In process</td>
 <td></td>
 </tr>
