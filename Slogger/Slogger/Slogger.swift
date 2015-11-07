@@ -53,11 +53,17 @@ public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> B
 
 /// An enumeration of the types of information for a `Generator` to output.
 public enum Detail : Int {
+  /// Whether the event was an override
+  case Override
+
   ///  Date and time of the event.
   case Date
 
-  /// File and line number of the logging site.
+  /// File of the logging site.
   case File
+
+  /// File line number of the logging site
+  case Line
 
   /// The function the logging site is in.
   case Function
@@ -67,6 +73,9 @@ public enum Detail : Int {
 
   /// The category specified in the logging site.
   case Category
+
+  /// The message string produced at the logging site.
+  case Message
 }
 
 /**
@@ -156,7 +165,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
   public var dateFormatter : NSDateFormatter
 
   /// Local storage
-  private var _details : [Detail] = [.Date, .File, .Function, .Category, .Level]
+  private var _details : [Detail] = [.Override, .Date, .File, .Line, .Function, .Category, .Level, .Message]
 
   /// An array representing what to output (and in what order) by a `Generator`.
   public var details : [Detail] {
@@ -281,14 +290,21 @@ public class Slogger <T: SloggerCategory> : NSObject {
   	- [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 myFunction(_:) [] Severe: String
    */
   public let defaultGenerator : Generator = { (message, category, override, level, date, function, file, line, details, dateFormatter) -> String in
-    let prefix = (override != nil) ? "*" : "-"
     let str : NSMutableString = NSMutableString(capacity: 512)
-    str.appendString(prefix)
+    var isFirst = true
 
     for detail in details {
-      str.appendString(" ")
+      if isFirst {
+        isFirst = false
+      } else {
+        str.appendString(" ")
+      }
 
       switch detail {
+
+      case .Override:
+        let prefix = (override != nil) ? "*" : "-"
+        str.appendString(prefix)
 
       case .Category:
         if category != nil {
@@ -300,7 +316,10 @@ public class Slogger <T: SloggerCategory> : NSObject {
       case .File:
         var f = file as NSString
         f = f.lastPathComponent
-        str.appendString("\(f as String):\(line)")
+        str.appendString("\(f as String)")
+
+      case .Line:
+        str.appendString("(\(line))")
 
       case .Function:
         str.appendString(function)
@@ -311,11 +330,14 @@ public class Slogger <T: SloggerCategory> : NSObject {
       case .Date:
         let dateString = dateFormatter.stringFromDate(date)
         str.appendString("[\(dateString)]")
+
+      case .Message:
+        str.appendString(": ")
+        str.appendString(message)
       }
     }
 
-    str.appendString(": ")
-    str.appendString(message)
+
     return str as String
   }
 
