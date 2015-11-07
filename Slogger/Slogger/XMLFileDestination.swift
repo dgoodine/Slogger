@@ -50,7 +50,7 @@ public class XMLGenerator : Generator {
       outputString.appendString("<\(key)>\(value)</\(key)>")
 
     case .StringValue(let key, let value):
-      outputString.appendString("<\(key)>\(value)</\(key)>")
+      outputString.appendString("<\(key)><![CDATA[\(value)]]></\(key)>")
 
     case .DateValue(let key, let value):
       let ds = dateFormatter.stringFromDate(value)
