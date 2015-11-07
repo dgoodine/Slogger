@@ -16,7 +16,7 @@ import Foundation
  content enclosing the entries (e.g. JSON and XML).
 
 */
-public class TextFileDestination : BaseDestination {
+public class TextFileDestination : Destination {
 
   /// Configuration values for file destinations.
   public class Configuration {

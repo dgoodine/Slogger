@@ -53,9 +53,9 @@ class SloggerTests: XCTestCase {
 
     let prefix = (override != nil) ? "* " : "- "
     XCTAssert(last.containsString(prefix), "Incorrect Radioactive Trace Prefix")
-    XCTAssert(last.containsString(" \(level): "), "Incorrect level")
+    XCTAssert(last.containsString(" \(level) "), "Incorrect level")
     XCTAssert(last.containsString(": \(message)"), "Incorrect message")
-    XCTAssert(last.containsString(" SloggerTests.swift:"), "Incorrect file")
+    XCTAssert(last.containsString(" SloggerTests.swift "), "Incorrect file")
     XCTAssert(last.containsString(" \(function) "), "Incorrect function")
     if category == nil {
       XCTAssert(last.containsString(" [] "), "Incorrect function")

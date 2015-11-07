@@ -13,7 +13,7 @@ import Foundation
  Provided as it might be a useful superclass for some use-cases (e.g. buffering lines for periodic
  transfer to some other output sink.
  */
-public class MemoryDestination : BaseDestination {
+public class MemoryDestination : Destination {
 
   // MARK - Properties
 

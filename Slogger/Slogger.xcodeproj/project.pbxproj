@@ -11,11 +11,6 @@
 		A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
 		A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
 		A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
-		A82061121BEE614100487B2E /* WrappedFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82061111BEE614100487B2E /* WrappedFileDestination.swift */; };
-		A82061131BEE614100487B2E /* WrappedFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82061111BEE614100487B2E /* WrappedFileDestination.swift */; };
-		A82061141BEE614100487B2E /* WrappedFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82061111BEE614100487B2E /* WrappedFileDestination.swift */; };
-		A82061151BEE614100487B2E /* WrappedFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82061111BEE614100487B2E /* WrappedFileDestination.swift */; };
-		A82061161BEE614100487B2E /* WrappedFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82061111BEE614100487B2E /* WrappedFileDestination.swift */; };
 		A826330E1BE1271600293716 /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* TextFileDestination.swift */; };
 		A826330F1BE1271600293716 /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* TextFileDestination.swift */; };
 		A82633101BE1271600293716 /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* TextFileDestination.swift */; };
@@ -37,6 +32,11 @@
 		A83C79F11BD6639A00DA9F07 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
 		A845537A1BDC084D00678385 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
 		A845537B1BDC085100678385 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A85019B51BEE7E9200FA6185 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
+		A85019B61BEE7FEE00FA6185 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
+		A85019B71BEE7FEF00FA6185 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
+		A85019B81BEE7FEF00FA6185 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
+		A85019B91BEE7FF000FA6185 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
 		A85BFC471BDD4622008D1F1E /* SloggerOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = A85BFC461BDD4622008D1F1E /* SloggerOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A85BFC4E1BDD4622008D1F1E /* SloggerOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */; };
 		A85BFC5B1BDD46A6008D1F1E /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
@@ -91,7 +91,6 @@
 /* Begin PBXFileReference section */
 		A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDestination.swift; sourceTree = "<group>"; };
 		A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleDestination.swift; sourceTree = "<group>"; };
-		A82061111BEE614100487B2E /* WrappedFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedFileDestination.swift; sourceTree = "<group>"; };
 		A826330D1BE1271600293716 /* TextFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFileDestination.swift; sourceTree = "<group>"; };
 		A82633131BE20F9000293716 /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 		A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnsiDecorator.swift; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		A83C79E71BD6636800DA9F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A83C79F01BD6639A00DA9F07 /* Slogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slogger.swift; sourceTree = "<group>"; };
 		A84553791BDC084D00678385 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A85019B41BEE7E9200FA6185 /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SloggerOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A85BFC461BDD4622008D1F1E /* SloggerOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SloggerOSX.h; sourceTree = "<group>"; };
 		A85BFC481BDD4622008D1F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,7 +164,6 @@
 				A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */,
 				A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */,
 				A826330D1BE1271600293716 /* TextFileDestination.swift */,
-				A82061111BEE614100487B2E /* WrappedFileDestination.swift */,
 				A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */,
 			);
 			name = Destinations;
@@ -207,9 +206,10 @@
 		A83C79D81BD6636800DA9F07 /* Slogger */ = {
 			isa = PBXGroup;
 			children = (
-				A88102971BEBEAD100A639C4 /* Performance */,
+				A85019BA1BEE800700FA6185 /* Generators */,
 				A826330C1BE126D500293716 /* Decorators */,
 				A80A898A1BE0F6B200FE8F81 /* Destinations */,
+				A88102971BEBEAD100A639C4 /* Performance */,
 				A83C79F01BD6639A00DA9F07 /* Slogger.swift */,
 				A83C79D91BD6636800DA9F07 /* Slogger.h */,
 				A83C79DB1BD6636800DA9F07 /* Info.plist */,
@@ -224,6 +224,14 @@
 				A83C79E71BD6636800DA9F07 /* Info.plist */,
 			);
 			path = SloggerTests;
+			sourceTree = "<group>";
+		};
+		A85019BA1BEE800700FA6185 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				A85019B41BEE7E9200FA6185 /* Generator.swift */,
+			);
+			name = Generators;
 			sourceTree = "<group>";
 		};
 		A85BFC451BDD4622008D1F1E /* SloggerOSX */ = {
@@ -475,12 +483,12 @@
 				A83C79F11BD6639A00DA9F07 /* Slogger.swift in Sources */,
 				A8A53D9F1BDC2903009EA295 /* XCodeColorsDecorator.swift in Sources */,
 				A83C59E61BED2F8D0037B847 /* AnsiDecorator.swift in Sources */,
-				A82061121BEE614100487B2E /* WrappedFileDestination.swift in Sources */,
 				A82633141BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
 				A845537A1BDC084D00678385 /* Color.swift in Sources */,
 				A826330E1BE1271600293716 /* TextFileDestination.swift in Sources */,
+				A85019B51BEE7E9200FA6185 /* Generator.swift in Sources */,
 				A8CF46BB1BEE4E270013D2C7 /* JSONFileDestination.swift in Sources */,
 				A80A89891BE0F59B00FE8F81 /* BaseDestination.swift in Sources */,
 			);
@@ -496,12 +504,12 @@
 				A845537B1BDC085100678385 /* Color.swift in Sources */,
 				A83C59E71BED365F0037B847 /* AnsiDecorator.swift in Sources */,
 				A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */,
-				A82061131BEE614100487B2E /* WrappedFileDestination.swift in Sources */,
 				A8CF46BC1BEE4E2A0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A82633151BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */,
 				A8A9DAEF1BE0FB25000A9351 /* BaseDestination.swift in Sources */,
+				A85019B61BEE7FEE00FA6185 /* Generator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,12 +520,12 @@
 				A85BFC5B1BDD46A6008D1F1E /* Slogger.swift in Sources */,
 				A85BFC5C1BDD46A6008D1F1E /* ConsoleDestination.swift in Sources */,
 				A83C59E81BED365F0037B847 /* AnsiDecorator.swift in Sources */,
-				A82061141BEE614100487B2E /* WrappedFileDestination.swift in Sources */,
 				A82633161BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC5D1BDD46A6008D1F1E /* Color.swift in Sources */,
 				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC5F1BDD46A6008D1F1E /* MemoryDestination.swift in Sources */,
 				A82633101BE1271600293716 /* TextFileDestination.swift in Sources */,
+				A85019B71BEE7FEF00FA6185 /* Generator.swift in Sources */,
 				A8CF46BD1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A8A9DAF01BE0FB25000A9351 /* BaseDestination.swift in Sources */,
 			);
@@ -533,12 +541,12 @@
 				A85BFC621BDD472A008D1F1E /* Color.swift in Sources */,
 				A83C59E91BED36600037B847 /* AnsiDecorator.swift in Sources */,
 				A85BFC641BDD472A008D1F1E /* MemoryDestination.swift in Sources */,
-				A82061151BEE614100487B2E /* WrappedFileDestination.swift in Sources */,
 				A8CF46BE1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
 				A82633171BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A8A9DAF11BE0FB26000A9351 /* BaseDestination.swift in Sources */,
+				A85019B81BEE7FEF00FA6185 /* Generator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,12 +557,12 @@
 				A85BFC771BDD4B8B008D1F1E /* MemoryDestination.swift in Sources */,
 				A85BFC741BDD4B8B008D1F1E /* ConsoleDestination.swift in Sources */,
 				A83C59EA1BED36610037B847 /* AnsiDecorator.swift in Sources */,
-				A82061161BEE614100487B2E /* WrappedFileDestination.swift in Sources */,
 				A82633181BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC761BDD4B8B008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC731BDD4B8B008D1F1E /* Slogger.swift in Sources */,
 				A85BFC751BDD4B8B008D1F1E /* Color.swift in Sources */,
 				A82633121BE1271600293716 /* TextFileDestination.swift in Sources */,
+				A85019B91BEE7FF000FA6185 /* Generator.swift in Sources */,
 				A8CF46BF1BEE4E2C0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A8A9DAF21BE0FB27000A9351 /* BaseDestination.swift in Sources */,
 			);

@@ -10,21 +10,21 @@ import Foundation
 
 /**
  Base class implementing the destination protocol.  Subclasses must override *logString* function.
-*/
-public class BaseDestination : Destination {
+ */
+public class Destination {
 
-  /// Protocol property
+  /// A custom generator for this destination.  If not provided, the logger value will be used.
   public var decorator : Decorator?
 
-  /// Protocol property
+  /// A custom color map for this destination.  If not provided, the logger value will be used.
   public var generator : Generator?
 
-  /// Protocol property
+  /// A custom decorator for this destination.  If not provided, the logger value will be used.
   public var colorMap : ColorMap?
 
   /**
    Base initializer.
-   
+
    - Parameter generator: Generator to use for this destination.  If nil, uses the logger's generator.
    - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
    - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.

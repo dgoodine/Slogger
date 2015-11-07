@@ -13,7 +13,7 @@
     <a title="Configuration Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Slogger Docs</a> (95% documented)</p>
+        <p><a href="../../index.html">Slogger Docs</a> (89% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -31,13 +31,19 @@
           <a href="../../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../../Classes/BaseDestination.html">BaseDestination</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Classes/ConsoleDestination.html">ConsoleDestination</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Classes/Destination.html">Destination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Generator.html">Generator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Classes/JSONFileDestination.html">JSONFileDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes.html#/s:C7Slogger13JSONGenerator">JSONGenerator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Classes/MemoryDestination.html">MemoryDestination</a>
@@ -93,9 +99,6 @@
                 <a href="../../Protocols/Decorator.html">Decorator</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Protocols/Destination.html">Destination</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Protocols.html#/s:P7Slogger15SloggerCategory">SloggerCategory</a>
               </li>
             </ul>
@@ -122,9 +125,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Typealiases.html#/s:7Slogger9ColorSpec">ColorSpec</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Typealiases.html#/s:7Slogger9Generator">Generator</a>
               </li>
             </ul>
           </li>
@@ -176,53 +176,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:CC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler"></a>
-                    <a name="//apple_ref/swift/Alias/PostFileCloseHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:CC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler">PostFileCloseHandler</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A closure that is called after a file has been closed.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">PostFileCloseHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nv">path</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>path</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The path of the file just closed.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:CC7Slogger19TextFileDestination13Configuration20FileWrapperGenerator"></a>
                     <a name="//apple_ref/swift/Alias/FileWrapperGenerator" class="dashAnchor"></a>
                     <a class="token" href="#/s:CC7Slogger19TextFileDestination13Configuration20FileWrapperGenerator">FileWrapperGenerator</a>
@@ -257,6 +210,53 @@
                               <td>
                                 <div>
                                   <p>If <code>true</code> the file has just been opened.  If it is <code>false</code>, it is about to be closed.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:CC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler"></a>
+                    <a name="//apple_ref/swift/Alias/PostFileCloseHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:CC7Slogger19TextFileDestination13Configuration20PostFileCloseHandler">PostFileCloseHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A closure that is called after a file has been closed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">PostFileCloseHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nv">path</span> <span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path of the file just closed.</p>
 
                                 </div>
                               </td>
@@ -533,9 +533,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS2_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__"></a>
+                    <a name="/s:vCC7Slogger19TextFileDestination13Configuration9generatorGSqCS_9Generator_"></a>
                     <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration9generatorGSqFT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS2_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail_13dateFormatterCSo15NSDateFormatter_GSqSS__">generator</a>
+                    <a class="token" href="#/s:vCC7Slogger19TextFileDestination13Configuration9generatorGSqCS_9Generator_">generator</a>
                     </code>
                   </div>
                   <div class="height-container">

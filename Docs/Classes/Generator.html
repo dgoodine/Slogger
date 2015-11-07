@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>MemoryDestination Class Reference</title>
+    <title>Generator Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,8 +9,8 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/MemoryDestination" class="dashAnchor"></a>
-    <a title="MemoryDestination Class Reference"></a>
+    <a name="//apple_ref/swift/Class/Generator" class="dashAnchor"></a>
+    <a title="Generator Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Slogger Docs</a> (89% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Slogger Reference</a>
         <img id="carat" src="../img/carat.png" />
-        MemoryDestination Class Reference
+        Generator Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -133,16 +133,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>MemoryDestination</h1>
+            <h1>Generator</h1>
               <div class="declaration">
                 <div class="Swift">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MemoryDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Generator</span></code></pre>
 
                 </div>
               </div>
-            <p>An in-memory logging destination used by the test suite. 
-Provided as it might be a useful superclass for some use-cases (e.g. buffering lines for periodic
-transfer to some other output sink.</p>
+            <p>Base class for log entry generators.</p>
 
           </section>
           <section class="section task-group-section">
@@ -151,9 +149,9 @@ transfer to some other output sink.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger17MemoryDestination9lastIndexSi"></a>
-                    <a name="//apple_ref/swift/Property/lastIndex" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger17MemoryDestination9lastIndexSi">lastIndex</a>
+                    <a name="/s:OC7Slogger9Generator9ValueType"></a>
+                    <a name="//apple_ref/swift/Enum/ValueType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:OC7Slogger9Generator9ValueType">ValueType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -161,14 +159,15 @@ transfer to some other output sink.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The index of the last logged line.  Returns <em>-1</em> if the destination is empty.</p>
+                        <p>An enum for passing detail values to emitter functions.</p>
 
+                        <a href="../Classes/Generator/ValueType.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">lastIndex</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ValueType</span></code></pre>
 
                         </div>
                       </div>
@@ -178,9 +177,9 @@ transfer to some other output sink.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:sC7Slogger17MemoryDestination9subscriptFSiGSqSS_"></a>
-                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:sC7Slogger17MemoryDestination9subscriptFSiGSqSS_">subscript(_:)</a>
+                    <a name="/s:vC7Slogger9Generator13dateFormatterCSo15NSDateFormatter"></a>
+                    <a name="//apple_ref/swift/Property/dateFormatter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC7Slogger9Generator13dateFormatterCSo15NSDateFormatter">dateFormatter</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,14 +187,41 @@ transfer to some other output sink.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Subscript-based access to logging lines.</p>
+                        <p>Default date formatter</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">subscript</span> <span class="p">(</span><span class="nv">index</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">dateFormatter</span> <span class="p">:</span> <span class="kt">NSDateFormatter</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger9Generator8generateFS0_FT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail__GSqSS_"></a>
+                    <a name="//apple_ref/swift/Method/generate(message:category:override:level:date:function:file:line:details:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger9Generator8generateFS0_FT7messageSS8categoryGSqP__8overrideGSqOS_5Level_5levelS1_4dateCSo6NSDate8functionSS4fileSS4lineSi7detailsGSaOS_6Detail__GSqSS_">generate(message:category:override:level:date:function:file:line:details:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The generator function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">func</span> <span class="nf">generate</span> <span class="p">(</span><span class="n">message</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">,</span> <span class="nv">date</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">details</span> <span class="p">:</span> <span class="p">[</span><span class="kt">Detail</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -206,91 +232,38 @@ transfer to some other output sink.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>index</em>
+                                <em>message</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The index of the line to return</p>
+                                  <p>The message string at the logging site.</p>
 
                                 </div>
                               </td>
                             </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The logging output for the index or nil if the destination is empty or the index is out of bounds</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC7Slogger17MemoryDestination8lastLineGSqSS_"></a>
-                    <a name="//apple_ref/swift/Property/lastLine" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger17MemoryDestination8lastLineGSqSS_">lastLine</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The last logged line.  Returns <em>nil</em> if the destination is empty.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">lastLine</span> <span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC7Slogger17MemoryDestination9logStringFS0_FTSS5levelOS_5Level_T_"></a>
-                    <a name="//apple_ref/swift/Method/logString(_:level:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger17MemoryDestination9logStringFS0_FTSS5levelOS_5Level_T_">logString(_:level:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Protocol implementation.  Simply appends the string to an internal array.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">logString</span><span class="p">(</span><span class="nv">string</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
                             <tr>
                               <td>
                                 <code>
-                                <em>string</em>
+                                <em>category</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The line to be logged.</p>
+                                  <p>The category specified in the logging site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>override</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The override level.</p>
 
                                 </div>
                               </td>
@@ -303,7 +276,72 @@ transfer to some other output sink.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The level provided at the logging site.</p>
+                                  <p>The logging level of the site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>date</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The date of the logging event.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>function</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The function the logging site is in.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file the logging site is in.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in the file of the logging site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>details</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ordered array of detail enum values for information that should be output.</p>
 
                                 </div>
                               </td>
@@ -311,32 +349,10 @@ transfer to some other output sink.</p>
                           </tbody>
                         </table>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC7Slogger17MemoryDestination5clearFS0_FT_T_"></a>
-                    <a name="//apple_ref/swift/Method/clear()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger17MemoryDestination5clearFS0_FT_T_">clear()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Clear the logging history.</p>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A string representation of the generator output or <code>nil</code> to produce no output.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">clear</span> <span class="p">()</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>

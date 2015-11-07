@@ -12,7 +12,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (95% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (89% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -30,13 +30,19 @@
           <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/BaseDestination.html">BaseDestination</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/ConsoleDestination.html">ConsoleDestination</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/Destination.html">Destination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Generator.html">Generator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/JSONFileDestination.html">JSONFileDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:C7Slogger13JSONGenerator">JSONGenerator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/MemoryDestination.html">MemoryDestination</a>
@@ -92,9 +98,6 @@
                 <a href="Protocols/Decorator.html">Decorator</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/Destination.html">Destination</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Protocols.html#/s:P7Slogger15SloggerCategory">SloggerCategory</a>
               </li>
             </ul>
@@ -121,9 +124,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Typealiases.html#/s:7Slogger9ColorSpec">ColorSpec</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:7Slogger9Generator">Generator</a>
               </li>
             </ul>
           </li>
@@ -246,7 +246,7 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConsoleDestination</span> <span class="p">:</span> <span class="kt">BaseDestination</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ConsoleDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
@@ -280,7 +280,7 @@ transfer to some other output sink.</p>
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MemoryDestination</span> <span class="p">:</span> <span class="kt">BaseDestination</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MemoryDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>
@@ -317,7 +317,39 @@ transfer to some other output sink.</p>
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextFileDestination</span> <span class="p">:</span> <span class="kt">BaseDestination</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextFileDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C7Slogger9Generator"></a>
+                    <a name="//apple_ref/swift/Class/Generator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C7Slogger9Generator">Generator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Base class for log entry generators.</p>
+
+                        <a href="Classes/Generator.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Generator</span></code></pre>
 
                         </div>
                       </div>
@@ -348,6 +380,25 @@ transfer to some other output sink.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C7Slogger13JSONGenerator"></a>
+                    <a name="//apple_ref/swift/Class/JSONGenerator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C7Slogger13JSONGenerator">JSONGenerator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -355,9 +406,9 @@ transfer to some other output sink.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C7Slogger15BaseDestination"></a>
-                    <a name="//apple_ref/swift/Class/BaseDestination" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C7Slogger15BaseDestination">BaseDestination</a>
+                    <a name="/s:C7Slogger11Destination"></a>
+                    <a name="//apple_ref/swift/Class/Destination" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C7Slogger11Destination">Destination</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -367,13 +418,13 @@ transfer to some other output sink.</p>
                       <div class="abstract">
                         <p>Base class implementing the destination protocol.  Subclasses must override <em>logString</em> function.</p>
 
-                        <a href="Classes/BaseDestination.html" class="slightly-smaller">See more</a>
+                        <a href="Classes/Destination.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BaseDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Destination</span></code></pre>
 
                         </div>
                       </div>

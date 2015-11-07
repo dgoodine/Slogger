@@ -128,7 +128,7 @@ These are closures that output a log entry based on information from the logging
 
 The default uses the typical pattern:
 
-	- [2015-11-01 15:33:57.435 EDT] SloggerTests.swift:117 callIt [] Severe: Message...
+	- [2015-11-07 14:47:20.702 EST] SloggerTests.swift (82) callIt(category:) [] Error : String
 	
 List of supported generators (see the source for details):
 

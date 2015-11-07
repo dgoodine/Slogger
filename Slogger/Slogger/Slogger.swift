@@ -78,49 +78,6 @@ public enum Detail : Int {
   case Message
 }
 
-/**
- A type alias for generator closures.
- 
- - Important: The `override` parameter can be used to signify in the output that this is an override event. However, the
- `level` parameter should be used if the details call for it, since it corresponds to the level implicitly passed by the
- logging function at the logging site.  This will preserve decorator style appropriate for the level.
-
- - Parameter message: The message string at the logging site.
- - Parameter category: The category specified in the logging site.
- - Parameter override: The override level.
- - Parameter level: The logging level of the site.
- - Parameter date: The date of the logging event.
- - Parameter function: The function the logging site is in.
- - Parameter file: The file the logging site is in.
- - Parameter line: The line number in the file of the logging site.
- - Parameter details: The ordered array of detail enum values for information that should be output.
- - Parameter dateFormatter: The dateFormatter to use for formatting the current date.
-
- - Returns: A string representation of the generator output or `nil` to produce no output.
-
- */
-public typealias Generator = (message: String, category: Any?, override: Level?, level: Level, date: NSDate, function: String, file: String, line: Int, details : [Detail], dateFormatter: NSDateFormatter) -> String?
-
-/// The protocol for logging destinations.
-public protocol Destination {
-  /// A custom generator for this destination.  If not provided, the logger value will be used.
-  var generator : Generator? { get set }
-
-  /// A custom color map for this destination.  If not provided, the logger value will be used.
-  var colorMap : ColorMap? { get set }
-
-  /// A custom decorator for this destination.  If not provided, the logger value will be used.
-  var decorator : Decorator? { get set }
-
-  /**
-   The logging function.
-
-   - Parameter string: The fully generated and decorated log string for the event.
-   - Parameter level: The level of the logging site.  Provided for some special cases such as unit testing.
-   */
-  func logString(string : String, level: Level)
-}
-
 /// Protocol for type used to decorate generator output.
 public protocol Decorator {
 
@@ -161,9 +118,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
   /// The active, global operating level of the logger.
   public var level : Level
 
-  /// Formatter to use for dates.
-  public var dateFormatter : NSDateFormatter
-
   /// Local storage
   private var _details : [Detail] = [.Override, .Date, .File, .Line, .Function, .Category, .Level, .Message]
 
@@ -194,23 +148,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
     set { _destinations = newValue }
   }
 
-  /// Local Storage
-  private var _colorMap : ColorMap = [
-    .None : (colorFromHexString("02A8A8"), nil),
-    .Severe : (colorFromHexString("FF0000"), nil),
-    .Error : (colorFromHexString("FF5500"), nil),
-    .Warning : (colorFromHexString("FF03FB"), nil),
-    .Info : (colorFromHexString("008C31"), nil),
-    .Debug : (colorFromHexString("035FFF"), nil),
-    .Verbose : (colorFromHexString("555555"), nil),
-  ]
-
-  /// The current mapping of `Level` to `ColorSpec`
-  public var colorMap : ColorMap {
-    get { return _colorMap }
-    set { _colorMap = newValue }
-  }
-
   /// Number of events logged.
   public var hits : UInt64 = 0
 
@@ -232,18 +169,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
   - Parameter details: The detail for the generator to output at logging sites.
   */
   public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
-    var df = dateFormatter
-    if df == nil {
-      let template = "yyyy-MM-dd HH:mm:ss.SSS zzz"
-      let idf = NSDateFormatter()
-      idf.dateFormat = template
-      df = idf
-    }
-
     self.level = defaultLevel
-    self.dateFormatter = df!
     self.generator = defaultGenerator
-    self.consoleDestination = ConsoleDestination(colorMap: _colorMap, decorator: XCodeColorsDecorator())
+    self.consoleDestination = ConsoleDestination()
   	self._destinations = [consoleDestination]
 
     if let details = details {
@@ -289,57 +217,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   	- [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 myFunction(_:) [] Severe: String
    */
-  public let defaultGenerator : Generator = { (message, category, override, level, date, function, file, line, details, dateFormatter) -> String in
-    let str : NSMutableString = NSMutableString(capacity: 512)
-    var isFirst = true
-
-    for detail in details {
-      if isFirst {
-        isFirst = false
-      } else {
-        str.appendString(" ")
-      }
-
-      switch detail {
-
-      case .Override:
-        let prefix = (override != nil) ? "*" : "-"
-        str.appendString(prefix)
-
-      case .Category:
-        if category != nil {
-          str.appendString("[\(category!)]")
-        } else {
-          str.appendString("[]")
-        }
-
-      case .File:
-        var f = file as NSString
-        f = f.lastPathComponent
-        str.appendString("\(f as String)")
-
-      case .Line:
-        str.appendString("(\(line))")
-
-      case .Function:
-        str.appendString(function)
-
-      case .Level:
-        str.appendString("\(level)")
-
-      case .Date:
-        let dateString = dateFormatter.stringFromDate(date)
-        str.appendString("[\(dateString)]")
-
-      case .Message:
-        str.appendString(": ")
-        str.appendString(message)
-      }
-    }
-
-
-    return str as String
-  }
+  public let defaultGenerator : Generator = Generator()
 
   // MARK: Destinations
   /// The default consoleDestination.
@@ -366,16 +244,14 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
       for dest in self.destinations {
         let string : String?
-        if let gen = dest.generator {
-          string = gen(message: message, category: category, override: override, level: level, date: date,
-            function: function, file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
+        if let generator = dest.generator {
+          string = generator.generate(message: message, category: category, override: override, level: level, date: date,             function: function, file: file, line: line, details: self.details)
         }
         else if defaultString != nil {
           string = defaultString!
         }
         else {
-          string = self.generator(message: message, category: category, override: override, level: level, date: NSDate(),
-            function: function, file: file, line: line, details: self.details, dateFormatter: self.dateFormatter)
+          string = self.generator.generate(message: message, category: category, override: override, level: level, date: NSDate(), function: function, file: file, line: line, details: self.details)
           defaultString = string
         }
 
