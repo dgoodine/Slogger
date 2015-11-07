@@ -199,35 +199,16 @@ class SloggerTests: XCTestCase {
     self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
   }
 
+  func testXMLFileLogging () {
+    let dir = "~/Desktop/SloggerTestLogs" as NSString
+    let path = dir.stringByExpandingTildeInPath
+    let dest = XMLFileDestination(directory: path)
+
+    print("Testing JSON file logging to path: \(path)")
+    self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
+  }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

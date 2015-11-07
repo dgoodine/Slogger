@@ -21,6 +21,7 @@
 		A82633161BE20F9000293716 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82633131BE20F9000293716 /* PerformanceTest.swift */; };
 		A82633171BE20F9000293716 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82633131BE20F9000293716 /* PerformanceTest.swift */; };
 		A82633181BE20F9000293716 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82633131BE20F9000293716 /* PerformanceTest.swift */; };
+		A82F89561BEE902F003B0BBA /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
 		A83C59E61BED2F8D0037B847 /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */; };
 		A83C59E71BED365F0037B847 /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */; };
 		A83C59E81BED365F0037B847 /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */; };
@@ -58,6 +59,10 @@
 		A85BFC771BDD4B8B008D1F1E /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A86ED5B81BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
+		A8A11D1E1BEE946F00EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
+		A8A11D1F1BEE947000EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
+		A8A11D201BEE947000EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
+		A8A11D211BEE947100EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
 		A8A53D9F1BDC2903009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
 		A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
 		A8A9DAEF1BE0FB25000A9351 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* BaseDestination.swift */; };
@@ -93,6 +98,7 @@
 		A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleDestination.swift; sourceTree = "<group>"; };
 		A826330D1BE1271600293716 /* TextFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFileDestination.swift; sourceTree = "<group>"; };
 		A82633131BE20F9000293716 /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
+		A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLFileDestination.swift; sourceTree = "<group>"; };
 		A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnsiDecorator.swift; sourceTree = "<group>"; };
 		A83C79D61BD6636800DA9F07 /* Slogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Slogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83C79D91BD6636800DA9F07 /* Slogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Slogger.h; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */,
 				A826330D1BE1271600293716 /* TextFileDestination.swift */,
 				A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */,
+				A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */,
 			);
 			name = Destinations;
 			sourceTree = "<group>";
@@ -486,6 +493,7 @@
 				A82633141BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A80E06501BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
+				A82F89561BEE902F003B0BBA /* XMLFileDestination.swift in Sources */,
 				A845537A1BDC084D00678385 /* Color.swift in Sources */,
 				A826330E1BE1271600293716 /* TextFileDestination.swift in Sources */,
 				A85019B51BEE7E9200FA6185 /* Generator.swift in Sources */,
@@ -505,6 +513,7 @@
 				A83C59E71BED365F0037B847 /* AnsiDecorator.swift in Sources */,
 				A80F91081BDBF40F00589C79 /* Slogger.swift in Sources */,
 				A8CF46BC1BEE4E2A0013D2C7 /* JSONFileDestination.swift in Sources */,
+				A8A11D1E1BEE946F00EEEA2B /* XMLFileDestination.swift in Sources */,
 				A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A82633151BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */,
@@ -523,6 +532,7 @@
 				A82633161BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC5D1BDD46A6008D1F1E /* Color.swift in Sources */,
 				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
+				A8A11D1F1BEE947000EEEA2B /* XMLFileDestination.swift in Sources */,
 				A85BFC5F1BDD46A6008D1F1E /* MemoryDestination.swift in Sources */,
 				A82633101BE1271600293716 /* TextFileDestination.swift in Sources */,
 				A85019B71BEE7FEF00FA6185 /* Generator.swift in Sources */,
@@ -542,6 +552,7 @@
 				A83C59E91BED36600037B847 /* AnsiDecorator.swift in Sources */,
 				A85BFC641BDD472A008D1F1E /* MemoryDestination.swift in Sources */,
 				A8CF46BE1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */,
+				A8A11D201BEE947000EEEA2B /* XMLFileDestination.swift in Sources */,
 				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
 				A82633171BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */,
@@ -560,6 +571,7 @@
 				A82633181BE20F9000293716 /* PerformanceTest.swift in Sources */,
 				A85BFC761BDD4B8B008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A85BFC731BDD4B8B008D1F1E /* Slogger.swift in Sources */,
+				A8A11D211BEE947100EEEA2B /* XMLFileDestination.swift in Sources */,
 				A85BFC751BDD4B8B008D1F1E /* Color.swift in Sources */,
 				A82633121BE1271600293716 /* TextFileDestination.swift in Sources */,
 				A85019B91BEE7FF000FA6185 /* Generator.swift in Sources */,
