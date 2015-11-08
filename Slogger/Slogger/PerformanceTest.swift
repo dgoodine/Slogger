@@ -61,19 +61,30 @@ public class PerformanceTest {
 
   /// Test Function
   public func test () {
-    testWithDestinations(nil, 100000, .Verbose)
-    testWithDestinations(MemoryDestination(), 10000, .Severe)
-    testWithDestinations(MemoryDestination(), 10000, .Verbose)
-    testWithDestinations(ConsoleDestination(), 10000, .Severe)
-    testWithDestinations(ConsoleDestination(), 10000, .Verbose)
+    let dir = NSTemporaryDirectory().stringByAppendingString("/SloggerTestLogs") as NSString
+    let path = dir.stringByExpandingTildeInPath
+    print("Testing JSON: \(path)")
+    testWithDestinations(JSONFileDestination(directory: path), 1000, .Severe)
+    testWithDestinations(JSONFileDestination(directory: path), 1000, .Verbose)
+    print("Testing XML: \(path)")
+    testWithDestinations(XMLFileDestination(directory: path), 1000, .Severe)
+    testWithDestinations(XMLFileDestination(directory: path), 1000, .Verbose)
+    self.testWithDestinations(nil, 100000, .Verbose)
+    self.testWithDestinations(MemoryDestination(), 1000, .Severe)
+    self.testWithDestinations(MemoryDestination(), 1000, .Verbose)
+    self.testWithDestinations(ConsoleDestination(), 1000, .Severe)
+    self.testWithDestinations(ConsoleDestination(), 1000, .Verbose)
 
-    print("\nMarkdown table output:\n")
-    print("Device | Destinations | Level | Can Log | log.Debug(.Only, \"Message\")")
-    print("--- | --- | --- | --- | ---")
-    for mdString in mdStrings {
-      print(mdString)
+    let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+    dispatch_after(delay, dispatch_get_main_queue()) {
+      print("\nMarkdown table output:\n")
+      print("Device | Destinations | Level | Can Log | log.Debug(.Only, \"Message\")")
+      print("--- | --- | --- | --- | ---")
+      for mdString in self.mdStrings {
+        print(mdString)
+      }
+      print("")
     }
-    print("")
   }
 
   /// Private test implementation.

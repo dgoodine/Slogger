@@ -12,7 +12,7 @@
     <a title="Slogger  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (89% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (87% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -55,6 +55,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/TextFileDestination.html">TextFileDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/XMLFileDestination.html">XMLFileDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:C7Slogger12XMLGenerator">XMLGenerator</a>
               </li>
             </ul>
           </li>
@@ -150,20 +156,19 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>0.1.x</td>
-<td>Available</td>
-<td><strong>Pre-release</strong> (for sorting out CocoaPods/Carthage support).</td>
-</tr>
-<tr>
 <td>1.0</td>
 <td>In Progress</td>
 <td>Finishing up for initial release</td>
+</tr>
+<tr>
+<td>0.1.x</td>
+<td>Available</td>
+<td><strong>Pre-release</strong> (CocoaPods/Carthage support and TextFileDestination variants).</td>
 </tr>
 </tbody></table>
 <a href='#todo' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='todo'>TODO</h2>
 
 <ul>
-<li>Finish FileDestination (<em>currently not supported</em>)</li>
 <li>Add <em>Carthage</em> support.</li>
 <li>Make docset</li>
 </ul>
@@ -173,7 +178,7 @@
 
 <p><em>Slogger</em> uses much the same approach and identical function signatures as <em>XCGLogger</em>, so they are interchangeable without modifying existing logging sites. Be sure to check the <strong>Advanced Features</strong> section below – particularly <em>Radioactive Logging</em> and <em>Categories</em> – to see why I decided to go this route.</p>
 
-<p>Also note: Slogger is completely API independent, except for the Swift standard library.  So it can be used in Mac OS X projects projects as well.</p>
+<p>Also note: Slogger is completely API independent, except for the Swift standard library and the <code>Foundation</code> import.  So it can be used in Mac OS X projects projects as well.  (Mac OS X support for <em>CocoaPods</em> and <em>Carthage</em> pending.)</p>
 
 <p><strong>Slogger requires Xcode 7 and Swift 2.1.</strong></p>
 <a href='#general_info' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='general_info'>General Info</h2>
@@ -227,7 +232,7 @@ log.debug() { "Enter" }
 
 <p><strong>Important Note</strong>: The resulting closures <strong>are not evaluated if the logging site doesn&rsquo;t pass the level threshold</strong>.  So don&rsquo;t worry about expensive computations inside them.  And don&rsquo;t rely on them for side-effects.</p>
 
-<p>For completeness, functions are provided for the .None level that have no-op implementations.  Thus the only overhead would be allocating the closure on the stack and the function call.</p>
+<p>For completeness, functions are provided for the .None level that have no-op implementations.  Thus the only overhead would be allocating the closure on the stack and the function call.  You can use them to effectively disable certain logging sites with the highest efficiency.  (<em>See the Performance sections below for more details.</em>)</p>
 <pre class="highlight plaintext"><code>log.none("Enter")
 log.none() { "Enter" }
 </code></pre>
@@ -248,11 +253,6 @@ log.none() { "Enter" }
 <td>The active, global level of the logger instance.</td>
 </tr>
 <tr>
-<td>dateFormatter</td>
-<td>NSDateFormatter</td>
-<td>Formatter to use for dates.</td>
-</tr>
-<tr>
 <td>details</td>
 <td>[Detail]</td>
 <td>Determines what to output and in what order.</td>
@@ -260,7 +260,7 @@ log.none() { "Enter" }
 <tr>
 <td>categories</td>
 <td>[T : Level]</td>
-<td>A mapping between categories and levels (see below)</td>
+<td>A mapping between categories and levels.</td>
 </tr>
 <tr>
 <td>generator</td>
@@ -273,11 +273,6 @@ log.none() { "Enter" }
 <td>Destinations this logger will write to.  Defaults to [<em>consoleDestination</em>].</td>
 </tr>
 <tr>
-<td>colorMap</td>
-<td>ColorMap</td>
-<td>The current colorMap.</td>
-</tr>
-<tr>
 <td>defaultGenerator</td>
 <td>Generator</td>
 <td>Default generator implementation.</td>
@@ -285,7 +280,7 @@ log.none() { "Enter" }
 <tr>
 <td>consoleDestination</td>
 <td>Destination</td>
-<td>The default console implementation with an XcodeColors decorator.</td>
+<td>The default console implementation with an <em>XcodeColors</em> decorator.</td>
 </tr>
 <tr>
 <td>hits</td>
@@ -302,43 +297,60 @@ log.none() { "Enter" }
 <a href='#important_implementation_note' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='important_implementation_note'>*** Important Implementation Note ***</h3>
 
 <p><em>Slogger</em> uses a private, serial dispatch queue for most of its work, including calls to the 
-generator, decorator, and all logging destinations.  The only code executed synchronously by the logging functions is
-the threshold evaluation (and only if <code>destinations.count &gt; 0</code>) and, if that passes, evaulation of the closure
-to produce the message from the logging site.  All other work is performed on a separate thread serially.</p>
+generator, decorator, and all logging destinations.  The only code executed synchronously by the
+logging functions is the threshold evaluation (and only if <code>destinations.count &gt; 0</code>) and,
+if that passes, evaulation of the closure to produce the message from the logging site.</p>
 
-<p>Thus, all <em>Slogger</em> types are inherently thread-safe. If you decide to implement your own, you can do so
-without concern about concurrency issues. However, if you create a custom implementation of any type that requires
-code be executed on the main thread, you <strong>MUST</strong> wrap that code inside a <code>dispatch_async</code> call to the main queue.</p>
+<p>Thus, all <em>Slogger</em> types are inherently thread-safe. If you decide to implement your own, you can
+do so without concern for concurrency issues. However, if you create a custom implementation
+of any type that requires code be executed on the main thread, you <strong>MUST</strong> wrap that code inside a
+<code>dispatch_async</code> call to the main queue.</p>
 <a href='#destinations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='destinations'>Destinations</h3>
 
-<p>The <em>Destination</em> protocol allows you to write your own log destinations and add them to the logger. The following destinations are provided:</p>
+<p>The <em>Destination</em> class allows you to write your own log destination subclasses and add them to the logger. The following destinations are provided in the implementation:</p>
 
 <table><thead>
 <tr>
-<th>Destination</th>
+<th>Class</th>
 <th>Status</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Console</td>
-<td>Supported</td>
+<td>ConsoleDestination</td>
+<td>✔️</td>
 </tr>
 <tr>
-<td>Memory</td>
-<td>Supported</td>
+<td>MemoryDestination</td>
+<td>✔️</td>
 </tr>
 <tr>
-<td>File</td>
-<td>Coming Soon™</td>
+<td>TextFileDestination</td>
+<td>✔️ (mimics ConsoleDestination behavior w/o decoration)</td>
 </tr>
 <tr>
-<td>Network</td>
+<td>JSONFileDestination</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>XMLFileDestination</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>TabFileDestination</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>CSVFileDestination</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>NetworkDestination</td>
 <td>Planned but no ETA</td>
 </tr>
 </tbody></table>
 <a href='#generators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='generators'>Generators</h3>
 
-<p>These are closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.</p>
+<p>These are classes that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.</p>
 
 <p>The default uses the typical pattern:</p>
 <pre class="highlight plaintext"><code>- [2015-11-07 14:47:20.702 EST] SloggerTests.swift (82) callIt(category:) [] Error : String
@@ -353,24 +365,24 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 </tr>
 </thead><tbody>
 <tr>
-<td>defaultGenerator</td>
-<td>Supported</td>
+<td>Generator</td>
+<td>✔️</td>
 </tr>
 <tr>
-<td>jsonGenerator</td>
-<td>Coming Soon™</td>
+<td>JSONGenerator</td>
+<td>✔️</td>
 </tr>
 <tr>
-<td>xmlGenerator</td>
-<td>Coming Soon™</td>
+<td>XMLGenerator</td>
+<td>✔️</td>
 </tr>
 <tr>
-<td>tabGenerator</td>
-<td>Coming Soon™</td>
+<td>TabGenerator</td>
+<td>✔️</td>
 </tr>
 <tr>
-<td>csvGenerator</td>
-<td>Coming Soon™</td>
+<td>CSVGenerator</td>
+<td>✔️</td>
 </tr>
 </tbody></table>
 <a href='#details' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='details'>Details</h3>
@@ -378,10 +390,8 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <p>You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.</p>
 
 <p>The default value includes all available <em>Detail</em> values, in a typical order:</p>
-<pre class="highlight plaintext"><code>[.Date, .File, .Function, .Category, .Level]
+<pre class="highlight plaintext"><code>[.Override, .Date, .File, .Line, .Function, .Category, .Level, .Message]
 </code></pre>
-
-<p>The inclusion of the message at the logging site is implicit.</p>
 <a href='#configurable_decorators' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_decorators'>Configurable Decorators</h3>
 
 <p>You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.</p>
@@ -401,12 +411,14 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <tr>
 <td>ANSI</td>
 <td>On Hold</td>
-<td>Not sure how useful this is for the trouble.</td>
+<td>Currently trying to sort out supporting this.</td>
 </tr>
 </tbody></table>
 <a href='#configurable_colormaps' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='configurable_colormaps'>Configurable Colormaps</h3>
 
-<p>Make your own color map to customize log line color by <em>Level</em> in a platform- and decorator-independent way.  See the <em>ColorMap</em> type for more information.  (Note: You can use the <em>XcodeColorsDecorator</em> class yourself for non-log use in your console without writing your own.)</p>
+<p>Make your own color map to customize log entry color by <em>Level</em> in a platform- and decorator-independent
+way.  See the <em>ColorMap</em> type for more information.  (Note: You can use the <em>XcodeColorsDecorator</em>
+class for non-log use in your console without writing your own.)</p>
 <a href='#radioactive_logging' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='radioactive_logging'>Radioactive Logging</h3>
 
 <p>Radioactive logging allows logging to execute based on evaluation of an optional <em>override</em> value at logging sites.  If the <em>override</em> value is non-nil, it is evaluated first. If the level of the logging function is less than or equal to the <em>override</em> value, the site will be logged.  If not, logging threshold evaluation will proceed by the normal process.</p>
@@ -481,6 +493,27 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <td>1µs</td>
 </tr>
 <tr>
+<td>[ConsoleDestination]</td>
+<td>Severe</td>
+<td>false</td>
+<td>370ns</td>
+<td>1µs</td>
+</tr>
+<tr>
+<td>[JSONFileDestination]</td>
+<td>Severe</td>
+<td>false</td>
+<td>463ns</td>
+<td>1µs</td>
+</tr>
+<tr>
+<td>[XMLFileDestination]</td>
+<td>Severe</td>
+<td>false</td>
+<td>425ns</td>
+<td>1µs</td>
+</tr>
+<tr>
 <td>[MemoryDestination]</td>
 <td>Verbose</td>
 <td>true</td>
@@ -489,17 +522,24 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 </tr>
 <tr>
 <td>[ConsoleDestination]</td>
-<td>Severe</td>
-<td>false</td>
-<td>370ns</td>
-<td>1µs</td>
-</tr>
-<tr>
-<td>[ConsoleDestination]</td>
 <td>Verbose</td>
 <td>true</td>
 <td>4µs</td>
 <td>15µs</td>
+</tr>
+<tr>
+<td>[JSONFileDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>4µs</td>
+<td>10µs</td>
+</tr>
+<tr>
+<td>[XMLFileDestination]</td>
+<td>Verbose</td>
+<td>true</td>
+<td>12µs</td>
+<td>16µs</td>
 </tr>
 </tbody></table>
 
@@ -513,19 +553,19 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
 <table><thead>
 <tr>
 <th>Means</th>
-<th>Status</th>
+<th>Version</th>
 <th>Comment</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Github</td>
-<td>Supported</td>
+<td>v0.1.1</td>
 <td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
 </tr>
 <tr>
 <td>Cocoapods</td>
-<td>In process</td>
-<td>v0.1 (Pre-release) <strong>Mac OS X not yet available.</strong></td>
+<td>v0.1.1</td>
+<td><strong>Mac OS X framework not yet available.</strong></td>
 </tr>
 <tr>
 <td>Carthage</td>

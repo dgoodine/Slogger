@@ -6,6 +6,11 @@ AnsiDecorator.swift
 ConsoleDestination.swift
 	public init (colorMap: ColorMap = defaultColorMap, decorator: Decorator = XCodeColorsDecorator())
 	public override func logString(string : String, level: Level)
+XMLFileDestination.swift
+	public class XMLFileDestination : TextFileDestination
+	public class XMLConfiguration :  Configuration
+	public init ()
+	public class XMLGenerator : Generator
 Generator.swift
 	case StringValue (key: Detail, value: String)
 	case BoolValue (key: Detail, value: Bool)

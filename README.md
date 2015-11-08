@@ -9,11 +9,10 @@ A simple, fast and flexible logging framework for Swift.
 
 Version | Status | Comments
 --- | --- | ---
-0.1.x | Available | **Pre-release** (for sorting out CocoaPods/Carthage support).
 1.0 | In Progress | Finishing up for initial release
+0.1.x | Available | **Pre-release** (CocoaPods/Carthage support and TextFileDestination variants).
 
 ## TODO
-- Finish FileDestination (*currently not supported*)
 - Add *Carthage* support.
 - Make docset
 
@@ -23,7 +22,7 @@ When I started doing serious Swift development, I naturally looked around for a 
 
 *Slogger* uses much the same approach and identical function signatures as *XCGLogger*, so they are interchangeable without modifying existing logging sites. Be sure to check the **Advanced Features** section below – particularly *Radioactive Logging* and *Categories* – to see why I decided to go this route.
 
-Also note: Slogger is completely API independent, except for the Swift standard library.  So it can be used in Mac OS X projects projects as well.
+Also note: Slogger is completely API independent, except for the Swift standard library and the `Foundation` import.  So it can be used in Mac OS X projects projects as well.  (Mac OS X support for *CocoaPods* and *Carthage* pending.)
 
 **Slogger requires Xcode 7 and Swift 2.1.**
 
@@ -78,7 +77,7 @@ Each log level has *autoclosure* and *noescape* trailing closure implementations
 	
 **Important Note**: The resulting closures **are not evaluated if the logging site doesn't pass the level threshold**.  So don't worry about expensive computations inside them.  And don't rely on them for side-effects.
 
-For completeness, functions are provided for the .None level that have no-op implementations.  Thus the only overhead would be allocating the closure on the stack and the function call.
+For completeness, functions are provided for the .None level that have no-op implementations.  Thus the only overhead would be allocating the closure on the stack and the function call.  You can use them to effectively disable certain logging sites with the highest efficiency.  (*See the Performance sections below for more details.*)
 
 	log.none("Enter")
 	log.none() { "Enter" }
@@ -89,14 +88,12 @@ The following properties of each log instance are exposed and have read/write ac
 Property | Type | Comments
 --- | --- | ---
 level | Level | The active, global level of the logger instance.
-dateFormatter | NSDateFormatter | Formatter to use for dates.
 details | [Detail] | Determines what to output and in what order.
-categories | [T : Level] | A mapping between categories and levels (see below)
+categories | [T : Level] | A mapping between categories and levels.
 generator | Generator | Current generator.  Defaults to *defaultGenerator*.
 destinations | [Destination] | Destinations this logger will write to.  Defaults to [*consoleDestination*].
-colorMap | ColorMap | The current colorMap.
 defaultGenerator | Generator | Default generator implementation.
-consoleDestination | Destination | The default console implementation with an XcodeColors decorator.
+consoleDestination | Destination | The default console implementation with an *XcodeColors* decorator.
 hits | UInt64 | Number of events logged.
 misses | UInt64 | Number of events not logged due to logging threshold evaluation.
 
@@ -105,26 +102,31 @@ misses | UInt64 | Number of events not logged due to logging threshold evaluatio
 ### *** Important Implementation Note ***
 
 *Slogger* uses a private, serial dispatch queue for most of its work, including calls to the 
-generator, decorator, and all logging destinations.  The only code executed synchronously by the logging functions is
-the threshold evaluation (and only if `destinations.count > 0`) and, if that passes, evaulation of the closure
-to produce the message from the logging site.  All other work is performed on a separate thread serially.
+generator, decorator, and all logging destinations.  The only code executed synchronously by the
+logging functions is the threshold evaluation (and only if `destinations.count > 0`) and,
+if that passes, evaulation of the closure to produce the message from the logging site.
 
-Thus, all *Slogger* types are inherently thread-safe. If you decide to implement your own, you can do so
-without concern about concurrency issues. However, if you create a custom implementation of any type that requires
-code be executed on the main thread, you **MUST** wrap that code inside a `dispatch_async` call to the main queue.
+Thus, all *Slogger* types are inherently thread-safe. If you decide to implement your own, you can
+do so without concern for concurrency issues. However, if you create a custom implementation
+of any type that requires code be executed on the main thread, you **MUST** wrap that code inside a
+`dispatch_async` call to the main queue.
 
 ### Destinations
-The *Destination* protocol allows you to write your own log destinations and add them to the logger. The following destinations are provided:
+The *Destination* class allows you to write your own log destination subclasses and add them to the logger. The following destinations are provided in the implementation:
 
-Destination | Status
+Class | Status
 --- | ---
-Console | Supported
-Memory | Supported
-File | Coming Soon™
-Network | Planned but no ETA
+ConsoleDestination | ✔️
+MemoryDestination | ✔️
+TextFileDestination | ✔️ (mimics ConsoleDestination behavior w/o decoration)
+JSONFileDestination | ✔️
+XMLFileDestination | ✔️
+TabFileDestination | ✔️
+CSVFileDestination | ✔️
+NetworkDestination | Planned but no ETA
 
 ### Generators
-These are closures that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.
+These are classes that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.
 
 The default uses the typical pattern:
 
@@ -134,31 +136,31 @@ List of supported generators (see the source for details):
 
 Generator | Status
 --- | ---
-defaultGenerator | Supported
-jsonGenerator | Coming Soon™
-xmlGenerator | Coming Soon™
-tabGenerator | Coming Soon™
-csvGenerator | Coming Soon™
+Generator | ✔️
+JSONGenerator | ✔️
+XMLGenerator | ✔️
+TabGenerator | ✔️
+CSVGenerator | ✔️
 
 ### Details
 You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
 
 The default value includes all available *Detail* values, in a typical order:
 
-	[.Date, .File, .Function, .Category, .Level]
+	[.Override, .Date, .File, .Line, .Function, .Category, .Level, .Message]
 	
-The inclusion of the message at the logging site is implicit.
-
 ### Configurable Decorators
 You can supply a decorator that will further adjust the format of the generator output.  These are configured per destination.
 
 Decorators | Status | Info
 --- | --- | ---
 XcodeColors | Supported | Get [*XcodeColors*](https://github.com/robbiehanson/XcodeColors).
-ANSI | On Hold | Not sure how useful this is for the trouble.
+ANSI | On Hold | Currently trying to sort out supporting this.
 
 ### Configurable Colormaps
-Make your own color map to customize log line color by *Level* in a platform- and decorator-independent way.  See the *ColorMap* type for more information.  (Note: You can use the *XcodeColorsDecorator* class yourself for non-log use in your console without writing your own.)
+Make your own color map to customize log entry color by *Level* in a platform- and decorator-independent
+way.  See the *ColorMap* type for more information.  (Note: You can use the *XcodeColorsDecorator*
+class for non-log use in your console without writing your own.)
 
 ### Radioactive Logging
 Radioactive logging allows logging to execute based on evaluation of an optional *override* value at logging sites.  If the *override* value is non-nil, it is evaluated first. If the level of the logging function is less than or equal to the *override* value, the site will be logged.  If not, logging threshold evaluation will proceed by the normal process.
@@ -212,24 +214,26 @@ Destinations | Level | Can Log | Simulator | iPhone 6
 --- | --- | --- | --- | ---
 []                   | Verbose | true  | 53ns  | 108ns
 [MemoryDestination]  | Severe  | false | 374ns | 1µs
-[MemoryDestination]  | Verbose | true  | 3µs   | 8µs
 [ConsoleDestination] | Severe  | false | 370ns | 1µs
+[JSONFileDestination] | Severe | false | 463ns | 1µs
+[XMLFileDestination] | Severe | false | 425ns | 1µs
+[MemoryDestination]  | Verbose | true  | 3µs   | 8µs
 [ConsoleDestination] | Verbose | true  | 4µs   | 15µs
+[JSONFileDestination] | Verbose | true | 4µs | 10µs
+[XMLFileDestination] | Verbose | true | 12µs | 16µs
 
 It's clear from the timing that if you want to completely turn off logging in the most efficient way, set the *destinations* property to an empty array.  This avoids even performing the level threshold test.
 
 It should be noted that the timing for where *Can Log* is *true* does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via dispatch_async to a private, serial queue.
 
-
 ## How To Get it
 Here's how you can get *Slogger* if you want to give it a try:
 
-Means | Status | Comment
---- | --- | ---
-Github | Supported | https://github.com/dgoodine/Slogger
-Cocoapods | In process | v0.1 (Pre-release) **Mac OS X not yet available.**
+Means |  Version | Comment
+--- |  --- | ---
+Github | v0.1.1 | https://github.com/dgoodine/Slogger
+Cocoapods | v0.1.1 | **Mac OS X framework not yet available.**
 Carthage | In process | 
-
 
 ## Feedback
 Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.

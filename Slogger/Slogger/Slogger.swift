@@ -165,10 +165,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
   The default initializer.
 
   - Parameter defaultLevel: Sets the 'level' property to this value.
-  - Parameter dateFormatter: The date formatter to use for dates.  It has locale independent default.
   - Parameter details: The detail for the generator to output at logging sites.
   */
-  public init (defaultLevel : Level, dateFormatter : NSDateFormatter? = nil, details : [Detail]? = nil) {
+  public init (defaultLevel : Level, details : [Detail]? = nil) {
     self.level = defaultLevel
     self.generator = defaultGenerator
     self.consoleDestination = ConsoleDestination()
