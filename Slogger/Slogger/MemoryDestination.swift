@@ -34,6 +34,11 @@ public class MemoryDestination : Destination {
   /// Storage
   private var lines : [String] = []
 
+  // MARK - Initializer
+  override init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+    super.init(details: details, generator: generator, colorMap: colorMap, decorator: decorator)
+  }
+
   // MARK - Functions
   /**
   Protocol implementation.  Simply appends the string to an internal array.

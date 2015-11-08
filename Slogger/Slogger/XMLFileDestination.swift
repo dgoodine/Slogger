@@ -12,8 +12,8 @@ public class XMLFileDestination : TextFileDestination {
 
   public class XMLConfiguration :  Configuration {
 
-    public init () {
-      super.init()
+    public init (generator: Generator = XMLGenerator()) {
+      super.init(generator: generator)
       self.fileExtension = "xml"
       self.entryDelimiter = "\n"
       self.fileWrapperGenerator = { (isPreamble) in
@@ -30,7 +30,6 @@ public class XMLFileDestination : TextFileDestination {
 
   init(directory: String, config: XMLConfiguration = XMLConfiguration()) {
     super.init(directory: directory, config: config)
-    self.generator = XMLGenerator()
   }
 }
 

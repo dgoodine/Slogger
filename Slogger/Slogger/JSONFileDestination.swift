@@ -13,7 +13,7 @@ public class JSONFileDestination : TextFileDestination {
   public class JSONConfiguration :  Configuration {
 
     public init () {
-      super.init()
+      super.init(generator: JSONGenerator())
       self.fileExtension = "json"
       self.entryDelimiter = ",\n"
       self.fileWrapperGenerator = { (isPreamble) in
@@ -24,7 +24,6 @@ public class JSONFileDestination : TextFileDestination {
 
   init(directory: String, config: JSONConfiguration = JSONConfiguration()) {
     super.init(directory: directory, config: config)
-    self.generator = JSONGenerator()
   }
 }
 

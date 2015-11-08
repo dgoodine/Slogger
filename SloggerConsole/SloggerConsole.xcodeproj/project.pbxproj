@@ -11,13 +11,15 @@
 		A83C5A121BED38F80037B847 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A091BED38F80037B847 /* Color.swift */; };
 		A83C5A131BED38F80037B847 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */; };
 		A83C5A141BED38F80037B847 /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */; };
-		A83C5A151BED38F80037B847 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0C1BED38F80037B847 /* BaseDestination.swift */; };
 		A83C5A161BED38F80037B847 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0D1BED38F80037B847 /* ConsoleDestination.swift */; };
 		A83C5A171BED38F80037B847 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0E1BED38F80037B847 /* MemoryDestination.swift */; };
 		A83C5A181BED38F80037B847 /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0F1BED38F80037B847 /* TextFileDestination.swift */; };
 		A83C5A191BED38F80037B847 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A101BED38F80037B847 /* Slogger.swift */; };
 		A8A11D241BEEED9A00EEEA2B /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D221BEEED9A00EEEA2B /* JSONFileDestination.swift */; };
 		A8A11D251BEEED9A00EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D231BEEED9A00EEEA2B /* XMLFileDestination.swift */; };
+		A8A11D291BEF040200EEEA2B /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D281BEF040200EEEA2B /* Destination.swift */; };
+		A8A11D371BEF08A700EEEA2B /* CSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D351BEF08A700EEEA2B /* CSVFileDestination.swift */; };
+		A8A11D381BEF08A700EEEA2B /* TSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D361BEF08A700EEEA2B /* TSVFileDestination.swift */; };
 		A8AC59931BED1C8200DBC78E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AC59921BED1C8200DBC78E /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,13 +40,15 @@
 		A83C5A091BED38F80037B847 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = ../Slogger/Slogger/Color.swift; sourceTree = "<group>"; };
 		A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCodeColorsDecorator.swift; path = ../Slogger/Slogger/XCodeColorsDecorator.swift; sourceTree = "<group>"; };
 		A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnsiDecorator.swift; path = ../Slogger/Slogger/AnsiDecorator.swift; sourceTree = "<group>"; };
-		A83C5A0C1BED38F80037B847 /* BaseDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseDestination.swift; path = ../Slogger/Slogger/BaseDestination.swift; sourceTree = "<group>"; };
 		A83C5A0D1BED38F80037B847 /* ConsoleDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsoleDestination.swift; path = ../Slogger/Slogger/ConsoleDestination.swift; sourceTree = "<group>"; };
 		A83C5A0E1BED38F80037B847 /* MemoryDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryDestination.swift; path = ../Slogger/Slogger/MemoryDestination.swift; sourceTree = "<group>"; };
 		A83C5A0F1BED38F80037B847 /* TextFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFileDestination.swift; path = ../Slogger/Slogger/TextFileDestination.swift; sourceTree = "<group>"; };
 		A83C5A101BED38F80037B847 /* Slogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slogger.swift; path = ../Slogger/Slogger/Slogger.swift; sourceTree = "<group>"; };
 		A8A11D221BEEED9A00EEEA2B /* JSONFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONFileDestination.swift; path = ../Slogger/Slogger/JSONFileDestination.swift; sourceTree = "<group>"; };
 		A8A11D231BEEED9A00EEEA2B /* XMLFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMLFileDestination.swift; path = ../Slogger/Slogger/XMLFileDestination.swift; sourceTree = "<group>"; };
+		A8A11D281BEF040200EEEA2B /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Destination.swift; path = ../Slogger/Slogger/Destination.swift; sourceTree = "<group>"; };
+		A8A11D351BEF08A700EEEA2B /* CSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CSVFileDestination.swift; path = ../Slogger/Slogger/CSVFileDestination.swift; sourceTree = "<group>"; };
+		A8A11D361BEF08A700EEEA2B /* TSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TSVFileDestination.swift; path = ../Slogger/Slogger/TSVFileDestination.swift; sourceTree = "<group>"; };
 		A8AC598F1BED1C8200DBC78E /* slogger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = slogger; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8AC59921BED1C8200DBC78E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,16 +67,18 @@
 		A83C5A071BED38DE0037B847 /* Slogger */ = {
 			isa = PBXGroup;
 			children = (
-				A8A11D221BEEED9A00EEEA2B /* JSONFileDestination.swift */,
-				A8A11D231BEEED9A00EEEA2B /* XMLFileDestination.swift */,
 				A83C5A081BED38F80037B847 /* PerformanceTest.swift */,
 				A83C5A091BED38F80037B847 /* Color.swift */,
 				A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */,
 				A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */,
-				A83C5A0C1BED38F80037B847 /* BaseDestination.swift */,
+				A8A11D281BEF040200EEEA2B /* Destination.swift */,
 				A83C5A0D1BED38F80037B847 /* ConsoleDestination.swift */,
 				A83C5A0E1BED38F80037B847 /* MemoryDestination.swift */,
 				A83C5A0F1BED38F80037B847 /* TextFileDestination.swift */,
+				A8A11D221BEEED9A00EEEA2B /* JSONFileDestination.swift */,
+				A8A11D231BEEED9A00EEEA2B /* XMLFileDestination.swift */,
+				A8A11D351BEF08A700EEEA2B /* CSVFileDestination.swift */,
+				A8A11D361BEF08A700EEEA2B /* TSVFileDestination.swift */,
 				A83C5A101BED38F80037B847 /* Slogger.swift */,
 			);
 			name = Slogger;
@@ -162,15 +168,17 @@
 			files = (
 				A83C5A111BED38F80037B847 /* PerformanceTest.swift in Sources */,
 				A83C5A131BED38F80037B847 /* XCodeColorsDecorator.swift in Sources */,
+				A8A11D291BEF040200EEEA2B /* Destination.swift in Sources */,
 				A83C5A161BED38F80037B847 /* ConsoleDestination.swift in Sources */,
 				A8AC59931BED1C8200DBC78E /* main.swift in Sources */,
+				A8A11D371BEF08A700EEEA2B /* CSVFileDestination.swift in Sources */,
 				A8A11D241BEEED9A00EEEA2B /* JSONFileDestination.swift in Sources */,
 				A83C5A121BED38F80037B847 /* Color.swift in Sources */,
 				A8A11D251BEEED9A00EEEA2B /* XMLFileDestination.swift in Sources */,
 				A83C5A181BED38F80037B847 /* TextFileDestination.swift in Sources */,
 				A83C5A171BED38F80037B847 /* MemoryDestination.swift in Sources */,
 				A83C5A141BED38F80037B847 /* AnsiDecorator.swift in Sources */,
-				A83C5A151BED38F80037B847 /* BaseDestination.swift in Sources */,
+				A8A11D381BEF08A700EEEA2B /* TSVFileDestination.swift in Sources */,
 				A83C5A191BED38F80037B847 /* Slogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,7 +21,7 @@ public class Generator {
 
   /// Default date formatter
   public lazy var dateFormatter : NSDateFormatter = {
-    let template = "yyyy-MM-dd HH:mm:ss.SSS zzz"
+    let template = "yyyy-MM-dd HH:mm:ss.SSS ZZZ"
     let idf = NSDateFormatter()
     idf.dateFormat = template
     return idf

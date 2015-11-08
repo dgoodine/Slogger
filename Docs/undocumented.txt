@@ -4,12 +4,17 @@ AnsiDecorator.swift
 	public struct AnsiDecorator : Decorator
 	public init() {}
 ConsoleDestination.swift
-	public init (colorMap: ColorMap = defaultColorMap, decorator: Decorator = XCodeColorsDecorator())
+	override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = defaultColorMap, decorator: Decorator? = XCodeColorsDecorator())
 	public override func logString(string : String, level: Level)
+CSVFileDestination.swift
+	public class CSVFileDestination : TextFileDestination
+	public class CSVConfiguration :  Configuration
+	public init ()
+	public class CSVGenerator : Generator
 XMLFileDestination.swift
 	public class XMLFileDestination : TextFileDestination
 	public class XMLConfiguration :  Configuration
-	public init ()
+	public init (generator: Generator = XMLGenerator())
 	public class XMLGenerator : Generator
 Generator.swift
 	case StringValue (key: Detail, value: String)
@@ -21,3 +26,8 @@ JSONFileDestination.swift
 	public class JSONConfiguration :  Configuration
 	public init ()
 	public class JSONGenerator : Generator
+TSVFileDestination.swift
+	public class TSVFileDestination : TextFileDestination
+	public class TSVConfiguration :  Configuration
+	public init ()
+	public class TSVGenerator : Generator

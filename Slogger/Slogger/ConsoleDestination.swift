@@ -22,10 +22,8 @@ public class ConsoleDestination : Destination {
     .Verbose : (colorFromHexString("555555"), nil),
   ]
 
-  public init (colorMap: ColorMap = defaultColorMap, decorator: Decorator = XCodeColorsDecorator()) {
-    super.init()
-    self.colorMap = colorMap
-    self.decorator = decorator
+  override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = defaultColorMap, decorator: Decorator? = XCodeColorsDecorator()) {
+    super.init(details: details, generator: generator, colorMap: colorMap, decorator: decorator)
   }
 
   public override func logString(string : String, level: Level) {

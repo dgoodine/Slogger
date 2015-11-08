@@ -35,7 +35,6 @@ class SloggerTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    testDestination.generator = log.defaultGenerator
   }
 
   override func tearDown() {
@@ -146,7 +145,7 @@ class SloggerTests: XCTestCase {
   }
 
   func testRadioactive () {
-    log.destinations = [log.consoleDestination, testDestination]
+    log.destinations = [ConsoleDestination(), testDestination]
 
     print("Testing Radioactive Logging")
     for logLevel in Level.allValues {
@@ -170,9 +169,8 @@ class SloggerTests: XCTestCase {
   }
 
   func testConsole () {
-    log.destinations = [log.consoleDestination]
     testDestination.clear()
-    self.exhaustiveTest(destinations: [log.consoleDestination], checkResults: false, verbose: true)
+    self.exhaustiveTest(destinations: [ConsoleDestination()], checkResults: false, verbose: true)
   }
 
   func testNoConsole () {
@@ -205,6 +203,24 @@ class SloggerTests: XCTestCase {
     let dest = XMLFileDestination(directory: path)
 
     print("Testing JSON file logging to path: \(path)")
+    self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
+  }
+
+  func testCSVFileLogging () {
+    let dir = "~/Desktop/SloggerTestLogs" as NSString
+    let path = dir.stringByExpandingTildeInPath
+    let dest = CSVFileDestination(directory: path)
+
+    print("Testing CSV file logging to path: \(path)")
+    self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
+  }
+
+  func testTSVFileLogging () {
+    let dir = "~/Desktop/SloggerTestLogs" as NSString
+    let path = dir.stringByExpandingTildeInPath
+    let dest = TSVFileDestination(directory: path)
+
+    print("Testing TSV file logging to path: \(path)")
     self.exhaustiveTest(destinations: [dest], checkResults: false, verbose: false)
   }
 

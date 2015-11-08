@@ -68,14 +68,16 @@ public enum Detail : Int {
   /// The function the logging site is in.
   case Function
 
-  /// The logging level of the site.
-  case Level
-
   /// The category specified in the logging site.
   case Category
 
+  /// The logging level of the site.
+  case Level
+
   /// The message string produced at the logging site.
   case Message
+
+  static let allValues = [Override, Date, File, Line, Function, Category, Level, Message]
 }
 
 /// Protocol for type used to decorate generator output.
@@ -119,15 +121,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
   public var level : Level
 
   /// Local storage
-  private var _details : [Detail] = [.Override, .Date, .File, .Line, .Function, .Category, .Level, .Message]
-
-  /// An array representing what to output (and in what order) by a `Generator`.
-  public var details : [Detail] {
-    get { return _details }
-    set { _details = newValue }
-  }
-
-  /// Local storage
   private var _categories : [T : Level] = Dictionary<T, Level>()
 
   /// A dictionary for providing a custom `Level` for each `Category` defined.
@@ -135,9 +128,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
     get { return _categories }
     set {_categories = newValue }
   }
-
-  /// The current generator closure.
-  public var generator : Generator
 
   // Local Storage
   private var _destinations : [Destination] = []
@@ -165,17 +155,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
   The default initializer.
 
   - Parameter defaultLevel: Sets the 'level' property to this value.
-  - Parameter details: The detail for the generator to output at logging sites.
   */
-  public init (defaultLevel : Level, details : [Detail]? = nil) {
+  public init (defaultLevel : Level) {
     self.level = defaultLevel
-    self.generator = defaultGenerator
-    self.consoleDestination = ConsoleDestination()
-  	self._destinations = [consoleDestination]
-
-    if let details = details {
-      self._details = details
-    }
   }
 
   // MARK: Functions
@@ -210,18 +192,6 @@ public class Slogger <T: SloggerCategory> : NSObject {
     misses = 0
   }
 
-  // MARK: Generators
-  /**
-   The default generator function. The ouput looks like this:
-
-  	- [10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 myFunction(_:) [] Severe: String
-   */
-  public let defaultGenerator : Generator = Generator()
-
-  // MARK: Destinations
-  /// The default consoleDestination.
-  public let consoleDestination : Destination
-
   // MARK: Private
   func logInternal (@noescape closure closure: LogClosure, category: T?, override: Level?, level: Level, function: String, file: String, line: Int) {
 
@@ -239,22 +209,8 @@ public class Slogger <T: SloggerCategory> : NSObject {
     let codeBlock = {
       self.hits = self.hits &+ 1
 
-      var defaultString : String? = nil
-
       for dest in self.destinations {
-        let string : String?
-        if let generator = dest.generator {
-          string = generator.generate(message: message, category: category, override: override, level: level, date: date,             function: function, file: file, line: line, details: self.details)
-        }
-        else if defaultString != nil {
-          string = defaultString!
-        }
-        else {
-          string = self.generator.generate(message: message, category: category, override: override, level: level, date: NSDate(), function: function, file: file, line: line, details: self.details)
-          defaultString = string
-        }
-
-        if let string = string {
+        if let string = dest.generator.generate(message: message, category: category, override: override, level: level, date: date, function: function, file: file, line: line, details: dest.details) {
           dest.logString(string, level: level)
         }
       }

@@ -88,12 +88,8 @@ The following properties of each log instance are exposed and have read/write ac
 Property | Type | Comments
 --- | --- | ---
 level | Level | The active, global level of the logger instance.
-details | [Detail] | Determines what to output and in what order.
 categories | [T : Level] | A mapping between categories and levels.
-generator | Generator | Current generator.  Defaults to *defaultGenerator*.
-destinations | [Destination] | Destinations this logger will write to.  Defaults to [*consoleDestination*].
-defaultGenerator | Generator | Default generator implementation.
-consoleDestination | Destination | The default console implementation with an *XcodeColors* decorator.
+destinations | [Destination] | Destinations this logger will write to.  Defaults to `ConsoleDestination` with *XcodeColors* decorator.
 hits | UInt64 | Number of events logged.
 misses | UInt64 | Number of events not logged due to logging threshold evaluation.
 
@@ -130,7 +126,7 @@ These are classes that output a log entry based on information from the logging 
 
 The default uses the typical pattern:
 
-	- [2015-11-07 14:47:20.702 EST] SloggerTests.swift (82) callIt(category:) [] Error : String
+	- [2015-11-07 23:53:18.187 -0500] File.swift (82) function() [] Error : String
 	
 List of supported generators (see the source for details):
 

@@ -17,10 +17,13 @@ public class Destination {
   public var decorator : Decorator?
 
   /// A custom color map for this destination.  If not provided, the logger value will be used.
-  public var generator : Generator?
+  public var generator : Generator
 
   /// A custom decorator for this destination.  If not provided, the logger value will be used.
   public var colorMap : ColorMap?
+
+  /// The details to be logged for this destination.
+  public let details : [Detail]
 
   /**
    Base initializer.
@@ -29,8 +32,9 @@ public class Destination {
    - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
    - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.
    */
-  public init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+  public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
     self.generator = generator
+    self.details = details != nil ? details! : Detail.allValues
     self.colorMap = colorMap
     self.decorator = decorator
   }

@@ -63,6 +63,9 @@ public class TextFileDestination : Destination {
     /// File extension for log files.  Defaults to "txt"
     public var fileExtension : String = "txt"
 
+    /// Details to output.
+    public var details : [Detail] = Detail.allValues
+
     /**
      File system attributes to use when creating the log directory and log files.
 
@@ -76,7 +79,7 @@ public class TextFileDestination : Destination {
     public var decorator : Decorator?
 
     /// Protocol property for Destination
-    public var generator : Generator?
+    public var generator : Generator
 
     /// Protocol property for Destination
     public var colorMap : ColorMap?
@@ -88,7 +91,8 @@ public class TextFileDestination : Destination {
      - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
      - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.
      */
-    init (generator: Generator? = nil, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+    init (details: [Detail] = Detail.allValues, generator: Generator, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+      self.details = details
       self.generator = generator
       self.colorMap = colorMap
       self.decorator = decorator
@@ -120,25 +124,21 @@ public class TextFileDestination : Destination {
    Designated initializer.
 
    - Parameter directory: Full path for the logging directory.  This will be created if necessary.  
-   - Parameter config: The configuration to use for this destination.  Defaults to `Configuration()`.
+   - Parameter config: The configuration to use for this destination.  Defaults to `Configuration(generator: Generator())`.
    
    - SeeAlso: Configuration.fileAttributes for important information for iOS developers.
    */
-  public init(directory: String, config: Configuration = Configuration()) {
+  public init(directory: String, config: Configuration = Configuration(generator: Generator())) {
     self.directory = directory
     self.config = config
-    super.init(generator: config.generator, colorMap: config.colorMap, decorator: config.decorator)
+    super.init(details: config.details, generator: config.generator, colorMap: config.colorMap, decorator: config.decorator)
   }
 
   deinit {
     closeFile()
   }
 
-  /**
-   Protocol Implementation
-   
-
-   */
+  /// Protocol Implementation
   public override func logString(string: String, level: Level) {
     if let os = outputFile {
 

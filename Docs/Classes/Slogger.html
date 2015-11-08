@@ -13,7 +13,7 @@
     <a title="Slogger Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Slogger Docs</a> (87% documented)</p>
+        <p><a href="../index.html">Slogger Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -30,6 +30,12 @@
           <li class="nav-group-name">
           <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CSVFileDestination.html">CSVFileDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C7Slogger12CSVGenerator">CSVGenerator</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Classes/ConsoleDestination.html">ConsoleDestination</a>
               </li>
@@ -53,6 +59,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Slogger.html">Slogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TSVFileDestination.html">TSVFileDestination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C7Slogger12TSVGenerator">TSVGenerator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/TextFileDestination.html">TextFileDestination</a>
@@ -197,33 +209,6 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC7Slogger7Slogger7detailsGSaOS_6Detail_"></a>
-                    <a name="//apple_ref/swift/Property/details" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger7detailsGSaOS_6Detail_">details</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>An array representing what to output (and in what order) by a <code>Generator</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">details</span> <span class="p">:</span> <span class="p">[</span><span class="kt">Detail</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:vC7Slogger7Slogger10categoriesGVSs10Dictionaryq_OS_5Level_"></a>
                     <a name="//apple_ref/swift/Property/categories" class="dashAnchor"></a>
                     <a class="token" href="#/s:vC7Slogger7Slogger10categoriesGVSs10Dictionaryq_OS_5Level_">categories</a>
@@ -242,33 +227,6 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">categories</span> <span class="p">:</span> <span class="p">[</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">Level</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC7Slogger7Slogger9generatorCS_9Generator"></a>
-                    <a name="//apple_ref/swift/Property/generator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger9generatorCS_9Generator">generator</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The current generator closure.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">generator</span> <span class="p">:</span> <span class="kt">Generator</span></code></pre>
 
                         </div>
                       </div>
@@ -370,9 +328,9 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC7Slogger7SloggercuRq_S_15SloggerCategory_FMGS0_q__FT12defaultLevelOS_5Level7detailsGSqGSaOS_6Detail___GS0_q__"></a>
-                    <a name="//apple_ref/swift/Method/init(defaultLevel:details:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC7Slogger7SloggercuRq_S_15SloggerCategory_FMGS0_q__FT12defaultLevelOS_5Level7detailsGSqGSaOS_6Detail___GS0_q__">init(defaultLevel:details:)</a>
+                    <a name="/s:FC7Slogger7SloggercuRq_S_15SloggerCategory_FMGS0_q__FT12defaultLevelOS_5Level_GS0_q__"></a>
+                    <a name="//apple_ref/swift/Method/init(defaultLevel:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7SloggercuRq_S_15SloggerCategory_FMGS0_q__FT12defaultLevelOS_5Level_GS0_q__">init(defaultLevel:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -387,7 +345,7 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">defaultLevel</span> <span class="p">:</span> <span class="kt">Level</span><span class="p">,</span> <span class="nv">details</span> <span class="p">:</span> <span class="p">[</span><span class="kt">Detail</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">defaultLevel</span> <span class="p">:</span> <span class="kt">Level</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -404,19 +362,6 @@ code be executed on the main thread, you <strong>MUST</strong> wrap that code in
                               <td>
                                 <div>
                                   <p>Sets the &lsquo;level&rsquo; property to this value.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>details</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The detail for the generator to output at logging sites.</p>
 
                                 </div>
                               </td>
@@ -547,90 +492,10 @@ The order of the parameters designates their precedence in evaluating the loggin
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-                <div class="task-name-container">
-                  <a name="/Generators"></a>
-                  <a name="//apple_ref/swift/Section/Generators" class="dashAnchor"></a>
-                  <a href="#/Generators">
-                    <h3 class="section-name">Generators</h3>
-                  </a>
-                </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC7Slogger7Slogger16defaultGeneratorCS_9Generator"></a>
-                    <a name="//apple_ref/swift/Property/defaultGenerator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger16defaultGeneratorCS_9Generator">defaultGenerator</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The default generator function. The ouput looks like this:</p>
-
-<ul>
-<li>[10/25/2015, 17:07:52.302 EDT] SloggerTests.swift:118 myFunction(_:) [] Severe: String</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">defaultGenerator</span> <span class="p">:</span> <span class="kt">Generator</span> <span class="o">=</span> <span class="kt">Generator</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-                <div class="task-name-container">
-                  <a name="/Destinations"></a>
-                  <a name="//apple_ref/swift/Section/Destinations" class="dashAnchor"></a>
-                  <a href="#/Destinations">
-                    <h3 class="section-name">Destinations</h3>
-                  </a>
-                </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vC7Slogger7Slogger18consoleDestinationCS_11Destination"></a>
-                    <a name="//apple_ref/swift/Property/consoleDestination" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC7Slogger7Slogger18consoleDestinationCS_11Destination">consoleDestination</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The default consoleDestination.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">consoleDestination</span> <span class="p">:</span> <span class="kt">Destination</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-11-07)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">David Goodine</a>. All rights reserved. (Last updated: 2015-11-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
