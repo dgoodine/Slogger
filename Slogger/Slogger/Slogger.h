@@ -6,11 +6,7 @@
 //  Copyright © 2015 David Goodine. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#else
-#import <Cocoa/Cocoa.h>
-#endif
+#import <Foundation/Foundation.h>
 
 //! Project version number for Slogger.
 FOUNDATION_EXPORT double SloggerVersionNumber;
