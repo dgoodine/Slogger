@@ -40,7 +40,7 @@
 
 <p>Also note: Slogger is completely API independent, except for the Swift standard library and the <code>Foundation</code> import.  So it can be used in Mac OS X projects projects as well.  (Mac OS X support for <em>CocoaPods</em> and <em>Carthage</em> pending.)</p>
 
-<p><strong>Slogger requires Xcode 7 and Swift 2.1.</strong></p>
+<p><strong>Slogger requires Xcode 7.1 and Swift 2.1.</strong></p>
 
 <h2>
 <a id="general-info" class="anchor" href="#general-info" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Info</h2>
@@ -154,20 +154,20 @@ log.none() { "Enter" }
 </table>
 
 <h2>
-<a id="advanced-features" class="anchor" href="#advanced-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced Features</h2>
-
-<h3>
-<a id="-important-implementation-note-" class="anchor" href="#-important-implementation-note-" aria-hidden="true"><span class="octicon octicon-link"></span></a>*** Important Implementation Note ***</h3>
+<a id="implementation-note" class="anchor" href="#implementation-note" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation Note</h2>
 
 <p><em>Slogger</em> uses a private, serial dispatch queue for most of its work, including calls to the 
 generator, decorator, and all logging destinations.  The only code executed synchronously by the
-logging functions is the threshold evaluation (and only if <code>destinations.count &gt; 0</code>) and,
+logging functions is threshold evaluation (and only if <code>destinations.count &gt; 0</code>) and,
 if that passes, evaulation of the closure to produce the message from the logging site.</p>
 
 <p>Thus, all <em>Slogger</em> types are inherently thread-safe. If you decide to implement your own, you can
 do so without concern for concurrency issues. However, if you create a custom implementation
 of any type that requires code be executed on the main thread, you <strong>MUST</strong> wrap that code inside a
 <code>dispatch_async</code> call to the main queue.</p>
+
+<h2>
+<a id="advanced-features" class="anchor" href="#advanced-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced Features</h2>
 
 <h3>
 <a id="destinations" class="anchor" href="#destinations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Destinations</h3>
@@ -179,40 +179,48 @@ of any type that requires code be executed on the main thread, you <strong>MUST<
 <tr>
 <th>Class</th>
 <th>Status</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ConsoleDestination</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Defaults to sensible output with <em>XcodeColors</em> support</td>
 </tr>
 <tr>
 <td>MemoryDestination</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Appends entries to in-memory array.</td>
 </tr>
 <tr>
 <td>TextFileDestination</td>
-<td>
-<g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji> (mimics ConsoleDestination behavior w/o decoration)</td>
+<td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Mimics ConsoleDestination behavior by default w/o decoration</td>
 </tr>
 <tr>
 <td>JSONFileDestination</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Outputs one-entry-per-line JSON format</td>
 </tr>
 <tr>
 <td>XMLFileDestination</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Outputs one-entry-per-line XML format</td>
 </tr>
 <tr>
 <td>TabFileDestination</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Outputs tab-delimited files.</td>
 </tr>
 <tr>
 <td>CSVFileDestination</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
+<td>Outputs comma-separated values files.</td>
 </tr>
 <tr>
 <td>NetworkDestination</td>
+<td>🤔</td>
 <td>Planned but no ETA</td>
 </tr>
 </tbody>
@@ -251,11 +259,11 @@ of any type that requires code be executed on the main thread, you <strong>MUST<
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
 </tr>
 <tr>
-<td>TabGenerator</td>
+<td>CSVGenerator</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
 </tr>
 <tr>
-<td>CSVGenerator</td>
+<td>TSVGenerator</td>
 <td><g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji></td>
 </tr>
 </tbody>
@@ -359,7 +367,7 @@ class for non-log use in your console without writing your own.)</p>
 
 <p>Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the <em>init</em> method and provide that information there.</p>
 
-<p>Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your <em>Swift</em> code defines a module, you a) don't have to worry about name collisions, and b) you can document your categories and allow other modules to modify its behavior, as described above.</p>
+<p>Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your <em>Swift</em> code defines a module, you a) don't have to worry about name collisions, and b) can document your categories and allow other modules to modify its behavior, as described above.</p>
 
 <h2>
 <a id="performance" class="anchor" href="#performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Performance</h2>
@@ -445,39 +453,7 @@ class for non-log use in your console without writing your own.)</p>
 
 <p>It's clear from the timing that if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
 
-<p>It should be noted that the timing for where <em>Can Log</em> is <em>true</em> does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via dispatch_async to a private, serial queue.</p>
-
-<h2>
-<a id="how-to-get-it" class="anchor" href="#how-to-get-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How To Get it</h2>
-
-<p>Here's how you can get <em>Slogger</em> if you want to give it a try:</p>
-
-<table>
-<thead>
-<tr>
-<th>Means</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Github</td>
-<td>v0.1.1</td>
-<td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
-</tr>
-<tr>
-<td>Cocoapods</td>
-<td>v0.1.1</td>
-<td><strong>Mac OS X framework not yet available.</strong></td>
-</tr>
-<tr>
-<td>Carthage</td>
-<td>In process</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>It should be noted that the timing for where <em>Can Log</em> is <em>true</em> does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via <code>dispatch_async</code> to a private, serial queue.</p>
 
 <h2>
 <a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h2>
@@ -485,6 +461,39 @@ class for non-log use in your console without writing your own.)</p>
 <p>Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.</p>
 
 <p><strong><em>Happy logging!</em></strong></p>
+
+<h2>
+<a id="version-history" class="anchor" href="#version-history" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version History</h2>
+
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Status</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>Released</td>
+<td>First release.</td>
+</tr>
+<tr>
+<td>0.1.x</td>
+<td>Available</td>
+<td>
+<strong>Pre-release</strong> (CocoaPods/Carthage support and TextFileDestination variants).</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="todo" class="anchor" href="#todo" aria-hidden="true"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>Make docset</li>
+</ul>
       </section>
     </div>
 
