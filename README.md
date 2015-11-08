@@ -1,9 +1,10 @@
 # Slogger
 A simple, fast and flexible logging framework for Swift.
 
-[![Pod Version](http://img.shields.io/cocoapods/v/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
 [![Pod Platform](http://img.shields.io/cocoapods/p/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
 [![Pod License](http://img.shields.io/cocoapods/l/Slogger.svg?style=flat)](http://opensource.org/licenses/MIT)
+[![Pod Version](http://img.shields.io/cocoapods/v/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Slogger)
 
 ## Why Another Swift Logging Framework?
 
