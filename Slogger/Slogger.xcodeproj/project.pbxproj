@@ -79,6 +79,37 @@
 		A8A9DAF01BE0FB25000A9351 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* Destination.swift */; };
 		A8A9DAF11BE0FB26000A9351 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* Destination.swift */; };
 		A8A9DAF21BE0FB27000A9351 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* Destination.swift */; };
+		A8BD8C441BEFC61600349EDD /* SloggerTV.h in Headers */ = {isa = PBXBuildFile; fileRef = A8BD8C431BEFC61600349EDD /* SloggerTV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8BD8C4B1BEFC61600349EDD /* SloggerTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8BD8C411BEFC61600349EDD /* SloggerTV.framework */; };
+		A8BD8C501BEFC61600349EDD /* SloggerTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BD8C4F1BEFC61600349EDD /* SloggerTVTests.swift */; };
+		A8BD8C581BEFC65F00349EDD /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
+		A8BD8C591BEFC66000349EDD /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85019B41BEE7E9200FA6185 /* Generator.swift */; };
+		A8BD8C5A1BEFC66400349EDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A8BD8C5B1BEFC66400349EDD /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
+		A8BD8C5C1BEFC66400349EDD /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */; };
+		A8BD8C5D1BEFC66500349EDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84553791BDC084D00678385 /* Color.swift */; };
+		A8BD8C5E1BEFC66500349EDD /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */; };
+		A8BD8C5F1BEFC66500349EDD /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C59E51BED2F8D0037B847 /* AnsiDecorator.swift */; };
+		A8BD8C601BEFC66A00349EDD /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* Destination.swift */; };
+		A8BD8C611BEFC66A00349EDD /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
+		A8BD8C621BEFC66A00349EDD /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
+		A8BD8C631BEFC66A00349EDD /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* TextFileDestination.swift */; };
+		A8BD8C641BEFC66A00349EDD /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
+		A8BD8C651BEFC66A00349EDD /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
+		A8BD8C661BEFC66A00349EDD /* CSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D261BEEF95D00EEEA2B /* CSVFileDestination.swift */; };
+		A8BD8C671BEFC66A00349EDD /* TSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D2F1BEF07AA00EEEA2B /* TSVFileDestination.swift */; };
+		A8BD8C681BEFC66B00349EDD /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A89881BE0F59B00FE8F81 /* Destination.swift */; };
+		A8BD8C691BEFC66B00349EDD /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E064F1BDBEFA7007066B3 /* ConsoleDestination.swift */; };
+		A8BD8C6A1BEFC66B00349EDD /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
+		A8BD8C6B1BEFC66B00349EDD /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A826330D1BE1271600293716 /* TextFileDestination.swift */; };
+		A8BD8C6C1BEFC66B00349EDD /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
+		A8BD8C6D1BEFC66B00349EDD /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
+		A8BD8C6E1BEFC66B00349EDD /* CSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D261BEEF95D00EEEA2B /* CSVFileDestination.swift */; };
+		A8BD8C6F1BEFC66B00349EDD /* TSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D2F1BEF07AA00EEEA2B /* TSVFileDestination.swift */; };
+		A8BD8C701BEFC66F00349EDD /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8304B761BEFA105005CE752 /* PerformanceTest.swift */; };
+		A8BD8C711BEFC66F00349EDD /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8304B761BEFA105005CE752 /* PerformanceTest.swift */; };
+		A8BD8C721BEFC67300349EDD /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
+		A8BD8C731BEFC67400349EDD /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C79F01BD6639A00DA9F07 /* Slogger.swift */; };
 		A8CF46BB1BEE4E270013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
 		A8CF46BC1BEE4E2A0013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
 		A8CF46BD1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */; };
@@ -100,6 +131,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A85BFC431BDD4622008D1F1E;
 			remoteInfo = SloggerOSX;
+		};
+		A8BD8C4C1BEFC61600349EDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A83C79CD1BD6636800DA9F07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8BD8C401BEFC61600349EDD;
+			remoteInfo = SloggerTV;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -131,6 +169,12 @@
 		A8A11D261BEEF95D00EEEA2B /* CSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVFileDestination.swift; sourceTree = "<group>"; };
 		A8A11D2F1BEF07AA00EEEA2B /* TSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSVFileDestination.swift; sourceTree = "<group>"; };
 		A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCodeColorsDecorator.swift; sourceTree = "<group>"; };
+		A8BD8C411BEFC61600349EDD /* SloggerTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SloggerTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8BD8C431BEFC61600349EDD /* SloggerTV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SloggerTV.h; sourceTree = "<group>"; };
+		A8BD8C451BEFC61600349EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8BD8C4A1BEFC61600349EDD /* SloggerTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SloggerTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8BD8C4F1BEFC61600349EDD /* SloggerTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SloggerTVTests.swift; sourceTree = "<group>"; };
+		A8BD8C511BEFC61600349EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8CF46BA1BEE4E270013D2C7 /* JSONFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFileDestination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +213,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8BD8C3D1BEFC61600349EDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8BD8C471BEFC61600349EDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8BD8C4B1BEFC61600349EDD /* SloggerTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +275,8 @@
 				A85BFC451BDD4622008D1F1E /* SloggerOSX */,
 				A85BFC511BDD4622008D1F1E /* SloggerOSXTests */,
 				A85BFC6C1BDD4B63008D1F1E /* SloggerWatch */,
+				A8BD8C421BEFC61600349EDD /* SloggerTV */,
+				A8BD8C4E1BEFC61600349EDD /* SloggerTVTests */,
 				A83C79D71BD6636800DA9F07 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -228,6 +289,8 @@
 				A85BFC441BDD4622008D1F1E /* SloggerOSX.framework */,
 				A85BFC4D1BDD4622008D1F1E /* SloggerOSXTests.xctest */,
 				A85BFC6B1BDD4B63008D1F1E /* SloggerWatch.framework */,
+				A8BD8C411BEFC61600349EDD /* SloggerTV.framework */,
+				A8BD8C4A1BEFC61600349EDD /* SloggerTVTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,6 +352,24 @@
 			path = SloggerWatch;
 			sourceTree = "<group>";
 		};
+		A8BD8C421BEFC61600349EDD /* SloggerTV */ = {
+			isa = PBXGroup;
+			children = (
+				A8BD8C431BEFC61600349EDD /* SloggerTV.h */,
+				A8BD8C451BEFC61600349EDD /* Info.plist */,
+			);
+			path = SloggerTV;
+			sourceTree = "<group>";
+		};
+		A8BD8C4E1BEFC61600349EDD /* SloggerTVTests */ = {
+			isa = PBXGroup;
+			children = (
+				A8BD8C4F1BEFC61600349EDD /* SloggerTVTests.swift */,
+				A8BD8C511BEFC61600349EDD /* Info.plist */,
+			);
+			path = SloggerTVTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -313,6 +394,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A85BFC6E1BDD4B63008D1F1E /* SloggerWatch.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8BD8C3E1BEFC61600349EDD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8BD8C441BEFC61600349EDD /* SloggerTV.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +498,42 @@
 			productReference = A85BFC6B1BDD4B63008D1F1E /* SloggerWatch.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A8BD8C401BEFC61600349EDD /* SloggerTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8BD8C521BEFC61600349EDD /* Build configuration list for PBXNativeTarget "SloggerTV" */;
+			buildPhases = (
+				A8BD8C3C1BEFC61600349EDD /* Sources */,
+				A8BD8C3D1BEFC61600349EDD /* Frameworks */,
+				A8BD8C3E1BEFC61600349EDD /* Headers */,
+				A8BD8C3F1BEFC61600349EDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SloggerTV;
+			productName = SloggerTV;
+			productReference = A8BD8C411BEFC61600349EDD /* SloggerTV.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A8BD8C491BEFC61600349EDD /* SloggerTVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8BD8C551BEFC61600349EDD /* Build configuration list for PBXNativeTarget "SloggerTVTests" */;
+			buildPhases = (
+				A8BD8C461BEFC61600349EDD /* Sources */,
+				A8BD8C471BEFC61600349EDD /* Frameworks */,
+				A8BD8C481BEFC61600349EDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A8BD8C4D1BEFC61600349EDD /* PBXTargetDependency */,
+			);
+			name = SloggerTVTests;
+			productName = SloggerTVTests;
+			productReference = A8BD8C4A1BEFC61600349EDD /* SloggerTVTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -435,6 +560,13 @@
 					A85BFC6A1BDD4B63008D1F1E = {
 						CreatedOnToolsVersion = 7.1;
 					};
+					A8BD8C401BEFC61600349EDD = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 4G72T9YLHA;
+					};
+					A8BD8C491BEFC61600349EDD = {
+						CreatedOnToolsVersion = 7.1;
+					};
 				};
 			};
 			buildConfigurationList = A83C79D01BD6636800DA9F07 /* Build configuration list for PBXProject "Slogger" */;
@@ -454,6 +586,8 @@
 				A85BFC431BDD4622008D1F1E /* SloggerOSX */,
 				A85BFC4C1BDD4622008D1F1E /* SloggerOSXTests */,
 				A85BFC6A1BDD4B63008D1F1E /* SloggerWatch */,
+				A8BD8C401BEFC61600349EDD /* SloggerTV */,
+				A8BD8C491BEFC61600349EDD /* SloggerTVTests */,
 			);
 		};
 /* End PBXProject section */
@@ -488,6 +622,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A85BFC691BDD4B63008D1F1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8BD8C3F1BEFC61600349EDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8BD8C481BEFC61600349EDD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -604,6 +752,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A8BD8C3C1BEFC61600349EDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8BD8C621BEFC66A00349EDD /* MemoryDestination.swift in Sources */,
+				A8BD8C611BEFC66A00349EDD /* ConsoleDestination.swift in Sources */,
+				A8BD8C651BEFC66A00349EDD /* XMLFileDestination.swift in Sources */,
+				A8BD8C5C1BEFC66400349EDD /* AnsiDecorator.swift in Sources */,
+				A8BD8C631BEFC66A00349EDD /* TextFileDestination.swift in Sources */,
+				A8BD8C721BEFC67300349EDD /* Slogger.swift in Sources */,
+				A8BD8C581BEFC65F00349EDD /* Generator.swift in Sources */,
+				A8BD8C671BEFC66A00349EDD /* TSVFileDestination.swift in Sources */,
+				A8BD8C661BEFC66A00349EDD /* CSVFileDestination.swift in Sources */,
+				A8BD8C641BEFC66A00349EDD /* JSONFileDestination.swift in Sources */,
+				A8BD8C701BEFC66F00349EDD /* PerformanceTest.swift in Sources */,
+				A8BD8C601BEFC66A00349EDD /* Destination.swift in Sources */,
+				A8BD8C5A1BEFC66400349EDD /* Color.swift in Sources */,
+				A8BD8C5B1BEFC66400349EDD /* XCodeColorsDecorator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8BD8C461BEFC61600349EDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8BD8C6F1BEFC66B00349EDD /* TSVFileDestination.swift in Sources */,
+				A8BD8C501BEFC61600349EDD /* SloggerTVTests.swift in Sources */,
+				A8BD8C6E1BEFC66B00349EDD /* CSVFileDestination.swift in Sources */,
+				A8BD8C5E1BEFC66500349EDD /* XCodeColorsDecorator.swift in Sources */,
+				A8BD8C731BEFC67400349EDD /* Slogger.swift in Sources */,
+				A8BD8C6C1BEFC66B00349EDD /* JSONFileDestination.swift in Sources */,
+				A8BD8C6D1BEFC66B00349EDD /* XMLFileDestination.swift in Sources */,
+				A8BD8C691BEFC66B00349EDD /* ConsoleDestination.swift in Sources */,
+				A8BD8C681BEFC66B00349EDD /* Destination.swift in Sources */,
+				A8BD8C591BEFC66000349EDD /* Generator.swift in Sources */,
+				A8BD8C6B1BEFC66B00349EDD /* TextFileDestination.swift in Sources */,
+				A8BD8C6A1BEFC66B00349EDD /* MemoryDestination.swift in Sources */,
+				A8BD8C5D1BEFC66500349EDD /* Color.swift in Sources */,
+				A8BD8C711BEFC66F00349EDD /* PerformanceTest.swift in Sources */,
+				A8BD8C5F1BEFC66500349EDD /* AnsiDecorator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -616,6 +807,11 @@
 			isa = PBXTargetDependency;
 			target = A85BFC431BDD4622008D1F1E /* SloggerOSX */;
 			targetProxy = A85BFC4F1BDD4622008D1F1E /* PBXContainerItemProxy */;
+		};
+		A8BD8C4D1BEFC61600349EDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8BD8C401BEFC61600349EDD /* SloggerTV */;
+			targetProxy = A8BD8C4C1BEFC61600349EDD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -887,6 +1083,70 @@
 			};
 			name = Release;
 		};
+		A8BD8C531BEFC61600349EDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SloggerTV/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		A8BD8C541BEFC61600349EDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SloggerTV/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		A8BD8C561BEFC61600349EDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SloggerTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		A8BD8C571BEFC61600349EDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SloggerTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -943,6 +1203,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A8BD8C521BEFC61600349EDD /* Build configuration list for PBXNativeTarget "SloggerTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8BD8C531BEFC61600349EDD /* Debug */,
+				A8BD8C541BEFC61600349EDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A8BD8C551BEFC61600349EDD /* Build configuration list for PBXNativeTarget "SloggerTVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8BD8C561BEFC61600349EDD /* Debug */,
+				A8BD8C571BEFC61600349EDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
