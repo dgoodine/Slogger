@@ -1211,6 +1211,7 @@
 				A8BD8C541BEFC61600349EDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8BD8C551BEFC61600349EDD /* Build configuration list for PBXNativeTarget "SloggerTVTests" */ = {
 			isa = XCConfigurationList;
@@ -1219,6 +1220,7 @@
 				A8BD8C571BEFC61600349EDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

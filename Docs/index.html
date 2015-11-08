@@ -155,9 +155,10 @@
 
 <p>A simple, fast and flexible logging framework for Swift.</p>
 
-<p><a href="http://cocoadocs.org/docsets/Slogger/"><img src="http://img.shields.io/cocoapods/v/Slogger.svg?style=flat" alt="Pod Version"></a>
-<a href="http://cocoadocs.org/docsets/Slogger/"><img src="http://img.shields.io/cocoapods/p/Slogger.svg?style=flat" alt="Pod Platform"></a>
-<a href="http://opensource.org/licenses/MIT"><img src="http://img.shields.io/cocoapods/l/Slogger.svg?style=flat" alt="Pod License"></a></p>
+<p><a href="http://cocoadocs.org/docsets/Slogger/"><img src="http://img.shields.io/cocoapods/p/Slogger.svg?style=flat" alt="Pod Platform"></a>
+<a href="http://opensource.org/licenses/MIT"><img src="http://img.shields.io/cocoapods/l/Slogger.svg?style=flat" alt="Pod License"></a>
+<a href="http://cocoadocs.org/docsets/Slogger/"><img src="http://img.shields.io/cocoapods/v/Slogger.svg?style=flat" alt="Pod Version"></a>
+<a href="https://github.com/dgoodine/Slogger"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
 <a href='#why_another_swift_logging_framework' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='why_another_swift_logging_framework'>Why Another Swift Logging Framework?</h2>
 
 <p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found <a href="https://github.com/DaveWoodCom/XCGLogger"><em>XCGLogger</em></a> by Dave Wood @DaveWoodCom.  While it&rsquo;s fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺🍺🍺</p>
@@ -521,33 +522,6 @@ class for non-log use in your console without writing your own.)</p>
 <p>It&rsquo;s clear from the timing that if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
 
 <p>It should be noted that the timing for where <em>Can Log</em> is <em>true</em> does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it&rsquo;s noescape).  The rest of the work is done via <code>dispatch_async</code> to a private, serial queue.</p>
-<a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
-
-<p>Here&rsquo;s how you can get <em>Slogger</em> if you want to give it a try:</p>
-
-<table><thead>
-<tr>
-<th>Means</th>
-<th>Version</th>
-<th>Comment</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Github</td>
-<td>v0.1.1</td>
-<td><a href="https://github.com/dgoodine/Slogger">https://github.com/dgoodine/Slogger</a></td>
-</tr>
-<tr>
-<td>Cocoapods</td>
-<td>v0.1.1</td>
-<td><strong>Mac OS X framework not yet available.</strong></td>
-</tr>
-<tr>
-<td>Carthage</td>
-<td>In process</td>
-<td></td>
-</tr>
-</tbody></table>
 <a href='#feedback' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='feedback'>Feedback</h2>
 
 <p>Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.</p>
@@ -564,8 +538,8 @@ class for non-log use in your console without writing your own.)</p>
 </thead><tbody>
 <tr>
 <td>1.0</td>
-<td>In Progress</td>
-<td>Finishing up for initial release</td>
+<td>Released</td>
+<td>First release.</td>
 </tr>
 <tr>
 <td>0.1.x</td>
@@ -576,7 +550,6 @@ class for non-log use in your console without writing your own.)</p>
 <a href='#todo' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='todo'>TODO</h2>
 
 <ul>
-<li>Add <em>Carthage</em> support.</li>
 <li>Make docset</li>
 </ul>
 

@@ -4,7 +4,7 @@ A simple, fast and flexible logging framework for Swift.
 [![Pod Platform](http://img.shields.io/cocoapods/p/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
 [![Pod License](http://img.shields.io/cocoapods/l/Slogger.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Pod Version](http://img.shields.io/cocoapods/v/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Slogger)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/dgoodine/Slogger)
 
 ## Why Another Swift Logging Framework?
 
@@ -213,15 +213,6 @@ It's clear from the timing that if you want to completely turn off logging in th
 
 It should be noted that the timing for where *Can Log* is *true* does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via `dispatch_async` to a private, serial queue.
 
-## How To Get it
-Here's how you can get *Slogger* if you want to give it a try:
-
-Means |  Version | Comment
---- |  --- | ---
-Github | v0.1.1 | https://github.com/dgoodine/Slogger
-Cocoapods | v0.1.1 | **Mac OS X framework not yet available.**
-Carthage | In process | 
-
 ## Feedback
 Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.
 
@@ -231,9 +222,8 @@ Please do use the issues section on Github report bugs, raise questions, offer s
 
 Version | Status | Comments
 --- | --- | ---
-1.0 | In Progress | Finishing up for initial release
+1.0 | Released | First release.
 0.1.x | Available | **Pre-release** (CocoaPods/Carthage support and TextFileDestination variants).
 
 ## TODO
-- Add *Carthage* support.
 - Make docset
