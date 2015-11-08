@@ -24,7 +24,7 @@ When I started doing serious Swift development, I naturally looked around for a 
 
 Also note: Slogger is completely API independent, except for the Swift standard library and the `Foundation` import.  So it can be used in Mac OS X projects projects as well.  (Mac OS X support for *CocoaPods* and *Carthage* pending.)
 
-**Slogger requires Xcode 7 and Swift 2.1.**
+**Slogger requires Xcode 7.1 and Swift 2.1.**
 
 ## General Info
 
@@ -135,8 +135,9 @@ Generator | Status
 Generator | ✔️
 JSONGenerator | ✔️
 XMLGenerator | ✔️
-TabGenerator | ✔️
 CSVGenerator | ✔️
+TSVGenerator | ✔️
+
 
 ### Details
 You can configure what details you want to see in the logs – and in what order – by providing an array of enum values for each detail supported.  This makes it easy to customize your output format.
@@ -201,7 +202,7 @@ Then create your logger in the obvious way:
 	
 Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the *init* method and provide that information there.
 
-Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your *Swift* code defines a module, you a) don't have to worry about name collisions, and b) you can document your categories and allow other modules to modify its behavior, as described above.
+Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your *Swift* code defines a module, you a) don't have to worry about name collisions, and b) can document your categories and allow other modules to modify its behavior, as described above.
 
 ## Performance
 Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the *PerformanceTest* class and *SloggerPerformanceIOS* project for details.  (The performance of *Slogger* for Mac OS X applications should be identical to that of the simulator.)
