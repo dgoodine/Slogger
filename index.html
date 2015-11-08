@@ -38,7 +38,7 @@
 
 <p><em>Slogger</em> uses much the same approach and identical function signatures as <em>XCGLogger</em>, so they are interchangeable without modifying existing logging sites. Be sure to check the <strong>Advanced Features</strong> section below – particularly <em>Radioactive Logging</em> and <em>Categories</em> – to see why I decided to go this route.</p>
 
-<p>Also note: Slogger is completely API independent, except for the Swift standard library and the <code>Foundation</code> import.  So it can be used in Mac OS X projects projects as well.  (Mac OS X support for <em>CocoaPods</em> and <em>Carthage</em> pending.)</p>
+<p>Also note: Slogger is completely API independent, except for the Swift standard library and the <code>Foundation</code> import.  So it can be used in Mac OS X projects projects as well.</p>
 
 <p><strong>Slogger requires Xcode 7.1 and Swift 2.1.</strong></p>
 
@@ -233,7 +233,7 @@ of any type that requires code be executed on the main thread, you <strong>MUST<
 
 <p>The default uses the typical pattern:</p>
 
-<pre><code>- [2015-11-07 23:53:18.187 -0500] File.swift (82) function() [] Error : String
+<pre><code>- [2015-11-07 23:53:18.187 -0500] File.swift (82) function() [] Error : Message...
 </code></pre>
 
 <p>List of supported generators (see the source for details):</p>
