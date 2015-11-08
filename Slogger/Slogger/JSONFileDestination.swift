@@ -38,22 +38,22 @@ public class JSONGenerator : Generator {
     outputString.appendString("{\n")
   }
 
-  override func emit (outputString : NSMutableString, _ detail: Detail, _ type: ValueType) {
+  override func emit (outputString : NSMutableString, type: ValueType)  {
     switch type {
 
-    case .BoolValue (let key, let value):
-      outputString.appendString("\"\(key)\":\(value)")
+    case .BoolValue (let detail, let value):
+      outputString.appendString("\"\(detail)\":\(value)")
 
-    case .IntValue (let key, let value):
-      outputString.appendString("\"\(key)\":\(value)")
+    case .IntValue (let detail, let value):
+      outputString.appendString("\"\(detail)\":\(value)")
 
-    case .StringValue(let key, let value):
+    case .StringValue(let detail, let value, _):
       let str = value.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
-      outputString.appendString("\"\(key)\":\"\(str)\"")
+      outputString.appendString("\"\(detail)\":\"\(str)\"")
 
-    case .DateValue(let key, let value):
+    case .DateValue(let detail, let value):
       let ds = dateFormatter.stringFromDate(value)
-      outputString.appendString("\"\(key)\":\"\(ds)\"")
+      outputString.appendString("\"\(detail)\":\"\(ds)\"")
     }
   }
 

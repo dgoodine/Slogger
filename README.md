@@ -5,17 +5,6 @@ A simple, fast and flexible logging framework for Swift.
 [![Pod Platform](http://img.shields.io/cocoapods/p/Slogger.svg?style=flat)](http://cocoadocs.org/docsets/Slogger/)
 [![Pod License](http://img.shields.io/cocoapods/l/Slogger.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-## Version History
-
-Version | Status | Comments
---- | --- | ---
-1.0 | In Progress | Finishing up for initial release
-0.1.x | Available | **Pre-release** (CocoaPods/Carthage support and TextFileDestination variants).
-
-## TODO
-- Add *Carthage* support.
-- Make docset
-
 ## Why Another Swift Logging Framework?
 
 When I started doing serious Swift development, I naturally looked around for a logging framework.  I found [*XCGLogger*](https://github.com/DaveWoodCom/XCGLogger) by Dave Wood @DaveWoodCom.  While it's fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺🍺🍺
@@ -93,13 +82,11 @@ destinations | [Destination] | Destinations this logger will write to.  Defaults
 hits | UInt64 | Number of events logged.
 misses | UInt64 | Number of events not logged due to logging threshold evaluation.
 
-## Advanced Features
-
-### *** Important Implementation Note ***
+## Implementation Note
 
 *Slogger* uses a private, serial dispatch queue for most of its work, including calls to the 
 generator, decorator, and all logging destinations.  The only code executed synchronously by the
-logging functions is the threshold evaluation (and only if `destinations.count > 0`) and,
+logging functions is threshold evaluation (and only if `destinations.count > 0`) and,
 if that passes, evaulation of the closure to produce the message from the logging site.
 
 Thus, all *Slogger* types are inherently thread-safe. If you decide to implement your own, you can
@@ -107,19 +94,21 @@ do so without concern for concurrency issues. However, if you create a custom im
 of any type that requires code be executed on the main thread, you **MUST** wrap that code inside a
 `dispatch_async` call to the main queue.
 
+## Advanced Features
+
 ### Destinations
 The *Destination* class allows you to write your own log destination subclasses and add them to the logger. The following destinations are provided in the implementation:
 
-Class | Status
---- | ---
-ConsoleDestination | ✔️
-MemoryDestination | ✔️
-TextFileDestination | ✔️ (mimics ConsoleDestination behavior w/o decoration)
-JSONFileDestination | ✔️
-XMLFileDestination | ✔️
-TabFileDestination | ✔️
-CSVFileDestination | ✔️
-NetworkDestination | Planned but no ETA
+Class | Status | Notes
+--- | --- | ---
+ConsoleDestination | ✔️ | Defaults to sensible output with *XcodeColors* support
+MemoryDestination | ✔️ | Appends entries to in-memory array.
+TextFileDestination | ✔️ | Mimics ConsoleDestination behavior by default w/o decoration
+JSONFileDestination | ✔️ | Outputs one-entry-per-line JSON format
+XMLFileDestination | ✔️ | Outputs one-entry-per-line XML format
+TabFileDestination | ✔️ | Outputs tab-delimited files.
+CSVFileDestination | ✔️ | Outputs comma-separated values files.
+NetworkDestination | 🤔  | Planned but no ETA
 
 ### Generators
 These are classes that output a log entry based on information from the logging site. They are configurable per logging destination.  You can use the provided generators or implement your own.
@@ -221,7 +210,7 @@ Destinations | Level | Can Log | Simulator | iPhone 6
 
 It's clear from the timing that if you want to completely turn off logging in the most efficient way, set the *destinations* property to an empty array.  This avoids even performing the level threshold test.
 
-It should be noted that the timing for where *Can Log* is *true* does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via dispatch_async to a private, serial queue.
+It should be noted that the timing for where *Can Log* is *true* does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it's noescape).  The rest of the work is done via `dispatch_async` to a private, serial queue.
 
 ## How To Get it
 Here's how you can get *Slogger* if you want to give it a try:
@@ -236,3 +225,14 @@ Carthage | In process |
 Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.
 
 ***Happy logging!***
+
+## Version History
+
+Version | Status | Comments
+--- | --- | ---
+1.0 | In Progress | Finishing up for initial release
+0.1.x | Available | **Pre-release** (CocoaPods/Carthage support and TextFileDestination variants).
+
+## TODO
+- Add *Carthage* support.
+- Make docset

@@ -158,32 +158,6 @@
 <p><a href="http://cocoadocs.org/docsets/Slogger/"><img src="http://img.shields.io/cocoapods/v/Slogger.svg?style=flat" alt="Pod Version"></a>
 <a href="http://cocoadocs.org/docsets/Slogger/"><img src="http://img.shields.io/cocoapods/p/Slogger.svg?style=flat" alt="Pod Platform"></a>
 <a href="http://opensource.org/licenses/MIT"><img src="http://img.shields.io/cocoapods/l/Slogger.svg?style=flat" alt="Pod License"></a></p>
-<a href='#version_history' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='version_history'>Version History</h2>
-
-<table><thead>
-<tr>
-<th>Version</th>
-<th>Status</th>
-<th>Comments</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>1.0</td>
-<td>In Progress</td>
-<td>Finishing up for initial release</td>
-</tr>
-<tr>
-<td>0.1.x</td>
-<td>Available</td>
-<td><strong>Pre-release</strong> (CocoaPods/Carthage support and TextFileDestination variants).</td>
-</tr>
-</tbody></table>
-<a href='#todo' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='todo'>TODO</h2>
-
-<ul>
-<li>Add <em>Carthage</em> support.</li>
-<li>Make docset</li>
-</ul>
 <a href='#why_another_swift_logging_framework' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='why_another_swift_logging_framework'>Why Another Swift Logging Framework?</h2>
 
 <p>When I started doing serious Swift development, I naturally looked around for a logging framework.  I found <a href="https://github.com/DaveWoodCom/XCGLogger"><em>XCGLogger</em></a> by Dave Wood @DaveWoodCom.  While it&rsquo;s fast and well constructed, I needed some extra features and decided to build my own.  But I did learn a few things from him so he deserves some props. 🍺🍺🍺</p>
@@ -285,18 +259,18 @@ log.none() { "Enter" }
 <td>Number of events not logged due to logging threshold evaluation.</td>
 </tr>
 </tbody></table>
-<a href='#advanced_features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='advanced_features'>Advanced Features</h2>
-<a href='#important_implementation_note' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='important_implementation_note'>*** Important Implementation Note ***</h3>
+<a href='#implementation_note' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='implementation_note'>Implementation Note</h2>
 
 <p><em>Slogger</em> uses a private, serial dispatch queue for most of its work, including calls to the 
 generator, decorator, and all logging destinations.  The only code executed synchronously by the
-logging functions is the threshold evaluation (and only if <code>destinations.count &gt; 0</code>) and,
+logging functions is threshold evaluation (and only if <code>destinations.count &gt; 0</code>) and,
 if that passes, evaulation of the closure to produce the message from the logging site.</p>
 
 <p>Thus, all <em>Slogger</em> types are inherently thread-safe. If you decide to implement your own, you can
 do so without concern for concurrency issues. However, if you create a custom implementation
 of any type that requires code be executed on the main thread, you <strong>MUST</strong> wrap that code inside a
 <code>dispatch_async</code> call to the main queue.</p>
+<a href='#advanced_features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='advanced_features'>Advanced Features</h2>
 <a href='#destinations' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='destinations'>Destinations</h3>
 
 <p>The <em>Destination</em> class allows you to write your own log destination subclasses and add them to the logger. The following destinations are provided in the implementation:</p>
@@ -305,38 +279,47 @@ of any type that requires code be executed on the main thread, you <strong>MUST<
 <tr>
 <th>Class</th>
 <th>Status</th>
+<th>Notes</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>ConsoleDestination</td>
 <td>✔️</td>
+<td>Defaults to sensible output with <em>XcodeColors</em> support</td>
 </tr>
 <tr>
 <td>MemoryDestination</td>
 <td>✔️</td>
+<td>Appends entries to in-memory array.</td>
 </tr>
 <tr>
 <td>TextFileDestination</td>
-<td>✔️ (mimics ConsoleDestination behavior w/o decoration)</td>
+<td>✔️</td>
+<td>Mimics ConsoleDestination behavior by default w/o decoration</td>
 </tr>
 <tr>
 <td>JSONFileDestination</td>
 <td>✔️</td>
+<td>Outputs one-entry-per-line JSON format</td>
 </tr>
 <tr>
 <td>XMLFileDestination</td>
 <td>✔️</td>
+<td>Outputs one-entry-per-line XML format</td>
 </tr>
 <tr>
 <td>TabFileDestination</td>
 <td>✔️</td>
+<td>Outputs tab-delimited files.</td>
 </tr>
 <tr>
 <td>CSVFileDestination</td>
 <td>✔️</td>
+<td>Outputs comma-separated values files.</td>
 </tr>
 <tr>
 <td>NetworkDestination</td>
+<td>🤔</td>
 <td>Planned but no ETA</td>
 </tr>
 </tbody></table>
@@ -537,7 +520,7 @@ class for non-log use in your console without writing your own.)</p>
 
 <p>It&rsquo;s clear from the timing that if you want to completely turn off logging in the most efficient way, set the <em>destinations</em> property to an empty array.  This avoids even performing the level threshold test.</p>
 
-<p>It should be noted that the timing for where <em>Can Log</em> is <em>true</em> does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it&rsquo;s noescape).  The rest of the work is done via dispatch_async to a private, serial queue.</p>
+<p>It should be noted that the timing for where <em>Can Log</em> is <em>true</em> does not include the generator, decoration or destination overhead.  If a site can log, the only thing done inline is evaluating the message closure (required because it&rsquo;s noescape).  The rest of the work is done via <code>dispatch_async</code> to a private, serial queue.</p>
 <a href='#how_to_get_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how_to_get_it'>How To Get it</h2>
 
 <p>Here&rsquo;s how you can get <em>Slogger</em> if you want to give it a try:</p>
@@ -570,6 +553,32 @@ class for non-log use in your console without writing your own.)</p>
 <p>Please do use the issues section on Github report bugs, raise questions, offer suggestions for improvements or ask questions about the implementation.  And if you want to contribute, feel free to discuss it in the issues section and/or issue a pull request.</p>
 
 <p><strong><em>Happy logging!</em></strong></p>
+<a href='#version_history' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='version_history'>Version History</h2>
+
+<table><thead>
+<tr>
+<th>Version</th>
+<th>Status</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1.0</td>
+<td>In Progress</td>
+<td>Finishing up for initial release</td>
+</tr>
+<tr>
+<td>0.1.x</td>
+<td>Available</td>
+<td><strong>Pre-release</strong> (CocoaPods/Carthage support and TextFileDestination variants).</td>
+</tr>
+</tbody></table>
+<a href='#todo' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='todo'>TODO</h2>
+
+<ul>
+<li>Add <em>Carthage</em> support.</li>
+<li>Make docset</li>
+</ul>
 
           </section>
         </section>

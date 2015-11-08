@@ -447,7 +447,7 @@ The order of the parameters designates their precedence in evaluating the loggin
                               </td>
                               <td>
                                 <div>
-                                  <p>The default level of the logging site.</p>
+                                  <p>The level of the logging site implicitly specified by the logging function.</p>
 
                                 </div>
                               </td>
@@ -486,6 +486,132 @@ The order of the parameters designates their precedence in evaluating the loggin
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetStats</span> <span class="p">()</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC7Slogger7Slogger11logInternaluRq_S_15SloggerCategory_FGS0_q__FT7closureFT_SS8categoryGSqq__8overrideGSqOS_5Level_5levelS2_8functionSS4fileSS4lineSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/logInternal(closure:category:override:level:function:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC7Slogger7Slogger11logInternaluRq_S_15SloggerCategory_FGS0_q__FT7closureFT_SS8categoryGSqq__8overrideGSqOS_5Level_5levelS2_8functionSS4fileSS4lineSi_T_">logInternal(closure:category:override:level:function:file:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The internal logging function, provided for extensibility.  Normally, you&rsquo;ll want to use the logging site functions
+provided below for clarity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">logInternal</span> <span class="p">(</span><span class="kd">@noescape</span> <span class="n">closure</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt">LogClosure</span><span class="p">,</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">T</span><span class="p">?,</span> <span class="nv">override</span><span class="p">:</span> <span class="kt">Level</span><span class="p">?,</span> <span class="nv">level</span><span class="p">:</span> <span class="kt">Level</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>closure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that returns the message string.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>category</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Category of the logging site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>override</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If not nil, will be used to determine whether logging should output to the destinations.  Defaults to <code>nil</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>level</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The level of the logging site.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>function</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The function within which the logging site is contained.  It should remain as the default.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file within which the logging site is contained.  It should remain as the default.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line in the file of the logging site.  It should remain as the default.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

@@ -40,7 +40,7 @@ public class CSVGenerator : Generator {
 
   override func emitBegin(outputString: NSMutableString) {}
 
-  override func emit (outputString : NSMutableString, _ detail: Detail, _ type: ValueType) {
+  override func emit (outputString : NSMutableString, type: ValueType) {
     switch type {
 
     case .BoolValue (_, let value):
@@ -49,7 +49,7 @@ public class CSVGenerator : Generator {
     case .IntValue (_, let value):
       outputString.appendString("\(value)")
 
-    case .StringValue(_, let value):
+    case .StringValue(_, let value, _):
       let str = value.stringByReplacingOccurrencesOfString("\"", withString: "\"\"")
       outputString.appendString("\"\(str)\"")
 

@@ -93,7 +93,6 @@ public protocol Decorator {
   func decorateString(string : String, spec: ColorSpec) -> String
 }
 
-
 // MARK: - Slogger Class
 
 /**
@@ -168,8 +167,9 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   - Parameter override: If it is not nil, it will be used exclusively to determine if logging should proceeed.
   If the value is .None, the generator will not be called for this logging site and there will be no output.
-  - Parameter category: The category of the logging site or nil.  Used to evaluate category specific debugging level configuration.
-  - Parameter level: The default level of the logging site.
+  - Parameter category: The category of the logging site or nil.  Used to evaluate category specific debugging
+  level configuration.
+  - Parameter level: The level of the logging site implicitly specified by the logging function.
 
   - Returns: true of the logging of the event should proceed, false if it shouldn't
   */
@@ -192,8 +192,19 @@ public class Slogger <T: SloggerCategory> : NSObject {
     misses = 0
   }
 
-  // MARK: Private
-  func logInternal (@noescape closure closure: LogClosure, category: T?, override: Level?, level: Level, function: String, file: String, line: Int) {
+/**
+   The internal logging function, provided for extensibility.  Normally, you'll want to use the logging site functions
+   provided below for clarity.
+
+   - Parameter closure: A closure that returns the message string.
+   - Parameter category: Category of the logging site.
+   - Parameter override: If not nil, will be used to determine whether logging should output to the destinations.  Defaults to `nil`.
+   - Parameter level: The level of the logging site.
+   - Parameter function: The function within which the logging site is contained.  It should remain as the default.
+   - Parameter file: The file within which the logging site is contained.  It should remain as the default.
+   - Parameter line: The line in the file of the logging site.  It should remain as the default.
+*/
+  public func logInternal (@noescape closure closure: LogClosure, category: T?, override: Level?, level: Level, function: String, file: String, line: Int) {
 
     guard destinations.count > 0 else {
       return
@@ -226,7 +237,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
 // MARK: - Log site functions
 /**
-This extension holds the public convenience methods for logging.  They should be the only ones used at logging sites.
+This extension holds the public convenience methods for logging per level.
 */
 extension Slogger {
   // MARK: Severe

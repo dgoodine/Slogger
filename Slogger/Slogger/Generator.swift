@@ -8,25 +8,50 @@
 
 import Foundation
 
-/// Base class for log entry generators.
+/// Base class for log entry generators.  See custom file destinations for more generators.
 public class Generator {
 
   /// An enum for passing detail values to emitter functions.
   public enum ValueType {
-    /// A value to be emitted as a string
-    case StringValue (key: Detail, value: String)
+    /** 
+     A value to be emitted as a string
 
-    /// A value to be emitted as a boolean (`true` or `false`)
-    case BoolValue (key: Detail, value: Bool)
+     - Parameter detail: The `Detail` enum for this value.
+     - Parameter value: The value to be output.
+     - Parameter protect: If true, the value may contain characters that are not alphanumeric, and anomalous
+     to the output format – a comma character the message field in CSV format, for example. Implementations are free
+     to ignore this and protect all string fields if desired.  This was motivated to cut down on CDATA section spam
+     where it isn't needed in the XMLGenerator implementation.
 
-    /// A value to be emitted as an integer.
-    case IntValue (key: Detail, value: Int)
+     */
+    case StringValue (detail: Detail, value: String, protect: Bool)
 
-    /// A value to be emitted as a date.
-    case DateValue (key: Detail, value: NSDate)
+    /**
+    A value to be emitted as a boolean (`true` or `false`)
+
+    - Parameter detail: The `Detail` enum for this value.
+    - Parameter value: The value to be output.
+    */
+    case BoolValue (detail: Detail, value: Bool)
+
+    /**
+     A value to be emitted as an integer.
+
+    - Parameter detail: The `Detail` enum for this value.
+    - Parameter value: The value to be output.
+    */
+    case IntValue (detail: Detail, value: Int)
+
+    /**
+     A value to be emitted as a date.
+
+     - Parameter detail: The `Detail` enum for this value.
+     - Parameter value: The value to be output.
+     */
+    case DateValue (detail: Detail, value: NSDate)
   }
 
-  /// Default date formatter
+  /// Formatter for emitting dates.  You can set this for your own custom format.
   public lazy var dateFormatter : NSDateFormatter = {
     let template = "yyyy-MM-dd HH:mm:ss.SSS ZZZ"
     let idf = NSDateFormatter()
@@ -37,14 +62,14 @@ public class Generator {
   /**
    The generator function.
 
-   - Important: The `override` parameter can be used to signify in the output that this is an override event. However, the
-   `level` parameter should be used if the details call for it, since it corresponds to the level implicitly passed by the
-   logging function at the logging site.  This will preserve decorator style appropriate for the level.
+   - Important: The `override` parameter can be used to signify in the output that this is an override event. However,
+   the `level` parameter should be used if the details call for it, since it corresponds to the level implicitly passed
+   by the logging site.
 
-   - Parameter message: The message string at the logging site.
-   - Parameter category: The category specified in the logging site.
+   - Parameter message: The message string from the logging site.
+   - Parameter category: The category specified at the logging site.
    - Parameter override: The override level.
-   - Parameter level: The logging level of the site.
+   - Parameter level: The level of the logging site.
    - Parameter date: The date of the logging event.
    - Parameter function: The function the logging site is in.
    - Parameter file: The file the logging site is in.
@@ -71,31 +96,31 @@ public class Generator {
       switch detail {
 
       case .Override:
-        self.emit(str, detail, .BoolValue(key: detail, value: override != nil))
+        self.emit(str, type: .BoolValue(detail: detail, value: override != nil))
 
       case .Category:
         let cat = category == nil ? "" : "\(category!)"
-        self.emit(str, detail, .StringValue(key: detail, value: cat))
+        self.emit(str, type: .StringValue(detail: detail, value: cat, protect: false))
 
       case .File:
         let f = file as NSString
         let filename = f.lastPathComponent
-        self.emit(str, detail, .StringValue(key: detail, value: filename))
+        self.emit(str, type: .StringValue(detail: detail, value: filename, protect: true))
 
       case .Line:
-        self.emit(str, detail, .IntValue(key: detail, value: line))
+        self.emit(str, type: .IntValue(detail: detail, value: line))
 
       case .Function:
-        self.emit(str, detail, .StringValue(key: detail, value: function))
+        self.emit(str, type: .StringValue(detail: detail, value: function, protect: true))
 
       case .Level:
-        self.emit(str, detail, .StringValue(key: detail, value: "\(level)"))
+        self.emit(str, type: .StringValue(detail: detail, value: "\(level)", protect: false))
 
       case .Date:
-        self.emit(str, detail, .DateValue(key: detail, value: date))
+        self.emit(str, type: .DateValue(detail: detail, value: date))
 
       case .Message:
-        self.emit(str, detail, .StringValue(key: .Message, value: message))
+        self.emit(str, type: .StringValue(detail: .Message, value: message, protect: true))
       }
 
     }
@@ -105,19 +130,33 @@ public class Generator {
     return str as String
   }
 
-  // Emit the preamble for the entry contents
+  /**
+   Emit the beginning of the log entry.
+   
+   - Parameter outputString: The destination for output.
+   */
   func emitBegin (outputString : NSMutableString) {
   }
 
-  // Emit an entry based on its value type.
-  func emit (outputString : NSMutableString, _ detail: Detail, _ type: ValueType) {
+  /** 
+   Emit a detail value based on its type.
+   
+   - Parameter outputString: The destination for output.
+   - Parameter type: `ValueType` enum value carrying the detail enum and value.
+   */
+  func emit (outputString : NSMutableString, type: ValueType) {
     switch type {
 
-    case .BoolValue (_, let value):
-      let string = value ? "*" : "-"
-      outputString.appendString("\(string)")
+    case .BoolValue (let detail, let value):
+      switch detail {
+      case .Override:
+        let string = value ? "*" : "-"
+        outputString.appendString("\(string)")
+      default:
+        outputString.appendString("\(value)")
+      }
 
-    case .IntValue (_, let value):
+    case .IntValue (let detail, let value):
       switch detail {
       case .Line:
         outputString.appendString("(\(value))")
@@ -125,7 +164,7 @@ public class Generator {
         outputString.appendString("\(value)")
       }
 
-    case .StringValue(_, let value):
+    case .StringValue(let detail, let value, _):
       switch detail {
       case .Category:
         outputString.appendString("[\(value)]")
@@ -142,12 +181,20 @@ public class Generator {
 
   }
 
-  // Emit the delimiter between entries.
+  /** 
+   Emit the delimiter between entries.  This will be output before any entry except for the first.
+   
+   - Parameter outputString: The destination for output.
+  */
   func emitDelimiter (outputString : NSMutableString) {
     outputString.appendString(" ")
   }
 
-  // Emit the postamble for the entry.
+  /** 
+   Emit the end of the log entry.
+   
+   - Parameter outputString: The destination for output.
+   */
   func emitEnd (outputString : NSMutableString) {
   }
 }

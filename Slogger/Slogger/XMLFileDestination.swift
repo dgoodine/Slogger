@@ -44,21 +44,23 @@ public class XMLGenerator : Generator {
     outputString.appendString("<entry>")
   }
 
-  override func emit (outputString : NSMutableString, _ detail: Detail, _ type: ValueType) {
+  override func emit (outputString : NSMutableString, type: ValueType)  {
+
     switch type {
 
-    case .BoolValue (let key, let value):
-      outputString.appendString("<\(key)>\(value)</\(key)>")
+    case .BoolValue (let detail, let value):
+      outputString.appendString("<\(detail)>\(value)</\(detail)>")
 
-    case .IntValue (let key, let value):
-      outputString.appendString("<\(key)>\(value)</\(key)>")
+    case .IntValue (let detail, let value):
+      outputString.appendString("<\(detail)>\(value)</\(detail)>")
 
-    case .StringValue(let key, let value):
-      outputString.appendString("<\(key)><![CDATA[\(value)]]></\(key)>")
+    case .StringValue(let detail, let value, let protect):
+      let str = protect ? "<![CDATA[\(value)]]>" : value
+      outputString.appendString("<\(detail)>\(str)</\(detail)>")
 
-    case .DateValue(let key, let value):
+    case .DateValue(let detail, let value):
       let ds = dateFormatter.stringFromDate(value)
-      outputString.appendString("<\(key)>\(ds)</\(key)>")
+      outputString.appendString("<\(detail)>\(ds)</\(detail)>")
     }
   }
 
