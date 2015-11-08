@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A83C5A111BED38F80037B847 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A081BED38F80037B847 /* PerformanceTest.swift */; };
 		A83C5A121BED38F80037B847 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A091BED38F80037B847 /* Color.swift */; };
 		A83C5A131BED38F80037B847 /* XCodeColorsDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */; };
 		A83C5A141BED38F80037B847 /* AnsiDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */; };
@@ -37,7 +36,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A83C5A081BED38F80037B847 /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceTest.swift; path = ../Slogger/Slogger/PerformanceTest.swift; sourceTree = "<group>"; };
 		A83C5A091BED38F80037B847 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = ../Slogger/Slogger/Color.swift; sourceTree = "<group>"; };
 		A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCodeColorsDecorator.swift; path = ../Slogger/Slogger/XCodeColorsDecorator.swift; sourceTree = "<group>"; };
 		A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnsiDecorator.swift; path = ../Slogger/Slogger/AnsiDecorator.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 		A83C5A071BED38DE0037B847 /* Slogger */ = {
 			isa = PBXGroup;
 			children = (
-				A83C5A081BED38F80037B847 /* PerformanceTest.swift */,
 				A83C5A091BED38F80037B847 /* Color.swift */,
 				A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */,
 				A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */,
@@ -169,7 +166,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A83C5A111BED38F80037B847 /* PerformanceTest.swift in Sources */,
 				A83C5A131BED38F80037B847 /* XCodeColorsDecorator.swift in Sources */,
 				A8A11D291BEF040200EEEA2B /* Destination.swift in Sources */,
 				A83C5A161BED38F80037B847 /* ConsoleDestination.swift in Sources */,

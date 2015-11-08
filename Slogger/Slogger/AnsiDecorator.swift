@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Decorator for ANSI color codes
 public struct AnsiDecorator : Decorator {
   private let escape = "\u{001b}["
   private let reset = "\u{001b}[m"
@@ -15,6 +16,7 @@ public struct AnsiDecorator : Decorator {
   private let bgCode = "48;2;"
   private let maxColor = 255.0
 
+  /// Designated initializer
   public init() {}
 
   /// Protocol implementation

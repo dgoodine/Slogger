@@ -8,10 +8,13 @@
 
 import Foundation
 
+/// Output destination for JSON files.
 public class JSONFileDestination : TextFileDestination {
 
+  /// Configuration instance.
   public class JSONConfiguration :  Configuration {
 
+    /// Designated initializer.
     public init () {
       super.init(generator: JSONGenerator())
       self.fileExtension = "json"
@@ -22,11 +25,13 @@ public class JSONFileDestination : TextFileDestination {
     }
   }
 
+  /// Designated initializer.
   init(directory: String, config: JSONConfiguration = JSONConfiguration()) {
     super.init(directory: directory, config: config)
   }
 }
 
+/// JSON format log entry generator.
 public class JSONGenerator : Generator {
 
   override func emitBegin(outputString: NSMutableString) {

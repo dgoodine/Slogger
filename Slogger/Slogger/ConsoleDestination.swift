@@ -22,10 +22,12 @@ public class ConsoleDestination : Destination {
     .Verbose : (colorFromHexString("555555"), nil),
   ]
 
+  /// Designated initializer.
   override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = defaultColorMap, decorator: Decorator? = XCodeColorsDecorator()) {
     super.init(details: details, generator: generator, colorMap: colorMap, decorator: decorator)
   }
 
+  /// Protocol implementation.
   public override func logString(string : String, level: Level) {
     if let color = colorMap?[level] where decorator != nil {
       if let decorated = decorator?.decorateString(string, spec: color) {

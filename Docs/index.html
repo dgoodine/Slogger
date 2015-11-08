@@ -12,7 +12,7 @@
     <a title="Slogger  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Slogger Docs</a> (81% documented)</p>
+        <p><a href="index.html">Slogger Docs</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/dgoodine/Slogger"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -192,7 +192,7 @@
 
 <p>Also note: Slogger is completely API independent, except for the Swift standard library and the <code>Foundation</code> import.  So it can be used in Mac OS X projects projects as well.  (Mac OS X support for <em>CocoaPods</em> and <em>Carthage</em> pending.)</p>
 
-<p><strong>Slogger requires Xcode 7 and Swift 2.1.</strong></p>
+<p><strong>Slogger requires Xcode 7.1 and Swift 2.1.</strong></p>
 <a href='#general_info' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='general_info'>General Info</h2>
 <a href='#logging_levels' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='logging_levels'>Logging Levels</h3>
 
@@ -369,11 +369,11 @@ of any type that requires code be executed on the main thread, you <strong>MUST<
 <td>✔️</td>
 </tr>
 <tr>
-<td>TabGenerator</td>
+<td>CSVGenerator</td>
 <td>✔️</td>
 </tr>
 <tr>
-<td>CSVGenerator</td>
+<td>TSVGenerator</td>
 <td>✔️</td>
 </tr>
 </tbody></table>
@@ -456,7 +456,7 @@ class for non-log use in your console without writing your own.)</p>
 
 <p>Naturally, if you want your logger to have customized values (generators, decorators, etc.), you can override the <em>init</em> method and provide that information there.</p>
 
-<p>Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your <em>Swift</em> code defines a module, you a) don&rsquo;t have to worry about name collisions, and b) you can document your categories and allow other modules to modify its behavior, as described above.</p>
+<p>Creating your logger as a top-level, global variable gives you convenient access to it anywhere in your code.  And since your <em>Swift</em> code defines a module, you a) don&rsquo;t have to worry about name collisions, and b) can document your categories and allow other modules to modify its behavior, as described above.</p>
 <a href='#performance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='performance'>Performance</h2>
 
 <p>Here are initial performance figures for logging calls with a release build (as of version 1.0).  See the <em>PerformanceTest</em> class and <em>SloggerPerformanceIOS</em> project for details.  (The performance of <em>Slogger</em> for Mac OS X applications should be identical to that of the simulator.)</p>

@@ -8,10 +8,13 @@
 
 import Foundation
 
+/// Tab-delimited file output destination.
 public class TSVFileDestination : TextFileDestination {
 
+  /// Configuration object.
   public class TSVConfiguration :  Configuration {
 
+    /// Designated initializer.
     public init () {
       super.init(generator: TSVGenerator())
       self.fileExtension = "tsv"
@@ -26,11 +29,13 @@ public class TSVFileDestination : TextFileDestination {
     }
   }
 
+  /// Designateed initializaer
   init(directory: String, config: TSVConfiguration = TSVConfiguration()) {
     super.init(directory: directory, config: config)
   }
 }
 
+/// Log entry generator for tab-delimited format.
 public class TSVGenerator : Generator {
 
   override func emitBegin(outputString: NSMutableString) {}

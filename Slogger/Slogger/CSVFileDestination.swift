@@ -8,10 +8,13 @@
 
 import Foundation
 
+/// Comma separated values TextFileDestination
 public class CSVFileDestination : TextFileDestination {
 
+  /// Configuration object.
   public class CSVConfiguration :  Configuration {
 
+    /// Designated initializer.
     public init () {
       super.init(generator: CSVGenerator())
       self.fileExtension = "csv"
@@ -26,11 +29,13 @@ public class CSVFileDestination : TextFileDestination {
     }
   }
 
+  /// Designated initializer.
   init(directory: String, config: CSVConfiguration = CSVConfiguration()) {
     super.init(directory: directory, config: config)
   }
 }
 
+/// CSV entry generator.
 public class CSVGenerator : Generator {
 
   override func emitBegin(outputString: NSMutableString) {}

@@ -13,9 +13,16 @@ public class Generator {
 
   /// An enum for passing detail values to emitter functions.
   public enum ValueType {
+    /// A value to be emitted as a string
     case StringValue (key: Detail, value: String)
+
+    /// A value to be emitted as a boolean (`true` or `false`)
     case BoolValue (key: Detail, value: Bool)
+
+    /// A value to be emitted as an integer.
     case IntValue (key: Detail, value: Int)
+
+    /// A value to be emitted as a date.
     case DateValue (key: Detail, value: NSDate)
   }
 
@@ -102,7 +109,7 @@ public class Generator {
   func emitBegin (outputString : NSMutableString) {
   }
 
-  // Emit an entry.
+  // Emit an entry based on its value type.
   func emit (outputString : NSMutableString, _ detail: Detail, _ type: ValueType) {
     switch type {
 
