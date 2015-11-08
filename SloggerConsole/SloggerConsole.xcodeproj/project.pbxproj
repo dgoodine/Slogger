@@ -21,6 +21,7 @@
 		A8A11D371BEF08A700EEEA2B /* CSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D351BEF08A700EEEA2B /* CSVFileDestination.swift */; };
 		A8A11D381BEF08A700EEEA2B /* TSVFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D361BEF08A700EEEA2B /* TSVFileDestination.swift */; };
 		A8AC59931BED1C8200DBC78E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AC59921BED1C8200DBC78E /* main.swift */; };
+		A8B663431BEF143200F0EB64 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B663421BEF143200F0EB64 /* Generator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		A8A11D361BEF08A700EEEA2B /* TSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TSVFileDestination.swift; path = ../Slogger/Slogger/TSVFileDestination.swift; sourceTree = "<group>"; };
 		A8AC598F1BED1C8200DBC78E /* slogger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = slogger; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8AC59921BED1C8200DBC78E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A8B663421BEF143200F0EB64 /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Generator.swift; path = ../Slogger/Slogger/Generator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				A83C5A091BED38F80037B847 /* Color.swift */,
 				A83C5A0A1BED38F80037B847 /* XCodeColorsDecorator.swift */,
 				A83C5A0B1BED38F80037B847 /* AnsiDecorator.swift */,
+				A8B663421BEF143200F0EB64 /* Generator.swift */,
 				A8A11D281BEF040200EEEA2B /* Destination.swift */,
 				A83C5A0D1BED38F80037B847 /* ConsoleDestination.swift */,
 				A83C5A0E1BED38F80037B847 /* MemoryDestination.swift */,
@@ -175,6 +178,7 @@
 				A8A11D241BEEED9A00EEEA2B /* JSONFileDestination.swift in Sources */,
 				A83C5A121BED38F80037B847 /* Color.swift in Sources */,
 				A8A11D251BEEED9A00EEEA2B /* XMLFileDestination.swift in Sources */,
+				A8B663431BEF143200F0EB64 /* Generator.swift in Sources */,
 				A83C5A181BED38F80037B847 /* TextFileDestination.swift in Sources */,
 				A83C5A171BED38F80037B847 /* MemoryDestination.swift in Sources */,
 				A83C5A141BED38F80037B847 /* AnsiDecorator.swift in Sources */,
