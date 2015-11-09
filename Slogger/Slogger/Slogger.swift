@@ -129,7 +129,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
   }
 
   // Local Storage
-  private var _destinations : [Destination] = []
+  private var _destinations : [Destination] = [ConsoleDestination()]
 
   /// Destinations this logger will write to.
   public var destinations : [Destination] {
