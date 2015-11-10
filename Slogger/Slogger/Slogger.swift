@@ -14,13 +14,13 @@ public typealias LogClosure = () -> String
 public protocol SloggerCategory : Hashable {}
 
 /// Default enum for instantiating a generic Slogger class without categories.
-public enum NoCategories : Int, SloggerCategory {
+@objc public enum NoCategories : Int, SloggerCategory {
   /// If you only need one category, you can use this. Not a likely use-case.
   case One
 }
 
 /// Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
-public enum Level : Int, Comparable {
+@objc public enum Level : Int, Comparable {
   /// Turn off all logging (except overrides).
   case None
 

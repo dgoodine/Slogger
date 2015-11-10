@@ -14,7 +14,7 @@ static SloggerObjC *slog;
 @implementation SloggerTestsObjC
 
 - (void) setUp {
-  slog = [[SloggerObjC alloc] init];
+  slog = [[SloggerObjC alloc] initWithDefaultLevel:LevelInfo];
 }
 
 - (void) testObjC {

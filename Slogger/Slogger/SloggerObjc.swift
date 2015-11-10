@@ -11,13 +11,13 @@ import Foundation
 @objc public class SloggerObjC : NSObject {
   let log : Slogger<NoCategories>
 
-  override public init () {
+  @objc public init (defaultLevel: Level) {
     log = Slogger<NoCategories>(defaultLevel: .Info)
   }
 
   // MARK: Severe
-  public func severe (@autoclosure  closure: LogClosure, override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
-    log.logInternal(closure: closure, category: nil, override: override, level: .Severe, function: function, file: file, line: line)
+  @objc public func severe (@autoclosure  closure: LogClosure, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    log.logInternal(closure: closure, category: nil, override: nil, level: .Severe, function: function, file: file, line: line)
   }
 
   public func severe (category: NoCategories?, @autoclosure _ closure: LogClosure, override: Level? = nil, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
