@@ -28,8 +28,8 @@ class TestLogger : Slogger<TestCategory>
   }
 }
 
-let testDestination = MemoryDestination()
-let log = TestLogger()
+private let testDestination = MemoryDestination()
+private let log = TestLogger()
 
 class SloggerTests: XCTestCase {
 

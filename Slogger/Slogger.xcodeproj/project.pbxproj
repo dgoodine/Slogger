@@ -60,6 +60,13 @@
 		A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A86ED5B81BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A88E3A451BF22535006E3201 /* SloggerTestsObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A441BF22535006E3201 /* SloggerTestsObjC.m */; };
+		A88E3A471BF22975006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
+		A88E3A481BF22975006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
+		A88E3A491BF22975006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
+		A88E3A4A1BF22975006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
+		A88E3A4B1BF22975006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
+		A88E3A4C1BF23055006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
+		A88E3A4D1BF23056006E3201 /* SloggerObjc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A461BF22975006E3201 /* SloggerObjc.swift */; };
 		A8A11D1E1BEE946F00EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
 		A8A11D1F1BEE947000EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
 		A8A11D201BEE947000EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
@@ -170,6 +177,7 @@
 		A88E3A421BF22535006E3201 /* SloggerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SloggerTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A88E3A431BF22535006E3201 /* SloggerTestsObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SloggerTestsObjC.h; sourceTree = "<group>"; };
 		A88E3A441BF22535006E3201 /* SloggerTestsObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SloggerTestsObjC.m; sourceTree = "<group>"; };
+		A88E3A461BF22975006E3201 /* SloggerObjc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SloggerObjc.swift; sourceTree = "<group>"; };
 		A8A11D261BEEF95D00EEEA2B /* CSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVFileDestination.swift; sourceTree = "<group>"; };
 		A8A11D2F1BEF07AA00EEEA2B /* TSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSVFileDestination.swift; sourceTree = "<group>"; };
 		A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCodeColorsDecorator.swift; sourceTree = "<group>"; };
@@ -309,6 +317,7 @@
 				A83C79F01BD6639A00DA9F07 /* Slogger.swift */,
 				A83C79DB1BD6636800DA9F07 /* Info.plist */,
 				A83C79D91BD6636800DA9F07 /* Slogger.h */,
+				A88E3A461BF22975006E3201 /* SloggerObjc.swift */,
 			);
 			path = Slogger;
 			sourceTree = "<group>";
@@ -664,6 +673,7 @@
 				A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
 				A82F89561BEE902F003B0BBA /* XMLFileDestination.swift in Sources */,
 				A845537A1BDC084D00678385 /* Color.swift in Sources */,
+				A88E3A471BF22975006E3201 /* SloggerObjc.swift in Sources */,
 				A826330E1BE1271600293716 /* TextFileDestination.swift in Sources */,
 				A85019B51BEE7E9200FA6185 /* Generator.swift in Sources */,
 				A8CF46BB1BEE4E270013D2C7 /* JSONFileDestination.swift in Sources */,
@@ -689,6 +699,7 @@
 				A8CF46BC1BEE4E2A0013D2C7 /* JSONFileDestination.swift in Sources */,
 				A8A11D2C1BEF068200EEEA2B /* CSVFileDestination.swift in Sources */,
 				A8A11D1E1BEE946F00EEEA2B /* XMLFileDestination.swift in Sources */,
+				A88E3A481BF22975006E3201 /* SloggerObjc.swift in Sources */,
 				A80E06511BDBEFA7007066B3 /* ConsoleDestination.swift in Sources */,
 				A8A53DA01BDC2C5D009EA295 /* XCodeColorsDecorator.swift in Sources */,
 				A8A9DAEF1BE0FB25000A9351 /* Destination.swift in Sources */,
@@ -708,6 +719,7 @@
 				A85BFC5E1BDD46A6008D1F1E /* XCodeColorsDecorator.swift in Sources */,
 				A8A11D1F1BEE947000EEEA2B /* XMLFileDestination.swift in Sources */,
 				A85BFC5F1BDD46A6008D1F1E /* MemoryDestination.swift in Sources */,
+				A88E3A491BF22975006E3201 /* SloggerObjc.swift in Sources */,
 				A82633101BE1271600293716 /* TextFileDestination.swift in Sources */,
 				A85019B71BEE7FEF00FA6185 /* Generator.swift in Sources */,
 				A8CF46BD1BEE4E2B0013D2C7 /* JSONFileDestination.swift in Sources */,
@@ -734,6 +746,7 @@
 				A8A11D201BEE947000EEEA2B /* XMLFileDestination.swift in Sources */,
 				A85BFC601BDD4725008D1F1E /* Slogger.swift in Sources */,
 				A85BFC631BDD472A008D1F1E /* XCodeColorsDecorator.swift in Sources */,
+				A88E3A4A1BF22975006E3201 /* SloggerObjc.swift in Sources */,
 				A8A9DAF11BE0FB26000A9351 /* Destination.swift in Sources */,
 				A85019B81BEE7FEF00FA6185 /* Generator.swift in Sources */,
 			);
@@ -751,6 +764,7 @@
 				A85BFC731BDD4B8B008D1F1E /* Slogger.swift in Sources */,
 				A8A11D211BEE947100EEEA2B /* XMLFileDestination.swift in Sources */,
 				A85BFC751BDD4B8B008D1F1E /* Color.swift in Sources */,
+				A88E3A4B1BF22975006E3201 /* SloggerObjc.swift in Sources */,
 				A82633121BE1271600293716 /* TextFileDestination.swift in Sources */,
 				A85019B91BEE7FF000FA6185 /* Generator.swift in Sources */,
 				A8CF46BF1BEE4E2C0013D2C7 /* JSONFileDestination.swift in Sources */,
@@ -772,6 +786,7 @@
 				A8BD8C721BEFC67300349EDD /* Slogger.swift in Sources */,
 				A8BD8C581BEFC65F00349EDD /* Generator.swift in Sources */,
 				A8BD8C671BEFC66A00349EDD /* TSVFileDestination.swift in Sources */,
+				A88E3A4C1BF23055006E3201 /* SloggerObjc.swift in Sources */,
 				A8BD8C661BEFC66A00349EDD /* CSVFileDestination.swift in Sources */,
 				A8BD8C641BEFC66A00349EDD /* JSONFileDestination.swift in Sources */,
 				A8BD8C701BEFC66F00349EDD /* PerformanceTest.swift in Sources */,
@@ -798,6 +813,7 @@
 				A8BD8C6B1BEFC66B00349EDD /* TextFileDestination.swift in Sources */,
 				A8BD8C6A1BEFC66B00349EDD /* MemoryDestination.swift in Sources */,
 				A8BD8C5D1BEFC66500349EDD /* Color.swift in Sources */,
+				A88E3A4D1BF23056006E3201 /* SloggerObjc.swift in Sources */,
 				A8BD8C711BEFC66F00349EDD /* PerformanceTest.swift in Sources */,
 				A8BD8C5F1BEFC66500349EDD /* AnsiDecorator.swift in Sources */,
 			);

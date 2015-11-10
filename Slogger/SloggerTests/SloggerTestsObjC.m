@@ -9,8 +9,16 @@
 #import "SloggerTestsObjC.h"
 @import Slogger;
 
-//static Slogger *log = Slogger.logObjC;
+static SloggerObjC *slog;
 
 @implementation SloggerTestsObjC
+
+- (void) setUp {
+  slog = [[SloggerObjC alloc] init];
+}
+
+- (void) testObjC {
+  NSLog(@"log: %@", slog);
+}
 
 @end

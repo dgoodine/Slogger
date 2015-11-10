@@ -14,7 +14,7 @@ public typealias LogClosure = () -> String
 public protocol SloggerCategory : Hashable {}
 
 /// Default enum for instantiating a generic Slogger class without categories.
-public enum NoCategories : SloggerCategory {
+public enum NoCategories : Int, SloggerCategory {
   /// If you only need one category, you can use this. Not a likely use-case.
   case One
 }
