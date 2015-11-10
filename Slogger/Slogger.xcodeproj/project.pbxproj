@@ -59,6 +59,7 @@
 		A85BFC771BDD4B8B008D1F1E /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A86ED5B71BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
 		A86ED5B81BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */; };
+		A88E3A451BF22535006E3201 /* SloggerTestsObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = A88E3A441BF22535006E3201 /* SloggerTestsObjC.m */; };
 		A8A11D1E1BEE946F00EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
 		A8A11D1F1BEE947000EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
 		A8A11D201BEE947000EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F89551BEE902F003B0BBA /* XMLFileDestination.swift */; };
@@ -166,6 +167,9 @@
 		A85BFC6D1BDD4B63008D1F1E /* SloggerWatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SloggerWatch.h; sourceTree = "<group>"; };
 		A85BFC6F1BDD4B63008D1F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A86ED5B61BDD0C4F0065AF70 /* MemoryDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryDestination.swift; sourceTree = "<group>"; };
+		A88E3A421BF22535006E3201 /* SloggerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SloggerTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		A88E3A431BF22535006E3201 /* SloggerTestsObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SloggerTestsObjC.h; sourceTree = "<group>"; };
+		A88E3A441BF22535006E3201 /* SloggerTestsObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SloggerTestsObjC.m; sourceTree = "<group>"; };
 		A8A11D261BEEF95D00EEEA2B /* CSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVFileDestination.swift; sourceTree = "<group>"; };
 		A8A11D2F1BEF07AA00EEEA2B /* TSVFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSVFileDestination.swift; sourceTree = "<group>"; };
 		A8A53D9E1BDC2903009EA295 /* XCodeColorsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCodeColorsDecorator.swift; sourceTree = "<group>"; };
@@ -314,6 +318,9 @@
 			children = (
 				A83C79E51BD6636800DA9F07 /* SloggerTests.swift */,
 				A83C79E71BD6636800DA9F07 /* Info.plist */,
+				A88E3A431BF22535006E3201 /* SloggerTestsObjC.h */,
+				A88E3A441BF22535006E3201 /* SloggerTestsObjC.m */,
+				A88E3A421BF22535006E3201 /* SloggerTests-Bridging-Header.h */,
 			);
 			path = SloggerTests;
 			sourceTree = "<group>";
@@ -671,6 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8304B781BEFA109005CE752 /* PerformanceTest.swift in Sources */,
+				A88E3A451BF22535006E3201 /* SloggerTestsObjC.m in Sources */,
 				A83C79E61BD6636800DA9F07 /* SloggerTests.swift in Sources */,
 				A86ED5B81BDD0C4F0065AF70 /* MemoryDestination.swift in Sources */,
 				A826330F1BE1271600293716 /* TextFileDestination.swift in Sources */,
@@ -950,20 +958,25 @@
 		A83C79EE1BD6636800DA9F07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SloggerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SloggerTests/SloggerTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		A83C79EF1BD6636800DA9F07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SloggerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SloggerTests/SloggerTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
