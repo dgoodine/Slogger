@@ -13,7 +13,7 @@ import Foundation
  Provided as it might be a useful superclass for some use-cases (e.g. buffering lines for periodic
  transfer to some other output sink.
  */
-public class MemoryDestination : Destination {
+public class MemoryDestination : DestinationBase, Destination {
 
   // MARK - Properties
 
@@ -35,7 +35,7 @@ public class MemoryDestination : Destination {
   private var lines : [String] = []
 
   // MARK - Initializer
-  override init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+  override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
     super.init(details: details, generator: generator, colorMap: colorMap, decorator: decorator)
   }
 
@@ -46,7 +46,7 @@ public class MemoryDestination : Destination {
   - Parameter string: The line to be logged.
   - Parameter level: The level provided at the logging site.
   */
-  public override func logString(string : String, level: Level) {
+  public func logString(string : String, level: Level) {
     lines.append(string)
   }
 

@@ -8,25 +8,49 @@
 
 import Foundation
 
-/**
- Base class implementing the destination protocol.  Subclasses must override *logString* function.
- */
-public class Destination {
-
+/// Protocol all destinations must implement.
+public protocol Destination {
   /// A custom generator for this destination.  If not provided, the logger value will be used.
-  public var decorator : Decorator?
+  var decorator : Decorator? { get set }
 
   /// A custom color map for this destination.  If not provided, the logger value will be used.
-  public var generator : Generator
+  var generator : Generator { get set }
 
   /// A custom decorator for this destination.  If not provided, the logger value will be used.
-  public var colorMap : ColorMap?
+  var colorMap : ColorMap? { get set }
 
   /// The details to be logged for this destination.
-  public let details : [Detail]
+  var details : [Detail] { get  set }
+
+  /*
+  The function called by the internal system to emit the event.
+
+  - Parameter string: The string representation of the logging event.
+  - Parameter level: The logging level, provided for level-based destination routing.
+  */
+  func logString (string : String, level: Level)
+}
+
+/**
+ Abstract providing some of the Destination protocol.
+ Subclasses must conform to Destination and provide the `logString` function.
+ */
+public class DestinationBase {
+
+  /// Protocol Implementation
+  public var decorator : Decorator?
+
+  /// Protocol Implementation
+  public var generator : Generator
+
+  /// Protocol Implementation
+  public var colorMap : ColorMap?
+
+  /// Protocol Implementation
+  public var details : [Detail]
 
   /**
-   Base initializer.
+   Designated initializer.
 
    - Parameter generator: Generator to use for this destination.  If nil, uses the logger's generator.
    - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
@@ -37,13 +61,5 @@ public class Destination {
     self.details = details != nil ? details! : Detail.allValues
     self.colorMap = colorMap
     self.decorator = decorator
-  }
-
-  /**
-   Protocol implementation.  Will terminate with a false assertion.
-   Important: Subclasses *MUST* override this function.
-   */
-  public func logString(string : String, level: Level) {
-    assert(true, "This function must be overridden by subclasses")
   }
 }

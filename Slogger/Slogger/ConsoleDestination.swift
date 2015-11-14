@@ -9,7 +9,7 @@
 import Foundation
 
 /// A default console destination.
-public class ConsoleDestination : Destination {
+public class ConsoleDestination : DestinationBase, Destination {
 
   /// Local Storage
   private static let defaultColorMap : ColorMap = [
@@ -28,7 +28,7 @@ public class ConsoleDestination : Destination {
   }
 
   /// Protocol implementation.
-  public override func logString(string : String, level: Level) {
+  public func logString (string : String, level: Level) {
     if let color = colorMap?[level] where decorator != nil {
       if let decorated = decorator?.decorateString(string, spec: color) {
         print(decorated)

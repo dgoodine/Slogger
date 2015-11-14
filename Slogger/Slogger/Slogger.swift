@@ -46,7 +46,7 @@ public protocol SloggerCategory : Hashable {}
   static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
 }
 
-/// This is necessary because Swift doesn't provide it by default for Int-based enume
+/// This is necessary because Swift doesn't provide it by default for Int-based enums
 public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> Bool {
   return a.rawValue < b.rawValue
 }
@@ -77,6 +77,7 @@ public enum Detail : Int {
   /// The message string produced at the logging site.
   case Message
 
+  /// An array of all avaliable cases in a typical order.
   static let allValues = [Override, Date, File, Line, Function, Category, Level, Message]
 }
 

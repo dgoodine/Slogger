@@ -16,7 +16,7 @@ import Foundation
  content enclosing the entries (e.g. JSON and XML).
 
 */
-public class TextFileDestination : Destination {
+public class TextFileDestination : DestinationBase, Destination {
 
   /// Configuration values for file destinations.
   public class Configuration {
@@ -139,7 +139,7 @@ public class TextFileDestination : Destination {
   }
 
   /// Protocol Implementation
-  public override func logString(string: String, level: Level) {
+  public func logString(string: String, level: Level) {
     if let os = outputFile {
 
       // Truncate the file to the current file position (to remove postamble that may have been output.
@@ -173,9 +173,9 @@ public class TextFileDestination : Destination {
 
   private var _outputFileDate :  NSDate? = nil
   private var _outputFilePath : String? = nil
-  private var _outputFile : UnsafeMutablePointer<FILE>? = nil
   private var _outputFileEntryCount : UInt64 = 0
 
+  private var _outputFile : UnsafeMutablePointer<FILE>? = nil
   private var outputFile : UnsafeMutablePointer<FILE>? {
     get {
       if let fileOpenDate = _outputFileDate
