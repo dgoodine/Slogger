@@ -17,14 +17,14 @@ public class MemoryDestination : DestinationBase, Destination {
 
   // MARK - Properties
 
-  /// The index of the last logged line.  Returns *-1* if the destination is empty.
+  /// The index of the last logged line.  Returns `-1` if the destination is empty.
   public var lastIndex : Int {
     get {
       return lines.count - 1
     }
   }
 
-  /// The last logged line.  Returns *nil* if the destination is empty.
+  /// The last logged line.  Returns *nil* if the storage is empty.
   public var lastLine : String? {
     get {
       return self[lastIndex]

@@ -10,13 +10,13 @@ import Foundation
 
 /// Protocol all destinations must implement.
 public protocol Destination {
-  /// A custom generator for this destination.  If not provided, the logger value will be used.
+  /// A custom generator for this destination.  If nil, the output will not be decorated.
   var decorator : Decorator? { get set }
 
-  /// A custom color map for this destination.  If not provided, the logger value will be used.
+  /// The generator for this destination.
   var generator : Generator { get set }
 
-  /// A custom decorator for this destination.  If not provided, the logger value will be used.
+  /// A custom decorator for this destination.  If nil, no color will be used.
   var colorMap : ColorMap? { get set }
 
   /// The details to be logged for this destination.
@@ -52,7 +52,7 @@ public class DestinationBase {
   /**
    Designated initializer.
 
-   - Parameter generator: Generator to use for this destination.  If nil, uses the logger's generator.
+   - Parameter generator: Generator to use for this destination.
    - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
    - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.
    */
