@@ -9,10 +9,10 @@
 import Foundation
 
 /// Comma separated values TextFileDestination
-public class CSVFileDestination : TextFileDestination {
+public class CSVFileDestination: TextFileDestination {
 
   /// Configuration object.
-  public class CSVConfiguration :  Configuration {
+  public class CSVConfiguration: Configuration {
 
     /// Designated initializer.
     public init () {
@@ -30,17 +30,17 @@ public class CSVFileDestination : TextFileDestination {
   }
 
   /// Designated initializer.
-  init(directory: String, config: CSVConfiguration = CSVConfiguration()) {
+  public init(directory: String, config: CSVConfiguration = CSVConfiguration()) {
     super.init(directory: directory, config: config)
   }
 }
 
 /// CSV entry generator.
-public class CSVGenerator : Generator {
+public class CSVGenerator: Generator {
 
   override func emitBegin(outputString: NSMutableString) {}
 
-  override func emit (outputString : NSMutableString, type: ValueType) {
+  override func emit (outputString: NSMutableString, type: ValueType) {
     switch type {
 
     case .BoolValue (_, let value):

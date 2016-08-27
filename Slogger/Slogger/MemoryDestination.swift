@@ -9,44 +9,44 @@
 import Foundation
 
 /**
- An in-memory logging destination used by the test suite. 
+ An in-memory logging destination used by the test suite.
  Provided as it might be a useful superclass for some use-cases (e.g. buffering lines for periodic
  transfer to some other output sink.
  */
-public class MemoryDestination : DestinationBase, Destination {
+public class MemoryDestination: DestinationBase, Destination {
 
   // MARK - Properties
 
   /// The index of the last logged line.  Returns `-1` if the destination is empty.
-  public var lastIndex : Int {
+  public var lastIndex: Int {
     get {
       return lines.count - 1
     }
   }
 
   /// The last logged line.  Returns *nil* if the storage is empty.
-  public var lastLine : String? {
+  public var lastLine: String? {
     get {
       return self[lastIndex]
     }
   }
 
   /// Storage
-  private var lines : [String] = []
+  private var lines: [String] = []
 
   // MARK - Initializer
-  override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+  override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap: ColorMap? = nil, decorator: Decorator? = nil) {
     super.init(details: details, generator: generator, colorMap: colorMap, decorator: decorator)
   }
 
   // MARK - Functions
   /**
   Protocol implementation.  Simply appends the string to an internal array.
-  
+
   - Parameter string: The line to be logged.
   - Parameter level: The level provided at the logging site.
   */
-  public func logString(string : String, level: Level) {
+  public func logString(string: String, level: Level) {
     lines.append(string)
   }
 
@@ -61,7 +61,7 @@ public class MemoryDestination : DestinationBase, Destination {
    - Parameter index: The index of the line to return
    - Returns: The logging output for the index or nil if the destination is empty or the index is out of bounds
    */
-  public subscript (index : Int) -> String? {
+  public subscript (index: Int) -> String? {
     get {
       guard index >= 0 && index < lines.count else {
         return nil

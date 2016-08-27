@@ -9,7 +9,7 @@
 import Foundation
 
 /// Decorator for ANSI color codes
-public struct AnsiDecorator : Decorator {
+public struct AnsiDecorator: Decorator {
   private let escape = "\u{001b}["
   private let reset = "\u{001b}[m"
   private let fgCode = "38;2;"
@@ -20,7 +20,7 @@ public struct AnsiDecorator : Decorator {
   public init() {}
 
   /// Protocol implementation
-  public func decorateString(string : String, spec: ColorSpec) -> String {
+  public func decorateString(string: String, spec: ColorSpec) -> String {
     // This is disabled for now.
     return string
 

@@ -14,14 +14,13 @@ import XCTest
 @testable import SloggerOSX
 #endif
 
-enum TestCategory : String, SloggerCategory {
+enum TestCategory: String, SloggerCategory {
   case First, Second
 
   static let allValues = [First, Second]
 }
 
-class TestLogger : Slogger<TestCategory>
-{
+class TestLogger: Slogger<TestCategory> {
   init() {
     super.init(defaultLevel: .Info)
     self.asynchronous = false
@@ -41,7 +40,7 @@ class SloggerTests: XCTestCase {
     super.tearDown()
   }
 
-  func checkForMessage (message: String, _ category: TestCategory?, _ override: Level?, _ level: Level, _ function: String,  _ checkResults: Bool) {
+  func checkForMessage (message: String, _ category: TestCategory?, _ override: Level?, _ level: Level, _ function: String, _ checkResults: Bool) {
     guard checkResults && log.canLog(override: override, category: category, siteLevel: level) else {
       return
     }
@@ -63,7 +62,7 @@ class SloggerTests: XCTestCase {
     }
   }
 
-  func callIt (category category: TestCategory?, override: Level?, level: Level, checkResults : Bool) {
+  func callIt (category category: TestCategory?, override: Level?, level: Level, checkResults: Bool) {
     switch (level) {
     case .None:
       log.none(category, "String", override: override)
@@ -109,7 +108,7 @@ class SloggerTests: XCTestCase {
     }
   }
 
-  func exhaustiveTest (destinations destinations : [Destination], checkResults: Bool = true, verbose: Bool = false) {
+  func exhaustiveTest (destinations destinations: [Destination], checkResults: Bool = true, verbose: Bool = false) {
     let levels = Level.allValues
     let categories = TestCategory.allValues
 
@@ -118,7 +117,7 @@ class SloggerTests: XCTestCase {
     log.destinations = destinations
 
 
-    func sloggit (category category: TestCategory?, override: Level? = nil, checkResults : Bool) {
+    func sloggit (category category: TestCategory?, override: Level? = nil, checkResults: Bool) {
       testDestination.clear()
       for level in levels {
         callIt(category: category, override: override, level: level, checkResults: checkResults)
@@ -225,10 +224,3 @@ class SloggerTests: XCTestCase {
   }
 
 }
-
-
-
-
-
-
-

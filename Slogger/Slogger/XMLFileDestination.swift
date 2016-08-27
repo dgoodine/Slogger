@@ -9,10 +9,10 @@
 import Foundation
 
 /// Destination for XML file output.
-public class XMLFileDestination : TextFileDestination {
+public class XMLFileDestination: TextFileDestination {
 
   /// Configuration instance.
-  public class XMLConfiguration :  Configuration {
+  public class XMLConfiguration: Configuration {
 
     /// Designated initializer.
     public init (generator: Generator = XMLGenerator()) {
@@ -32,19 +32,19 @@ public class XMLFileDestination : TextFileDestination {
   }
 
   /// Designated initializer.
-  init(directory: String, config: XMLConfiguration = XMLConfiguration()) {
+  public init(directory: String, config: XMLConfiguration = XMLConfiguration()) {
     super.init(directory: directory, config: config)
   }
 }
 
 /// XML log entry generator.
-public class XMLGenerator : Generator {
+public class XMLGenerator: Generator {
 
   override func emitBegin(outputString: NSMutableString) {
     outputString.appendString("<entry>")
   }
 
-  override func emit (outputString : NSMutableString, type: ValueType)  {
+  override func emit (outputString: NSMutableString, type: ValueType) {
 
     switch type {
 

@@ -11,16 +11,16 @@ import Foundation
 public typealias LogClosure = () -> String
 
 /// Protocol for client-provided logging category enums.
-public protocol SloggerCategory : Hashable {}
+public protocol SloggerCategory: Hashable {}
 
 /// Default enum for instantiating a generic Slogger class without categories.
-@objc public enum NoCategories : Int, SloggerCategory {
+@objc public enum NoCategories: Int, SloggerCategory {
   /// If you only need one category, you can use this. Not a likely use-case.
   case One
 }
 
 /// Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
-@objc public enum Level : Int, Comparable {
+@objc public enum Level: Int, Comparable {
   /// Turn off all logging (except overrides).
   case None
 
@@ -52,7 +52,7 @@ public func <<T: RawRepresentable where T.RawValue: Comparable>(a: T, b: T) -> B
 }
 
 /// An enumeration of the types of information for a `Generator` to output.
-public enum Detail : Int {
+public enum Detail: Int {
   /// Whether the event was an override
   case Override
 
@@ -91,7 +91,7 @@ public protocol Decorator {
    - Parameter colorSpec: The color spec to use for decoration.
    - Returns: The decorated string.
    */
-  func decorateString(string : String, spec: ColorSpec) -> String
+  func decorateString(string: String, spec: ColorSpec) -> String
 }
 
 // MARK: - Slogger Class
@@ -118,31 +118,31 @@ code be executed on the main thread, you **MUST** wrap that code inside a `dispa
 public class Slogger <T: SloggerCategory> : NSObject {
 
   /// The active, global operating level of the logger.
-  public var level : Level
+  public var level: Level
 
   /// Local storage
-  private var _categories : [T : Level] = Dictionary<T, Level>()
+  private var _categories: [T : Level] = Dictionary<T, Level>()
 
   /// A dictionary for providing a custom `Level` for each `Category` defined.
-  public var categories : [T : Level] {
+  public var categories: [T : Level] {
     get { return _categories }
     set {_categories = newValue }
   }
 
   // Local Storage
-  private var _destinations : [Destination] = [ConsoleDestination()]
+  private var _destinations: [Destination] = [ConsoleDestination()]
 
   /// Destinations this logger will write to.
-  public var destinations : [Destination] {
+  public var destinations: [Destination] {
     get { return _destinations}
     set { _destinations = newValue }
   }
 
   /// Number of events logged.
-  public var hits : UInt64 = 0
+  public var hits: UInt64 = 0
 
   /// Number of events that weren't logged due to logging threshold.
-  public var misses : UInt64 = 0
+  public var misses: UInt64 = 0
 
   /// Used to turn off asynchronous operation for unit testing.
   var asynchronous = true
@@ -156,7 +156,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
 
   - Parameter defaultLevel: Sets the 'level' property to this value.
   */
-  public init (defaultLevel : Level) {
+  public init (defaultLevel: Level) {
     self.level = defaultLevel
   }
 
@@ -175,7 +175,7 @@ public class Slogger <T: SloggerCategory> : NSObject {
   - Returns: true of the logging of the event should proceed, false if it shouldn't
   */
   public func canLog (override override: Level?, category: T?, siteLevel: Level) -> Bool {
-    let effectiveLevel : Level
+    let effectiveLevel: Level
     if override != nil {
       effectiveLevel = override!
     } else if category != nil, let categoryLevel = categories[category!] {
@@ -403,24 +403,14 @@ extension Slogger {
 
   // MARK: None
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
-  public func none (@autoclosure  closure: LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line)
-  {}
+  public func none (@autoclosure  closure: LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {}
 
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
-  public func none (category: T?, @autoclosure _ closure: LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line)
-  {}
+  public func none (category: T?, @autoclosure _ closure: LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {}
 
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
-  public func none (override override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line, @noescape _ closure: LogClosure)
-  {}
+  public func none (override override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line, @noescape _ closure: LogClosure) {}
 
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
-  public func none (category: T?, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line, @noescape _ closure: LogClosure)
-  {}
+  public func none (category: T?, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line, @noescape _ closure: LogClosure) {}
 }
-
-
-
-
-
-

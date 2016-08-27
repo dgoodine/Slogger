@@ -13,7 +13,7 @@ public class Generator {
 
   /// An enum for passing detail values to emitter functions.
   public enum ValueType {
-    /** 
+    /**
      A value to be emitted as a string
 
      - Parameter detail: The `Detail` enum for this value.
@@ -52,7 +52,7 @@ public class Generator {
   }
 
   /// Formatter for emitting dates.  You can set this for your own custom format.
-  public lazy var dateFormatter : NSDateFormatter = {
+  public lazy var dateFormatter: NSDateFormatter = {
     let template = "yyyy-MM-dd HH:mm:ss.SSS ZZZ"
     let idf = NSDateFormatter()
     idf.dateFormat = template
@@ -77,11 +77,11 @@ public class Generator {
    - Parameter details: The ordered array of detail enum values for information that should be output.
 
    - Returns: A string representation of the generator output or `nil` to produce no output.
-   
-   */
-  public final func generate (message message: String, category: Any?, override: Level?, level: Level, date: NSDate, function: String, file: String, line: Int, details : [Detail]) -> String? {
 
-    let str : NSMutableString = NSMutableString(capacity: 512)
+   */
+  public final func generate (message message: String, category: Any?, override: Level?, level: Level, date: NSDate, function: String, file: String, line: Int, details: [Detail]) -> String? {
+
+    let str: NSMutableString = NSMutableString(capacity: 512)
     var isFirst = true
 
     self.emitBegin(str)
@@ -132,19 +132,19 @@ public class Generator {
 
   /**
    Emit the beginning of the log entry.
-   
+
    - Parameter outputString: The destination for output.
    */
-  func emitBegin (outputString : NSMutableString) {
+  func emitBegin (outputString: NSMutableString) {
   }
 
-  /** 
+  /**
    Emit a detail value based on its type.
-   
+
    - Parameter outputString: The destination for output.
    - Parameter type: `ValueType` enum value carrying the detail enum and value.
    */
-  func emit (outputString : NSMutableString, type: ValueType) {
+  func emit (outputString: NSMutableString, type: ValueType) {
     switch type {
 
     case .BoolValue (let detail, let value):
@@ -181,21 +181,20 @@ public class Generator {
 
   }
 
-  /** 
+  /**
    Emit the delimiter between entries.  This will be output before any entry except for the first.
-   
+
    - Parameter outputString: The destination for output.
   */
-  func emitDelimiter (outputString : NSMutableString) {
+  func emitDelimiter (outputString: NSMutableString) {
     outputString.appendString(" ")
   }
 
-  /** 
+  /**
    Emit the end of the log entry.
-   
+
    - Parameter outputString: The destination for output.
    */
-  func emitEnd (outputString : NSMutableString) {
+  func emitEnd (outputString: NSMutableString) {
   }
 }
-

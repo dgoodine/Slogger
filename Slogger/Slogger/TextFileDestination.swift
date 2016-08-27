@@ -16,7 +16,7 @@ import Foundation
  content enclosing the entries (e.g. JSON and XML).
 
 */
-public class TextFileDestination : DestinationBase, Destination {
+public class TextFileDestination: DestinationBase, Destination {
 
   /// Configuration values for file destinations.
   public class Configuration {
@@ -33,38 +33,38 @@ public class TextFileDestination : DestinationBase, Destination {
 
      - Parameter path: The path of the file just closed.
      */
-    public typealias PostFileCloseHandler = (path : String) -> Void
+    public typealias PostFileCloseHandler = (path: String) -> Void
 
     /**
      A closure that is called after an archiving operation has completed.
 
      - Parameter archive: The recently compressed archive.
      */
-    public typealias PostArchiveHandler = (directory : String) -> Void
+    public typealias PostArchiveHandler = (directory: String) -> Void
 
     /// Time interval in seconds for log file rotation. Defaults to 24 hours.
-    public var fileRotationInterval : NSTimeInterval = 60 * 60 * 24
+    public var fileRotationInterval: NSTimeInterval = 60 * 60 * 24
 
     /// Time interval in seconds for log directory archiving.  Defaults to 7 days.
-    public var directoryArchivingInterval : NSTimeInterval = 60 * 60 * 24 * 30
+    public var directoryArchivingInterval: NSTimeInterval = 60 * 60 * 24 * 30
 
     /// Generator for prepending and appending text to a file. Defaults to nil.
-    public var fileWrapperGenerator : FileWrapperGenerator? = nil
+    public var fileWrapperGenerator: FileWrapperGenerator? = nil
 
     /// Handler called after closing a file. Defaults to nil.
-    public var postFileCloseHandler : PostFileCloseHandler? = nil
+    public var postFileCloseHandler: PostFileCloseHandler? = nil
 
     /// Handler called after archiving. Defaults to nil.
-    public var postArchiveHandler : PostArchiveHandler? = nil
+    public var postArchiveHandler: PostArchiveHandler? = nil
 
     /// A string to emit between log entries.
-    public var entryDelimiter : String = "\n"
+    public var entryDelimiter: String = "\n"
 
     /// File extension for log files.  Defaults to "txt"
-    public var fileExtension : String = "txt"
+    public var fileExtension: String = "txt"
 
     /// Details to output.
-    public var details : [Detail] = Detail.allValues
+    public var details: [Detail] = Detail.allValues
 
     /**
      File system attributes to use when creating the log directory and log files.
@@ -73,16 +73,16 @@ public class TextFileDestination : DestinationBase, Destination {
      and either a) don't use them, or b) add the appropriate attributes so the log files aren't backed up. **If you
      don't, it's highly likely Apple will reject your binary when submitting to iTunes**.
      */
-    public var fileAttributes : [String : AnyObject] = [:]
+    public var fileAttributes: [String : AnyObject] = [:]
 
     /// Protocol property for Destination
-    public var decorator : Decorator?
+    public var decorator: Decorator?
 
     /// Protocol property for Destination
-    public var generator : Generator
+    public var generator: Generator
 
     /// Protocol property for Destination
-    public var colorMap : ColorMap?
+    public var colorMap: ColorMap?
 
     /**
      Constructor for TextFileDestination configuration.
@@ -91,7 +91,7 @@ public class TextFileDestination : DestinationBase, Destination {
      - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
      - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.
      */
-    init (details: [Detail] = Detail.allValues, generator: Generator, colorMap : ColorMap? = nil, decorator: Decorator? = nil) {
+    init (details: [Detail] = Detail.allValues, generator: Generator, colorMap: ColorMap? = nil, decorator: Decorator? = nil) {
       self.details = details
       self.generator = generator
       self.colorMap = colorMap
@@ -101,20 +101,20 @@ public class TextFileDestination : DestinationBase, Destination {
 
   // MARK: - Public
   /// Directory path for the log files.
-  public let directory : String
+  public let directory: String
 
   /// Configuration for this destination.
-  public let config : Configuration
+  public let config: Configuration
 
   /// Date the current output file was opened or nil if there's no output file open.
-  public var outputFileDate : NSDate? {
+  public var outputFileDate: NSDate? {
     get {
       return _outputFileDate
     }
   }
 
   /// Path of the the current output file or nil if no file is open.
-  public var outputFilePath : NSString? {
+  public var outputFilePath: NSString? {
     get {
       return _outputFilePath
     }
@@ -123,9 +123,9 @@ public class TextFileDestination : DestinationBase, Destination {
   /**
    Designated initializer.
 
-   - Parameter directory: Full path for the logging directory.  This will be created if necessary.  
+   - Parameter directory: Full path for the logging directory.  This will be created if necessary.
    - Parameter config: The configuration to use for this destination.  Defaults to `Configuration(generator: Generator())`.
-   
+
    - SeeAlso: Configuration.fileAttributes for important information for iOS developers.
    */
   public init(directory: String, config: Configuration = Configuration(generator: Generator())) {
@@ -143,7 +143,7 @@ public class TextFileDestination : DestinationBase, Destination {
     if let os = outputFile {
 
       // Truncate the file to the current file position (to remove postamble that may have been output.
-      var pos : fpos_t = 0
+      var pos: fpos_t = 0
       fgetpos(os, &pos)
       truncate(_outputFilePath!, pos)
 
@@ -165,18 +165,18 @@ public class TextFileDestination : DestinationBase, Destination {
   // MARK: - Private
 
   /// Date format for log files
-  private lazy var fileDateFormatter : NSDateFormatter = {
+  private lazy var fileDateFormatter: NSDateFormatter = {
     let value = NSDateFormatter()
     value.dateFormat = "yyyy-MM-dd-HH-mm-ss-SSS-zzz"
     return value
   }()
 
-  private var _outputFileDate :  NSDate? = nil
-  private var _outputFilePath : String? = nil
-  private var _outputFileEntryCount : UInt64 = 0
+  private var _outputFileDate: NSDate? = nil
+  private var _outputFilePath: String? = nil
+  private var _outputFileEntryCount: UInt64 = 0
 
-  private var _outputFile : UnsafeMutablePointer<FILE>? = nil
-  private var outputFile : UnsafeMutablePointer<FILE>? {
+  private var _outputFile: UnsafeMutablePointer<FILE>? = nil
+  private var outputFile: UnsafeMutablePointer<FILE>? {
     get {
       if let fileOpenDate = _outputFileDate
         where _outputFile != nil && NSDate().timeIntervalSinceDate(fileOpenDate) > config.fileRotationInterval {
@@ -251,33 +251,9 @@ public class TextFileDestination : DestinationBase, Destination {
       checkForArchiving()
     }
   }
-  
+
   // Check existing log files for archiving.
   private func checkForArchiving () {
     // Not implemented.
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -13,7 +13,7 @@ public class PerformanceTest {
 
   // This code was found at Stack Overflow:
   // http://stackoverflow.com/questions/26028918/ios-how-to-determine-iphone-model-in-swift
-  let device : String = {
+  let device: String = {
     var systemInfo = utsname()
     uname(&systemInfo)
     let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -49,10 +49,10 @@ public class PerformanceTest {
   }()
 
   /// Markdown table rows
-  var mdStrings : [String] = []
+  var mdStrings: [String] = []
 
   /// Category enum
-  private enum PerformanceCategory : String, SloggerCategory {
+  private enum PerformanceCategory: String, SloggerCategory {
     case Only
   }
 
@@ -88,7 +88,7 @@ public class PerformanceTest {
   }
 
   /// Private test implementation.
-  private func testWithDestinations (destination : Destination?, _ count : Int, _ level : Level) {
+  private func testWithDestinations (destination: Destination?, _ count: Int, _ level: Level) {
     let log = Slogger<PerformanceCategory>(defaultLevel: level)
     log.destinations = (destination == nil) ? [] : [destination!]
 
@@ -115,7 +115,7 @@ public class PerformanceTest {
   }
 
   /// Helper function for human-readable output.
-  private func intervalToString (interval : Double) -> String {
+  private func intervalToString (interval: Double) -> String {
     if interval > 1.0 {
       return "\(formatInterval(interval))s"
     } else if interval > 0.001 {
@@ -129,7 +129,7 @@ public class PerformanceTest {
   }
 
   /// Cuz meh.
-  private func formatInterval (interval : Double) -> String {
+  private func formatInterval (interval: Double) -> String {
     return NSString(format: "%.0f", interval) as String
   }
 }

@@ -9,10 +9,10 @@
 import Foundation
 
 /// Output destination for JSON files.
-public class JSONFileDestination : TextFileDestination {
+public class JSONFileDestination: TextFileDestination {
 
   /// Configuration instance.
-  public class JSONConfiguration :  Configuration {
+  public class JSONConfiguration: Configuration {
 
     /// Designated initializer.
     public init () {
@@ -26,19 +26,19 @@ public class JSONFileDestination : TextFileDestination {
   }
 
   /// Designated initializer.
-  init(directory: String, config: JSONConfiguration = JSONConfiguration()) {
+  public init(directory: String, config: JSONConfiguration = JSONConfiguration()) {
     super.init(directory: directory, config: config)
   }
 }
 
 /// JSON format log entry generator.
-public class JSONGenerator : Generator {
+public class JSONGenerator: Generator {
 
   override func emitBegin(outputString: NSMutableString) {
     outputString.appendString("{\n")
   }
 
-  override func emit (outputString : NSMutableString, type: ValueType)  {
+  override func emit (outputString: NSMutableString, type: ValueType) {
     switch type {
 
     case .BoolValue (let detail, let value):
