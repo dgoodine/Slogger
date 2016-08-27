@@ -222,6 +222,7 @@ Please do use the issues section on Github report bugs, raise questions, offer s
 
 Version | Status | Comments
 --- | --- | ---
+2.0 | Released | Update for Swift 2.2.  Minor fixes.
 1.0 | Released | First release.
 0.1.x | Available | **Pre-release** (CocoaPods/Carthage support and TextFileDestination variants).
 
