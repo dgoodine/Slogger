@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Slogger"
-  s.version      = "2.0.0"
+  s.version      = "2.0"
   s.summary      = "A simple, fast and flexible logging framework for Swift."
 
   # This description is used to generate tags and improve search results.
