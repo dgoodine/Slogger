@@ -67,45 +67,45 @@ class SloggerTests: XCTestCase {
     switch (level) {
     case .None:
       log.none(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.none(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
 
     case .Severe:
       log.severe(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.severe(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
 
     case .Error:
       log.error(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.error(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
 
     case .Warning:
       log.warning(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.warning(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
 
     case .Info:
       log.info(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.info(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
 
     case .Debug:
       log.debug(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.debug(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
 
     case .Verbose:
       log.verbose(category, "String", override: override)
-      checkForMessage("String", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("String", category, override, level, #function, checkResults)
       log.verbose(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, __FUNCTION__, checkResults)
+      checkForMessage("Closure", category, override, level, #function, checkResults)
     }
   }
 

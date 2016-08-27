@@ -158,7 +158,7 @@ public class TextFileDestination : DestinationBase, Destination {
       fseek(os, -postambleLength, SEEK_END)
 
       // This could crash is we overflowed a UInt64. That would be a really big file.
-      _outputFileEntryCount++
+      _outputFileEntryCount += 1
     }
   }
 
