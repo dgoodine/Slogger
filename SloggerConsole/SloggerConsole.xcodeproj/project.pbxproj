@@ -141,6 +141,7 @@
 				TargetAttributes = {
 					A8AC598E1BED1C8200DBC78E = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -277,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = slogger;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -284,6 +286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = slogger;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
