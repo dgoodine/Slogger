@@ -9,10 +9,10 @@
 import Foundation
 
 /// Output destination for JSON files.
-public class JSONFileDestination: TextFileDestination {
+open class JSONFileDestination: TextFileDestination {
 
   /// Configuration instance.
-  public class JSONConfiguration: Configuration {
+  open class JSONConfiguration: Configuration {
 
     /// Designated initializer.
     public init () {
@@ -32,37 +32,37 @@ public class JSONFileDestination: TextFileDestination {
 }
 
 /// JSON format log entry generator.
-public class JSONGenerator: Generator {
+open class JSONGenerator: Generator {
 
-  override func emitBegin(outputString: NSMutableString) {
-    outputString.appendString("{\n")
+  override func emitBegin(_ outputString: NSMutableString) {
+    outputString.append("{\n")
   }
 
-  override func emit (outputString: NSMutableString, type: ValueType) {
+  override func emit (_ outputString: NSMutableString, type: ValueType) {
     switch type {
 
-    case .BoolValue (let detail, let value):
-      outputString.appendString("\"\(detail)\":\(value)")
+    case .boolValue (let detail, let value):
+      outputString.append("\"\(detail)\":\(value)")
 
-    case .IntValue (let detail, let value):
-      outputString.appendString("\"\(detail)\":\(value)")
+    case .intValue (let detail, let value):
+      outputString.append("\"\(detail)\":\(value)")
 
-    case .StringValue(let detail, let value, _):
-      let str = value.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
-      outputString.appendString("\"\(detail)\":\"\(str)\"")
+    case .stringValue(let detail, let value, _):
+      let str = value.replacingOccurrences(of: "\"", with: "\\\"")
+      outputString.append("\"\(detail)\":\"\(str)\"")
 
-    case .DateValue(let detail, let value):
-      let ds = dateFormatter.stringFromDate(value)
-      outputString.appendString("\"\(detail)\":\"\(ds)\"")
+    case .dateValue(let detail, let value):
+      let ds = dateFormatter.string(from: value)
+      outputString.append("\"\(detail)\":\"\(ds)\"")
     }
   }
 
-  override func emitDelimiter(outputString: NSMutableString) {
-    outputString.appendString(",")
+  override func emitDelimiter(_ outputString: NSMutableString) {
+    outputString.append(",")
   }
 
-  override func emitEnd(outputString: NSMutableString) {
-    outputString.appendString("\n}")
+  override func emitEnd(_ outputString: NSMutableString) {
+    outputString.append("\n}")
   }
 
 }

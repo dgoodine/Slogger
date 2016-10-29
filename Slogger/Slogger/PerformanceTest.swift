@@ -9,7 +9,7 @@
 import Foundation
 
 /// Simple performance test for logging.
-public class PerformanceTest {
+open class PerformanceTest {
 
   // This code was found at Stack Overflow:
   // http://stackoverflow.com/questions/26028918/ios-how-to-determine-iphone-model-in-swift
@@ -18,7 +18,7 @@ public class PerformanceTest {
     uname(&systemInfo)
     let machineMirror = Mirror(reflecting: systemInfo.machine)
     let identifier = machineMirror.children.reduce("") { identifier, element in
-      guard let value = element.value as? Int8 where value != 0 else { return identifier }
+      guard let value = element.value as? Int8 , value != 0 else { return identifier }
       return identifier + String(UnicodeScalar(UInt8(value)))
     }
 
@@ -52,7 +52,7 @@ public class PerformanceTest {
   var mdStrings: [String] = []
 
   /// Category enum
-  private enum PerformanceCategory: String, SloggerCategory {
+  fileprivate enum PerformanceCategory: String, SloggerCategory {
     case Only
   }
 
@@ -60,23 +60,23 @@ public class PerformanceTest {
   public init () {}
 
   /// Test Function
-  public func test () {
-    let dir = NSTemporaryDirectory().stringByAppendingString("/SloggerTestLogs") as NSString
-    let path = dir.stringByExpandingTildeInPath
+  open func test () {
+    let dir = NSTemporaryDirectory() + "/SloggerTestLogs" as NSString
+    let path = dir.expandingTildeInPath
     print("Testing JSON: \(path)")
-    testWithDestinations(JSONFileDestination(directory: path), 1000, .Severe)
-    testWithDestinations(JSONFileDestination(directory: path), 1000, .Verbose)
+    testWithDestinations(JSONFileDestination(directory: path), 1000, .severe)
+    testWithDestinations(JSONFileDestination(directory: path), 1000, .verbose)
     print("Testing XML: \(path)")
-    testWithDestinations(XMLFileDestination(directory: path), 1000, .Severe)
-    testWithDestinations(XMLFileDestination(directory: path), 1000, .Verbose)
-    self.testWithDestinations(nil, 100000, .Verbose)
-    self.testWithDestinations(MemoryDestination(), 1000, .Severe)
-    self.testWithDestinations(MemoryDestination(), 1000, .Verbose)
-    self.testWithDestinations(ConsoleDestination(), 1000, .Severe)
-    self.testWithDestinations(ConsoleDestination(), 1000, .Verbose)
+    testWithDestinations(XMLFileDestination(directory: path), 1000, .severe)
+    testWithDestinations(XMLFileDestination(directory: path), 1000, .verbose)
+    self.testWithDestinations(nil, 100000, .verbose)
+    self.testWithDestinations(MemoryDestination(), 1000, .severe)
+    self.testWithDestinations(MemoryDestination(), 1000, .verbose)
+    self.testWithDestinations(ConsoleDestination(), 1000, .severe)
+    self.testWithDestinations(ConsoleDestination(), 1000, .verbose)
 
-    let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
-    dispatch_after(delay, dispatch_get_main_queue()) {
+    let delay = DispatchTime.now() + Double(Int64(5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+    DispatchQueue.main.asyncAfter(deadline: delay) {
       print("\nMarkdown table output:\n")
       print("Device | Destinations | Level | Can Log | log.Debug(.Only, \"Message\")")
       print("--- | --- | --- | --- | ---")
@@ -88,26 +88,26 @@ public class PerformanceTest {
   }
 
   /// Private test implementation.
-  private func testWithDestinations (destination: Destination?, _ count: Int, _ level: Level) {
+  fileprivate func testWithDestinations (_ destination: Destination?, _ count: Int, _ level: Level) {
     let log = Slogger<PerformanceCategory>(defaultLevel: level)
     log.destinations = (destination == nil) ? [] : [destination!]
 
     print("Testing \(log.destinations) with \(count) iterations at level: \(level)")
 
-    let startDate = NSDate()
+    let startDate = Date()
 
     for _ in 1...count {
       log.debug(.Only, "LogMessage")
     }
 
-    let endDate = NSDate()
-    let interval = endDate.timeIntervalSinceDate(startDate)
+    let endDate = Date()
+    let interval = endDate.timeIntervalSince(startDate)
 
     let elapsed = intervalToString(interval)
     let perCall = intervalToString(interval / Double(count))
 
-    let dString = (log.destinations.count > 0) ? "[\(log.destinations[0].dynamicType)]" : "[]"
-    let canLog = log.canLog(override: nil, category: .Only, siteLevel: .Debug)
+    let dString = (log.destinations.count > 0) ? "[\(type(of: log.destinations[0]))]" : "[]"
+    let canLog = log.canLog(override: nil, category: .Only, siteLevel: .debug)
     let mdString = "\(device) | \(dString) | \(level) | \(canLog) | \(perCall)"
     mdStrings.append(mdString)
 
@@ -115,7 +115,7 @@ public class PerformanceTest {
   }
 
   /// Helper function for human-readable output.
-  private func intervalToString (interval: Double) -> String {
+  fileprivate func intervalToString (_ interval: Double) -> String {
     if interval > 1.0 {
       return "\(formatInterval(interval))s"
     } else if interval > 0.001 {
@@ -129,7 +129,7 @@ public class PerformanceTest {
   }
 
   /// Cuz meh.
-  private func formatInterval (interval: Double) -> String {
+  fileprivate func formatInterval (_ interval: Double) -> String {
     return NSString(format: "%.0f", interval) as String
   }
 }

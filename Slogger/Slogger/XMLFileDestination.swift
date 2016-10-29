@@ -9,10 +9,10 @@
 import Foundation
 
 /// Destination for XML file output.
-public class XMLFileDestination: TextFileDestination {
+open class XMLFileDestination: TextFileDestination {
 
   /// Configuration instance.
-  public class XMLConfiguration: Configuration {
+  open class XMLConfiguration: Configuration {
 
     /// Designated initializer.
     public init (generator: Generator = XMLGenerator()) {
@@ -38,38 +38,38 @@ public class XMLFileDestination: TextFileDestination {
 }
 
 /// XML log entry generator.
-public class XMLGenerator: Generator {
+open class XMLGenerator: Generator {
 
-  override func emitBegin(outputString: NSMutableString) {
-    outputString.appendString("<entry>")
+  override func emitBegin(_ outputString: NSMutableString) {
+    outputString.append("<entry>")
   }
 
-  override func emit (outputString: NSMutableString, type: ValueType) {
+  override func emit (_ outputString: NSMutableString, type: ValueType) {
 
     switch type {
 
-    case .BoolValue (let detail, let value):
-      outputString.appendString("<\(detail)>\(value)</\(detail)>")
+    case .boolValue (let detail, let value):
+      outputString.append("<\(detail)>\(value)</\(detail)>")
 
-    case .IntValue (let detail, let value):
-      outputString.appendString("<\(detail)>\(value)</\(detail)>")
+    case .intValue (let detail, let value):
+      outputString.append("<\(detail)>\(value)</\(detail)>")
 
-    case .StringValue(let detail, let value, let protect):
+    case .stringValue(let detail, let value, let protect):
       let str = protect ? "<![CDATA[\(value)]]>" : value
-      outputString.appendString("<\(detail)>\(str)</\(detail)>")
+      outputString.append("<\(detail)>\(str)</\(detail)>")
 
-    case .DateValue(let detail, let value):
-      let ds = dateFormatter.stringFromDate(value)
-      outputString.appendString("<\(detail)>\(ds)</\(detail)>")
+    case .dateValue(let detail, let value):
+      let ds = dateFormatter.string(from: value)
+      outputString.append("<\(detail)>\(ds)</\(detail)>")
     }
   }
 
-  override func emitDelimiter(outputString: NSMutableString) {
-    outputString.appendString("")
+  override func emitDelimiter(_ outputString: NSMutableString) {
+    outputString.append("")
   }
 
-  override func emitEnd(outputString: NSMutableString) {
-    outputString.appendString("</entry>")
+  override func emitEnd(_ outputString: NSMutableString) {
+    outputString.append("</entry>")
   }
 
 }

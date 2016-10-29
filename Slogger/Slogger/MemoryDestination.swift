@@ -13,26 +13,26 @@ import Foundation
  Provided as it might be a useful superclass for some use-cases (e.g. buffering lines for periodic
  transfer to some other output sink.
  */
-public class MemoryDestination: DestinationBase, Destination {
+open class MemoryDestination: DestinationBase, Destination {
 
   // MARK - Properties
 
   /// The index of the last logged line.  Returns `-1` if the destination is empty.
-  public var lastIndex: Int {
+  open var lastIndex: Int {
     get {
       return lines.count - 1
     }
   }
 
   /// The last logged line.  Returns *nil* if the storage is empty.
-  public var lastLine: String? {
+  open var lastLine: String? {
     get {
       return self[lastIndex]
     }
   }
 
   /// Storage
-  private var lines: [String] = []
+  fileprivate var lines: [String] = []
 
   // MARK - Initializer
   override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap: ColorMap? = nil, decorator: Decorator? = nil) {
@@ -46,12 +46,12 @@ public class MemoryDestination: DestinationBase, Destination {
   - Parameter string: The line to be logged.
   - Parameter level: The level provided at the logging site.
   */
-  public func logString(string: String, level: Level) {
+  open func logString(_ string: String, level: Level) {
     lines.append(string)
   }
 
   /// Clear the logging history.
-  public func clear () {
+  open func clear () {
     lines = []
   }
 
@@ -61,7 +61,7 @@ public class MemoryDestination: DestinationBase, Destination {
    - Parameter index: The index of the line to return
    - Returns: The logging output for the index or nil if the destination is empty or the index is out of bounds
    */
-  public subscript (index: Int) -> String? {
+  open subscript (index: Int) -> String? {
     get {
       guard index >= 0 && index < lines.count else {
         return nil

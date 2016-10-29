@@ -9,10 +9,10 @@
 import Foundation
 
 /// Tab-delimited file output destination.
-public class TSVFileDestination: TextFileDestination {
+open class TSVFileDestination: TextFileDestination {
 
   /// Configuration object.
-  public class TSVConfiguration: Configuration {
+  open class TSVConfiguration: Configuration {
 
     /// Designated initializer.
     public init () {
@@ -21,7 +21,7 @@ public class TSVFileDestination: TextFileDestination {
       self.entryDelimiter = "\n"
       self.fileWrapperGenerator = { (isPreamble) in
         if isPreamble {
-          let header = self.details.map({"\($0)"}).joinWithSeparator("\t")
+          let header = self.details.map({"\($0)"}).joined(separator: "\t")
           return "\(header)\n"
         }
         return ""
@@ -36,34 +36,34 @@ public class TSVFileDestination: TextFileDestination {
 }
 
 /// Log entry generator for tab-delimited format.
-public class TSVGenerator: Generator {
+open class TSVGenerator: Generator {
 
-  override func emitBegin(outputString: NSMutableString) {}
+  override func emitBegin(_ outputString: NSMutableString) {}
 
-  override func emit (outputString: NSMutableString, type: ValueType) {
+  override func emit (_ outputString: NSMutableString, type: ValueType) {
     switch type {
 
-    case .BoolValue (_, let value):
-      outputString.appendString("\(value)")
+    case .boolValue (_, let value):
+      outputString.append("\(value)")
 
-    case .IntValue (_, let value):
-      outputString.appendString("\(value)")
+    case .intValue (_, let value):
+      outputString.append("\(value)")
 
-    case .StringValue(_, let value, _):
-      let str = value.stringByReplacingOccurrencesOfString("\t", withString: " ")
-      outputString.appendString("\(str)")
+    case .stringValue(_, let value, _):
+      let str = value.replacingOccurrences(of: "\t", with: " ")
+      outputString.append("\(str)")
 
-    case .DateValue(_, let value):
-      var ds = dateFormatter.stringFromDate(value)
-      ds = ds.stringByReplacingOccurrencesOfString("\t", withString: " ")
-      outputString.appendString("\(ds)")
+    case .dateValue(_, let value):
+      var ds = dateFormatter.string(from: value)
+      ds = ds.replacingOccurrences(of: "\t", with: " ")
+      outputString.append("\(ds)")
     }
   }
 
-  override func emitDelimiter(outputString: NSMutableString) {
-    outputString.appendString("\t")
+  override func emitDelimiter(_ outputString: NSMutableString) {
+    outputString.append("\t")
   }
 
-  override func emitEnd(outputString: NSMutableString) {}
+  override func emitEnd(_ outputString: NSMutableString) {}
 
 }

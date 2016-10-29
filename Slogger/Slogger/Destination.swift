@@ -28,26 +28,26 @@ public protocol Destination {
   - Parameter string: The string representation of the logging event.
   - Parameter level: The logging level, provided for level-based destination routing.
   */
-  func logString (string: String, level: Level)
+  func logString (_ string: String, level: Level)
 }
 
 /**
  Abstract providing some of the Destination protocol.
  Subclasses must conform to Destination and provide the `logString` function.
  */
-public class DestinationBase {
+open class DestinationBase {
 
   /// Protocol Implementation
-  public var decorator: Decorator?
+  open var decorator: Decorator?
 
   /// Protocol Implementation
-  public var generator: Generator
+  open var generator: Generator
 
   /// Protocol Implementation
-  public var colorMap: ColorMap?
+  open var colorMap: ColorMap?
 
   /// Protocol Implementation
-  public var details: [Detail]
+  open var details: [Detail]
 
   /**
    Designated initializer.

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Base class for log entry generators.  See custom file destinations for more generators.
-public class Generator {
+open class Generator {
 
   /// An enum for passing detail values to emitter functions.
   public enum ValueType {
@@ -24,7 +24,7 @@ public class Generator {
      where it isn't needed in the XMLGenerator implementation.
 
      */
-    case StringValue (detail: Detail, value: String, protect: Bool)
+    case stringValue (detail: Detail, value: String, protect: Bool)
 
     /**
     A value to be emitted as a boolean (`true` or `false`)
@@ -32,7 +32,7 @@ public class Generator {
     - Parameter detail: The `Detail` enum for this value.
     - Parameter value: The value to be output.
     */
-    case BoolValue (detail: Detail, value: Bool)
+    case boolValue (detail: Detail, value: Bool)
 
     /**
      A value to be emitted as an integer.
@@ -40,7 +40,7 @@ public class Generator {
     - Parameter detail: The `Detail` enum for this value.
     - Parameter value: The value to be output.
     */
-    case IntValue (detail: Detail, value: Int)
+    case intValue (detail: Detail, value: Int)
 
     /**
      A value to be emitted as a date.
@@ -48,13 +48,13 @@ public class Generator {
      - Parameter detail: The `Detail` enum for this value.
      - Parameter value: The value to be output.
      */
-    case DateValue (detail: Detail, value: NSDate)
+    case dateValue (detail: Detail, value: Date)
   }
 
   /// Formatter for emitting dates.  You can set this for your own custom format.
-  public lazy var dateFormatter: NSDateFormatter = {
+  open lazy var dateFormatter: DateFormatter = {
     let template = "yyyy-MM-dd HH:mm:ss.SSS ZZZ"
-    let idf = NSDateFormatter()
+    let idf = DateFormatter()
     idf.dateFormat = template
     return idf
   }()
@@ -79,7 +79,7 @@ public class Generator {
    - Returns: A string representation of the generator output or `nil` to produce no output.
 
    */
-  public final func generate (message message: String, category: Any?, override: Level?, level: Level, date: NSDate, function: String, file: String, line: Int, details: [Detail]) -> String? {
+  public final func generate (message: String, category: Any?, override: Level?, level: Level, date: Date, function: String, file: String, line: Int, details: [Detail]) -> String? {
 
     let str: NSMutableString = NSMutableString(capacity: 512)
     var isFirst = true
@@ -95,32 +95,32 @@ public class Generator {
 
       switch detail {
 
-      case .Override:
-        self.emit(str, type: .BoolValue(detail: detail, value: override != nil))
+      case .override:
+        self.emit(str, type: .boolValue(detail: detail, value: override != nil))
 
-      case .Category:
+      case .category:
         let cat = category == nil ? "" : "\(category!)"
-        self.emit(str, type: .StringValue(detail: detail, value: cat, protect: false))
+        self.emit(str, type: .stringValue(detail: detail, value: cat, protect: false))
 
-      case .File:
+      case .file:
         let f = file as NSString
         let filename = f.lastPathComponent
-        self.emit(str, type: .StringValue(detail: detail, value: filename, protect: true))
+        self.emit(str, type: .stringValue(detail: detail, value: filename, protect: true))
 
-      case .Line:
-        self.emit(str, type: .IntValue(detail: detail, value: line))
+      case .line:
+        self.emit(str, type: .intValue(detail: detail, value: line))
 
-      case .Function:
-        self.emit(str, type: .StringValue(detail: detail, value: function, protect: true))
+      case .function:
+        self.emit(str, type: .stringValue(detail: detail, value: function, protect: true))
 
-      case .Level:
-        self.emit(str, type: .StringValue(detail: detail, value: "\(level)", protect: false))
+      case .level:
+        self.emit(str, type: .stringValue(detail: detail, value: "\(level)", protect: false))
 
-      case .Date:
-        self.emit(str, type: .DateValue(detail: detail, value: date))
+      case .date:
+        self.emit(str, type: .dateValue(detail: detail, value: date))
 
-      case .Message:
-        self.emit(str, type: .StringValue(detail: .Message, value: message, protect: true))
+      case .message:
+        self.emit(str, type: .stringValue(detail: .message, value: message, protect: true))
       }
 
     }
@@ -135,7 +135,7 @@ public class Generator {
 
    - Parameter outputString: The destination for output.
    */
-  func emitBegin (outputString: NSMutableString) {
+  func emitBegin (_ outputString: NSMutableString) {
   }
 
   /**
@@ -144,39 +144,39 @@ public class Generator {
    - Parameter outputString: The destination for output.
    - Parameter type: `ValueType` enum value carrying the detail enum and value.
    */
-  func emit (outputString: NSMutableString, type: ValueType) {
+  func emit (_ outputString: NSMutableString, type: ValueType) {
     switch type {
 
-    case .BoolValue (let detail, let value):
+    case .boolValue (let detail, let value):
       switch detail {
-      case .Override:
+      case .override:
         let string = value ? "*" : "-"
-        outputString.appendString("\(string)")
+        outputString.append("\(string)")
       default:
-        outputString.appendString("\(value)")
+        outputString.append("\(value)")
       }
 
-    case .IntValue (let detail, let value):
+    case .intValue (let detail, let value):
       switch detail {
-      case .Line:
-        outputString.appendString("(\(value))")
+      case .line:
+        outputString.append("(\(value))")
       default:
-        outputString.appendString("\(value)")
+        outputString.append("\(value)")
       }
 
-    case .StringValue(let detail, let value, _):
+    case .stringValue(let detail, let value, _):
       switch detail {
-      case .Category:
-        outputString.appendString("[\(value)]")
-      case .Message:
-        outputString.appendString(": \(value)")
+      case .category:
+        outputString.append("[\(value)]")
+      case .message:
+        outputString.append(": \(value)")
       default:
-        outputString.appendString("\(value)")
+        outputString.append("\(value)")
       }
 
-    case .DateValue(_, let value):
-      let ds = dateFormatter.stringFromDate(value)
-      outputString.appendString("[\(ds)]")
+    case .dateValue(_, let value):
+      let ds = dateFormatter.string(from: value)
+      outputString.append("[\(ds)]")
     }
 
   }
@@ -186,8 +186,8 @@ public class Generator {
 
    - Parameter outputString: The destination for output.
   */
-  func emitDelimiter (outputString: NSMutableString) {
-    outputString.appendString(" ")
+  func emitDelimiter (_ outputString: NSMutableString) {
+    outputString.append(" ")
   }
 
   /**
@@ -195,6 +195,6 @@ public class Generator {
 
    - Parameter outputString: The destination for output.
    */
-  func emitEnd (outputString: NSMutableString) {
+  func emitEnd (_ outputString: NSMutableString) {
   }
 }

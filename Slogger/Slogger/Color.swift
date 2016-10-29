@@ -28,16 +28,16 @@ public typealias ColorMap = [Level : ColorSpec]
 
  - Parameter string: A six-digit hex value. Can optionally be prefixed with '#'.
 */
-public func colorFromHexString (string: String) -> Color {
-  let hexString = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-  let scanner = NSScanner(string: hexString)
+public func colorFromHexString (_ string: String) -> Color {
+  let hexString = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+  let scanner = Scanner(string: hexString)
 
   if (hexString.hasPrefix("#")) {
     scanner.scanLocation = 1
   }
 
   var color: UInt32 = 0
-  scanner.scanHexInt(&color)
+  scanner.scanHexInt32(&color)
   let mask = 0x000000FF
   let r = Int(color >> 16) & mask
   let g = Int(color >> 8) & mask

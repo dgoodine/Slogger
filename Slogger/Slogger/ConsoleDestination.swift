@@ -9,17 +9,17 @@
 import Foundation
 
 /// A default console destination.
-public class ConsoleDestination: DestinationBase, Destination {
+open class ConsoleDestination: DestinationBase, Destination {
 
   /// Local Storage
-  private static let defaultColorMap: ColorMap = [
-    .None : (colorFromHexString("02A8A8"), nil),
-    .Severe : (colorFromHexString("FF0000"), nil),
-    .Error : (colorFromHexString("FF5500"), nil),
-    .Warning : (colorFromHexString("FF03FB"), nil),
-    .Info : (colorFromHexString("008C31"), nil),
-    .Debug : (colorFromHexString("035FFF"), nil),
-    .Verbose : (colorFromHexString("555555"), nil),
+  fileprivate static let defaultColorMap: ColorMap = [
+    .none : (colorFromHexString("02A8A8"), nil),
+    .severe : (colorFromHexString("FF0000"), nil),
+    .error : (colorFromHexString("FF5500"), nil),
+    .warning : (colorFromHexString("FF03FB"), nil),
+    .info : (colorFromHexString("008C31"), nil),
+    .debug : (colorFromHexString("035FFF"), nil),
+    .verbose : (colorFromHexString("555555"), nil),
   ]
 
   /// Designated initializer.
@@ -28,8 +28,8 @@ public class ConsoleDestination: DestinationBase, Destination {
   }
 
   /// Protocol implementation.
-  public func logString (string: String, level: Level) {
-    if let color = colorMap?[level] where decorator != nil {
+  open func logString (_ string: String, level: Level) {
+    if let color = colorMap?[level] , decorator != nil {
       if let decorated = decorator?.decorateString(string, spec: color) {
         print(decorated)
         return

@@ -10,18 +10,18 @@ import Foundation
 
 /// Decorator that uses XcodeColors format
 public struct XCodeColorsDecorator: Decorator {
-  private let escape = "\u{001b}["
-  private let resetFg = "\u{001b}[fg;"
-  private let resetBg = "\u{001b}[bg;"
-  private let reset = "\u{001b}[;"
-  private let maxColor = 255.0
+  fileprivate let escape = "\u{001b}["
+  fileprivate let resetFg = "\u{001b}[fg;"
+  fileprivate let resetBg = "\u{001b}[bg;"
+  fileprivate let reset = "\u{001b}[;"
+  fileprivate let maxColor = 255.0
 
   /// Protocol implementation
-  public func decorateString(string: String, spec: ColorSpec) -> String {
+  public func decorateString(_ string: String, spec: ColorSpec) -> String {
     let fg = spec.fg
     let bg = spec.bg
 
-    func prefix (color: Color, _ typeCode: String) -> String {
+    func prefix (_ color: Color, _ typeCode: String) -> String {
       let r = Int(color.r * maxColor)
       let g = Int(color.g * maxColor)
       let b = Int(color.b * maxColor)

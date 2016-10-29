@@ -9,10 +9,10 @@
 import Foundation
 
 /// Comma separated values TextFileDestination
-public class CSVFileDestination: TextFileDestination {
+open class CSVFileDestination: TextFileDestination {
 
   /// Configuration object.
-  public class CSVConfiguration: Configuration {
+  open class CSVConfiguration: Configuration {
 
     /// Designated initializer.
     public init () {
@@ -21,7 +21,7 @@ public class CSVFileDestination: TextFileDestination {
       self.entryDelimiter = "\n"
       self.fileWrapperGenerator = { (isPreamble) in
         if isPreamble {
-          let header = self.details.map({"\($0)"}).joinWithSeparator(",")
+          let header = self.details.map({"\($0)"}).joined(separator: ",")
           return "\(header)\n"
         }
         return ""
@@ -36,33 +36,33 @@ public class CSVFileDestination: TextFileDestination {
 }
 
 /// CSV entry generator.
-public class CSVGenerator: Generator {
+open class CSVGenerator: Generator {
 
-  override func emitBegin(outputString: NSMutableString) {}
+  override func emitBegin(_ outputString: NSMutableString) {}
 
-  override func emit (outputString: NSMutableString, type: ValueType) {
+  override func emit (_ outputString: NSMutableString, type: ValueType) {
     switch type {
 
-    case .BoolValue (_, let value):
-      outputString.appendString("\(value)")
+    case .boolValue (_, let value):
+      outputString.append("\(value)")
 
-    case .IntValue (_, let value):
-      outputString.appendString("\(value)")
+    case .intValue (_, let value):
+      outputString.append("\(value)")
 
-    case .StringValue(_, let value, _):
-      let str = value.stringByReplacingOccurrencesOfString("\"", withString: "\"\"")
-      outputString.appendString("\"\(str)\"")
+    case .stringValue(_, let value, _):
+      let str = value.replacingOccurrences(of: "\"", with: "\"\"")
+      outputString.append("\"\(str)\"")
 
-    case .DateValue(_, let value):
-      let ds = dateFormatter.stringFromDate(value)
-      outputString.appendString("\"\(ds)\"")
+    case .dateValue(_, let value):
+      let ds = dateFormatter.string(from: value)
+      outputString.append("\"\(ds)\"")
     }
   }
 
-  override func emitDelimiter(outputString: NSMutableString) {
-    outputString.appendString(",")
+  override func emitDelimiter(_ outputString: NSMutableString) {
+    outputString.append(",")
   }
 
-  override func emitEnd(outputString: NSMutableString) {}
+  override func emitEnd(_ outputString: NSMutableString) {}
 
 }

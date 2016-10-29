@@ -8,14 +8,14 @@
 
 import Foundation
 
-@objc public class SloggerObjC: NSObject {
-  private let logger: Slogger<NoCategories>
+@objc open class SloggerObjC: NSObject {
+  fileprivate let logger: Slogger<NoCategories>
 
   public init (defaultLevel: Level) {
-    logger = Slogger<NoCategories>(defaultLevel: .Info)
+    logger = Slogger<NoCategories>(defaultLevel: .info)
   }
 
-  public func log (level: Level, @autoclosure  closure: LogClosure, function: String = #function, file: String = #file, line: Int = #line) {
+  open func log (_ level: Level, closure: @autoclosure LogClosure, function: String = #function, file: String = #file, line: Int = #line) {
     logger.logInternal(closure: closure, category: nil, override: nil, level: level, function: function, file: file, line: line)
   }
 }
