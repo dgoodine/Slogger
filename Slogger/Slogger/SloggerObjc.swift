@@ -15,7 +15,7 @@ import Foundation
     logger = Slogger<NoCategories>(defaultLevel: .info)
   }
 
-  open func log (_ level: Level, closure: @autoclosure LogClosure, function: String = #function, file: String = #file, line: Int = #line) {
+  open func log (_ level: Level, closure: @autoclosure () -> String, function: String = #function, file: String = #file, line: Int = #line) {
     logger.logInternal(closure: closure, category: nil, override: nil, level: level, function: function, file: file, line: line)
   }
 }

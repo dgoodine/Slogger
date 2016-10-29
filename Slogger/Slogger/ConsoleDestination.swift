@@ -13,7 +13,7 @@ open class ConsoleDestination: DestinationBase, Destination {
 
   /// Local Storage
   fileprivate static let defaultColorMap: ColorMap = [
-    .none : (colorFromHexString("02A8A8"), nil),
+    .off : (colorFromHexString("02A8A8"), nil),
     .severe : (colorFromHexString("FF0000"), nil),
     .error : (colorFromHexString("FF5500"), nil),
     .warning : (colorFromHexString("FF03FB"), nil),

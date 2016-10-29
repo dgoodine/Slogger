@@ -14,6 +14,7 @@
 		A83C5A171BED38F80037B847 /* MemoryDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0E1BED38F80037B847 /* MemoryDestination.swift */; };
 		A83C5A181BED38F80037B847 /* TextFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A0F1BED38F80037B847 /* TextFileDestination.swift */; };
 		A83C5A191BED38F80037B847 /* Slogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C5A101BED38F80037B847 /* Slogger.swift */; };
+		A85CB4251DC4DAFF0092653D /* SloggerOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85CB4241DC4DAFF0092653D /* SloggerOSX.framework */; };
 		A8A11D241BEEED9A00EEEA2B /* JSONFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D221BEEED9A00EEEA2B /* JSONFileDestination.swift */; };
 		A8A11D251BEEED9A00EEEA2B /* XMLFileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D231BEEED9A00EEEA2B /* XMLFileDestination.swift */; };
 		A8A11D291BEF040200EEEA2B /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11D281BEF040200EEEA2B /* Destination.swift */; };
@@ -43,6 +44,7 @@
 		A83C5A0E1BED38F80037B847 /* MemoryDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryDestination.swift; path = ../Slogger/Slogger/MemoryDestination.swift; sourceTree = "<group>"; };
 		A83C5A0F1BED38F80037B847 /* TextFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFileDestination.swift; path = ../Slogger/Slogger/TextFileDestination.swift; sourceTree = "<group>"; };
 		A83C5A101BED38F80037B847 /* Slogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slogger.swift; path = ../Slogger/Slogger/Slogger.swift; sourceTree = "<group>"; };
+		A85CB4241DC4DAFF0092653D /* SloggerOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SloggerOSX.framework; path = ../../../../Library/Developer/Xcode/DerivedData/Build/Products/Debug/SloggerOSX.framework; sourceTree = "<group>"; };
 		A8A11D221BEEED9A00EEEA2B /* JSONFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONFileDestination.swift; path = ../Slogger/Slogger/JSONFileDestination.swift; sourceTree = "<group>"; };
 		A8A11D231BEEED9A00EEEA2B /* XMLFileDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMLFileDestination.swift; path = ../Slogger/Slogger/XMLFileDestination.swift; sourceTree = "<group>"; };
 		A8A11D281BEF040200EEEA2B /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Destination.swift; path = ../Slogger/Slogger/Destination.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		A8AC598F1BED1C8200DBC78E /* slogger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = slogger; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8AC59921BED1C8200DBC78E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A8B663421BEF143200F0EB64 /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Generator.swift; path = ../Slogger/Slogger/Generator.swift; sourceTree = "<group>"; };
+		A8DC04B01DC4DCD7007A60D1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A85CB4251DC4DAFF0092653D /* SloggerOSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,12 +88,22 @@
 			name = Slogger;
 			sourceTree = "<group>";
 		};
+		A85CB4231DC4DAFF0092653D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8DC04B01DC4DCD7007A60D1 /* AppKit.framework */,
+				A85CB4241DC4DAFF0092653D /* SloggerOSX.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A8AC59861BED1C8200DBC78E = {
 			isa = PBXGroup;
 			children = (
 				A8AC59911BED1C8200DBC78E /* SloggerConsole */,
 				A83C5A071BED38DE0037B847 /* Slogger */,
 				A8AC59901BED1C8200DBC78E /* Products */,
+				A85CB4231DC4DAFF0092653D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,7 +155,9 @@
 				TargetAttributes = {
 					A8AC598E1BED1C8200DBC78E = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 4G72T9YLHA;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -190,6 +206,7 @@
 		A8AC59941BED1C8200DBC78E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -237,6 +254,7 @@
 		A8AC59951BED1C8200DBC78E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -277,16 +295,24 @@
 		A8AC59971BED1C8200DBC78E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 4G72T9YLHA;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = slogger;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		A8AC59981BED1C8200DBC78E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 4G72T9YLHA;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = slogger;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -9,18 +9,18 @@
 import Foundation
 import SloggerOSX
 
-var log = Slogger<NoCategories>(defaultLevel: .Verbose)
+var log = Slogger<NoCategories>(defaultLevel: .verbose)
 
 let consoleDestination = ConsoleDestination()
 consoleDestination.decorator = AnsiDecorator()
 consoleDestination.colorMap = [
-  .None : (colorFromHexString("02A8A8"), nil),
-  .Severe : (colorFromHexString("FF0000"), nil),
-  .Error : (colorFromHexString("FF5500"), nil),
-  .Warning : (colorFromHexString("FF03FB"), nil),
-  .Info : (colorFromHexString("008C31"), nil),
-  .Debug : (colorFromHexString("035FFF"), nil),
-  .Verbose : (colorFromHexString("555555"), nil),
+  .off : (colorFromHexString("02A8A8"), nil),
+  .severe : (colorFromHexString("FF0000"), nil),
+  .error : (colorFromHexString("FF5500"), nil),
+  .warning : (colorFromHexString("FF03FB"), nil),
+  .info : (colorFromHexString("008C31"), nil),
+  .debug : (colorFromHexString("035FFF"), nil),
+  .verbose : (colorFromHexString("555555"), nil),
 ]
 
 log.destinations = [consoleDestination]
@@ -36,47 +36,44 @@ class Console {
     case Exit, Quit
 
     func execute(arglist : [String]) {
-      let joined = arglist.joinWithSeparator(" ")
+      let joined = arglist.joined(separator: " ")
 
       switch self {
         
-      case None:
+      case .None:
         log.none(joined)
-      case Severe:
+      case .Severe:
         log.severe(joined)
-      case Error:
+      case .Error:
         log.error(joined)
-      case Warning:
+      case .Warning:
         log.warning(joined)
-      case Info:
+      case .Info:
         log.info(joined)
-      case Debug:
+      case .Debug:
         log.debug(joined)
-      case Verbose:
+      case .Verbose:
         log.verbose(joined)
 
-      case Exit, Quit:
+      case .Exit, .Quit:
         exit(0)
       }
     }
   }
 
-  @noreturn func enter () {
+  func enter () -> Never  {
     while (true) {
-      let ws = NSCharacterSet.whitespaceCharacterSet()
+      let ws = NSCharacterSet.whitespaces
       print("> ", terminator:"")
       if let line = readLine() {
-        let string = line.stringByTrimmingCharactersInSet(ws)
-        var array = string.componentsSeparatedByCharactersInSet(ws).filter() { !$0.isEmpty }
-        if array.count > 0 {
-          let command = Command(rawValue:array.first!.capitalizedString)
-          if command != nil {
-
-            array.removeFirst()
-            command?.execute(array)
-            sleep(1)
-          }
-        }
+        let string = line.trimmingCharacters(in: ws)
+				var array: [String] = string.components(separatedBy: ws).filter() { !$0.isEmpty }
+				guard array.count > 0 else { continue }
+				let first = array.first!.capitalized
+				guard let command = Command(rawValue:first) else { continue }
+				array.removeFirst()
+				command.execute(arglist: array)
+				sleep(1)
       }
     }
   }

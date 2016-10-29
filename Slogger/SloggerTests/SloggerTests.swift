@@ -22,7 +22,7 @@ enum TestCategory: String, SloggerCategory {
 
 class TestLogger: Slogger<TestCategory> {
   init() {
-    super.init(defaultLevel: .Info)
+    super.init(defaultLevel: .info)
     self.asynchronous = false
   }
 }
@@ -40,7 +40,7 @@ class SloggerTests: XCTestCase {
     super.tearDown()
   }
 
-  func checkForMessage (message: String, _ category: TestCategory?, _ override: Level?, _ level: Level, _ function: String, _ checkResults: Bool) {
+  func checkForMessage (message: String, category: TestCategory?, override: Level?, level: Level, function: String, checkResults: Bool) {
     guard checkResults && log.canLog(override: override, category: category, siteLevel: level) else {
       return
     }
@@ -50,65 +50,65 @@ class SloggerTests: XCTestCase {
     }
 
     let prefix = (override != nil) ? "* " : "- "
-    XCTAssert(last.containsString(prefix), "Incorrect Radioactive Trace Prefix")
-    XCTAssert(last.containsString(" \(level) "), "Incorrect level")
-    XCTAssert(last.containsString(": \(message)"), "Incorrect message")
-    XCTAssert(last.containsString(" SloggerTests.swift "), "Incorrect file")
-    XCTAssert(last.containsString(" \(function) "), "Incorrect function")
+    XCTAssert(last.contains(prefix), "Incorrect Radioactive Trace Prefix")
+    XCTAssert(last.contains(" \(level) "), "Incorrect level")
+    XCTAssert(last.contains(": \(message)"), "Incorrect message")
+    XCTAssert(last.contains(" SloggerTests.swift "), "Incorrect file")
+    XCTAssert(last.contains(" \(function) "), "Incorrect function")
     if category == nil {
-      XCTAssert(last.containsString(" [] "), "Incorrect function")
+      XCTAssert(last.contains(" [] "), "Incorrect function")
     } else {
-      XCTAssert(last.containsString(" [\(category!)] "), "Incorrect function")
+      XCTAssert(last.contains(" [\(category!)] "), "Incorrect function")
     }
   }
 
-  func callIt (category category: TestCategory?, override: Level?, level: Level, checkResults: Bool) {
+  func callIt (category: TestCategory?, override: Level?, level: Level, checkResults: Bool) {
     switch (level) {
-    case .None:
+    case .off:
       log.none(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+			checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.none(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
 
-    case .Severe:
+    case .severe:
       log.severe(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+      checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.severe(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
 
-    case .Error:
+    case .error:
       log.error(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+      checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.error(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
 
-    case .Warning:
+    case .warning:
       log.warning(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+      checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.warning(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
 
-    case .Info:
+    case .info:
       log.info(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+      checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.info(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
 
-    case .Debug:
+    case .debug:
       log.debug(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+      checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.debug(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
 
-    case .Verbose:
+    case .verbose:
       log.verbose(category, "String", override: override)
-      checkForMessage("String", category, override, level, #function, checkResults)
+      checkForMessage(message: "String", category: category, override: override, level: level, function: #function, checkResults: checkResults)
       log.verbose(category, override: override) { "Closure" }
-      checkForMessage("Closure", category, override, level, #function, checkResults)
+      checkForMessage(message: "Closure", category: category, override: override, level: level, function: #function, checkResults: checkResults)
     }
   }
 
-  func exhaustiveTest (destinations destinations: [Destination], checkResults: Bool = true, verbose: Bool = false) {
+  func exhaustiveTest (destinations: [Destination], checkResults: Bool = true, verbose: Bool = false) {
     let levels = Level.allValues
     let categories = TestCategory.allValues
 
@@ -117,7 +117,7 @@ class SloggerTests: XCTestCase {
     log.destinations = destinations
 
 
-    func sloggit (category category: TestCategory?, override: Level? = nil, checkResults: Bool) {
+    func sloggit (category: TestCategory?, override: Level? = nil, checkResults: Bool) {
       testDestination.clear()
       for level in levels {
         callIt(category: category, override: override, level: level, checkResults: checkResults)
@@ -180,7 +180,7 @@ class SloggerTests: XCTestCase {
 
   func testPlainFileLogging () {
     let dir = "~/Desktop/SloggerTestLogs" as NSString
-    let path = dir.stringByExpandingTildeInPath
+    let path = dir.expandingTildeInPath
     let dest = TextFileDestination(directory: path)
 
     print("Testing plain file logging to path: \(path)")
@@ -189,7 +189,7 @@ class SloggerTests: XCTestCase {
 
   func testJSONFileLogging () {
     let dir = "~/Desktop/SloggerTestLogs" as NSString
-    let path = dir.stringByExpandingTildeInPath
+    let path = dir.expandingTildeInPath
     let dest = JSONFileDestination(directory: path)
 
     print("Testing JSON file logging to path: \(path)")
@@ -198,7 +198,7 @@ class SloggerTests: XCTestCase {
 
   func testXMLFileLogging () {
     let dir = "~/Desktop/SloggerTestLogs" as NSString
-    let path = dir.stringByExpandingTildeInPath
+    let path = dir.expandingTildeInPath
     let dest = XMLFileDestination(directory: path)
 
     print("Testing JSON file logging to path: \(path)")
@@ -207,7 +207,7 @@ class SloggerTests: XCTestCase {
 
   func testCSVFileLogging () {
     let dir = "~/Desktop/SloggerTestLogs" as NSString
-    let path = dir.stringByExpandingTildeInPath
+    let path = dir.expandingTildeInPath
     let dest = CSVFileDestination(directory: path)
 
     print("Testing CSV file logging to path: \(path)")
@@ -216,7 +216,7 @@ class SloggerTests: XCTestCase {
 
   func testTSVFileLogging () {
     let dir = "~/Desktop/SloggerTestLogs" as NSString
-    let path = dir.stringByExpandingTildeInPath
+    let path = dir.expandingTildeInPath
     let dest = TSVFileDestination(directory: path)
 
     print("Testing TSV file logging to path: \(path)")

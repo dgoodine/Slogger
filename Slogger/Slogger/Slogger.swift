@@ -22,7 +22,7 @@ public protocol SloggerCategory: Hashable {}
 /// Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
 @objc public enum Level: Int, Comparable {
   /// Turn off all logging (except overrides).
-  case none
+  case off
 
   /// Use this for cataclysmic events.
   case severe
@@ -43,7 +43,7 @@ public protocol SloggerCategory: Hashable {}
   case verbose
 
   /// All logging levels.
-  static let allValues = [none, severe, error, warning, info, debug, verbose]
+  static let allValues = [off, severe, error, warning, info, debug, verbose]
 }
 
 /// This is necessary because Swift doesn't provide it by default for Int-based enums
@@ -251,7 +251,7 @@ extension Slogger {
   - Parameter file: The file within which the logging site is contained.  It should remain as the default.
   - Parameter line: The line in the file of the logging site.  It should remain as the default.
   */
-  public func severe (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func severe (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: nil, override: override, level: .severe, function: function, file: file, line: line)
   }
 
@@ -265,7 +265,7 @@ extension Slogger {
    - Parameter file: The file within which the logging site is contained.  It should remain as the default.
    - Parameter line: The line in the file of the logging site.  It should remain as the default.
    */
-  public func severe (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func severe (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: category, override: override, level: .severe, function: function, file: file, line: line)
   }
 
@@ -298,12 +298,12 @@ extension Slogger {
 
   // MARK: Error
   /// See the `severe` functions for documentation.
-  public func error (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func error (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: nil, override: override, level: .error, function: function, file: file, line: line)
   }
 
   /// See the `severe` functions for documentation.
-  public func error (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func error (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: category, override: override, level: .error, function: function, file: file, line: line)
   }
 
@@ -319,12 +319,12 @@ extension Slogger {
 
   // MARK: Warning
   /// See the `severe` functions for documentation.
-  public func warning (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func warning (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: nil, override: override, level: .warning, function: function, file: file, line: line)
   }
 
   /// See the `severe` functions for documentation.
-  public func warning (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func warning (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: category, override: override, level: .warning, function: function, file: file, line: line)
   }
 
@@ -340,12 +340,12 @@ extension Slogger {
 
   // MARK: Info
   /// See the `severe` functions for documentation.
-  public func info (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func info (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: nil, override: override, level: .info, function: function, file: file, line: line)
   }
 
   /// See the `severe` functions for documentation.
-  public func info (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func info (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: category, override: override, level: .info, function: function, file: file, line: line)
   }
 
@@ -361,12 +361,12 @@ extension Slogger {
 
   // MARK: Debug
   /// See the `severe` functions for documentation.
-  public func debug (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func debug (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: nil, override: override, level: .debug, function: function, file: file, line: line)
   }
 
   /// See the `severe` functions for documentation.
-  public func debug (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func debug (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: category, override: override, level: .debug, function: function, file: file, line: line)
   }
 
@@ -382,12 +382,12 @@ extension Slogger {
 
   // MARK: Verbose
   /// See the `severe` functions for documentation.
-  public func verbose (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func verbose (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: nil, override: override, level: .verbose, function: function, file: file, line: line)
   }
 
   /// See the `severe` functions for documentation.
-  public func verbose (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
+  public func verbose (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {
     logInternal(closure: closure, category: category, override: override, level: .verbose, function: function, file: file, line: line)
   }
 
@@ -403,10 +403,10 @@ extension Slogger {
 
   // MARK: None
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
-  public func none (_  closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {}
+  public func none (_  closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {}
 
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
-  public func none (_ category: T?, _ closure: @autoclosure LogClosure, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {}
+  public func none (_ category: T?, _ closure: @autoclosure () -> String, override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line) {}
 
   /// See the corresponding `severe` function for documentation. This function does not perform threshold checking or output to logs. (Its implementation is empty.)
   public func none (override: Level? = nil, function: String = #function, file: String = #file, line: Int = #line, _ closure: LogClosure) {}
