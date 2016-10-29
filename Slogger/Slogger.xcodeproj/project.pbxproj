@@ -567,7 +567,9 @@
 					};
 					A83C79DF1BD6636800DA9F07 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 4G72T9YLHA;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					A85BFC431BDD4622008D1F1E = {
 						CreatedOnToolsVersion = 7.1;
@@ -994,6 +996,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4G72T9YLHA;
 				INFOPLIST_FILE = SloggerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTests;
@@ -1008,6 +1012,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4G72T9YLHA;
 				INFOPLIST_FILE = SloggerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.SloggerTests;
