@@ -23,7 +23,7 @@ open class ConsoleDestination: DestinationBase, Destination {
   ]
 
   /// Designated initializer.
-  override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap: ColorMap? = defaultColorMap, decorator: Decorator? = XCodeColorsDecorator()) {
+  override public init (details: [Detail]? = nil, generator: Generator = Generator(), colorMap: ColorMap? = defaultColorMap, decorator: Decorator? = nil) {
     super.init(details: details, generator: generator, colorMap: colorMap, decorator: decorator)
   }
 
