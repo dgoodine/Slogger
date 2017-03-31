@@ -14,14 +14,16 @@ When I started doing serious Swift development, I naturally looked around for a 
 
 Also note: Slogger is completely API independent, except for the Swift standard library and the `Foundation` import.  So it can be used in Mac OS X projects projects as well.
 
-**Slogger requires Xcode 7.1 and Swift 2.1.**
+**Slogger 3.x requires and Swift 3.x.**
+
+**Slogger 2.x requires and Swift 2.x.**
 
 ## General Info
 
 ### Logging Levels
 The typical logger levels are supported:
 
-	public enum Level : Int, Comparable {
+	public enum Level : Int, Comparable, CustomStringConvertible {
 	  case None, Severe, Error, Warning, Info, Debug, Verbose
 
 	  static let allValues = [None, Severe, Error, Warning, Info, Debug, Verbose]
@@ -222,6 +224,7 @@ Please do use the issues section on Github report bugs, raise questions, offer s
 
 Version | Status | Comments
 --- | --- | ---
+3.0 | Released | Update for Swift 3. Minor fixes.
 2.0 | Released | Update for Swift 2.2.  Minor fixes.
 1.0 | Released | First release.
 0.1.x | Available | **Pre-release** (CocoaPods/Carthage support and TextFileDestination variants).
