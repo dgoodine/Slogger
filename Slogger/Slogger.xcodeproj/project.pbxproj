@@ -562,8 +562,9 @@
 				TargetAttributes = {
 					A83C79D51BD6636800DA9F07 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 4G72T9YLHA;
+						DevelopmentTeam = BJ7A33SQQJ;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					A83C79DF1BD6636800DA9F07 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -964,8 +965,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BJ7A33SQQJ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -975,6 +977,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.Slogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -987,8 +990,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BJ7A33SQQJ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -998,6 +1002,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidgoodine.Slogger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

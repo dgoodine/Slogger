@@ -155,7 +155,7 @@
 				TargetAttributes = {
 					A8AC598E1BED1C8200DBC78E = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 4G72T9YLHA;
+						DevelopmentTeam = BJ7A33SQQJ;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -297,7 +297,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = 4G72T9YLHA;
+				DEVELOPMENT_TEAM = BJ7A33SQQJ;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = slogger;
 				SWIFT_VERSION = 3.0;
@@ -309,7 +309,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = 4G72T9YLHA;
+				DEVELOPMENT_TEAM = BJ7A33SQQJ;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = slogger;
 				SWIFT_VERSION = 3.0;

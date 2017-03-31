@@ -20,7 +20,7 @@ public protocol SloggerCategory: Hashable {}
 }
 
 /// Logging levels – Cumulatave upward (ex. .Error logs both .Error and .Severe events).
-@objc public enum Level: Int, Comparable {
+@objc public enum Level: Int, Comparable, CustomStringConvertible {
   /// Turn off all logging (except overrides).
   case off
 
@@ -41,6 +41,18 @@ public protocol SloggerCategory: Hashable {}
 
   /// Use this for even more verbose debugging.
   case verbose
+
+	public var description: String {
+		switch self {
+		case .off : return "Off"
+		case .severe: return "Severe"
+		case .error: return "Error"
+		case .warning: return "Warning"
+		case .info: return "Info"
+		case .debug: return "Debug"
+		case .verbose: return "Verbose"
+		}
+	}
 
   /// All logging levels.
   static let allValues = [off, severe, error, warning, info, debug, verbose]
