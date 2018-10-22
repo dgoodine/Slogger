@@ -42,7 +42,7 @@ open class PerformanceTest {
     case "iPad2,5", "iPad2,6", "iPad2,7":           return "iPad Mini"
     case "iPad4,4", "iPad4,5", "iPad4,6":           return "iPad Mini 2"
     case "iPad4,7", "iPad4,8", "iPad4,9":           return "iPad Mini 3"
-    case "iPad5,1", "iPad5,2":                      return "iPad Mini 4"
+    case "iPad5,2":                                 return "iPad Mini 4"
     case "i386", "x86_64":                          return "Simulator"
     default:                                        return "Unknown"
     }

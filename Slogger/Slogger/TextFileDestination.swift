@@ -101,10 +101,10 @@ open class TextFileDestination: DestinationBase, Destination {
 
   // MARK: - Public
   /// Directory path for the log files.
-  open let directory: String
+  public let directory: String
 
   /// Configuration for this destination.
-  open let config: Configuration
+  public let config: Configuration
 
   /// Date the current output file was opened or nil if there's no output file open.
   open var outputFileDate: Date? {
@@ -201,7 +201,7 @@ open class TextFileDestination: DestinationBase, Destination {
     // Create the directory if it doesn't exist.
     if !fm.fileExists(atPath: directory) {
       do {
-        try fm.createDirectory(atPath: directory, withIntermediateDirectories: true, attributes:config.fileAttributes)
+        try fm.createDirectory(atPath: directory, withIntermediateDirectories: true, attributes:convertToOptionalFileAttributeKeyDictionary(config.fileAttributes))
       } catch {
         if !errorPrinted {
           print("*** Fatal error in Slogger.TextFileDestination: \n\(error)")
@@ -214,7 +214,7 @@ open class TextFileDestination: DestinationBase, Destination {
     let now = Date()
     let dateString = fileDateFormatter.string(from: now)
     let filePath = "\(directory)/\(dateString).\(config.fileExtension)"
-    guard fm.createFile(atPath: filePath, contents: Data(), attributes: config.fileAttributes) else {
+    guard fm.createFile(atPath: filePath, contents: Data(), attributes: convertToOptionalFileAttributeKeyDictionary(config.fileAttributes)) else {
       if !errorPrinted {
         print("*** Slogger.TextFileDestination couldn't create log file.")
         errorPrinted = true
@@ -256,4 +256,10 @@ open class TextFileDestination: DestinationBase, Destination {
   fileprivate func checkForArchiving () {
     // Not implemented.
   }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalFileAttributeKeyDictionary(_ input: [String: Any]?) -> [FileAttributeKey: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (FileAttributeKey(rawValue: key), value)})
 }
