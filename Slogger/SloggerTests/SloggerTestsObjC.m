@@ -14,11 +14,12 @@ static SloggerObjC *slog;
 @implementation SloggerTestsObjC
 
 - (void) setUp {
-  slog = [[SloggerObjC alloc] initWithDefaultLevel:LevelInfo];
+    // Ditching this for now (probably permanently
+    // slog = [[SloggerObjC alloc] initWithDefaultLevel:LevelInfo];
 }
 
 - (void) testObjC {
-  NSLog(@"log: %@", slog);
+//  NSLog(@"log: %@", slog);
 }
 
 @end
