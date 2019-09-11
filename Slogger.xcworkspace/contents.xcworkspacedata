@@ -4,10 +4,4 @@
    <FileRef
       location = "group:Slogger/Slogger.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:SloggerPerformanceIOS/SloggerPerformanceIOS.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:SloggerConsole/SloggerConsole.xcodeproj">
-   </FileRef>
 </Workspace>
