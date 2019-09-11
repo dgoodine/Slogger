@@ -14,6 +14,8 @@ When I started doing serious Swift development, I naturally looked around for a 
 
 Also note: Slogger is completely API independent, except for the Swift standard library and the `Foundation` import.  So it can be used in Mac OS X projects projects as well.
 
+**Slogger 5.x requires and Swift 5.x.**
+
 **Slogger 3.x requires and Swift 3.x.**
 
 **Slogger 2.x requires and Swift 2.x.**
