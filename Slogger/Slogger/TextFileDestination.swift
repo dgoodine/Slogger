@@ -91,7 +91,7 @@ open class TextFileDestination: DestinationBase, Destination {
      - Parameter colorMap: Colormap to use for this destination. If nil, uses the logger's colorMap.
      - Parameter decorator: Decorator to use for this destination.  If nil, uses the logger's decorator.
      */
-    init (details: [Detail] = Detail.allValues, generator: Generator, colorMap: ColorMap? = nil, decorator: Decorator? = nil) {
+    public init (details: [Detail] = Detail.allValues, generator: Generator, colorMap: ColorMap? = nil, decorator: Decorator? = nil) {
       self.details = details
       self.generator = generator
       self.colorMap = colorMap

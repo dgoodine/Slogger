@@ -90,7 +90,7 @@ public enum Detail: Int {
   case message
 
   /// An array of all avaliable cases in a typical order.
-  static let allValues = [override, date, file, line, function, category, level, message]
+  static public let allValues = [override, date, file, line, function, category, level, message]
 }
 
 /// Protocol for type used to decorate generator output.

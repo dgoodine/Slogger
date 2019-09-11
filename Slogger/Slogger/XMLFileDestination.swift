@@ -40,6 +40,8 @@ open class XMLFileDestination: TextFileDestination {
 /// XML log entry generator.
 open class XMLGenerator: Generator {
 
+    override public init() { }
+
   override func emitBegin(_ outputString: NSMutableString) {
     outputString.append("<entry>")
   }
