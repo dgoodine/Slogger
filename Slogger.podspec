@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Slogger"
-  s.version      = "2.0"
+  s.version      = "5.0.3"
   s.summary      = "A simple, fast and flexible logging framework for Swift."
 
   # This description is used to generate tags and improve search results.
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/dgoodine/Slogger.git", :tag => "v1.0.1" }
+  s.source       = { :git => "https://github.com/dgoodine/Slogger.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
